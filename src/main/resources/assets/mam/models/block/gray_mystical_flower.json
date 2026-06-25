@@ -1,0 +1,6 @@
+{
+  "parent": "mam:block/shapes/cross",
+  "textures": {
+    "cross": "mam:block/gray_mystical_flower"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "": [
+      { "model": "mam:block/living_rock_polished" },
+      { "model": "mam:block/living_rock_polished_mirrored" },
+      { "model": "mam:block/living_rock_polished", "y": 180 },
+      { "model": "mam:block/living_rock_polished_mirrored", "y": 180 }
+    ]
+  }
+}

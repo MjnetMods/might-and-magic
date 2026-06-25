@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["##", "##"],
+  "key": { "#": { "item": "mam:living_rock_polished" } },
+  "result": { "id": "mam:living_rock_brick", "count": 4 }
+}

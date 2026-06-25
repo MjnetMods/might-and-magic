@@ -1,0 +1,6 @@
+{
+  "type": "mam:pure_daisy",
+  "input": { "Name": "minecraft:cobblestone" },
+  "output": { "Name": "mam:living_rock" },
+  "time": 200
+}

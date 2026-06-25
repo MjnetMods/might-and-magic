@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:block",
+  "pools": [{
+    "rolls": 1,
+    "entries": [{ "type": "minecraft:item", "name": "mam:black_mystical_mushroom" }],
+    "conditions": [{ "condition": "minecraft:survives_explosion" }]
+  }]
+}

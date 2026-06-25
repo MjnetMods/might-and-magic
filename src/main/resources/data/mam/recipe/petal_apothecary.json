@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["#P#", "# #", "###"],
+  "key": {
+    "#": { "item": "mam:living_rock" },
+    "P": { "item": "mam:living_rock_polished" }
+  },
+  "result": { "id": "mam:petal_apothecary", "count": 1 }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=x": { "model": "mam:block/livingwood_horizontal", "x": 90, "y": 90 },
+    "axis=y": { "model": "mam:block/livingwood" },
+    "axis=z": { "model": "mam:block/livingwood_horizontal", "x": 90 }
+  }
+}

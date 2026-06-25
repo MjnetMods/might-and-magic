@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:block",
+  "pools": [{
+    "rolls": 1,
+    "entries": [{ "type": "minecraft:item", "name": "mam:livingwood_planks_mossy" }],
+    "conditions": [{ "condition": "minecraft:survives_explosion" }]
+  }]
+}

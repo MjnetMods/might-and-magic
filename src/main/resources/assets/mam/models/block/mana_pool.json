@@ -1,0 +1,9 @@
+{
+  "parent": "mam:block/shapes/mana_pool",
+  "textures": {
+    "bottom": "mam:block/mana_pool_bottom",
+    "inside": "mam:block/mana_pool_inside",
+    "side":   "mam:block/mana_pool_side",
+    "top":    "mam:block/mana_pool_top"
+  }
+}

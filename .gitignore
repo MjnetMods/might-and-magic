@@ -1,0 +1,36 @@
+# Build outputs
+build/
+out/
+
+# Gradle
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# NeoForge run directories
+run/
+
+# Datagen cache (generated resources are committed, cache is not)
+src/generated/resources/.cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Mod JAR (built artifact, not source)
+*.jar
+!gradle/wrapper/gradle-wrapper.jar

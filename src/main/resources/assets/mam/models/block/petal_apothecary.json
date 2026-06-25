@@ -1,0 +1,8 @@
+{
+  "parent": "mam:block/shapes/petal_apothecary",
+  "textures": {
+    "bottom": "mam:block/petal_apothecary_bottom",
+    "side":   "mam:block/petal_apothecary_side",
+    "top":    "mam:block/petal_apothecary_top"
+  }
+}

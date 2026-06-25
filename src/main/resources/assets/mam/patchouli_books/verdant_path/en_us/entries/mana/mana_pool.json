@@ -1,0 +1,15 @@
+{
+  "name": "patchouli.mam.verdant_path.entry.mana_pool",
+  "category": "mam:verdant_path/mana",
+  "icon": "mam:mana_pool",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The $(thing)Mana Pool$() is a basin carved from $(thing)Living Rock$() that holds up to one million units of mana. Mystical flowers planted nearby will automatically push their generated mana into the nearest pool within 6 blocks."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A $(thing)Redstone Comparator$() placed next to a Mana Pool will output a signal proportional to how full the pool is — 0 when empty, up to 15 when completely full."
+    }
+  ]
+}
