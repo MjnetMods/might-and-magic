@@ -6,6 +6,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import org.mjli.mam.foundation.registration.MamRegistrate;
+import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantMana;
+import org.mjli.mam.verdant.VerdantRock;
+import org.mjli.mam.verdant.VerdantWood;
 import org.slf4j.Logger;
 
 @Mod(MightAndMagic.MODID)
@@ -13,9 +18,20 @@ public class MightAndMagic {
     public static final String MODID = "mam";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final MamRegistrate REGISTRATE = MamRegistrate.create(MODID);
+
+    public static MamRegistrate registrate() {
+        return REGISTRATE;
+    }
+
     public MightAndMagic(IEventBus modEventBus, ModContainer modContainer) {
-        MamBlocks.register(modEventBus);
-        MamItems.register(modEventBus);
+        REGISTRATE.registerEventListeners(modEventBus);
+
+        VerdantFlowers.init();
+        VerdantRock.init();
+        VerdantWood.init();
+        VerdantMana.init();
+
         MamBlockEntities.register(modEventBus);
         MamRecipes.register(modEventBus);
         MamCreativeTabs.register(modEventBus);

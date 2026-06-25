@@ -46,6 +46,11 @@ repositories {
         url = 'https://www.cursemaven.com'
         content { includeGroup("curse.maven") }
     }
+    maven {
+        name = 'IThundxrSnapshots' // Registrate (used by Create)
+        url = 'https://maven.ithundxr.dev/snapshots'
+        content { includeGroup("com.tterrag.registrate") }
+    }
 }
 
 base {
@@ -139,6 +144,9 @@ dependencies {
 
     // Lodestone — rendering/utility library (CurseForge maven, file ID = lodestone_version)
     implementation "curse.maven:lodestone-616457:${lodestone_version}"
+
+    // Registrate — fluent block/item builder (jarJar'd into our mod JAR)
+    jarJar(api("com.tterrag.registrate:Registrate:${registrate_version}"))
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

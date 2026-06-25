@@ -5,8 +5,9 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-import org.mjli.mam.MamBlocks;
 import org.mjli.mam.MightAndMagic;
+import org.mjli.mam.verdant.VerdantMana;
+import org.mjli.mam.verdant.VerdantRock;
 
 /**
  * In-game tests for The Verdant Path mechanics.
@@ -32,7 +33,7 @@ public class TestVerdantPath {
     @GameTest(template = "mam:verdant_path/pure_daisy_converts_stone", timeoutTicks = 400)
     public static void pureDaisyConvertsStone(GameTestHelper helper) {
         BlockPos stonePos = new BlockPos(1, 1, 2);
-        helper.succeedWhen(() -> helper.assertBlockPresent(MamBlocks.LIVING_ROCK.get(), stonePos));
+        helper.succeedWhen(() -> helper.assertBlockPresent(VerdantRock.LIVING_ROCK.get(), stonePos));
     }
 
     /**
@@ -42,6 +43,6 @@ public class TestVerdantPath {
     @GameTest(template = "mam:verdant_path/mana_pool_empty_comparator", timeoutTicks = 40)
     public static void manaPoolEmptyComparator(GameTestHelper helper) {
         BlockPos poolPos = new BlockPos(1, 1, 1);
-        helper.succeedWhen(() -> helper.assertBlockPresent(MamBlocks.MANA_POOL.get(), poolPos));
+        helper.succeedWhen(() -> helper.assertBlockPresent(VerdantMana.MANA_POOL.get(), poolPos));
     }
 }
