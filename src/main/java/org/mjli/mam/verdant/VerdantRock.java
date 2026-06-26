@@ -1,6 +1,7 @@
 package org.mjli.mam.verdant;
 
 import com.tterrag.registrate.util.CreativeModeTabModifier;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -15,6 +16,7 @@ public class VerdantRock {
     public static final BlockEntry<Block> LIVING_ROCK =
         R.block("living_rock", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
+         .blockstate(NonNullBiConsumer.noop())
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -22,6 +24,7 @@ public class VerdantRock {
     public static final BlockEntry<Block> LIVING_ROCK_POLISHED =
         R.block("living_rock_polished", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
+         .blockstate(NonNullBiConsumer.noop())
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -29,6 +32,7 @@ public class VerdantRock {
     public static final BlockEntry<Block> LIVING_ROCK_BRICK =
         R.block("living_rock_brick", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
+         .blockstate(NonNullBiConsumer.noop())
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();

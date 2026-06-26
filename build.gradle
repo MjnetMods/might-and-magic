@@ -88,6 +88,7 @@ runs {
     client {
         // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        systemProperty 'neoforge.enableGameTest', 'true'
     }
 
     server {
@@ -108,7 +109,19 @@ runs {
 
         // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
         arguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+
+        // Pass project root so SnbtToNbtProvider can locate src/gametest/structures/
+        systemProperty 'mam.projectDir', rootProject.projectDir.absolutePath
     }
+}
+
+afterEvaluate {
+    tasks.named('runGameTestServer') { dependsOn('runData') }
+    tasks.named('runClient') { dependsOn('runData') }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 // Sets up a dependency configuration called 'localRuntime'.

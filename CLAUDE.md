@@ -2,6 +2,13 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Collaboration rules
+
+- **Explain before acting:** Always state what you are about to do and why before running any tool. No silent tool calls.
+- **Short loops:** After each finding, check in before the next step. Don't chain multiple investigation steps without pausing.
+- **Fork research:** If a question requires more than 2 file reads to answer, fork it — don't fill the main conversation with raw output.
+- **Continuous improvement is the top priority:** When working patterns break down, stop and fix the process before continuing the task.
+
 ## Project
 
 **Might And Magic** (`mam`) — a Minecraft 1.21.1 mod built on NeoForge 21.1.234, using Java 21. Currently scaffolded from the NeoForge MDK template with placeholder content.
