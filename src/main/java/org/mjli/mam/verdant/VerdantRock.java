@@ -1,5 +1,6 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -32,10 +33,11 @@ public class VerdantRock {
          .simpleItem()
          .register();
 
-    public static void appendToTab(CreativeModeTab.Output output) {
-        output.accept(LIVING_ROCK.asStack());
-        output.accept(LIVING_ROCK_POLISHED.asStack());
-        output.accept(LIVING_ROCK_BRICK.asStack());
+    public static void appendToTab(CreativeModeTabModifier modifier) {
+        var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
+        modifier.accept(LIVING_ROCK.asStack(), tab);
+        modifier.accept(LIVING_ROCK_POLISHED.asStack(), tab);
+        modifier.accept(LIVING_ROCK_BRICK.asStack(), tab);
     }
 
     public static void init() {}

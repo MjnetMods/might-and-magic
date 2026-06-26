@@ -1,6 +1,6 @@
 {
   "name": "patchouli.mam.verdant_path.entry.mana_pool",
-  "category": "mam:verdant_path/mana",
+  "category": "mam:mana",
   "icon": "mam:mana_pool",
   "pages": [
     {

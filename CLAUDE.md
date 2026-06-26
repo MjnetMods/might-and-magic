@@ -65,6 +65,18 @@ Mixin config is at `src/main/resources/mam.mixins.json`; mixin classes go in `or
 | `mod_id` | mam |
 | `mod_group_id` | org.mjli.mam |
 
+### Registrate tab population
+
+All domain classes (`VerdantFlowers`, `VerdantRock`, etc.) expose `appendToTab(CreativeModeTabModifier)`.
+Items **must** be added with `CreativeModeTab.TabVisibility.PARENT_TAB_ONLY`:
+
+```java
+modifier.accept(BLOCK.asStack(), CreativeModeTab.TabVisibility.PARENT_TAB_ONLY);
+```
+
+Using the default `PARENT_AND_SEARCH_TABS` causes a crash: Registrate's `defaultCreativeModeTab = SEARCH`
+mechanism also adds items to SEARCH, so SEARCH ends up with each item twice.
+
 ### NeoForge docs
 
 Community docs: https://docs.neoforged.net/

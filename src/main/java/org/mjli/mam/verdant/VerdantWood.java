@@ -1,5 +1,6 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -68,15 +69,16 @@ public class VerdantWood {
          .simpleItem()
          .register();
 
-    public static void appendToTab(CreativeModeTab.Output output) {
-        output.accept(LIVINGWOOD_LOG.asStack());
-        output.accept(LIVINGWOOD_LOG_STRIPPED.asStack());
-        output.accept(LIVINGWOOD_LOG_GLIMMERING.asStack());
-        output.accept(LIVINGWOOD_LOG_STRIPPED_GLIMMERING.asStack());
-        output.accept(LIVINGWOOD.asStack());
-        output.accept(LIVINGWOOD_STRIPPED.asStack());
-        output.accept(LIVINGWOOD_PLANKS.asStack());
-        output.accept(LIVINGWOOD_PLANKS_MOSSY.asStack());
+    public static void appendToTab(CreativeModeTabModifier modifier) {
+        var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
+        modifier.accept(LIVINGWOOD_LOG.asStack(), tab);
+        modifier.accept(LIVINGWOOD_LOG_STRIPPED.asStack(), tab);
+        modifier.accept(LIVINGWOOD_LOG_GLIMMERING.asStack(), tab);
+        modifier.accept(LIVINGWOOD_LOG_STRIPPED_GLIMMERING.asStack(), tab);
+        modifier.accept(LIVINGWOOD.asStack(), tab);
+        modifier.accept(LIVINGWOOD_STRIPPED.asStack(), tab);
+        modifier.accept(LIVINGWOOD_PLANKS.asStack(), tab);
+        modifier.accept(LIVINGWOOD_PLANKS_MOSSY.asStack(), tab);
     }
 
     public static void init() {}

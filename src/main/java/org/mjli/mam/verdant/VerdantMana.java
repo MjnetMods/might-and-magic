@@ -1,5 +1,6 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import org.mjli.mam.MightAndMagic;
@@ -26,9 +27,10 @@ public class VerdantMana {
          .simpleItem()
          .register();
 
-    public static void appendToTab(CreativeModeTab.Output output) {
-        output.accept(MANA_POOL.asStack());
-        output.accept(PETAL_APOTHECARY.asStack());
+    public static void appendToTab(CreativeModeTabModifier modifier) {
+        var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
+        modifier.accept(MANA_POOL.asStack(), tab);
+        modifier.accept(PETAL_APOTHECARY.asStack(), tab);
     }
 
     public static void init() {}

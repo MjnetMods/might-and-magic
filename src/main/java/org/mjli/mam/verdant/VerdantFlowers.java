@@ -1,12 +1,15 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.util.CreativeModeTabModifier;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.item.ItemStack;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.block.MysticalMushroomBlock;
 import org.mjli.mam.block.flower.MysticalFlowerBlock;
@@ -17,14 +20,10 @@ import org.mjli.mam.foundation.registration.MamBlockProperties;
 import org.mjli.mam.foundation.registration.MamRegistrate;
 import org.mjli.mam.item.VerdantPathGuideItem;
 
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
-
 public class VerdantFlowers {
 
     private static final MamRegistrate R = MightAndMagic.registrate();
 
-    // Effect per dye color (ordinal-indexed, matching DyeColor.values() order)
     @SuppressWarnings("unchecked")
     private static final Holder<MobEffect>[] EFFECTS = new Holder[]{
         MobEffects.MOVEMENT_SPEED,    // WHITE
@@ -79,12 +78,13 @@ public class VerdantFlowers {
         R.item("verdant_path_guide", p -> new VerdantPathGuideItem(p.stacksTo(1)))
          .register();
 
-    public static void appendToTab(CreativeModeTab.Output output) {
-        output.accept(VERDANT_PATH_GUIDE.get());
-        PETALS.forEach(e -> output.accept(e.get()));
-        FLOWERS.forEach(e -> output.accept(e.asStack()));
-        output.accept(PURE_DAISY.asStack());
-        MUSHROOMS.forEach(e -> output.accept(e.asStack()));
+    public static void appendToTab(CreativeModeTabModifier modifier) {
+        var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
+        modifier.accept(new ItemStack(VERDANT_PATH_GUIDE.get()), tab);
+        PETALS.forEach(e -> modifier.accept(new ItemStack(e.get()), tab));
+        FLOWERS.forEach(e -> modifier.accept(e.asStack(), tab));
+        modifier.accept(PURE_DAISY.asStack(), tab);
+        MUSHROOMS.forEach(e -> modifier.accept(e.asStack(), tab));
     }
 
     public static void init() {}

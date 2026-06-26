@@ -32,6 +32,14 @@ public class MightAndMagic {
         VerdantWood.init();
         VerdantMana.init();
 
+        // One consumer, fires once per tab build — avoids Registrate's per-item double-add
+        REGISTRATE.modifyCreativeModeTab(MamCreativeTabs.VERDANT_PATH_KEY, modifier -> {
+            VerdantFlowers.appendToTab(modifier);
+            VerdantRock.appendToTab(modifier);
+            VerdantWood.appendToTab(modifier);
+            VerdantMana.appendToTab(modifier);
+        });
+
         MamBlockEntities.register(modEventBus);
         MamRecipes.register(modEventBus);
         MamCreativeTabs.register(modEventBus);
