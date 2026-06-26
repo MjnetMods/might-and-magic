@@ -1,6 +1,6 @@
 {
   "type": "mam:pure_daisy",
-  "input": { "Name": "minecraft:oak_log" },
+  "input": { "tag": "minecraft:logs" },
   "output": { "Name": "mam:livingwood_log" },
   "time": 200
 }

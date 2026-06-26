@@ -80,3 +80,16 @@ mechanism also adds items to SEARCH, so SEARCH ends up with each item twice.
 ### NeoForge docs
 
 Community docs: https://docs.neoforged.net/
+
+### Ref on disk 
+
+This project
+/Users/mannil/mcmod/mam
+
+ source code
+Botania => /Users/mannil/mcmod/Botania
+Create /Users/mannil/mcmod/Create
+Malum-Mod => /Users/mannil/mcmod/Malum-Mod
+Ponder => /Users/mannil/mcmod/Ponder
+
+

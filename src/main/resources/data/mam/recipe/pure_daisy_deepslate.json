@@ -1,6 +1,0 @@
-{
-  "type": "mam:pure_daisy",
-  "input": { "Name": "minecraft:deepslate" },
-  "output": { "Name": "mam:living_rock_polished" },
-  "time": 260
-}

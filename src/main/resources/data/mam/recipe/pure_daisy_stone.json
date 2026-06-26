@@ -1,6 +1,6 @@
 {
   "type": "mam:pure_daisy",
-  "input": { "Name": "minecraft:stone" },
+  "input": { "block": "minecraft:stone" },
   "output": { "Name": "mam:living_rock" },
   "time": 200
 }
