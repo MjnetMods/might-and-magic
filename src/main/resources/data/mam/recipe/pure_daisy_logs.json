@@ -1,6 +1,6 @@
 {
   "type": "mam:pure_daisy",
   "input": { "tag": "minecraft:logs" },
-  "output": { "Name": "mam:livingwood_log" },
+  "output": { "Name": "mam:livingwood_log", "Properties": { "axis": "y" } },
   "time": 200
 }

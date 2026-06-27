@@ -27,14 +27,14 @@ public class TestVerdantPath {
     /** Verify Pure Daisy converts adjacent logs to living wood within 20 seconds.   */
     @GameTest(template = "verdant_path/pure_daisy_converts_log", timeoutTicks = 16000)
     public static void pureDaisyConvertsLog(GameTestHelper helper) {
-        BlockPos logPos = new BlockPos(3, 1, 4);
+        BlockPos logPos = new BlockPos(3, 2, 4);
         helper.succeedWhen(() -> helper.assertBlockPresent(VerdantWood.LIVINGWOOD_LOG.get(), logPos));
     }
 
   /** Verify Pure Daisy converts adjacent stone to living rock within 20 seconds.   */
   @GameTest(template = "verdant_path/pure_daisy_converts_stone", timeoutTicks = 16000)
   public static void pureDaisyConvertsStone(GameTestHelper helper) {
-    BlockPos stonePos = new BlockPos(3, 1, 4);
+    BlockPos stonePos = new BlockPos(3, 2, 4);
     helper.succeedWhen(() -> helper.assertBlockPresent(VerdantRock.LIVING_ROCK.get(), stonePos));
   }
 //

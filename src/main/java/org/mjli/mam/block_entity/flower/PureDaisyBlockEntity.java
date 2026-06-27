@@ -33,14 +33,11 @@ public class PureDaisyBlockEntity extends BlockEntity {
         if (!(level instanceof ServerLevel serverLevel)) return;
         self.tick++;
 
-        if (self.tick == 1) System.out.println("[MAM] PureDaisy serverTick IS running at " + pos);
-
         BlockPos relative = SURROUNDING[self.tick % SURROUNDING.length];
         BlockPos target = pos.offset(relative);
         BlockState targetState = level.getBlockState(target);
 
         Optional<PureDaisyRecipe> recipe = PureDaisyRecipe.findRecipe(serverLevel, targetState);
-        if (self.tick <= 20) System.out.println("[MAM] tick=" + self.tick + " target=" + target + " block=" + targetState.getBlock().getDescriptionId() + " recipe=" + recipe.isPresent());
         if (recipe.isEmpty()) {
             self.conversionTimers.remove(target);
             return;
