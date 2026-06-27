@@ -10,10 +10,12 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -265,6 +267,27 @@ public class TestVerdantFlowers {
         helper.setBlock(CENTER.above(), tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
         helper.getLevel().destroyBlock(helper.absolutePos(CENTER), false);
         helper.assertItemEntityNotPresent(petal, CENTER, 3.0);
+        helper.succeed();
+    }
+
+    /**
+     * TF-3: shearing the lower half removes the whole plant and yields exactly 2 petals.
+     * Uses shears in MAIN_HAND so helper.useBlock routes through useItemOn → IShearable.
+     */
+    @GameTest(template = PLATFORM)
+    public static void tallFlowerShearDrops2PetalsAndRemoves(GameTestHelper helper) {
+        TallMysticalFlowerBlock tall = (TallMysticalFlowerBlock) VerdantFlowers.TALL_FLOWERS.get(DyeColor.WHITE).get();
+        Item petal = VerdantFlowers.PETALS.get(DyeColor.WHITE).get();
+        helper.setBlock(CENTER, tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+        helper.setBlock(CENTER.above(), tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
+
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.SHEARS));
+        helper.useBlock(CENTER, player);
+
+        helper.assertItemEntityCountIs(petal, CENTER, 2.0, 2);
+        helper.assertBlockNotPresent(tall, CENTER);
+        helper.assertBlockNotPresent(tall, CENTER.above());
         helper.succeed();
     }
 
