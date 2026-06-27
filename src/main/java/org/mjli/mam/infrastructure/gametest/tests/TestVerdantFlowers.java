@@ -1,6 +1,7 @@
 package org.mjli.mam.infrastructure.gametest.tests;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -9,9 +10,17 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.mjli.mam.MightAndMagic;
@@ -221,6 +230,105 @@ public class TestVerdantFlowers {
                 helper.fail(color.getSerializedName() + "_mystical_flower missing from small_flowers (tag has " + smFlowers.size() + " entries)");
             }
         }
+        helper.succeed();
+    }
+
+    // ── TallMysticalFlowerBlock — loot drops ─────────────────────────────
+
+    /** TF-1: breaking the LOWER half fires loot → exactly 2 petals dropped. */
+    @GameTest(template = PLATFORM)
+    public static void tallFlowerBreakLowerDrops2Petals(GameTestHelper helper) {
+        TallMysticalFlowerBlock tall = (TallMysticalFlowerBlock) VerdantFlowers.TALL_FLOWERS.get(DyeColor.WHITE).get();
+        Item petal = VerdantFlowers.PETALS.get(DyeColor.WHITE).get();
+        helper.setBlock(CENTER, tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+        helper.setBlock(CENTER.above(), tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
+        helper.getLevel().destroyBlock(helper.absolutePos(CENTER), true);
+        helper.assertItemEntityCountIs(petal, CENTER, 2.0, 2);
+        helper.succeed();
+    }
+
+    /**
+     * TF-2: destroyBlock with dropsItems=false suppresses the loot table entirely → 0 petals.
+     *
+     * NOTE on double-plant mechanics: DoublePlantBlock has no onRemove. Instead, updateShape
+     * returns AIR when the other half is missing, and Block.updateOrDestroy propagates that
+     * as destroyBlock(otherHalf, !suppressDrops). Breaking UPPER with dropsItems=true would
+     * therefore fire LOWER's loot (→ 2 petals). The dropsItems=false path tested here
+     * suppresses LOWER's drops while UPPER still gets destroyBlock'd with its own drops (0,
+     * since HALF=upper fails the condition). This is the correct counter-case to TF-1.
+     */
+    @GameTest(template = PLATFORM)
+    public static void tallFlowerBreakSuppressedDropsNothing(GameTestHelper helper) {
+        TallMysticalFlowerBlock tall = (TallMysticalFlowerBlock) VerdantFlowers.TALL_FLOWERS.get(DyeColor.WHITE).get();
+        Item petal = VerdantFlowers.PETALS.get(DyeColor.WHITE).get();
+        helper.setBlock(CENTER, tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER));
+        helper.setBlock(CENTER.above(), tall.defaultBlockState().setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER));
+        helper.getLevel().destroyBlock(helper.absolutePos(CENTER), false);
+        helper.assertItemEntityNotPresent(petal, CENTER, 3.0);
+        helper.succeed();
+    }
+
+    // ── BuriedPetalBlock — item placement ────────────────────────────────
+
+    /** BP-5: right-clicking petal item on dirt places the matching BuriedPetalBlock. */
+    @GameTest(template = PLATFORM)
+    public static void petalItemPlantsBuriedPetal(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.getInventory().setItem(0, new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get()));
+
+        // Click top face of dirt so BlockPlaceContext places at dirtPos.above() = CENTER
+        BlockPos dirtHelper = CENTER.below();
+        BlockPos worldDirt = helper.absolutePos(dirtHelper);
+        BlockHitResult hit = new BlockHitResult(Vec3.atCenterOf(worldDirt), Direction.UP, worldDirt, false);
+        helper.useBlock(dirtHelper, player, hit);
+
+        helper.assertBlockPresent(VerdantFlowers.BURIED_PETALS.get(DyeColor.WHITE).get(), CENTER);
+        helper.succeed();
+    }
+
+    // ── FloralPowderItem ──────────────────────────────────────────────────
+
+    /** FP-1: useOn flat dirt → exactly 5–7 flowers placed in the Y=2 layer. */
+    @GameTest(template = PLATFORM)
+    public static void floralPowderScattersFlowersOnDirt(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.getInventory().setItem(0, new ItemStack(VerdantFlowers.FLORAL_POWDER.get()));
+        helper.useBlock(CENTER.below(), player);
+
+        int count = 0;
+        for (int x = 0; x < 7; x++) for (int z = 0; z < 7; z++) {
+            if (!helper.getBlockState(new BlockPos(x, 2, z)).isAir()) count++;
+        }
+        if (count < 5 || count > 7) helper.fail("Expected 5–7 flowers on dirt, got " + count);
+        helper.succeed();
+    }
+
+    /** FP-2: ItemStack shrinks by 1 after a successful scatter. */
+    @GameTest(template = PLATFORM)
+    public static void floralPowderConsumesItem(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.getInventory().setItem(0, new ItemStack(VerdantFlowers.FLORAL_POWDER.get(), 3));
+        helper.useBlock(CENTER.below(), player);
+        int remaining = player.getInventory().getItem(0).getCount();
+        if (remaining != 2) helper.fail("Expected 2 remaining, got " + remaining);
+        helper.succeed();
+    }
+
+    /** FP-3: no flowers placed when the entire floor is stone (not in minecraft:dirt tag). */
+    @GameTest(template = PLATFORM)
+    public static void floralPowderBlockedOnStoneFloor(GameTestHelper helper) {
+        for (int x = 0; x < 7; x++) for (int z = 0; z < 7; z++) {
+            helper.setBlock(new BlockPos(x, 1, z), Blocks.STONE.defaultBlockState());
+        }
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.getInventory().setItem(0, new ItemStack(VerdantFlowers.FLORAL_POWDER.get()));
+        helper.useBlock(new BlockPos(3, 1, 3), player);
+
+        int count = 0;
+        for (int x = 0; x < 7; x++) for (int z = 0; z < 7; z++) {
+            if (!helper.getBlockState(new BlockPos(x, 2, z)).isAir()) count++;
+        }
+        if (count != 0) helper.fail("Expected 0 flowers on stone floor, got " + count);
         helper.succeed();
     }
 }
