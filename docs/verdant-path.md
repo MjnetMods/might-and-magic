@@ -26,32 +26,56 @@ Mana is the fundamental resource. It is gathered passively by special flowers an
 
 ```
 Mystical Flowers (placed in world)
-  ↓ grow near mana sources
-Generating Special Flowers (producing mana)
-  ↓ emptyManaIntoCollector()
-Mana Pool (stores up to 1,000,000 mana)
-  ↓ mana spreader (future)
+  ↓ bonemeal → Tall Mystical Flowers (more petals)
+  ↓ break → Petals (items)
+Petal Apothecary (petals + water + reagent → items)
+  ↓ craft Pure Daisy
+Pure Daisy (placed near stone/logs)
+  ↓ converts to Living Rock / Livingwood Log
+Mana Pool (crafted from Living Rock)
+  ↓ filled by generating special flowers
 Functional Flowers / Abilities (consuming mana)
 ```
 
-### Key Blocks
+### Key Blocks & Items
 
-| Block | Function |
+| Block / Item | Function |
 |---|---|
-| **Mystical Flowers** (16 colors) | Decorative, drop petals, used in crafting |
-| **Pure Daisy** | Special flower — converts adjacent blocks (stone → living rock) |
-| **Living Rock** | Crafting material, obtained via Pure Daisy |
-| **Petal Apothecary** | Primary crafting station — petals + reagent + water → items |
-| **Mana Pool** | Stores mana; filled by generating flowers; drained by abilities |
+| **Mystical Flowers** (16 colors) | Decorative; drop 1 petal when broken; bonemeal grows to tall variant |
+| **Tall Mystical Flowers** (16 colors) | Double-tall variant; drop 2 petals (lower half only) |
+| **Petals** (16 colors) | Item — dropped by flowers or crafted (1 flower → 4 petals); right-click on ground plants a Buried Petal |
+| **Buried Petals** (16 colors, internal) | Hidden underground sprout; grows into matching Mystical Flower on random tick |
+| **Floral Powder** | Thrown item — scatters random Mystical Flowers from the `mam:mystical_flowers` tag |
+| **Pure Daisy** | Special flower — converts adjacent blocks (stone → living rock, any log → livingwood log) |
+| **Living Rock** | Crafting material; obtained via Pure Daisy or found; comes in plain, polished, and brick variants |
+| **Livingwood Log** | Crafting material; obtained via Pure Daisy on any log; refined into planks |
+| **Petal Apothecary** | Primary crafting station — fill with water, throw petals + a seed reagent to conjure items |
+| **Mana Pool** | Stores up to 1,000,000 mana; filled by generating flowers within 6 blocks; comparator-readable |
+| **Verdant Path Guide** | Patchouli guidebook — all lore and mechanics documented in-game |
 
 ## Crafting Progression
 
-1. Find mystical flowers in the world
-2. Craft a **Pure Daisy** via petal apothecary
-3. Place Pure Daisy near stone → converts to **Living Rock**
-4. Craft a **Mana Pool** from living rock
-5. Craft generating special flowers → place near mana pool
-6. Use accumulated mana for healing/buff abilities
+1. Find Mystical Flowers in the world (or wait for world gen to ship)
+2. Bonemeal flowers → Tall Mystical Flowers (2× petal yield)
+3. Break flowers to collect **Petals** — or craft: 1 flower → 4 petals shapeless
+4. Fill a crafting table **Petal Apothecary** with water, throw petals + reagent → conjure a **Pure Daisy**
+5. Place Pure Daisy near stone → converts to **Living Rock**; near logs → converts to **Livingwood Log**
+6. Craft from Living Rock: polished → bricks → **Mana Pool** (U-shape) and **Petal Apothecary** block
+7. Craft generating special flowers via Petal Apothecary → place near Mana Pool
+8. Use accumulated mana for healing/buff abilities
+
+## Recipes (Implemented)
+
+| Recipe | Type | Result |
+|---|---|---|
+| Any flower → 4 petals | Shapeless crafting | Petals (item) |
+| 4 living_rock (2×2) → 4 polished | Shaped crafting | living_rock_polished |
+| 4 polished (2×2) → 4 bricks | Shaped crafting | living_rock_brick |
+| 8 living_rock (U-shape) → mana_pool | Shaped crafting | mana_pool |
+| living_rock + polished (goblet) → apothecary | Shaped crafting | petal_apothecary |
+| livingwood_log → 4 planks | Shapeless crafting | livingwood_planks |
+| stone → living_rock | Pure Daisy (200 ticks) | living_rock |
+| any log → livingwood_log | Pure Daisy (200 ticks) | livingwood_log |
 
 ## Abilities (placeholder names)
 
@@ -76,7 +100,16 @@ _Exact slots and stats TBD._
 
 ## Patchouli Guidebook
 
-A **Tome of Verdant Lore** is crafted early and serves as the in-game documentation. Content TBD — will cover lore of divine entities, mana mechanics, crafting recipes, and ability progression.
+The **Verdant Path Guide** is crafted early and serves as in-game documentation. Book ID: `mam:verdant_path`.
+
+Planned categories and entries:
+
+| Category | Entries |
+|---|---|
+| Introduction | Welcome, The Verdant Path (overview) |
+| Flowers | Mystical Flowers, Tall Flowers, Petals, Floral Powder |
+| Mana | Pure Daisy, Mana Pool, Petal Apothecary |
+| *(future)* | Generating Flowers, Abilities, Accessories |
 
 ## Dependencies
 
