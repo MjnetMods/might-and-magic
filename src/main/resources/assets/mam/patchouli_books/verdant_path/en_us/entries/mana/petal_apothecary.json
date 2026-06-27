@@ -2,10 +2,16 @@
   "name": "patchouli.mam.verdant_path.entry.petal_apothecary",
   "category": "mam:mana",
   "icon": "mam:petal_apothecary",
+  "sortnum": 2,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(thing)Petal Apothecary$() is the primary crafting station of the Verdant Path. Fill it with water using a bucket, then throw $(thing)Mystical Flower Petals$() into it. Add a seed as a reagent to complete the recipe and conjure a new item."
+      "text": "patchouli.mam.verdant_path.page.petal_apothecary.0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "mam:petal_apothecary",
+      "text": "patchouli.mam.verdant_path.page.petal_apothecary.1"
     }
   ]
 }

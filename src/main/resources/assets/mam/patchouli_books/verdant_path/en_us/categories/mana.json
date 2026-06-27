@@ -1,6 +1,6 @@
 {
   "name": "patchouli.mam.verdant_path.category.mana",
-  "description": "The lifeblood of the Verdant Path flows through mana — drawn from the earth by mystical flowers and gathered in pools of living stone.",
+  "description": "patchouli.mam.verdant_path.category.mana.desc",
   "icon": "mam:mana_pool",
   "sortnum": 1
 }

@@ -2,14 +2,16 @@
   "name": "patchouli.mam.verdant_path.entry.pure_daisy",
   "category": "mam:mana",
   "icon": "mam:pure_daisy",
+  "priority": true,
+  "sortnum": 0,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The $(thing)Pure Daisy$() is a sacred flower of transformation. When placed among ordinary stone, it slowly purifies the rock into $(thing)Living Rock$() — the foundation material of all Verdant Path crafting."
+      "text": "patchouli.mam.verdant_path.page.pure_daisy.0"
     },
     {
       "type": "patchouli:text",
-      "text": "Place the Pure Daisy on any solid surface. Within a few seconds, each adjacent stone block will begin to shimmer and convert, one at a time. The daisy can convert up to 8 blocks before needing a moment to rest."
+      "text": "patchouli.mam.verdant_path.page.pure_daisy.1"
     }
   ]
 }
