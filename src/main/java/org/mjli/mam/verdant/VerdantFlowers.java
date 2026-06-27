@@ -1,7 +1,6 @@
 package org.mjli.mam.verdant;
 
 import com.tterrag.registrate.util.CreativeModeTabModifier;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.core.Holder;
@@ -49,7 +48,8 @@ public class VerdantFlowers {
         R.block(color.getSerializedName() + "_mystical_flower",
                 p -> new MysticalFlowerBlock(color, EFFECTS[color.ordinal()], 240, p))
          .properties(p -> MamBlockProperties.flower())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().cross(ctx.getName(), p.modLoc("block/" + ctx.getName())).renderType("cutout")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register()
@@ -59,7 +59,8 @@ public class VerdantFlowers {
         R.block(color.getSerializedName() + "_mystical_mushroom",
                 p -> new MysticalMushroomBlock(color, p))
          .properties(p -> MamBlockProperties.mushroom())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().cross(ctx.getName(), p.modLoc("block/" + ctx.getName())).renderType("cutout")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register()
@@ -73,7 +74,8 @@ public class VerdantFlowers {
     public static final BlockEntry<PureDaisyBlock> PURE_DAISY =
         R.block("pure_daisy", PureDaisyBlock::new)
          .properties(p -> MamBlockProperties.flower())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().cross(ctx.getName(), p.modLoc("block/" + ctx.getName())).renderType("cutout")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();

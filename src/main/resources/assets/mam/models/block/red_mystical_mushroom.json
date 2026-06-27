@@ -1,4 +1,0 @@
-{
-  "parent": "mam:block/shapes/cross",
-  "textures": { "cross": "mam:block/red_mystical_mushroom" }
-}

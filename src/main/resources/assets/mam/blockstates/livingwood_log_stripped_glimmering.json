@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "axis=x": { "model": "mam:block/livingwood_log_stripped_glimmering_horizontal", "x": 90, "y": 90 },
-    "axis=y": { "model": "mam:block/livingwood_log_stripped_glimmering" },
-    "axis=z": { "model": "mam:block/livingwood_log_stripped_glimmering_horizontal", "x": 90 }
-  }
-}

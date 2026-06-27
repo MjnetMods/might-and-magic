@@ -1,1 +1,0 @@
-{ "parent": "minecraft:block/cube_column", "textures": { "end": "mam:block/livingwood_log_stripped_top", "side": "mam:block/livingwood_log_stripped_glimmering" } }

@@ -1,7 +1,6 @@
 package org.mjli.mam.verdant;
 
 import com.tterrag.registrate.util.CreativeModeTabModifier;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
@@ -17,7 +16,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_LOG =
         R.block("livingwood_log", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log_top")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -25,7 +26,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_LOG_STRIPPED =
         R.block("livingwood_log_stripped", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log_stripped"),
+             p.modLoc("block/livingwood_log_stripped_top")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -33,6 +36,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_LOG_GLIMMERING =
         R.block("livingwood_log_glimmering", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog().lightLevel(s -> 12))
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log_glimmering"),
+             p.modLoc("block/livingwood_log_top")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -40,6 +46,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_LOG_STRIPPED_GLIMMERING =
         R.block("livingwood_log_stripped_glimmering", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog().lightLevel(s -> 8))
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log_stripped_glimmering"),
+             p.modLoc("block/livingwood_log_stripped_top")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -47,7 +56,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD =
         R.block("livingwood", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -55,7 +66,9 @@ public class VerdantWood {
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_STRIPPED =
         R.block("livingwood_stripped", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log_stripped"),
+             p.modLoc("block/livingwood_log_stripped")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -63,7 +76,7 @@ public class VerdantWood {
     public static final BlockEntry<Block> LIVINGWOOD_PLANKS =
         R.block("livingwood_planks", Block::new)
          .properties(p -> MamBlockProperties.livingWood())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.cubeAll(ctx.get())))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -71,7 +84,7 @@ public class VerdantWood {
     public static final BlockEntry<Block> LIVINGWOOD_PLANKS_MOSSY =
         R.block("livingwood_planks_mossy", Block::new)
          .properties(p -> MamBlockProperties.livingWood())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.cubeAll(ctx.get())))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();

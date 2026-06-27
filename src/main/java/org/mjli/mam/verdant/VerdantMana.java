@@ -1,7 +1,6 @@
 package org.mjli.mam.verdant;
 
 import com.tterrag.registrate.util.CreativeModeTabModifier;
-import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import org.mjli.mam.MightAndMagic;
@@ -17,7 +16,8 @@ public class VerdantMana {
     public static final BlockEntry<ManaPoolBlock> MANA_POOL =
         R.block("mana_pool", ManaPoolBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -25,7 +25,8 @@ public class VerdantMana {
     public static final BlockEntry<PetalApothecaryBlock> PETAL_APOTHECARY =
         R.block("petal_apothecary", PetalApothecaryBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate(NonNullBiConsumer.noop())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
