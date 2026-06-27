@@ -29,6 +29,11 @@ public class MysticalFlowerBlock extends FlowerBlock implements BonemealableBloc
     }
 
     @Override
+    public boolean canSurvive(@NotNull BlockState state, @NotNull LevelReader level, @NotNull BlockPos pos) {
+        return super.canSurvive(state, level, pos);
+    }
+
+    @Override
     public boolean isValidBonemealTarget(@NotNull LevelReader world, @NotNull BlockPos pos, @NotNull BlockState state) {
         return world.isEmptyBlock(pos.above());
     }
