@@ -24,8 +24,8 @@ bin/
 # NeoForge run directories
 run/
 
-# Datagen cache (generated resources are committed, cache is not)
-src/generated/resources/.cache/
+# Datagen output — run ./gradlew runData to regenerate
+src/generated/
 
 # OS
 .DS_Store

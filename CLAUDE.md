@@ -59,7 +59,7 @@ Mixin config is at `src/main/resources/mam.mixins.json`; mixin classes go in `or
 ### Resources
 
 - `src/main/resources/` — hand-authored assets and data
-- `src/generated/resources/` — output of `runData` (data generators); committed to source, excluded from IDE source sets for `.cache` files
+- `src/generated/resources/` — output of `runData` (data generators); gitignored, run `runData` before building on a fresh clone
 - Translations: `src/main/resources/assets/mam/lang/en_us.json`
 - Mod metadata: `src/main/resources/META-INF/neoforge.mods.toml` — uses `${property}` expansion from `gradle.properties`
 

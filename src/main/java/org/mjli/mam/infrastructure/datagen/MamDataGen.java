@@ -44,5 +44,8 @@ public class MamDataGen {
             new SnbtToNbt(packOutput, inputFolders)
         );
       }
+
+      generator.addProvider(event.includeServer(),
+          new MamRecipeProvider(packOutput, event.getLookupProvider()));
     }
 }

@@ -54,6 +54,14 @@ public class MamBlockProperties {
                 .sound(SoundType.WOOD);
     }
 
+    public static BlockBehaviour.Properties buriedPetal() {
+        return BlockBehaviour.Properties.of()
+                .noCollission()
+                .instabreak()
+                .pushReaction(PushReaction.DESTROY)
+                .sound(SoundType.GRASS);
+    }
+
     public static BlockBehaviour.Properties manaPool() {
         return BlockBehaviour.Properties.of()
                 .mapColor(MapColor.STONE)
