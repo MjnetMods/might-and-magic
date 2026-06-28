@@ -88,15 +88,28 @@ mechanism also adds items to SEARCH, so SEARCH ends up with each item twice.
 
 Community docs: https://docs.neoforged.net/
 
-### Ref on disk 
+### Docs layout
 
-This project
-/Users/mannil/mcmod/mam
+| Folder | Purpose |
+|--------|---------|
+| `design/NN_*-path.md` | Creative / system design per magic path |
+| `design/N1_*-implementation-status.md` | In-game verification checklist per path |
+| `design/N2_*-test-plan.md` | Test coverage tracking per path |
+| `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
+| `docs/` | Player-facing flavor and lore |
 
- source code
-Botania => /Users/mannil/mcmod/Botania
-Create /Users/mannil/mcmod/Create
-Malum-Mod => /Users/mannil/mcmod/Malum-Mod
-Ponder => /Users/mannil/mcmod/Ponder
+Current active tracking files:
+- `design/21_verdant-implementation-status.md`
+- `design/22_verdant-test-plan.md`
+
+### Ref on disk
+
+This project: `/Users/mannil/mcmod/mam`
+
+Reference source code:
+- Botania → `/Users/mannil/mcmod/Botania`
+- Create → `/Users/mannil/mcmod/Create`
+- Malum-Mod → `/Users/mannil/mcmod/Malum-Mod`
+- Ponder → `/Users/mannil/mcmod/Ponder`
 
 

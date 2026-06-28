@@ -1,3 +1,11 @@
+---
+path: verdant
+type: impl
+status: wip
+last-updated: 2026-06-28
+links: "[[20_verdant-path]], [[22_verdant-test-plan]]"
+---
+
 # Implementation Status
 
 Quick-scan checklist for in-game verification. Legend:
