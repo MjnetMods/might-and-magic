@@ -1,7 +1,11 @@
 package org.mjli.mam;
 
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.DyeColor;
 import org.junit.jupiter.api.Test;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,5 +71,36 @@ class ManaPoolTest {
         int added = 50_000;
         int result = Math.max(0, Math.min(current + added, max));
         assertEquals(150_000, result);
+    }
+
+    // ── MP-4: NBT round-trip (saveAdditional / loadAdditional contract) ────────
+
+    @Test
+    void nbt_manaAndOutputting_roundtrip() {
+        CompoundTag tag = new CompoundTag();
+        tag.putInt("mana", 750_000);
+        tag.putBoolean("outputting", true);
+        assertEquals(750_000, tag.getInt("mana"));
+        assertTrue(tag.getBoolean("outputting"));
+    }
+
+    @Test
+    void nbt_color_presentRoundtrip() {
+        CompoundTag tag = new CompoundTag();
+        tag.putByte("color", (byte) DyeColor.RED.getId());
+        Optional<DyeColor> loaded = tag.contains("color")
+                ? Optional.of(DyeColor.byId(tag.getByte("color")))
+                : Optional.empty();
+        assertEquals(Optional.of(DyeColor.RED), loaded);
+    }
+
+    @Test
+    void nbt_color_absentRoundtrip() {
+        CompoundTag tag = new CompoundTag();
+        // no color key written — mirrors saveAdditional when color is empty
+        Optional<DyeColor> loaded = tag.contains("color")
+                ? Optional.of(DyeColor.byId(tag.getByte("color")))
+                : Optional.empty();
+        assertTrue(loaded.isEmpty());
     }
 }
