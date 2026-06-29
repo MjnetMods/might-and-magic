@@ -136,8 +136,8 @@ Slot counts define which recipes land at which altar:
 |----------|------------|-------|---------|
 | Pool upgrade runes | T1, T2 | ≤4, 5–6 | Rune of Infusion, Rune of the Sacred |
 | Elemental runes | T1 | ≤4 | TBD |
-| Season runes | T2 | 5–6 | TBD |
-| Complex runes (2× Mana Rune + 4× Mana Dust + 2× Season Rune) | T3 | 8 | TBD |
+| Concept runes | T2 | 5–6 | TBD |
+| Complex runes (2× Mana Rune + 4× Mana Dust + 2× Concept Rune) | T3 | 8 | TBD |
 | Endgame sacred components | T3 | 8–16 | TBD |
 
 ### Rune recipes
@@ -145,7 +145,7 @@ Slot counts define which recipes land at which altar:
 Rune ingredients and mana costs are TBD — set during balancing pass. Constraints:
 - Rune of Infusion: ≤4 ingredients, T1 materials only (runs on Altar)
 - Rune of the Sacred: ≤6 ingredients, T2 materials only (runs on Infused Altar)
-- T3 complex runes: 2× Mana Rune + 4× Mana Dust + 2× Season Rune = 8 slots (requires Sacred Altar)
+- T3 complex runes: 2× Mana Rune + 4× Mana Dust + 2× Concept Rune = 8 slots (requires Sacred Altar)
 
 ---
 
