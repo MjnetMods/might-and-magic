@@ -54,7 +54,7 @@ The mana loss on pickup is an intentional cost — you are committing your infra
 
 ## Rune Production
 
-Runes are crafted at the **Grove Altar** — the Verdant ritual station equivalent to Botania's Runic Altar.
+Runes are crafted at the **Altar** — the Verdant ritual station equivalent to Botania's Runic Altar.
 
 **Mechanic:** Place ingredients around the altar, then drop a **Living Rock** as the final trigger. When a nearby Mana Pool has sufficient mana, the altar automatically consumes the mana and ingredients and ejects the rune. No wand or manual activation — mana availability is the only gate.
 
@@ -65,7 +65,7 @@ Runes are crafted at the **Grove Altar** — the Verdant ritual station equivale
 
 Rune ingredients and mana costs are TBD — set during balancing pass. Both runes must be craftable from the tier *below* their target pool (T1 materials for Rune of Infusion, T2 materials for Rune of the Sacred), so no circular dependency.
 
-Full Grove Altar design: `design/20_verdant-path-grove-altar.md`
+Full Altar design: `design/20_verdant-path-altar.md`
 
 ---
 

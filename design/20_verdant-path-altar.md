@@ -5,29 +5,30 @@ last-updated: 2026-06-29
 links: "[[20_verdant-path]], [[20_verdant-path-mana-pool]], [[20_verdant-path-items]]"
 ---
 
-# Verdant Path — Grove Altar
+# Verdant Path — Altar
 
-The Grove Altar is the Verdant ritual station. It is to the Verdant Path what the Runic Altar is to Botania — a mana-consuming, ingredient-accepting station that produces runes, upgrade components, and sacred crafted items through a drop-and-charge ritual.
+The Altar is the Verdant ritual station. It is to the Verdant Path what the Runic Altar is to Botania — a mana-consuming, ingredient-accepting station that produces runes, upgrade components, and sacred crafted items through a drop-and-charge ritual.
 
 ---
 
 ## Thematic Framing
 
-The Grove Altar feels like a **living stone basin** that hums with sacred potential. Ingredients placed on it orbit slowly; mana fills it from a nearby pool; when the Living Rock trigger lands and mana is sufficient, the ritual completes and the output emerges. No wand. No manual step. The grove decides when it is ready.
+The Altar feels like a **living stone basin** that hums with sacred potential. Ingredients placed on it orbit slowly; mana fills it from a nearby pool; when the Living Rock trigger lands and mana is sufficient, the ritual completes and the output emerges. No wand. No manual step. The grove decides when it is ready.
 
 ---
 
 ## Tier Overview
 
-Three tiers, each with a larger ingredient capacity. Slot count is the primary tier gate — a recipe that needs 10 ingredient slots physically cannot run on a 6-slot altar.
+Four tiers, each with a larger ingredient capacity. Slot count is the primary tier gate — a recipe that needs 10 ingredient slots physically cannot run on a 6-slot altar.
 
 | Tier                 | Input Slots | Mana Source        | Notes                         |
 |----------------------|-------------|--------------------|-------------------------------|
-| **Grove Altar**      | 4           | Any pool ≥ recipe cost | T1 runes, early rites     |
-| **Infused Grove Altar** | 6        | Any pool ≥ recipe cost | T2 runes, mid rites       |
-| **Sacred Grove Altar**  | 16       | Any pool ≥ recipe cost | T3 rites, endgame recipes |
+| **Altar**      | 4           | Any pool ≥ recipe cost | T1 runes, early rites     |
+| **Infused Altar** | 6        | Any pool ≥ recipe cost | T2 runes, mid rites       |
+| **Sacred Altar**       | 16          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
+| **Desecrated Altar**   | 16          | Desecrated Pool ≥ recipe cost | Dark school T3 parallel     |
 
-Mana gating follows the pool capacity model — any pool with sufficient mana can supply the altar. The altar tier gates recipe access via slot count, not by pool type.
+Mana gating follows the pool capacity model — T1/T2 altars accept any pool; T3 altars are energy-aligned (Sacred uses Mana, Desecrated uses Nox). The altar tier gates recipe access via slot count, not by pool type.
 
 Slot counts are the progression gate: a recipe requiring 8 ingredients physically cannot run on a 6-slot altar, regardless of mana available. The jump from 6 → 16 at T3 is intentional — T3 recipes are meaningfully more complex than T2.
 
@@ -46,9 +47,10 @@ S = rock (tier-matched)   C = center ingredient
 
 | Output                  | S                   | C                              |
 |-------------------------|---------------------|--------------------------------|
-| Grove Altar             | Living Rock         | Mana Pearl **or** Mana Diamond (`#mam:mana_gems`) |
-| Infused Grove Altar     | Infused Living Rock | Grove Altar (item)             |
-| Sacred Grove Altar      | Sacred Living Rock  | Infused Grove Altar (item)     |
+| Altar             | Living Rock           | Mana Pearl **or** Mana Diamond (`#mam:mana_gems`) |
+| Infused Altar     | Infused Living Rock   | Altar (item)                                      |
+| Sacred Altar      | Sacred Living Rock    | Infused Altar (item)                              |
+| Desecrated Altar  | Desecrated Living Rock| Infused Altar (item)                              |
 
 5× rock + 1× center per recipe. The previous-tier altar is consumed — not returned.
 
@@ -96,11 +98,11 @@ No wand, no manual activation step.
 
 ## Recipe Format
 
-Data-driven. Recipe type: `mam:grove_altar`.
+Data-driven. Recipe type: `mam:altar`.
 
 ```json
 {
-  "type": "mam:grove_altar",
+  "type": "mam:altar",
   "ingredients": [
     { "item": "mam:living_rock" },
     { "tag": "mam:mana_gems" },
@@ -125,9 +127,10 @@ Slot counts define which recipes land at which altar:
 
 | Slot range | Altar | Recipe tier |
 |------------|-------|-------------|
-| ≤4 slots | Grove Altar | T1 — elemental runes, early rites |
-| 5–6 slots | Infused Grove Altar | T2 — season runes, mid rites |
-| 7–16 slots | Sacred Grove Altar | T3 — complex runes, endgame components |
+| ≤4 slots   | Altar            | T1 — elemental runes, early rites             |
+| 5–6 slots  | Infused Altar    | T2 — concept runes, mid rites                 |
+| 7–16 slots | Sacred Altar     | T3 — complex runes, endgame components (Mana) |
+| 7–16 slots | Desecrated Altar | T3 — Nox recipes, dark school components      |
 
 | Category | Altar Tier | Slots | Examples |
 |----------|------------|-------|---------|
@@ -140,20 +143,20 @@ Slot counts define which recipes land at which altar:
 ### Rune recipes
 
 Rune ingredients and mana costs are TBD — set during balancing pass. Constraints:
-- Rune of Infusion: ≤4 ingredients, T1 materials only (runs on Grove Altar)
-- Rune of the Sacred: ≤6 ingredients, T2 materials only (runs on Infused Grove Altar)
-- T3 complex runes: 2× Mana Rune + 4× Mana Dust + 2× Season Rune = 8 slots (requires Sacred Grove Altar)
+- Rune of Infusion: ≤4 ingredients, T1 materials only (runs on Altar)
+- Rune of the Sacred: ≤6 ingredients, T2 materials only (runs on Infused Altar)
+- T3 complex runes: 2× Mana Rune + 4× Mana Dust + 2× Season Rune = 8 slots (requires Sacred Altar)
 
 ---
 
-## Parallel with the Petal Apothecary
+## Parallel with the Apothecary
 
-The Apothecary and the Grove Altar share the same core mechanic — drop items, medium charges, output ejects — differing only in their medium:
+The Apothecary and the Altar share the same core mechanic — drop items, medium charges, output ejects — differing only in their medium:
 
 | Station | Medium | Trigger | Tiers |
 |---------|--------|---------|-------|
-| Petal Apothecary | Water (filled like a cauldron) | — (auto on water present + recipe match) | 3 |
-| Grove Altar | Mana (drawn from nearby pool) | Living Rock drop | 3 |
+| Apothecary | Water (filled like a cauldron) | — (auto on water present + recipe match) | 4 |
+| Altar      | Mana (drawn from nearby pool)  | Living Rock drop                          | 4 |
 
 Both station families share a base tick loop skeleton. Shared abstract base class recommended.
 
@@ -161,11 +164,11 @@ Both station families share a base tick loop skeleton. Shared abstract base clas
 
 ## Implementation Notes
 
-- Internal storage: `SimpleContainer` sized to the altar tier's slot limit (6 / 12 / 16)
+- Internal storage: `SimpleContainer` sized to the altar tier's slot limit (4 / 6 / 16)
 - Nearby pool scan: same pattern as pool infusion entity scan — once per second is sufficient
 - `drainMana()` on the pool block entity — already needed for pool infusion; shared API
 - Output item flagging: custom tag on `ItemEntity` NBT to prevent re-ingest (mirror Botania's `runicAltarSpawned`)
-- Abstract base: `GroveAltarBlockEntity` with slot count as a constructor param; T2/T3 subclass only
+- Abstract base: `AltarBlockEntity` with slot count as a constructor param; T2/T3 subclass only
 
 ---
 

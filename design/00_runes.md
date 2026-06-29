@@ -2,7 +2,7 @@
 type: design
 status: draft
 last-updated: 2026-06-29
-links: "[[20_verdant-path-grove-altar]], [[00_infra]]"
+links: "[[20_verdant-path-altar]], [[00_infra]]"
 ---
 
 # MAM — Rune Taxonomy
@@ -15,7 +15,7 @@ All runes are MAM-native (`mam:rune_*`). No dependency on Botania runes.
 
 ## Production
 
-The **Grove Altar** (Verdant Path) is the canonical primary source for all runes. Other schools will add alternative production routes for runes aligned to their themes — different mechanics, same output item. Rune of the Sanguine can be produced by the Grove Altar AND by a Sanguine-specific ritual; both produce `mam:rune_sanguine`.
+The **Altar** (Verdant Path) is the canonical primary source for all runes. Other schools will add alternative production routes for runes aligned to their themes — different mechanics, same output item. Rune of the Sanguine can be produced by the Altar AND by a Sanguine-specific ritual; both produce `mam:rune_sanguine`.
 
 This means:
 - Verdant players produce runes first
@@ -28,10 +28,10 @@ This means:
 
 | Tier | Altar | Slots | Recipe template |
 |------|-------|-------|-----------------|
-| T1 — Elemental | Grove Altar | ≤4 | Natural ingredients + base Verdant materials |
-| T2 — Concept | Infused Grove Altar | 5–6 | 2× T1 runes + thematic ingredients |
-| T3a — Grand Force | Sacred Grove Altar | 8 | 2× Mana Rune + 4× Mana Dust + 2× T2 runes |
-| T3b — School Essence | Sacred Grove Altar (primary) | 8 | 2× Mana Rune + 4× Mana Dust + 2× T2 runes |
+| T1 — Elemental | Altar | ≤4 | Natural ingredients + base Verdant materials |
+| T2 — Concept | Infused Altar | 5–6 | 2× T1 runes + thematic ingredients |
+| T3a — Grand Force | Sacred Altar | 8 | 2× Mana Rune + 4× Mana Dust + 2× T2 runes |
+| T3b — School Essence | Sacred Altar (primary) | 8 | 2× Mana Rune + 4× Mana Dust + 2× T2 runes |
 
 T3a and T3b use the same recipe template. School-specific alternative production routes for T3b are added per-school as they are designed.
 
@@ -91,7 +91,7 @@ Six universal principles that emerge from combining two T2 concepts. These repre
 
 One rune per magic school. Each represents the school's fundamental magical identity — used in that school's capstone recipes and in cross-school hybrid crafting.
 
-Primary production: Sacred Grove Altar using same 8-slot template. Each school adds its own alternative production route as it is designed.
+Primary production: Sacred Altar using same 8-slot template. Each school adds its own alternative production route as it is designed.
 
 | Rune | `mam:` key | T2 Pair | School |
 |------|------------|---------|--------|
@@ -129,8 +129,8 @@ Implement runes alongside the content that first requires them — not speculati
 
 | Rune set | When to implement |
 |----------|-------------------|
-| T1 elemental | When Grove Altar is implemented |
-| T2 concept | When Infused Grove Altar is implemented |
+| T1 elemental | When Altar is implemented |
+| T2 concept | When Infused Altar is implemented |
 | Rune of Infusion, Rune of the Sacred | With pool upgrade mechanic (see `20_verdant-path-mana-pool.md`) |
 | T3a Grand Force | When first recipe consuming them is designed |
 | T3b School Essence | When each school's capstone content is designed |

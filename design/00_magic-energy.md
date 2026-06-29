@@ -2,12 +2,12 @@
 type: design
 status: draft
 last-updated: 2026-06-29
-links: "[[00_runes]], [[20_verdant-path-mana-pool]], [[20_verdant-path-grove-altar]]"
+links: "[[00_runes]], [[20_verdant-path-mana-pool]], [[20_verdant-path-altar]]"
 ---
 
 # MAM — Magic Energy System
 
-Cross-school energy infrastructure. Defines the two energy types, how they interact, the tier branching at T3, and how shared stations (Apothecary, Grove Altar) serve all magic schools.
+Cross-school energy infrastructure. Defines the two energy types, how they interact, the tier branching at T3, and how shared stations (Apothecary, Altar) serve all magic schools.
 
 ---
 
@@ -74,7 +74,7 @@ T3 pools are pure vessels — they resist contamination at a cost. This makes Sa
 
 ## Shared Stations — Cross-School
 
-The Petal Apothecary, Grove Altar, and Weavery are **cross-school infrastructure**. None are Verdant-exclusive — any school can have recipes for them. The Verdant path builds them first; other schools add their own recipe support alongside their own content.
+The Petal Apothecary, Altar, and Weavery are **cross-school infrastructure**. None are Verdant-exclusive — any school can have recipes for them. The Verdant path builds them first; other schools add their own recipe support alongside their own content.
 
 ### Apothecary — fluid determines school
 
@@ -92,16 +92,16 @@ A single Apothecary block can be used for all schools by changing what you fill 
 
 The Weavery (smithing-table style, tier-matched) accepts trinkets from any school. Recipe structure stays the same — template slot + cloth piece + trinket → augmented cloth. Other schools add their own trinket types with their own slot affinity and effects. Three tiers (Weavery / Infused / Sacred) serve all schools; a Desecrated tier is TBD.
 
-### Grove Altar — energy determines school
+### Altar — energy determines school
 
-The Grove Altar draws from a nearby pool. The energy type in that pool determines which recipes fire.
+The Altar draws from a nearby pool. The energy type in that pool determines which recipes fire.
 
 | Pool energy | Recipe school |
 |-------------|---------------|
 | Mana | Verdant / generic |
 | Nox | Dark school |
 
-Physically the Desecrated Grove Altar is the same station built from Desecrated Living Rock — it draws from a Desecrated Pool for Nox recipes. Same mechanic, dark medium.
+Physically the Desecrated Altar is the same station built from Desecrated Living Rock — it draws from a Desecrated Pool for Nox recipes. Same mechanic, dark medium.
 
 ---
 
@@ -118,16 +118,16 @@ All shared stations exist in four tiers. Tier gates recipe complexity (slot coun
 | Sacred Apothecary | Sacred Living Rock | Verdant T3 | |
 | Desecrated Apothecary | Desecrated Living Rock | Dark T3 | Dark-flavour parallel |
 
-### Grove Altar
+### Altar
 
 | Tier | Slots | Built from | Notes |
 |------|-------|-----------|-------|
-| Grove Altar | 4 | Living Rock + gem | |
-| Infused Grove Altar | 6 | Infused Living Rock + Grove Altar | |
-| Sacred Grove Altar | 16 | Sacred Living Rock + Infused Grove Altar | |
-| Desecrated Grove Altar | 16 | Desecrated Living Rock + Infused Grove Altar | Dark parallel |
+| Altar | 4 | Living Rock + gem | |
+| Infused Altar | 6 | Infused Living Rock + Altar | |
+| Sacred Altar | 16 | Sacred Living Rock + Infused Altar | |
+| Desecrated Altar | 16 | Desecrated Living Rock + Infused Altar | Dark parallel |
 
-Desecrated Grove Altar: consumes Infused Grove Altar in center slot (same upgrade recipe pattern), substituting Desecrated Living Rock as the surrounding material.
+Desecrated Altar: consumes Infused Altar in center slot (same upgrade recipe pattern), substituting Desecrated Living Rock as the surrounding material.
 
 ---
 
