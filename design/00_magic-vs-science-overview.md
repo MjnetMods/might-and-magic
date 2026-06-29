@@ -44,7 +44,7 @@ A transactional school of magic centered on contracts, offerings, summoned serva
 * Excels at logistics, special trades, utility servants, and pact-driven progression
 * Power comes with debt, attention, and obligations
 
-### The Occult Path
+### The Sanguine Path
 
 A ritual-heavy school centered on circles, offerings, blood, curses, transformation, and forbidden workings.
 
@@ -62,7 +62,7 @@ Magic should not feel like one giant "spell tree." Each magical school must play
 
 * Verdant = growth, support, mana, flowers, grace
 * Summoning = contracts, servants, trade, bargains
-* Occult = rites, sacrifice, curses, transformation
+* Sanguine = rites, sacrifice, curses, transformation
 
 ### 2. Science Must Be a Real Path, Not Just Utility
 
@@ -103,7 +103,7 @@ Exposure is not simply corruption or punishment. It represents how deeply the pl
 
 * **Verdant Exposure** — attunement to living mana and divine-natural presence
 * **Summoning Exposure** — debt, contract marks, infernal attention, or otherworldly resonance
-* **Occult Exposure** — ritual scarring, blood debt, corruption, forbidden insight
+* **Sanguine Exposure** — ritual scarring, blood debt, corruption, forbidden insight
 * **Rational Exposure** — industrial conditioning, static charge, rational discipline, anti-magic hardening
 
 Exposure can be used for:
@@ -153,7 +153,7 @@ Effects:
 * calms corruption
 * improves healing and passive regeneration
 * weakens industrial efficiency if the area becomes too wild or overgrown
-* can protect against harsh occult side effects
+* can protect against harsh Sanguine side effects
 
 ### Summoning Aura
 
@@ -170,7 +170,7 @@ Effects:
 * destabilizes nearby machinery or causes minor distortions
 * may improve rare trade opportunities and pact outcomes
 
-### Occult Aura
+### Sanguine Aura
 
 Produced by:
 
@@ -197,19 +197,19 @@ The player should be able to begin with either side, but the paths feel differen
 * Science: hand-cranked machines, simple rotational power, basic material processing
 * Verdant: gather flowers, create first mana flower, craft petal apothecary, produce living stone
 * Summoning: assemble a chalk circle, perform a minor calling, bind a tiny helper spirit
-* Occult: craft ritual chalk or blood sigil, perform a small rite, create the first ritual focus
+* Sanguine: craft ritual chalk or blood sigil, perform a small rite, create the first ritual focus
 
 ### Midgame
 
 * Science scales into factories and anti-magic infrastructure
 * Verdant scales into mana production and protective/supportive rituals
 * Summoning scales into logistics spirits, trade entities, and contract specialization
-* Occult scales into curses, large rites, area shaping, and dangerous transformations
+* Sanguine scales into curses, large rites, area shaping, and dangerous transformations
 
 ### Lategame
 
 * Hybrid structures and school crossover become possible
-* Players can intentionally build science districts, sacred groves, occult sanctums, or infernal markets
+* Players can intentionally build science districts, sacred groves, sanguine sanctums, or infernal markets
 * Specialized tools allow one school to resist or exploit another
 
 ---
