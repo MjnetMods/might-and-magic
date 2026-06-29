@@ -1,0 +1,45 @@
+baseURL = "https://mjli.github.io/mam/"
+title = "Might & Magic"
+languageCode = "en-us"
+
+canonifyURLs = true
+relativeURLs = false
+
+[[module.imports]]
+path = "github.com/nunocoracao/blowfish/v2"
+
+[params]
+defaultAppearance = "dark"
+autoSwitchAppearance = false
+description = "A Minecraft magic & technology mod for NeoForge 1.21.1"
+
+[params.sidebar]
+emoji = "🌿"
+subtitle = "NeoForge 1.21.1"
+
+[menu]
+
+[[menu.main]]
+name = "Getting Started"
+url = "/getting-started/"
+weight = 10
+
+[[menu.main]]
+name = "Verdant Path"
+url = "/verdant-path/"
+weight = 20
+
+[[menu.main]]
+name = "Summoning Path"
+url = "/summoning-path/"
+weight = 30
+
+[[menu.main]]
+name = "Sanguine Path"
+url = "/sanguine-path/"
+weight = 40
+
+[[menu.main]]
+name = "The Rational Path"
+url = "/science-path/"
+weight = 50

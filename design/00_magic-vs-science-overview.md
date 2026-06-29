@@ -82,14 +82,25 @@ Science and magic should interfere with each other in tangible ways:
 * strong magical zones can jam or weaken machines
 * players can build stabilizers, insulators, and hybrid structures to manage this
 
-### 4. Hybridization Should Be Possible but Earned
+### 4. Cross-Path Dabbling Has Consequences — and Can Be Weaponized
 
-Players should be able to combine schools, but only through effort:
+Players are not locked into one path. But the paths are not neutral observers. Investing meaningfully in more than one path accumulates **Path Dissonance** — a measure of how torn the player's soul is between competing influences. This is distinct from Nox (dark mana); dissonance is structural tension between exposure counters.
+
+At low dissonance: subtle inefficiency, occasional interference between systems.  
+At high dissonance: unpredictable side effects, attention from hostile entities, infrastructure instability.
+
+**The multiplayer angle:** Dissonance is legible to other players. A pure Verdant practitioner can sense a dissonant player. A Sanguine ritualist can build a rite that *amplifies* a target's dissonance — turning their own dabbling against them. An industrial engineer can specifically target the magical components of a hybrid player's setup.
+
+Dabbling is a gamble. It may be worth it. Someone else may make sure it isn't.
+
+### 5. Hybridization Should Be Possible but Earned
+
+Players who choose to push through the consequences of cross-path play can stabilize their dissonance through effort:
 
 * anti-magic shielding
 * ritual grounding
 * special hybrid materials
-* progression gates that require understanding both sides
+* progression gates that require deep understanding of both sides
 
 ---
 
@@ -248,7 +259,12 @@ The pack should support several fantasies:
 
 * How visible should aura values be to the player?
 * Is exposure global per school, or per-subsystem?
+* At what dissonance threshold do hostile effects begin? Is there a grace period for casual experimentation?
 * Should certain schools be mutually exclusive at high investment?
 * Which existing mods are mandatory dependencies vs optional inspiration?
 * How much of the system should be handled through KubeJS/datapacks vs a custom addon mod?
 * What is the first playable “vertical slice” of the pack?
+
+---
+
+*Note: Mixed aura zones — where machines and magic operate in close proximity — generate a specific resonance in the fabric of the world. Engineers working near sites of high magical interference report unexplained mechanical failures: components missing, shafts jamming without cause, gears found teeth-down in places they could not have fallen. The rational explanation is vibration. Probably.*

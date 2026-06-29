@@ -1,0 +1,36 @@
+{{- $in   := .Get "in"    | default ",,|,,|,," -}}
+{{- $out  := .Get "out"   | default "" -}}
+{{- $count := .Get "count" | default "1" -}}
+{{- $type := .Get "type"  | default "Crafting Table" -}}
+
+{{- $rows := split $in "|" -}}
+
+<div class="crafting-widget">
+  <div class="crafting-type">{{ $type }}</div>
+  <div class="crafting-inner">
+    <div class="crafting-grid">
+      {{- range $rows -}}
+        {{- $slots := split . "," -}}
+        {{- range $slots -}}
+          {{- $slot := trim . " " -}}
+          <div class="crafting-slot">
+            {{- if $slot -}}
+              <img src="/textures/{{ $slot }}.png" alt="{{ $slot }}" title="{{ $slot }}" loading="lazy">
+            {{- end -}}
+          </div>
+        {{- end -}}
+      {{- end -}}
+    </div>
+    <div class="crafting-arrow">&#8594;</div>
+    <div class="crafting-output">
+      <div class="crafting-slot crafting-slot-out">
+        {{- if $out -}}
+          <img src="/textures/{{ $out }}.png" alt="{{ $out }}" title="{{ $out }}" loading="lazy">
+          {{- if gt (int $count) 1 -}}
+            <span class="crafting-count">{{ $count }}</span>
+          {{- end -}}
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</div>
