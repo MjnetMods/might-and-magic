@@ -33,9 +33,10 @@ The Tier 1 pool is crafted directly from Living Rock. Tier 2 and 3 pools are pro
 | Infused Mana Pool | Rune of Infusion + Mana Pool item (crafting table)  | ✅ decided  |
 | Sacred Mana Pool  | Rune of the Sacred + Infused Mana Pool item (crafting table) | ✅ decided |
 
-Tier 1 pool — U shape, 5× Living Rock:
+Tier 1 pool — U shape, 8× Living Rock:
 
 ```
+R R R
 R . R
 R R R   R = Living Rock   yields 1× Mana Pool
 ```
@@ -141,7 +142,7 @@ Mana fill is shown as a fluid layer inside the pool basin — height rises with 
 
 ## Open Questions
 
-- [x] **Mana Pool recipe shape** — U shape, 5× Living Rock (same shape for all tiers). WP-C unblocked.
+- [x] **Mana Pool recipe shape** — ring/U shape, 8× Living Rock (same shape for all tiers). WP-C unblocked.
 - [x] **Infused / Sacred pool recipes** — Rune + existing pool item at crafting table. Unblocked.
 - [ ] **Fluid rendering** — custom renderer or repurposed water? Decide before Dev work on Tier 2/3 visual.
 - [x] **Pool upgrade path** — pick up existing pool (mana lost), combine with rune at crafting table → next tier pool. Not in-place.
