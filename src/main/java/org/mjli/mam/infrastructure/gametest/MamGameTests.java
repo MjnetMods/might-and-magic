@@ -4,6 +4,7 @@ import net.neoforged.neoforge.event.RegisterGameTestsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.mjli.mam.MightAndMagic;
+import org.mjli.mam.infrastructure.gametest.tests.TestGeneratingFlowers;
 import org.mjli.mam.infrastructure.gametest.tests.TestManaPool;
 import org.mjli.mam.infrastructure.gametest.tests.TestApothecary;
 import org.mjli.mam.infrastructure.gametest.tests.TestRecipes;
@@ -16,6 +17,7 @@ public class MamGameTests {
     private static final Class<?>[] TEST_CLASSES = {
             TestVerdantPath.class,
             TestVerdantFlowers.class,
+            TestGeneratingFlowers.class,
             TestManaPool.class,
             TestRecipes.class,
             TestApothecary.class,

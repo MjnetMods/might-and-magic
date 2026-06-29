@@ -159,6 +159,34 @@ All registered, cross model + Botania textures, light level 3.
 
 ---
 
+### Generating Flowers
+
+Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the nearest `ManaPool` within 6 blocks and pushes buffered mana every tick.
+
+| Block | Registered | Model | In Tab | Mechanic | Ponder | Tests | Recipe |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| solarbud | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | ⬜ |
+| emberwort | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | ⬜ |
+| dewpetal | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | 🔨 | ⬜ |
+
+| Mechanic | Implemented | Tested | Notes |
+|---|:---:|:---:|---|
+| Solarbud: sky + daytime → 1 mana/tick | 🔨 | ⬜ | Max 900; stops at night or with blocked sky |
+| Emberwort: fuel item scan → burn → 3 mana/2 ticks | 🔨 | ⬜ | Radius 3; max 300; consumes 1 item at a time |
+| Dewpetal: rain or adjacent water → 1 mana/2 ticks | 🔨 | ⬜ | Max 900; water source is always-on |
+
+**Textures:** Botania placeholders (daybloom/endoflame/hydroangeas). Replace with original art before release.
+
+**Recipes:** Not yet — apothecary crafting must be implemented first.
+
+**Verify Solarbud:** Place in open air in daytime. Place a Mana Pool within 6 blocks → pool should fill slowly. Go underground (block sky) → generation stops.
+
+**Verify Emberwort:** Place within 6 blocks of a Mana Pool. Drop coal on the ground nearby → flower consumes it and mana rises in pool.
+
+**Verify Dewpetal:** Place adjacent to a water source block → pool fills slowly at all times. Move away from water → only generates in rain.
+
+---
+
 ### Mana System
 
 | Block | Registered | Model | Mechanic | Comparator |
@@ -224,6 +252,9 @@ All registered, cross model + Botania textures, light level 3.
 | Mana pool storage | 🔨 | ⬜ | MAX_MANA = 1,000,000 |
 | Mana network (pool/collector registry) | 🔨 | ⬜ | Per-dimension WeakHashMap |
 | GeneratingFlower → Pool mana push | 🔨 | ⬜ | `emptyManaIntoCollector()`, auto-binds ≤6 blocks |
+| Solarbud: sky+daylight → mana | 🔨 | ⬜ | `SolarbudBlockEntity.tickFlower()` |
+| Emberwort: fuel item → burn → mana | 🔨 | ⬜ | `EmberwortBlockEntity.tickFlower()`, radius 3 |
+| Dewpetal: rain/water → mana | 🔨 | ⬜ | `DewpetalBlockEntity.tickFlower()` |
 | Mana pool comparator output | ⬜ | ⬜ | Planned, not coded |
 | Petal apothecary water fill | ⬜ | ⬜ | |
 | Petal apothecary in-world crafting | ⬜ | ⬜ | Interaction hook exists, logic TODO |
@@ -310,7 +341,7 @@ Book ID: `mam:verdant_path`
 | Category | Entries | Status |
 |---|---|:---:|
 | Introduction | *(stub category, no entries yet)* | 🔨 |
-| Mana | Pure Daisy, Mana Pool, Apothecary | 🔨 |
+| Mana | Pure Daisy, Mana Pool, Apothecary, Solarbud, Emberwort, Dewpetal | 🔨 |
 
 **Missing entries (not yet written):**
 - Flowers category: Mystical Flowers, Tall Flowers, Petals, Floral Powder

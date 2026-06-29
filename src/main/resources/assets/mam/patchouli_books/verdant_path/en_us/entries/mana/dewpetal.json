@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.mam.verdant_path.entry.dewpetal",
+  "category": "mam:mana",
+  "icon": "mam:dewpetal",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.dewpetal.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.dewpetal.1"
+    }
+  ]
+}

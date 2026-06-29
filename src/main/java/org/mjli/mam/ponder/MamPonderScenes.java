@@ -10,6 +10,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantGeneratingFlowers;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
 
@@ -21,6 +22,15 @@ public class MamPonderScenes {
         H.forComponents(VerdantFlowers.PURE_DAISY)
             .addStoryBoard("pure_daisy/converts_stone", MamPonderScenes::pureDaisyStone)
             .addStoryBoard("pure_daisy/converts_log",   MamPonderScenes::pureDaisyLog);
+
+        H.forComponents(VerdantGeneratingFlowers.SOLARBUD)
+            .addStoryBoard("solarbud/sunlight", MamPonderScenes::solarbudSunlight);
+
+        H.forComponents(VerdantGeneratingFlowers.EMBERWORT)
+            .addStoryBoard("emberwort/burning_fuel", MamPonderScenes::emberwortBurningFuel);
+
+        H.forComponents(VerdantGeneratingFlowers.DEWPETAL)
+            .addStoryBoard("dewpetal/rain_and_water", MamPonderScenes::dewpetalRainAndWater);
     }
 
     public static void pureDaisyStone(SceneBuilder scene, SceneBuildingUtil util) {
@@ -89,6 +99,86 @@ public class MamPonderScenes {
         scene.overlay().showText(70)
             .text("…becoming Livingwood Logs, the foundation of verdant crafting.")
             .pointAt(util.vector().topOf(3, 1, 2))
+            .attachKeyFrame();
+        scene.idle(80);
+    }
+
+    public static void solarbudSunlight(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("solarbud.sunlight", "Absorbing Sunlight");
+        scene.configureBasePlate(0, 0, 5);
+
+        scene.showBasePlate();
+        scene.idle(10);
+
+        scene.world().showSection(util.select().position(2, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(60)
+            .text("The Solarbud passively absorbs sunlight during the day, as long as it can see the sky…")
+            .pointAt(util.vector().topOf(2, 1, 2))
+            .attachKeyFrame();
+        scene.idle(30);
+
+        scene.world().showSection(util.select().position(4, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(70)
+            .text("…slowly filling any Mana Pool within 6 blocks.")
+            .pointAt(util.vector().topOf(4, 1, 2))
+            .attachKeyFrame();
+        scene.idle(80);
+    }
+
+    public static void emberwortBurningFuel(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("emberwort.burning_fuel", "Burning Fuel");
+        scene.configureBasePlate(0, 0, 5);
+
+        scene.showBasePlate();
+        scene.idle(10);
+
+        scene.world().showSection(util.select().position(2, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(60)
+            .text("Drop any furnace fuel within 3 blocks of the Emberwort…")
+            .pointAt(util.vector().topOf(2, 1, 2))
+            .attachKeyFrame();
+        scene.idle(30);
+
+        scene.world().showSection(util.select().position(4, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(70)
+            .text("…and it burns the fuel, converting it into mana for a nearby pool.")
+            .pointAt(util.vector().topOf(4, 1, 2))
+            .attachKeyFrame();
+        scene.idle(80);
+    }
+
+    public static void dewpetalRainAndWater(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("dewpetal.rain_and_water", "Rain and Water");
+        scene.configureBasePlate(0, 0, 5);
+
+        scene.showBasePlate();
+        scene.idle(10);
+
+        scene.world().showSection(util.select().position(2, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(60)
+            .text("The Dewpetal generates mana in the rain — or when placed adjacent to a water source.")
+            .pointAt(util.vector().topOf(2, 1, 2))
+            .attachKeyFrame();
+        scene.idle(30);
+
+        scene.world().showSection(util.select().position(1, 1, 2), Direction.DOWN);
+        scene.idle(10);
+        scene.world().showSection(util.select().position(4, 1, 2), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(70)
+            .text("A single adjacent water source provides constant generation without needing rain.")
+            .pointAt(util.vector().topOf(1, 1, 2))
             .attachKeyFrame();
         scene.idle(80);
     }

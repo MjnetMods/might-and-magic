@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.mam.verdant_path.entry.solarbud",
+  "category": "mam:mana",
+  "icon": "mam:solarbud",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.solarbud.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.solarbud.1"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import org.mjli.mam.foundation.registration.MamRegistrate;
 import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantGeneratingFlowers;
 import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
@@ -28,6 +29,7 @@ public class MightAndMagic {
         REGISTRATE.registerEventListeners(modEventBus);
 
         VerdantFlowers.init();
+        VerdantGeneratingFlowers.init();
         VerdantRock.init();
         VerdantWood.init();
         VerdantMana.init();
@@ -35,6 +37,7 @@ public class MightAndMagic {
         // One consumer, fires once per tab build — avoids Registrate's per-item double-add
         REGISTRATE.modifyCreativeModeTab(MamCreativeTabs.VERDANT_PATH_KEY, modifier -> {
             VerdantFlowers.appendToTab(modifier);
+            VerdantGeneratingFlowers.appendToTab(modifier);
             VerdantRock.appendToTab(modifier);
             VerdantWood.appendToTab(modifier);
             VerdantMana.appendToTab(modifier);

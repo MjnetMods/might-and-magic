@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.mam.verdant_path.entry.emberwort",
+  "category": "mam:mana",
+  "icon": "mam:emberwort",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.emberwort.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.emberwort.1"
+    }
+  ]
+}

@@ -6,9 +6,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.mjli.mam.block_entity.ApothecaryBlockEntity;
+import org.mjli.mam.block_entity.flower.DewpetalBlockEntity;
+import org.mjli.mam.block_entity.flower.EmberwortBlockEntity;
 import org.mjli.mam.block_entity.flower.PureDaisyBlockEntity;
+import org.mjli.mam.block_entity.flower.SolarbudBlockEntity;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
 import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantGeneratingFlowers;
 import org.mjli.mam.verdant.VerdantMana;
 
 public class MamBlockEntities {
@@ -26,6 +30,18 @@ public class MamBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ApothecaryBlockEntity>> APOTHECARY =
             BLOCK_ENTITY_TYPES.register("apothecary",
                     () -> BlockEntityType.Builder.of(ApothecaryBlockEntity::new, VerdantMana.APOTHECARY.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SolarbudBlockEntity>> SOLARBUD =
+            BLOCK_ENTITY_TYPES.register("solarbud",
+                    () -> BlockEntityType.Builder.of(SolarbudBlockEntity::new, VerdantGeneratingFlowers.SOLARBUD.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EmberwortBlockEntity>> EMBERWORT =
+            BLOCK_ENTITY_TYPES.register("emberwort",
+                    () -> BlockEntityType.Builder.of(EmberwortBlockEntity::new, VerdantGeneratingFlowers.EMBERWORT.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DewpetalBlockEntity>> DEWPETAL =
+            BLOCK_ENTITY_TYPES.register("dewpetal",
+                    () -> BlockEntityType.Builder.of(DewpetalBlockEntity::new, VerdantGeneratingFlowers.DEWPETAL.get()).build(null));
 
     public static void register(IEventBus bus) {
         BLOCK_ENTITY_TYPES.register(bus);

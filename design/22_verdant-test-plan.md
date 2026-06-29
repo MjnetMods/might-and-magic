@@ -114,6 +114,19 @@ Shared structure: `verdant_flowers/small_platform` (7×5×7 dirt floor). All tes
 | PA-1 | `apothecaryInteractEmptyHandPasses` | `interact()` with empty hand → `PASS` |
 | PA-2 | `apothecaryNbtRoundtrip` | `FluidState` + petal list survive `saveCustomOnly`/`loadCustomOnly` |
 
+### Pass 4 — `TestGeneratingFlowers` (6 GameTests)
+
+Shared structure: `verdant_flowers/small_platform`. No pool placed — flowers buffer mana in their own BE when unbound.
+
+| ID | Test | What it verifies |
+|----|------|-----------------|
+| GF-1 | `solarbudGeneratesManaInDaylight` | Solarbud accumulates mana at time 6000 with open sky |
+| GF-2 | `solarbudNoManaAtNight` | Solarbud generates nothing at time 18000 (midnight) |
+| GF-3 | `emberwortBurnsCoalAndGeneratesMana` | Coal ItemEntity dropped at flower → mana > 0 after 40 ticks |
+| GF-4 | `emberwortIgnoresNonFuelItems` | Dirt ItemEntity dropped near flower → mana remains 0 |
+| GF-5 | `dewpetalGeneratesManaAdjacentToWater` | Water placed north of flower → mana > 0 after 20 ticks |
+| GF-6 | `dewpetalNoManaWithoutWater` | No water, no rain → mana remains 0 |
+
 ### Pass 2 — `TestRecipes` (3 GameTests)
 
 | ID | Test | What it verifies |
@@ -132,11 +145,9 @@ Complexity legend: **low** = sync call + assert, no player; **med** = needs mock
 
 Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload trigger in GameTest).
 
-### GeneratingFlower / ManaNetworkHandler
+### GeneratingFlower
 
-| ID | Test name | What it verifies | Complexity | Notes |
-|----|-----------|-----------------|------------|-------|
-| GF-1 | `generating_flower_sends_mana_to_nearest_pool` | Flower pushes mana to closest pool within BIND_RADIUS (6) | high | **Blocked** — `tickFlower()` is abstract, no concrete impl yet |
+All 6 GF tests implemented in Pass 4. The original pool-push integration test (flower → pool) is covered implicitly: GF-3/5 verify mana accumulates in the flower buffer, and the pool-push path (`emptyManaIntoCollector`) is covered by MP-2/3 and the `ManaNetworkHandlerTest` unit tests.
 
 ### ApothecaryBlockEntity
 
@@ -166,16 +177,17 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 | Recipes (GameTest) | RC-1/2/3 |
 | ManaPool (unit) | 12 (comparator math, NBT, clamp) |
 | ManaNetworkHandler (unit) | 4 (GF-2/3 variants) |
-| **Total** | **~51** |
+| GeneratingFlowers (GameTest) | GF-1/2/3/4/5/6 |
+| **Total** | **~57** |
 
 ### Remaining backlog
 
 | Category | Tests left | Med | High/Blocked |
 |----------|-----------|-----|------|
 | Pure Daisy | ✅ 0 | — | — |
-| GeneratingFlower | 1 | 0 | 1 (blocked on impl) |
+| GeneratingFlower | ✅ 0 | — | — |
 | Apothecary | 1 | 0 | 1 (blocked on impl) |
-| **Total** | **2** | **0** | **2** |
+| **Total** | **1** | **0** | **1** |
 
 ---
 

@@ -44,11 +44,28 @@ Functional Flowers / Abilities (consuming mana)
 | **Petals** (16 colors) | Item — dropped by flowers or crafted (1 flower → 4 petals) |
 | **Floral Powder** | Thrown item — scatters random Mystical Flowers |
 | **Pure Daisy** | Converts adjacent blocks (stone → living rock, any log → livingwood log) |
+| **Solarbud** | Generating flower — absorbs sunlight during daytime; requires open sky |
+| **Emberwort** | Generating flower — burns furnace fuel dropped nearby |
+| **Dewpetal** | Generating flower — draws from rain or an adjacent water source |
 | **Living Rock** | Crafting material; plain, polished, and brick variants |
 | **Livingwood Log** | Crafting material; refined into planks |
 | **Petal Apothecary** | Primary crafting station — fill with water, throw petals + seed to conjure items |
 | **Mana Pool** | Stores up to 1,000,000 mana; filled by nearby generating flowers; comparator-readable |
 | **Verdant Tome** | Patchouli guidebook, written as a scholar's journal — lore, recipes, and mechanics |
+
+---
+
+## Generating Flowers
+
+Generating flowers are special flowers that produce mana and push it into a nearby Mana Pool (within 6 blocks). Place one near a pool to start filling it.
+
+| Flower | Source | Rate | Notes |
+|---|---|---|---|
+| **Solarbud** | Sunlight | 1 mana/tick while active | Requires clear sky and daytime; stops at night or underground |
+| **Emberwort** | Furnace fuel dropped nearby | 3 mana/2 ticks while burning | Scans within 3 blocks; consumes one item at a time |
+| **Dewpetal** | Rain or adjacent water | 1 mana/2 ticks while active | A single water source block adjacent is enough for constant generation |
+
+All three flowers buffer up to their max mana before pushing to the pool, and bind automatically to the closest pool within 6 blocks on first tick.
 
 ---
 
