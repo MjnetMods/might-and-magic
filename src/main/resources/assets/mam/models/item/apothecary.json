@@ -1,4 +1,4 @@
 {
   "parent": "minecraft:item/generated",
-  "textures": { "layer0": "mam:block/petal_apothecary_side" }
+  "textures": { "layer0": "mam:block/apothecary_side" }
 }

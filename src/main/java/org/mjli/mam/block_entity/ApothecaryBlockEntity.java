@@ -14,17 +14,17 @@ import org.mjli.mam.MamBlockEntities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PetalApothecaryBlockEntity extends BlockEntity {
+public class ApothecaryBlockEntity extends BlockEntity {
     public enum FluidState { EMPTY, WATER, LAVA }
 
     private final List<ItemStack> petals = new ArrayList<>();
     private FluidState fluid = FluidState.EMPTY;
 
-    public PetalApothecaryBlockEntity(BlockPos pos, BlockState state) {
-        super(MamBlockEntities.PETAL_APOTHECARY.get(), pos, state);
+    public ApothecaryBlockEntity(BlockPos pos, BlockState state) {
+        super(MamBlockEntities.APOTHECARY.get(), pos, state);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, PetalApothecaryBlockEntity self) {
+    public static void tick(Level level, BlockPos pos, BlockState state, ApothecaryBlockEntity self) {
         // future: recipe matching tick
     }
 

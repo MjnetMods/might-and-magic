@@ -42,7 +42,7 @@
   "block.mam.living_rock_brick": "Living Rock Bricks",
 
   "block.mam.mana_pool": "Mana Pool",
-  "block.mam.petal_apothecary": "Petal Apothecary",
+  "block.mam.apothecary": "Apothecary",
 
   "item.mam.white_petal": "White Mystical Petal",
   "item.mam.orange_petal": "Orange Mystical Petal",
@@ -102,9 +102,9 @@
   "patchouli.mam.verdant_path.page.mana_pool.1": "Craft a Mana Pool with eight pieces of Living Rock arranged in a U-shape.",
   "patchouli.mam.verdant_path.page.mana_pool.2": "A $(thing)Redstone Comparator$() placed next to a Mana Pool outputs a signal proportional to how full the pool is — 0 when empty, up to 15 when completely full. Use this to build mana-aware circuits.",
 
-  "patchouli.mam.verdant_path.entry.petal_apothecary": "Petal Apothecary",
-  "patchouli.mam.verdant_path.page.petal_apothecary.0": "The $(thing)Petal Apothecary$() is the primary crafting station of the Verdant Path. Fill it with water using a bucket, then throw $(thing)Mystical Petals$() into the basin along with a seed as a reagent. When the recipe is satisfied, the finished item rises from the water.",
-  "patchouli.mam.verdant_path.page.petal_apothecary.1": "Craft the Petal Apothecary from $(thing)Living Rock$() and $(thing)Polished Living Rock$() in the shape of a pedestal and bowl.",
+  "patchouli.mam.verdant_path.entry.apothecary": "Apothecary",
+  "patchouli.mam.verdant_path.page.apothecary.0": "The $(thing)Apothecary$() is the primary crafting station of the Verdant Path. Fill it with water using a bucket, then throw $(thing)Mystical Petals$() into the basin along with a seed as a reagent. When the recipe is satisfied, the finished item rises from the water.",
+  "patchouli.mam.verdant_path.page.apothecary.1": "Craft the Apothecary from any $(thing)stone$() in the shape of a pedestal and bowl — no Living Rock required.",
 
   "mam.configuration.title": "Might And Magic Configs",
   "mam.configuration.section.mam.common.toml": "Might And Magic Configs",

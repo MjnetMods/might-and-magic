@@ -14,14 +14,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.mjli.mam.MamBlockEntities;
-import org.mjli.mam.block_entity.PetalApothecaryBlockEntity;
+import org.mjli.mam.block_entity.ApothecaryBlockEntity;
 
 import javax.annotation.Nullable;
 
-public class PetalApothecaryBlock extends BaseEntityBlock {
-    public static final MapCodec<PetalApothecaryBlock> CODEC = simpleCodec(PetalApothecaryBlock::new);
+public class ApothecaryBlock extends BaseEntityBlock {
+    public static final MapCodec<ApothecaryBlock> CODEC = simpleCodec(ApothecaryBlock::new);
 
-    public PetalApothecaryBlock(BlockBehaviour.Properties properties) {
+    public ApothecaryBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
@@ -36,18 +36,18 @@ public class PetalApothecaryBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new PetalApothecaryBlockEntity(pos, state);
+        return new ApothecaryBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, MamBlockEntities.PETAL_APOTHECARY.get(), PetalApothecaryBlockEntity::tick);
+        return createTickerHelper(type, MamBlockEntities.APOTHECARY.get(), ApothecaryBlockEntity::tick);
     }
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
-        if (!level.isClientSide && level.getBlockEntity(pos) instanceof PetalApothecaryBlockEntity apothecary) {
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof ApothecaryBlockEntity apothecary) {
             return apothecary.interact(player);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);

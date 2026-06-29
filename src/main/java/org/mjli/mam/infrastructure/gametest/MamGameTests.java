@@ -5,7 +5,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.infrastructure.gametest.tests.TestManaPool;
-import org.mjli.mam.infrastructure.gametest.tests.TestPetalApothecary;
+import org.mjli.mam.infrastructure.gametest.tests.TestApothecary;
 import org.mjli.mam.infrastructure.gametest.tests.TestRecipes;
 import org.mjli.mam.infrastructure.gametest.tests.TestVerdantFlowers;
 import org.mjli.mam.infrastructure.gametest.tests.TestVerdantPath;
@@ -18,7 +18,7 @@ public class MamGameTests {
             TestVerdantFlowers.class,
             TestManaPool.class,
             TestRecipes.class,
-            TestPetalApothecary.class,
+            TestApothecary.class,
     };
 
     @SubscribeEvent

@@ -1,9 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": ["#P#", "# #", "###"],
+  "pattern": ["###", "# #", "###"],
   "key": {
-    "#": { "item": "mam:living_rock" },
-    "P": { "item": "mam:living_rock_polished" }
+    "#": { "tag": "c:stones" }
   },
-  "result": { "id": "mam:petal_apothecary", "count": 1 }
+  "result": { "id": "mam:apothecary", "count": 1 }
 }
