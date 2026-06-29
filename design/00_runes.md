@@ -47,7 +47,7 @@ Six primitive forces. These are the atoms of the rune system — everything high
 | Rune of Life | `rune_life` | Growth, vitality, restoration | Verdant primary |
 | Rune of Death | `rune_death` | Decay, ending, sacrifice | Sanguine primary |
 | Rune of Order | `rune_order` | Structure, precision, law | Rational primary |
-| Rune of Chaos | `rune_chaos` | Disruption, wild magic, entropy | Dark primary |
+| Rune of Chaos | `rune_chaos` | Disruption, wild magic, entropy | unassigned (TBD) |
 | Rune of Flow | `rune_flow` | Motion, transfer, mana current | Verdant secondary |
 | Rune of Force | `rune_force` | Power, impact, physical energy | Rational secondary |
 
@@ -100,7 +100,7 @@ Primary production: Sacred Altar using same 8-slot template. Each school adds it
 | Rune of the Sanguine | `rune_sanguine` | Decay + Will | Sanguine |
 | Rune of the Rational | `rune_rational` | Will + Binding | Rational |
 | Rune of the Pact | `rune_pact` | Binding + Mana | Summoning |
-| Rune of the Void | `rune_void` | Decay + Binding | Dark (school TBD) |
+| Rune of the Void | `rune_void` | Decay + Binding | TBD — school or generic dark |
 
 **Recipe template:** 8 ingredients — `2× Mana Rune + 4× Mana Dust + 2× T2 runes (school-aligned pair)`, ~12,000 mana.
 
@@ -172,7 +172,7 @@ Implement runes alongside the content that first requires them — not speculati
 - [ ] **T1 recipe ingredients** — specific natural items per rune TBD, balancing pass
 - [ ] **T2 recipe ingredients** — thematic natural items per rune TBD, balancing pass
 - [ ] **Mana costs** — all values approximate; tune during implementation
-- [ ] **Dark school name** — `rune_void` placeholder until dark school is named
+- [ ] **`rune_chaos` / `rune_void` alignment** — Nox is cross-school; these two runes are unassigned pending further school design. May become school-specific or stay as generic dark primitives.
 - [ ] **Alternative production routes** — each non-Verdant school adds its own when designed
 
 ---
