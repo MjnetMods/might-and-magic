@@ -250,7 +250,7 @@ Grove is the school’s **world-shaping and environmental** pillar.
 
 | Block                                  | Function                                                                                       |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **Petal Apothecary**                   | Core floral crafting station for petals, reagents, and early Verdant progression               |
+| **Apothecary**                   | Core floral crafting station for petals, reagents, and early Verdant progression               |
 | **Infused Apothecary**                 | Mid-tier crafting station; unlocks Infused-tier floral recipes                                 |
 | **Sacred Apothecary**                  | Endgame crafting station; unlocks Sacred-tier floral recipes                                   |
 | **Weavery**                            | Cross-school weaving station; used for cloth + trinket merge. Three tiers — tier-matched Livingwood + string. Opens vanilla smithing UI — subclass of `SmithingTableBlock`, retextured only |
@@ -301,7 +301,7 @@ C C C
 
 | Output             | C                   |
 |--------------------|---------------------|
-| Petal Apothecary   | Any rock            |
+| Apothecary   | Any rock            |
 | Infused Apothecary | Infused Living Rock |
 | Sacred Apothecary  | Sacred Living Rock  |
 
@@ -329,7 +329,7 @@ The Verdant Path should feel welcoming, tactile, and visibly rewarding from the 
 
 1. Discover mystical flowers in the world
 2. Gather petals and simple natural reagents
-3. craft a **Petal Apothecary**
+3. craft a **Apothecary**
 4. create the first special flower or floral catalyst
 5. use it to transform stone or wood into **living Verdant materials**
 6. build the first **Mana Pool**

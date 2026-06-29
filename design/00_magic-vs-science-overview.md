@@ -195,7 +195,7 @@ The player should be able to begin with either side, but the paths feel differen
 ### Example Early Openers
 
 * Science: hand-cranked machines, simple rotational power, basic material processing
-* Verdant: gather flowers, create first mana flower, craft petal apothecary, produce living stone
+* Verdant: gather flowers, create first mana flower, craft Apothecary, produce living stone
 * Summoning: assemble a chalk circle, perform a minor calling, bind a tiny helper spirit
 * Sanguine: craft ritual chalk or blood sigil, perform a small rite, create the first ritual focus
 

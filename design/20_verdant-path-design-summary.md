@@ -41,7 +41,7 @@ Advancing a tier means building the next pool. That pool is itself made from the
 
 ### Step 1 — Bootstrap (no mana infrastructure yet)
 
-- Gather stone, craft **Petal Apothecary** (any rock + petal, goblet shape)
+- Gather stone, craft **Apothecary** (8× any stone, ring shape)
 - Craft flowers in the Apothecary; use them to grow mana-generating flowers
 - Craft **Pure Daisy** in the Apothecary; place it to convert stone → **Living Rock**, logs → **Livingwood**
 
@@ -109,7 +109,7 @@ All Tier 2/3 materials are produced by pool infusion. All cost **75% of the pool
 
 | Station            | Tiers | Recipe                         | Unlocks |
 |--------------------|-------|--------------------------------|---------|
-| Petal Apothecary   | × 3   | Any rock + petal (goblet)      | Floral crafting per tier |
+| Apothecary   | × 3   | 8× any stone (ring)            | Floral crafting per tier |
 | Mana Pool          | × 3   | Living Rock tier (U shape)     | All pool infusion |
 | Weavery            | × 3   | 2 string + 4 Livingwood tier   | Cloth augmentation |
 
@@ -216,8 +216,8 @@ A cloth piece can hold one ring merge (mana storage, any slot) and one trinket m
 | Pool infusion mechanic | ⬜ WP-A |
 | Mana Pool T1 block | ✅ implemented |
 | Mana Pool T2/T3 blocks | ⬜ WP-B |
-| Petal Apothecary T1 | 🔨 in progress |
-| Petal Apothecary T2/T3 | ⬜ planned |
+| Apothecary T1 | 🔨 in progress |
+| Apothecary T2/T3 | ⬜ planned |
 | Weavery (all tiers) | ⬜ planned |
 | Metal tools & armor | ⬜ planned |
 | Cloth armor | ⬜ planned |

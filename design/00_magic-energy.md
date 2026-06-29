@@ -74,7 +74,7 @@ T3 pools are pure vessels — they resist contamination at a cost. This makes Sa
 
 ## Shared Stations — Cross-School
 
-The Petal Apothecary, Altar, and Weavery are **cross-school infrastructure**. None are Verdant-exclusive — any school can have recipes for them. The Verdant path builds them first; other schools add their own recipe support alongside their own content.
+The Apothecary, Altar, and Weavery are **cross-school infrastructure**. None are Verdant-exclusive — any school can have recipes for them. The Verdant path builds them first; other schools add their own recipe support alongside their own content.
 
 ### Apothecary — fluid determines school
 
@@ -113,7 +113,7 @@ All shared stations exist in four tiers. Tier gates recipe complexity (slot coun
 
 | Tier | Built from | School gate | Notes |
 |------|-----------|-------------|-------|
-| Petal Apothecary | Living Rock | All schools T1 | |
+| Apothecary | Living Rock | All schools T1 | |
 | Infused Apothecary | Infused Living Rock | All schools T2 | |
 | Sacred Apothecary | Sacred Living Rock | Verdant T3 | |
 | Desecrated Apothecary | Desecrated Living Rock | Dark T3 | Dark-flavour parallel |
