@@ -251,13 +251,66 @@ Grove is the school’s **world-shaping and environmental** pillar.
 | Block                                  | Function                                                                                       |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | **Petal Apothecary**                   | Core floral crafting station for petals, reagents, and early Verdant progression               |
+| **Infused Apothecary**                 | Mid-tier crafting station; unlocks Infused-tier floral recipes                                 |
+| **Sacred Apothecary**                  | Endgame crafting station; unlocks Sacred-tier floral recipes                                   |
+| **Weavery**                            | Cross-school weaving station; used for cloth + trinket merge. Three tiers — tier-matched Livingwood + string. Opens vanilla smithing UI — subclass of `SmithingTableBlock`, retextured only |
 | **Pure Bloom / Pure Daisy equivalent** | Special flower used to transform mundane blocks into living materials                          |
 | **Living Stone**                       | Foundational Verdant building and crafting material created through floral transformation      |
 | **Mana Pool**                          | Stores cultivated mana and anchors many Verdant systems                                        |
+| **Infused Mana Pool**                  | Higher-capacity pool; required to craft Infused Ingots                                         |
+| **Sacred Mana Pool**                   | Highest-capacity pool; required to craft Sacred Ingots                                         |
+| **Infused Living Rock**                | Produced by infusing Living Rock in a pool with ≥4M Mana (75% cost); no crafting recipe       |
+| **Sacred Living Rock**                 | Produced by infusing Infused Living Rock in a pool with ≥16M Mana (75% cost); no crafting recipe |
+| **Desecrated Living Rock**             | Produced by infusing Infused Living Rock in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |
 | **Verdant Shrine**                     | A small sacred structure that strengthens local Verdant Aura and supports blessings or warding |
 | **Bloom Lantern**                      | Decorative and functional light source tied to floral mana or ambient blessing                 |
-| **Grove Altar**                        | Mid- to late-game station for blessings, grove rites, and sanctified space mechanics           |
+| **Grove Altar**                        | T1 ritual station (4 slots); produces runes and early rites via mana + Living Rock trigger     |
+| **Infused Grove Altar**                | T2 ritual station (12 slots); mid-game rites and Rune of the Sacred                           |
+| **Sacred Grove Altar**                 | T3 ritual station (16 slots); endgame sacred components and high rites                        |
 | **Livingwood / Verdant Timber**        | Structural material for sacred architecture and school-specific recipes                        |
+| **Infused Livingwood**                 | Produced by infusing Livingwood in a pool with ≥4M Mana (75% cost); no crafting recipe        |
+| **Sacred Livingwood**                  | Produced by infusing Infused Livingwood in a pool with ≥16M Mana (75% cost); no crafting recipe |
+| **Desecrated Livingwood**              | Produced by infusing Infused Livingwood in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |
+
+### Weavery recipe shape
+
+```
+S S
+W W   S = string   W = Livingwood (tier-matched)   → 1× Weavery (tier-matched)
+W W
+```
+
+| Output          | W                  |
+|-----------------|--------------------|
+| Weavery         | Livingwood         |
+| Infused Weavery | Infused Livingwood |
+| Sacred Weavery  | Sacred Livingwood  |
+
+Implementation: subclass `SmithingTableBlock`, override container title per tier, provide tier-matched model/texture. No GUI code needed — reuses `SmithingMenu` directly.
+
+---
+
+### Apothecary recipe shape
+
+All three tiers share the same goblet pattern — 7 rock blocks + 1 petal. The Living Rock tier is the only gate; petal is the center ingredient throughout.
+
+```
+C P C
+. C .   C = rock (tier-matched)   P = petal
+C C C
+```
+
+| Output             | C                   |
+|--------------------|---------------------|
+| Petal Apothecary   | Any rock            |
+| Infused Apothecary | Infused Living Rock |
+| Sacred Apothecary  | Sacred Living Rock  |
+
+**Progression note:** T1 uses any rock because the player has no Living Rock yet — you need to craft a Pure Daisy in the Apothecary, place it, and let it convert stone → Living Rock before you can build a Mana Pool. The Apothecary must be craftable before that loop begins.
+
+*Reference: `Botania/Xplat/src/generated/resources/data/botania/recipes/apothecary_livingrock.json`*
+
+---
 
 Not all of these need to be custom content immediately. Some can be:
 

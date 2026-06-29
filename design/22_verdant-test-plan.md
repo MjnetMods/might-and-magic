@@ -107,7 +107,7 @@ Shared structure: `verdant_flowers/small_platform` (7×5×7 dirt floor). All tes
 | MP-2 | `manaPoolRegistersOnPlace` | Pool BE is in ManaNetworkHandler set after first server tick |
 | MP-3 | `manaPoolDeregistersOnRemove` | Removing pool block removes it from ManaNetworkHandler synchronously |
 
-### Pass 2 — `TestPetalApothecary` (2 GameTests)
+### Pass 2 — `TestApothecary` (2 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
@@ -138,7 +138,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 |----|-----------|-----------------|------------|-------|
 | GF-1 | `generating_flower_sends_mana_to_nearest_pool` | Flower pushes mana to closest pool within BIND_RADIUS (6) | high | **Blocked** — `tickFlower()` is abstract, no concrete impl yet |
 
-### PetalApothecaryBlockEntity
+### ApothecaryBlockEntity
 
 | ID | Test name | What it verifies | Complexity | Notes |
 |----|-----------|-----------------|------------|-------|
@@ -162,7 +162,7 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 | Tags | TAG-1/2 |
 | Pure Daisy (integration + edge cases) | 2 integration + PD-1/2/4/5 |
 | ManaPool (GameTest) | MP-1/2/3 |
-| PetalApothecary (GameTest) | PA-1/2 |
+| Apothecary (GameTest) | PA-1/2 |
 | Recipes (GameTest) | RC-1/2/3 |
 | ManaPool (unit) | 12 (comparator math, NBT, clamp) |
 | ManaNetworkHandler (unit) | 4 (GF-2/3 variants) |
@@ -174,7 +174,7 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 |----------|-----------|-----|------|
 | Pure Daisy | ✅ 0 | — | — |
 | GeneratingFlower | 1 | 0 | 1 (blocked on impl) |
-| PetalApothecary | 1 | 0 | 1 (blocked on impl) |
+| Apothecary | 1 | 0 | 1 (blocked on impl) |
 | **Total** | **2** | **0** | **2** |
 
 ---

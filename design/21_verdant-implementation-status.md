@@ -138,6 +138,12 @@ All registered, cross model + Botania textures, light level 3.
 | living_rock | 🔨 | 🔨 | ⬜ | ⬜ |
 | living_rock_polished | 🔨 | 🔨 | ⬜ | ⬜ |
 | living_rock_brick | 🔨 | 🔨 | ⬜ | ⬜ |
+| infused_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
 
 **Verify:** Break without a pickaxe → nothing drops. Break with pickaxe → drops self.
 
@@ -158,11 +164,18 @@ All registered, cross model + Botania textures, light level 3.
 | Block | Registered | Model | Mechanic | Comparator |
 |---|:---:|:---:|:---:|:---:|
 | mana_pool | 🔨 | 🔨 | 🔨 | ⬜ |
-| petal_apothecary | 🔨 | 🔨 | ⬜ | — |
+| infused_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
+| apothecary | 🔨 | 🔨 | ⬜ | — |
+| weavery | ⬜ | ⬜ | ⬜ | — |
+| infused_weavery | ⬜ | ⬜ | ⬜ | — |
+| sacred_weavery | ⬜ | ⬜ | ⬜ | — |
+| infused_apothecary | ⬜ | ⬜ | ⬜ | — |
+| sacred_apothecary | ⬜ | ⬜ | ⬜ | — |
 
 **Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
 
-**Verify Petal Apothecary:** Place block. Right-click with a water bucket → should fill (not yet implemented).
+**Verify Apothecary:** Place block. Right-click with a water bucket → should fill (not yet implemented).
 
 ---
 
@@ -178,6 +191,12 @@ All registered, cross model + Botania textures, light level 3.
 | livingwood_stripped | 🔨 | 🔨 | 🔨 | ⬜ |
 | livingwood_planks | 🔨 | 🔨 | 🔨 | ⬜ |
 | livingwood_planks_mossy | 🔨 | 🔨 | 🔨 | ⬜ |
+| infused_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
+| sacred_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
 
 **Verify:** Log rotates on placement (axis x/y/z). Glimmering logs glow. **Not yet added:** stairs, slabs, fences, fence gates, wall.
 
@@ -231,11 +250,11 @@ All registered, cross model + Botania textures, light level 3.
 | 4 living_rock (2×2) → 4 living_rock_polished | shaped | 🔨 | ⬜ |
 | 4 living_rock_polished (2×2) → 4 living_rock_brick | shaped | 🔨 | ⬜ |
 | 8 living_rock (U-shape) → mana_pool | shaped | 🔨 | ⬜ |
-| living_rock + polished (goblet) → petal_apothecary | shaped | 🔨 | ⬜ |
+| 8× any stone (ring) → apothecary | shaped | ✅ | ⬜ |
 | livingwood_log → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 | livingwood_log_stripped → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 
-### Petal Apothecary in-world (mam:petal_apothecary)
+### Apothecary in-world (mam:apothecary)
 
 | Recipe | Status |
 |---|:---:|
@@ -291,7 +310,7 @@ Book ID: `mam:verdant_path`
 | Category | Entries | Status |
 |---|---|:---:|
 | Introduction | *(stub category, no entries yet)* | 🔨 |
-| Mana | Pure Daisy, Mana Pool, Petal Apothecary | 🔨 |
+| Mana | Pure Daisy, Mana Pool, Apothecary | 🔨 |
 
 **Missing entries (not yet written):**
 - Flowers category: Mystical Flowers, Tall Flowers, Petals, Floral Powder

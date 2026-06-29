@@ -121,6 +121,62 @@ New file: `.github/workflows/site.yml`
 
 ---
 
+## Track C: Recipe Display
+
+**Goal:** Render crafting/processing recipes in Hugo pages using mod textures — no screenshots, no external tools, auto-synced.
+
+### Step C-1: Texture sync (Gradle task)
+
+Add a Gradle task `syncTextures` that copies item and block textures into `site/static/textures/`:
+
+```groovy
+tasks.register('syncTextures', Copy) {
+    from 'src/main/resources/assets/mam/textures'
+    into 'site/static/textures'
+    include '**/*.png'
+}
+```
+
+Wire it so `syncTextures` runs automatically before `hugo` in CI (Track B deploy workflow).
+
+**Scope:** only `assets/mam/textures/` — vanilla textures are not bundled; shortcode falls back to a blank slot for missing images.
+
+### Step C-2: Crafting table shortcode
+
+New file: `site/layouts/shortcodes/crafting.html`
+
+- Accepts `in` (9-slot string, `|`-separated rows, `,`-separated columns; empty = air), `out` (item name), `count` (stack size, default 1)
+- Renders a 3×3 CSS grid + output slot using `<img src="/textures/item/{{ slot }}.png">`
+- Falls back to an empty styled `<div>` for blank slots
+
+### Step C-3: CSS
+
+New file: `site/assets/css/crafting.css` (or inline in the shortcode):
+
+```css
+.crafting-grid { display: grid; grid-template-columns: repeat(3, 48px); gap: 2px; }
+.crafting-grid .slot { width: 48px; height: 48px; background: #8b8b8b; border: 2px inset #373737; }
+.crafting-grid img { width: 100%; image-rendering: pixelated; }
+.crafting-output .slot { background: #8b8b8b; border: 2px inset #373737; }
+```
+
+Scale factor 3× (16px → 48px) keeps pixel art crisp at doc-page widths.
+
+### Usage in markdown
+
+```
+{{< crafting in=",,|,verdant_leaf,,|,," out="verdant_dust" count=4 >}}
+```
+
+### Verification
+
+- [ ] `./gradlew syncTextures` → PNGs appear in `site/static/textures/item/`
+- [ ] Shortcode renders correctly in `hugo server` local preview
+- [ ] Missing texture (air slot) shows as grey box, no broken-image icon
+- [ ] CI: textures synced before Hugo build step
+
+---
+
 ## Status
 
 | Item | Status |
@@ -131,3 +187,63 @@ New file: `.github/workflows/site.yml`
 | B: blowfish theme wired | ⬜ planned |
 | B: verdant-path content | ⬜ planned |
 | B: deploy workflow | ⬜ planned |
+| C-1: texture sync Gradle task | ⬜ planned |
+| C-2: crafting shortcode | ⬜ planned |
+| C-3: recipe CSS | ⬜ planned |
+
+---
+
+## Agent Roles
+
+Roles are defined by **file scope constraints**, not personality. Each agent is given a work package brief that specifies which files it can touch. Touching files outside scope is the primary failure mode to guard against.
+
+| Role | File Scope | When to Use |
+|------|-----------|-------------|
+| **Dev** | `src/main/java/` | Feature implementation, new blocks/items/mechanics |
+| **Test** | `src/main/java/.../gametest/` | GameTest coverage for a completed feature |
+| **Site** | `site/` | Hugo content, shortcodes, CSS |
+| **Infra** | `build.gradle`, `.github/`, `gradle.properties` | CI, publish pipeline, Gradle tasks |
+
+### Work Package Format
+
+```
+Role: <Dev|Test|Site|Infra>
+Design doc: design/<NN_filename.md> § <Section heading>
+File targets:
+  - <path/to/file> — <what to change>
+Acceptance criteria:
+  - [ ] <verifiable check>
+  - [ ] <verifiable check>
+Out of scope: <explicit list of what NOT to touch>
+```
+
+### When to spawn vs. stay inline
+
+Spawn when:
+- Task is file-disjoint from current work (no merge conflicts possible)
+- Acceptance criteria are verifiable with `git diff` + checklist
+- Task will take more than ~10 tool calls (no value in filling main context)
+
+Stay inline when:
+- Task requires back-and-forth decisions
+- Design is still exploratory — criteria not yet clear
+- Task is small enough that agent overhead isn't worth it
+
+---
+
+## Handoff Protocol
+
+After an agent completes:
+
+1. **Review the diff** — `git diff main..claude/<branch>`
+2. **Verify checklist** — tick off each acceptance criterion from the work package
+3. **Merge**:
+   ```bash
+   git switch main
+   git merge --no-ff claude/<branch>   # preserves agent commits as a group in log
+   git branch -d claude/<branch>
+   git worktree remove <worktree-path>
+   ```
+4. **Update status table** above (or the relevant `design/NN_*` tracking doc)
+
+Use `gh pr create --head claude/<branch>` instead of direct merge when you want CI to run on the branch before it lands on main.
