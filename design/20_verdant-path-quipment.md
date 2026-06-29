@@ -23,9 +23,10 @@ This is not enchanted gear. It is **mana-integrated gear** — the mana is intri
 
 | Tier         | Base Metal    | Cloth Patch         | Mana Pool           | Stat Baseline | Notes                            |
 |--------------|---------------|---------------------|---------------------|---------------|----------------------------------|
-| **Basic**    | Mana Ingot    | Mana Weave Patch    | Mana Pool           | ≈ Iron        | First step into Verdant gear     |
-| **Advanced** | Infused Ingot | Infused Weave Patch | Infused Mana Pool   | ≈ Diamond     | Mid-game plateau                 |
-| **Superior** | Sacred Ingot  | Sacred Weave Patch  | Sacred Mana Pool    | ≈ Netherite   | Endgame; recipe placeholder only |
+| **Mana**        | Mana Ingot        | Mana Weave Patch        | Mana Pool           | ≈ Iron      | First step into Verdant gear     |
+| **Infused**     | Infused Ingot     | Infused Weave Patch     | Infused Mana Pool   | ≈ Diamond   | Mid-game plateau                 |
+| **Sacred**      | Sacred Ingot      | Sacred Weave Patch      | Sacred Mana Pool    | ≈ Netherite | Endgame; Verdant branch          |
+| **Desecrated**  | Desecrated Ingot  | Desecrated Weave Patch  | Desecrated Pool     | ≈ Netherite | Endgame; dark branch             |
 
 ---
 
