@@ -28,6 +28,7 @@ This means:
 
 | Tier | Altar | Slots | Recipe template |
 |------|-------|-------|-----------------|
+| Infrastructure | Altar / Infused Altar | 4–5 | Tier-matched Living Rock + mana gem + elemental rune |
 | T1 — Elemental | Altar | ≤4 | Natural ingredients + base Verdant materials |
 | T2 — Concept | Infused Altar | 5–6 | 2× T1 runes + thematic ingredients |
 | T3a — Grand Force | Sacred Altar | 8 | 2× Mana Rune + 4× Mana Dust + 2× T2 runes |
@@ -105,7 +106,35 @@ Primary production: Sacred Altar using same 8-slot template. Each school adds it
 
 ---
 
+## Infrastructure Runes
+
+Two runes that sit outside the school taxonomy — they gate pool tier progression and are intentionally cross-school. Any school can craft and use them.
+
+| Rune | `mam:` key | Altar | Slots | Purpose |
+|------|------------|-------|-------|---------|
+| Rune of Infusion | `rune_infusion` | Altar (T1) | 4 | Upgrades Mana Pool → Infused Mana Pool |
+| Rune of the Sacred | `rune_sacred` | Infused Altar (T2) | 5 | Upgrades Infused Mana Pool → Sacred Mana Pool |
+
+**Rune of Infusion recipe** — ~6,000 mana:
+```
+2× Living Rock  +  1× #mam:mana_gems  +  1× Rune of Flow
+```
+Uses only T1 materials — no circular dependency with the Infused Pool.
+
+**Rune of the Sacred recipe** — ~10,000 mana:
+```
+2× Infused Living Rock  +  1× Rune of Mana  +  1× Rune of Binding  +  1× #mam:mana_gems
+```
+Uses T2 runes — requires the Infused Pool to produce them first, which you already have at this point.
+
+Both runes are consumed on use (dropped into the crafting table upgrade recipe along with the pool item).
+
+---
+
 ## Item Registry Summary
+
+### Infrastructure (2 items)
+`rune_infusion`, `rune_sacred`
 
 ### T1 (6 items)
 `rune_life`, `rune_death`, `rune_order`, `rune_chaos`, `rune_flow`, `rune_force`
@@ -119,7 +148,7 @@ Primary production: Sacred Altar using same 8-slot template. Each school adds it
 ### T3b (5 items)
 `rune_grove`, `rune_sanguine`, `rune_rational`, `rune_pact`, `rune_void`
 
-**Total: 22 rune items**
+**Total: 24 rune items**
 
 ---
 
@@ -131,7 +160,7 @@ Implement runes alongside the content that first requires them — not speculati
 |----------|-------------------|
 | T1 elemental | When Altar is implemented |
 | T2 concept | When Infused Altar is implemented |
-| Rune of Infusion, Rune of the Sacred | With pool upgrade mechanic (see `20_verdant-path-mana-pool.md`) |
+| Infrastructure (Rune of Infusion, Rune of the Sacred) | With pool upgrade mechanic (see `20_verdant-path-mana-pool.md`) |
 | T3a Grand Force | When first recipe consuming them is designed |
 | T3b School Essence | When each school's capstone content is designed |
 
@@ -157,6 +186,6 @@ Implement runes alongside the content that first requires them — not speculati
 | T3 recipe template | ✅ decided (2× Mana Rune + 4× Mana Dust + 2× T2 runes) |
 | T1/T2 recipe ingredients | ⬜ TBD — balancing pass |
 | Mana Dust design | ⬜ TBD |
-| Rune of Infusion / Sacred | ⬜ TBD — pool upgrade pass |
+| Infrastructure runes (recipe + keys) | ✅ decided |
 | Item registration | ⬜ not started |
 | Recipe JSONs | ⬜ not started |

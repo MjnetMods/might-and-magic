@@ -268,7 +268,7 @@ Grove is the school’s **world-shaping and environmental** pillar.
 | **Infused Altar**                | T2 ritual station (6 slots); mid-game rites and Rune of the Sacred                            |
 | **Sacred Altar**                 | T3 ritual station (16 slots); endgame sacred components and high rites                        |
 | **Desecrated Altar**             | T3 ritual station (16 slots); dark school parallel — draws from Desecrated Pool (Nox)         |
-| **Livingwood / Verdant Timber**        | Structural material for sacred architecture and school-specific recipes                        |
+| **Livingwood**                         | Structural material for sacred architecture and school-specific recipes                        |
 | **Infused Livingwood**                 | Produced by infusing Livingwood in a pool with ≥4M Mana (75% cost); no crafting recipe        |
 | **Sacred Livingwood**                  | Produced by infusing Infused Livingwood in a pool with ≥16M Mana (75% cost); no crafting recipe |
 | **Desecrated Livingwood**              | Produced by infusing Infused Livingwood in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |

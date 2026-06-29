@@ -59,12 +59,12 @@ Runes are crafted at the **Altar** — the Verdant ritual station equivalent to 
 
 **Mechanic:** Place ingredients around the altar, then drop a **Living Rock** as the final trigger. When a nearby Mana Pool has sufficient mana, the altar automatically consumes the mana and ingredients and ejects the rune. No wand or manual activation — mana availability is the only gate.
 
-| Rune                | Trigger     | Mana Cost | Other Ingredients |
-|---------------------|-------------|-----------|-------------------|
-| Rune of Infusion    | Living Rock | TBD       | TBD               |
-| Rune of the Sacred  | Living Rock | TBD       | TBD               |
+| Rune (`mam:`)       | Trigger     | Mana Cost  | Other Ingredients                                        |
+|---------------------|-------------|------------|----------------------------------------------------------|
+| `rune_infusion`     | Living Rock | ~6,000     | 2× Living Rock + 1× `#mam:mana_gems` + 1× Rune of Flow  |
+| `rune_sacred`       | Living Rock | ~10,000    | 2× Infused Living Rock + Rune of Mana + Rune of Binding + 1× `#mam:mana_gems` |
 
-Rune ingredients and mana costs are TBD — set during balancing pass. Both runes must be craftable from the tier *below* their target pool (T1 materials for Rune of Infusion, T2 materials for Rune of the Sacred), so no circular dependency.
+Mana costs are approximate — tune during balancing pass. Both runes use only tier-matched materials to avoid circular dependency (Rune of Infusion uses T1 only; Rune of the Sacred uses T2 only, available from the Infused Pool you already have). Full recipe spec: `design/00_runes.md § Infrastructure Runes`.
 
 Full Altar design: `design/20_verdant-path-altar.md`
 
