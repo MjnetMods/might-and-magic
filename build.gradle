@@ -51,6 +51,15 @@ repositories {
         url = 'https://maven.ithundxr.dev/snapshots'
         content { includeGroup("com.tterrag.registrate") }
     }
+    maven {
+        name = 'CreateMod' // Create, Ponder, Flywheel
+        url = 'https://maven.createmod.net'
+        content {
+            includeGroup("com.simibubi.create")
+            includeGroup("net.createmod.ponder")
+            includeGroup("dev.engine-room.flywheel")
+        }
+    }
 }
 
 base {
@@ -161,6 +170,17 @@ dependencies {
     // Registrate — fluent block/item builder (jarJar'd into our mod JAR)
     jarJar(api("com.tterrag.registrate:Registrate:${registrate_version}"))
 
+    // Create mod (optional — required for the Rational Path); transitive=false to skip Create's compat mod deps
+    compileOnly("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive = false }
+    localRuntime("com.simibubi.create:create-${minecraft_version}:${create_version}") { transitive = false }
+
+    // Ponder — jarJar'd inside Create at runtime; needed explicitly for compile
+    compileOnly "net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}"
+
+    // Flywheel — Create's rendering backend, also pulled by Ponder
+    compileOnly "dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}"
+    localRuntime "dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}"
+
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
@@ -218,6 +238,12 @@ publishing {
             url "file://${project.projectDir}/repo"
         }
     }
+}
+
+tasks.register('syncTextures', Copy) {
+    from 'src/main/resources/assets/mam/textures'
+    into 'site/static/textures'
+    include '**/*.png'
 }
 
 test {

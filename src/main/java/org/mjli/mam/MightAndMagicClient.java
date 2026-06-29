@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -24,8 +25,13 @@ public class MightAndMagicClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        MightAndMagic.LOGGER.info("HELLO FROM CLIENT SETUP");
         MightAndMagic.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+        if (ModList.get().isLoaded("create")) {
+            initPonder();
+        }
+    }
+
+    private static void initPonder() {
+        net.createmod.ponder.foundation.PonderIndex.addPlugin(new org.mjli.mam.ponder.MamPonderPlugin());
     }
 }
