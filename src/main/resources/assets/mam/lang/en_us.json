@@ -112,5 +112,13 @@
   "mam.configuration.items": "Item List",
   "mam.configuration.logDirtBlock": "Log Dirt Block",
   "mam.configuration.magicNumberIntroduction": "Magic Number Text",
-  "mam.configuration.magicNumber": "Magic Number"
+  "mam.configuration.magicNumber": "Magic Number",
+
+  "mam.ponder.pure_daisy.converts_stone.header": "Transmuting Stone",
+  "mam.ponder.pure_daisy.converts_stone.text_1": "Place the Pure Daisy near any Stone…",
+  "mam.ponder.pure_daisy.converts_stone.text_2": "…and it slowly transmutes nearby Stone into Living Rock.",
+
+  "mam.ponder.pure_daisy.converts_log.header": "Transmuting Wood",
+  "mam.ponder.pure_daisy.converts_log.text_1": "Oak Logs placed nearby are transmuted too…",
+  "mam.ponder.pure_daisy.converts_log.text_2": "…becoming Livingwood Logs, the foundation of verdant crafting."
 }

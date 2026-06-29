@@ -96,6 +96,7 @@ Community docs: https://docs.neoforged.net/
 | `design/N1_*-implementation-status.md` | In-game verification checklist per path |
 | `design/N2_*-test-plan.md` | Test coverage tracking per path |
 | `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
+| `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `site/content/` | Player-facing documentation (source of truth — `docs/` removed) |
 
 Current active tracking files:

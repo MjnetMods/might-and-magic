@@ -98,6 +98,8 @@ runs {
         // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
         systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         systemProperty 'neoforge.enableGameTest', 'true'
+        // NeoForge's early loading window uses OpenGL framebuffer blits that crash on Apple Silicon (Metal driver SIGSEGV)
+        systemProperty 'fml.earlyprogresswindow', 'false'
     }
 
     server {

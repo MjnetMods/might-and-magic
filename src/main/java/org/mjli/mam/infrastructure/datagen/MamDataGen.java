@@ -36,12 +36,17 @@ public class MamDataGen {
       // 3. Pin down the absolute path to your custom gametest files
       Path snbtSourceFolder = projectRoot.resolve("src").resolve("gametest").resolve("structure");
 
-      // Register it! Vanilla's class handles the output target folder automatically
-      if (Files.exists(snbtSourceFolder)) {
-        Iterable<Path> inputFolders = List.of(snbtSourceFolder);
+      // Ponder structures: src/ponder/structure/assets/mam/ponder/ → assets/mam/ponder/
+      Path ponderSnbtFolder = projectRoot.resolve("src").resolve("ponder").resolve("structure");
+
+      // SnbtToNbt uses a fixed provider name so we can only register it once; combine all source folders
+      List<Path> snbtFolders = new java.util.ArrayList<>();
+      if (Files.exists(snbtSourceFolder)) snbtFolders.add(snbtSourceFolder);
+      if (Files.exists(ponderSnbtFolder)) snbtFolders.add(ponderSnbtFolder);
+      if (!snbtFolders.isEmpty()) {
         generator.addProvider(
-            event.includeServer(),
-            new SnbtToNbt(packOutput, inputFolders)
+            event.includeServer() || event.includeClient(),
+            new SnbtToNbt(packOutput, snbtFolders)
         );
       }
 
