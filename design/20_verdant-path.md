@@ -262,8 +262,6 @@ Grove is the school’s **world-shaping and environmental** pillar.
 | **Infused Living Rock**                | Produced by infusing Living Rock in a pool with ≥4M Mana (75% cost); no crafting recipe       |
 | **Sacred Living Rock**                 | Produced by infusing Infused Living Rock in a pool with ≥16M Mana (75% cost); no crafting recipe |
 | **Desecrated Living Rock**             | Produced by infusing Infused Living Rock in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |
-| **Verdant Shrine**                     | A small sacred structure that strengthens local Verdant Aura and supports blessings or warding |
-| **Bloom Lantern**                      | Decorative and functional light source tied to floral mana or ambient blessing                 |
 | **Altar**                        | T1 ritual station (4 slots); produces runes and early rites via mana + Living Rock trigger     |
 | **Infused Altar**                | T2 ritual station (6 slots); mid-game rites and Rune of the Sacred                            |
 | **Sacred Altar**                 | T3 ritual station (16 slots); endgame sacred components and high rites                        |
@@ -665,3 +663,14 @@ This school does **not** need to replace Botania. It can begin as a **pack ident
 * How strongly should sacred groves push back against Rational machinery and Sanguine corruption?
 * Should Verdant include tree / root / druidic motifs, or stay tightly focused on flowers, living stone, and mana?
 * Are there special biomes, structures, or world events that should naturally favor Verdant progression?
+
+---
+
+## Future Ideas
+
+Aspirations without a design yet. Do not track or implement until a design doc exists.
+
+| Idea | Notes |
+|------|-------|
+| **Verdant Shrine** | A small sacred structure that strengthens local Verdant Aura and supports blessings or warding |
+| **Bloom Lantern** | Decorative and functional light source tied to floral mana or ambient blessing |
