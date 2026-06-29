@@ -1,25 +1,32 @@
+# Might & Magic
 
-Installation information
-=======
+A magic and technology mod for **Minecraft 1.21.1** built on **NeoForge 21.1.x**.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions provided by [GitHub](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+Multiple arcane paths, each with distinct mechanics and progression:
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+- **The Verdant Path** — nature and light magic, mystical flowers, mana networks *(in development)*
+- **The Sanguine Path** — dark and forbidden arts *(planned)*
+- **The Summoning Path** — bound entities and ritual magic *(planned)*
+- **The Rational Path** — machinery and Create integration *(planned)*
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+## Download
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+Grab the latest release JAR from the [Releases](../../releases/latest) page and drop it into your `mods/` folder.
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+**Required:** NeoForge 21.1.x for Minecraft 1.21.1
+
+## Documentation
+
+[mjnetmods.github.io/might-and-magic](https://mjnetmods.github.io/might-and-magic/)
+
+## Building from source
+
+```bash
+./gradlew build
+```
+
+Output lands in `build/libs/`. Run `./gradlew runData` first on a fresh clone to generate resources.
+
+## License
+
+[MIT](LICENSE)
