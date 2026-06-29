@@ -13,6 +13,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Might And Magic** (`mam`) — a Minecraft 1.21.1 mod built on NeoForge 21.1.234, using Java 21. Currently scaffolded from the NeoForge MDK template with placeholder content.
 
+## Commit convention
+
+This repo uses **conventional commits**. Prefix every commit message:
+
+| Prefix | Use for |
+|--------|---------|
+| `feat:` | New blocks, items, mechanics, content |
+| `fix:` | Bug fixes |
+| `refactor:` | Code restructuring, no behavior change |
+| `perf:` | Performance improvements |
+| `test:` | GameTests |
+| `docs:` / `design:` | Design docs, site content, CLAUDE.md |
+| `chore:` / `build:` / `ci:` | Gradle, workflows, tooling |
+
+Releases are tagged `vX.Y.Z`. `git-cliff` reads these prefixes to generate the changelog automatically.
+
 ## Commands
 
 ```bash
