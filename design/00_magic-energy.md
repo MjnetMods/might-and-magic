@@ -78,15 +78,28 @@ The Apothecary, Altar, and Weavery are **cross-school infrastructure**. None are
 
 ### Apothecary — fluid determines school
 
-The Apothecary is filled with a fluid before use. The fluid type activates a different recipe set.
+The Apothecary accepts any bucket-compatible fluid (stationary). Fluid type activates a recipe school; unrecognised fluids are accepted but inert.
 
-| Fluid | Colour | Recipe school | Notes |
-|-------|--------|---------------|-------|
-| Water | Blue | Verdant / floral | Default Verdant recipes |
-| Lava | Orange | TBD school | TBD — fire/forge-adjacent path |
-| Blood | Red | Sanguine | Sanguine school recipes |
+| Fluid | Colour | Recipe school | Ingredient type | Catalyst |
+|-------|--------|---------------|-----------------|---------|
+| Water | Blue | Verdant / floral | Petals | Seed |
+| Lava | Orange | Summoning | Mushrooms | TBD |
+| Blood | Red | Sanguine | TBD | TBD |
+| Milk | White | TBD | TBD | TBD |
+| Other | — | — | — | — |
 
-A single Apothecary block can be used for all schools by changing what you fill it with. The tier (Petal / Infused / Sacred / Desecrated) gates recipe complexity; the fluid gates recipe school.
+**Mechanic** (same across all schools):
+1. Fill the Apothecary with the school fluid.
+2. Throw ingredients in — they float/circle above the fluid.
+3. Throw the catalyst last — triggers recipe matching and ejects the output item.
+
+| School | Catalyst |
+|--------|---------|
+| Verdant | Seed |
+| Summoning | TBD |
+| Sanguine | TBD |
+
+Tier gates the number of ingredient slots (how many items can float simultaneously), not the school. A single Apothecary block serves all schools by swapping fluid.
 
 ### Weavery — cross-school trinket merging
 
@@ -94,14 +107,19 @@ The Weavery (smithing-table style, tier-matched) accepts trinkets from any schoo
 
 ### Altar — energy determines school
 
-The Altar draws from a nearby pool. The energy type in that pool determines which recipes fire.
+The Altar draws energy from a Pool via the Mana Spreader network (pool → spreader → altar). The energy type determines which recipes fire.
 
 | Pool energy | Recipe school |
 |-------------|---------------|
 | Mana | Verdant / generic |
 | Nox | Any non-Verdant school (cross-school dark energy) |
 
-Physically the Desecrated Altar is the same station built from Desecrated Living Rock — it draws from a Desecrated Pool for Nox recipes. Same mechanic, dark medium.
+**Mechanic:**
+1. Throw ingredient items at the Altar — they float/orbit above it.
+2. Some recipes require mana from a connected Pool via Spreader.
+3. Throw a **Blank Rune** to activate — matches floating ingredients to a recipe and ejects the output.
+
+Tier gates slot count (ingredient complexity). Desecrated Altar is built from Desecrated Living Rock and draws from a Desecrated Pool — same mechanic, dark medium.
 
 ---
 
@@ -131,11 +149,25 @@ Desecrated Altar: consumes Infused Altar in center slot (same upgrade recipe pat
 
 ---
 
+## Energy Transport — Mana Spreader
+
+The **Mana Spreader** is the universal transport block for both Mana and Nox. Any generator (flower, dark source, Apothecary bootstrap) emits energy into a Spreader; the Spreader fires a burst at a target Pool.
+
+```
+Generator → Mana Spreader → Pool
+```
+
+The Spreader is energy-agnostic — it carries whatever energy type the connected generator produces. A Spreader fed by a Nox source delivers Nox; fed by a Mana source delivers Mana. Pointed at a T3 aligned pool, the pool's rejection mechanic applies on receipt.
+
+> **Design status:** Spreader details (range, burst size, tiers) TBD — tracked separately. The transport model is decided.
+
+---
+
 ## Open Questions
 
-- [ ] **Nox generation** — what produces Nox to fill a Desecrated Pool? (dark flowers? corruption sources? ritual? TBD with per-school dark design (TBD))
+- [ ] **Nox generation** — primary sources TBD (dark flowers, corruption structures, rituals — per-school dark design). Bootstrap: T2+ Apothecary filled with Blood or Lava slowly converts fluid → Nox, emitted via the Mana Spreader network into a nearby Desecrated Pool. Yield is intentionally tiny (order of magnitude: 1–100 Nox per bucket) — bootstrap only, not a viable production source.
 - [ ] **Lava Apothecary** — which school uses it, and what does it produce? TBD with that school's design
-- [ ] **Tainting mechanic** — how exactly is Nox introduced into a mana pool? Player action, proximity, item drop? TBD with per-school dark design (TBD)
+- [ ] **Tainting mechanic** — Nox enters a pool via Mana Spreader (a Nox-generating source pointed at a Mana/Infused Pool fires Nox bursts, triggering instant taint). Spreader burst details TBD.
 - [ ] **Blood fluid** — is Blood a custom fluid item, or a vanilla fluid substitute? Sanguine school design
 - [ ] **Desecrated Weavery** — does the Weavery also get a Desecrated tier? TBD
 
@@ -149,7 +181,10 @@ Desecrated Altar: consumes Infused Altar in center slot (same upgrade recipe pat
 | Tainting rule (any Nox → all mana converts to Nox 1:1, instant) | ✅ decided |
 | Tier branching (Infused → Sacred or Desecrated) | ✅ decided |
 | Desecrated Pool (capacity, mechanic) | ✅ decided |
-| Apothecary fluid types (Water, Lava, Blood) | ✅ decided |
+| Apothecary fluid types (Water → Verdant, Lava → Summoning, Blood → Sanguine, Milk → TBD) | ✅ decided |
+| Apothecary accepts any fluid; unknown fluids inert | ✅ decided |
+| Nox bootstrap (T2+ Apothecary + Blood/Lava → slow Nox drain) | ✅ decided |
+| Mana Spreader as universal transport (Mana and Nox, generator → spreader → pool) | ✅ decided |
 | Cross-school station model | ✅ decided |
 | Station tier table (4 tiers each) | ✅ decided |
 | Nox generation | ⬜ TBD — per-school dark design (TBD) |
