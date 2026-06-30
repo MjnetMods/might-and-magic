@@ -2,7 +2,7 @@
 path: verdant
 type: impl
 status: wip
-last-updated: 2026-06-28
+last-updated: 2026-06-30
 links: "[[20_verdant-path]], [[22_verdant-test-plan]]"
 ---
 
@@ -135,9 +135,9 @@ All registered, cross model + Botania textures, light level 3.
 
 | Block | Registered | Model | Loot Table | Needs Tool |
 |---|:---:|:---:|:---:|:---:|
-| living_rock | 🔨 | 🔨 | ⬜ | ⬜ |
-| living_rock_polished | 🔨 | 🔨 | ⬜ | ⬜ |
-| living_rock_brick | 🔨 | 🔨 | ⬜ | ⬜ |
+| living_rock | 🔨 | 🔨 | 🔨 | ⬜ |
+| living_rock_polished | 🔨 | 🔨 | 🔨 | ⬜ |
+| living_rock_brick | 🔨 | 🔨 | 🔨 | ⬜ |
 | infused_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
 | infused_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
 | infused_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -211,14 +211,14 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 
 | Block | Registered | Model | In Tab | Loot Table |
 |---|:---:|:---:|:---:|:---:|
-| livingwood_log | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_log_stripped | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_log_glimmering | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_log_stripped_glimmering | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_stripped | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_planks | 🔨 | 🔨 | 🔨 | ⬜ |
-| livingwood_planks_mossy | 🔨 | 🔨 | 🔨 | ⬜ |
+| livingwood_log | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_log_stripped | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_log_glimmering | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_log_stripped_glimmering | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_stripped | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_planks | 🔨 | 🔨 | 🔨 | 🔨 |
+| livingwood_planks_mossy | 🔨 | 🔨 | 🔨 | 🔨 |
 | infused_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
 | infused_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
 | infused_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -353,13 +353,14 @@ Book ID: `mam:verdant_path`
 
 ## Known Gaps / TODOs
 
-- [ ] Loot tables — living rock, living wood, and mushrooms have no drop data yet
+- [x] Loot tables — all blocks covered by datagen; stale hand-authored duplicates removed from `src/main/resources/data/mam/loot_table/blocks/`
+- [ ] Loot table tests — LT-1/2 (living rock drop with/without tool), LT-3 (mushroom dropSelf), LT-4 (livingwood dropSelf) not yet written
 - [ ] Floral powder mechanic — item registered but `FloralPowderItem` logic not coded
 - [ ] BuriedPetalBlock random-tick growth — needs verification
 - [ ] Petal apothecary water/lava interaction not coded
 - [ ] Petal apothecary in-world recipes (petals + seed → item)
 - [ ] Mana pool comparator support not coded
-- [ ] No world gen — flowers/mushrooms don't spawn naturally
+- [ ] World gen registered and WG-1/2/3 tests pass; natural biome placement not yet wired
 - [ ] Living wood: stairs/slabs/fences/walls not added
 - [ ] No sounds beyond vanilla defaults
 - [ ] No particle effects (Botania sparkles not ported)
