@@ -51,19 +51,24 @@ public class TestGeneratingFlowers {
     public static void daybloomNoManaWhenSkyBlocked(GameTestHelper helper) {
         helper.setBlock(CENTER, VerdantGeneratingFlowers.DAYBLOOM.get().defaultBlockState());
 
-        // Let it generate for 5 ticks in open sky, then block the sky and verify mana freezes.
+        // Let it generate for 5 ticks in open sky, then block the sky.
+        // Sample baseline 2 ticks AFTER stone is placed (not before) to avoid a 1-tick
+        // race between the game-test callback and the BE tick ordering within the same tick.
         helper.runAfterDelay(5, () -> {
-            DaybloomBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DaybloomBlockEntity.class);
-            int manaBeforeBlock = be.getCurrentMana();
             helper.setBlock(CENTER.above(), Blocks.STONE.defaultBlockState());
 
-            helper.runAfterDelay(15, () -> {
-                int manaAfterBlock = be.getCurrentMana();
-                if (manaAfterBlock > manaBeforeBlock) {
-                    helper.fail("Daybloom should stop generating with blocked sky, but mana increased from "
-                            + manaBeforeBlock + " to " + manaAfterBlock);
-                }
-                helper.succeed();
+            helper.runAfterDelay(2, () -> {
+                DaybloomBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DaybloomBlockEntity.class);
+                int manaSnapshot = be.getCurrentMana();
+
+                helper.runAfterDelay(15, () -> {
+                    int manaFinal = be.getCurrentMana();
+                    if (manaFinal > manaSnapshot) {
+                        helper.fail("Daybloom should stop generating with blocked sky, but mana increased from "
+                                + manaSnapshot + " to " + manaFinal);
+                    }
+                    helper.succeed();
+                });
             });
         });
     }
