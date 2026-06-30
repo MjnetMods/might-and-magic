@@ -1,8 +1,8 @@
 ---
 type: design
 status: draft
-last-updated: 2026-06-29
-links: "[[20_verdant-path]], [[20_verdant-path-mana-pool]], [[20_verdant-path-items]]"
+last-updated: 2026-06-30
+links: "[[20_verdant-path]], [[magic/15_mana-pool]], [[magic/17_trinkets]], [[magic/00_energy]], [[magic/10_apothecary]]"
 ---
 
 # Verdant Path — Altar
@@ -17,6 +17,19 @@ The Altar feels like a **living stone basin** that hums with sacred potential. I
 
 ---
 
+## Cross-school: energy determines school
+
+The Altar draws energy from a Pool via the Mana Spreader network (pool → spreader → altar). The energy type determines which recipes fire — same cross-school model as the Apothecary's fluid selector (see [[magic/10_apothecary]]), just keyed by energy instead of fluid.
+
+| Pool energy | Recipe school |
+|-------------|---------------|
+| Mana | Verdant / generic |
+| Nox | Any non-Verdant school (cross-school dark energy) |
+
+The Verdant path builds and documents the Altar first (this doc); other schools add their own recipe support without needing a new station.
+
+---
+
 ## Tier Overview
 
 Four tiers, each with a larger ingredient capacity. Slot count is the primary tier gate — a recipe that needs 10 ingredient slots physically cannot run on a 6-slot altar.
@@ -26,7 +39,7 @@ Four tiers, each with a larger ingredient capacity. Slot count is the primary ti
 | **Altar**      | 4           | Any pool ≥ recipe cost | T1 runes, early rites     |
 | **Infused Altar** | 6        | Any pool ≥ recipe cost | T2 runes, mid rites       |
 | **Sacred Altar**       | 16          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
-| **Desecrated Altar**   | 16          | Desecrated Pool ≥ recipe cost | Dark school T3 parallel     |
+| **Desecrated Altar**   | 16          | Desecrated Mana Pool ≥ recipe cost | Dark school T3 parallel     |
 
 Mana gating follows the pool capacity model — T1/T2 altars accept any pool; T3 altars are energy-aligned (Sacred uses Mana, Desecrated uses Nox). The altar tier gates recipe access via slot count, not by pool type.
 
@@ -105,13 +118,16 @@ Data-driven. Recipe type: `mam:altar`.
   "type": "mam:altar",
   "ingredients": [
     { "item": "mam:living_rock" },
+    { "item": "mam:living_rock" },
     { "tag": "mam:mana_gems" },
-    { "item": "minecraft:red_mushroom" }
+    { "item": "mam:rune_flow" }
   ],
-  "mana": 10000,
-  "output": { "item": "mam:rune_of_infusion" }
+  "mana": 6000,
+  "output": { "item": "mam:rune_infusion" }
 }
 ```
+
+This is the real, current Rune of Infusion recipe ([[magic/25_runes]] § Infrastructure Runes) — kept in sync as a worked example, not a placeholder.
 
 - `ingredients` — unordered list; count must not exceed the altar tier's slot limit
 - `mana` — cost drawn from the nearest pool; pool must hold at least this much
@@ -155,10 +171,12 @@ The Apothecary and the Altar share the same core mechanic — drop items, medium
 
 | Station | Medium | Trigger | Tiers |
 |---------|--------|---------|-------|
-| Apothecary | Water (filled like a cauldron) | — (auto on water present + recipe match) | 4 |
+| Apothecary | Fluid (Water/Lava/Blood/Milk — fluid selects school) | Catalyst item thrown last | 4 |
 | Altar      | Mana (drawn from nearby pool)  | Living Rock drop                          | 4 |
 
 Both station families share a base tick loop skeleton. Shared abstract base class recommended.
+
+See [[magic/10_apothecary]] for the Apothecary's full design.
 
 ---
 

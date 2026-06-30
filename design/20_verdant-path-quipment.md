@@ -26,7 +26,7 @@ This is not enchanted gear. It is **mana-integrated gear** — the mana is intri
 | **Mana**        | Mana Ingot        | Mana Weave Patch        | Mana Pool           | ≈ Iron      | First step into Verdant gear     |
 | **Infused**     | Infused Ingot     | Infused Weave Patch     | Infused Mana Pool   | ≈ Diamond   | Mid-game plateau                 |
 | **Sacred**      | Sacred Ingot      | Sacred Weave Patch      | Sacred Mana Pool    | ≈ Netherite | Endgame; Verdant branch          |
-| **Desecrated**  | Desecrated Ingot  | Desecrated Weave Patch  | Desecrated Pool     | ≈ Netherite | Endgame; dark branch             |
+| **Desecrated**  | Desecrated Ingot  | Desecrated Weave Patch  | Desecrated Mana Pool | ≈ Netherite | Endgame; dark branch             |
 
 ---
 
@@ -141,7 +141,7 @@ Verdant equipment uses **standard durability** but is repaired by mana. Run out 
 | Source          | How                                                                                |
 |-----------------|------------------------------------------------------------------------------------|
 | **Mana Pool**   | Drop the item in — instantly repairs using pool mana                               |
-| **Mana Tablet** | Held in inventory; passively repairs equipped gear by draining the tablet. Three tiers (Mana / Infused / Sacred) — see [[20_verdant-path-items]] |
+| **Mana Tablet** | Held in inventory; passively repairs equipped gear by draining the tablet. Four tiers (Mana / Infused / Sacred / Desecrated) — see [[magic/17_trinkets]] |
 
 This is the same mechanic as Botania's mana gear. Straightforward to implement — durability is the existing repair hook, no custom serialization needed per item.
 

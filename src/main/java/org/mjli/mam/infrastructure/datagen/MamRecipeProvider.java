@@ -12,9 +12,12 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
 
@@ -32,6 +35,7 @@ public class MamRecipeProvider extends RecipeProvider {
         flowers(output);
         livingRock(output);
         livingWood(output);
+        apothecary(output);
     }
 
     private void guide(RecipeOutput output) {
@@ -179,6 +183,22 @@ public class MamRecipeProvider extends RecipeProvider {
             .define('S', Items.STICK)
             .unlockedBy("has_livingwood_planks", has(VerdantWood.LIVINGWOOD_PLANKS.get()))
             .save(output, id("livingwood_planks_fence_gate"));
+    }
+
+    private void apothecary(RecipeOutput output) {
+        var petals = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_petals"));
+        var mushrooms = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_mushrooms"));
+        Ingredient petalOrMushroom = CompoundIngredient.of(Ingredient.of(petals), Ingredient.of(mushrooms));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.APOTHECARY.get())
+            .pattern("#P#")
+            .pattern(" # ")
+            .pattern("###")
+            .define('#', Tags.Items.STONES)
+            .define('P', petalOrMushroom)
+            .unlockedBy("has_petal", has(petals))
+            .unlockedBy("has_mushroom", has(mushrooms))
+            .save(output, id("apothecary"));
     }
 
     private static ResourceLocation id(String name) {

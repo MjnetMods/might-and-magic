@@ -74,7 +74,7 @@ Shared magic infrastructure used across all paths. Legend:
 
 ### Pure Daisy
 
-Converts adjacent blocks into magic materials. Produced via Petal Apothecary.
+Converts adjacent blocks into magic materials. Produced via Apothecary.
 
 | Block | Registered | Model | Mechanic | Recipe |
 |---|:---:|:---:|:---:|:---:|
@@ -91,12 +91,15 @@ Converts adjacent blocks into magic materials. Produced via Petal Apothecary.
 | mana_pool | 🔨 | 🔨 | 🔨 | ⬜ |
 | infused_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
 | sacred_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
+| desecrated_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
 | apothecary | 🔨 | 🔨 | ⬜ | — |
 | weavery | ⬜ | ⬜ | ⬜ | — |
 | infused_weavery | ⬜ | ⬜ | ⬜ | — |
 | sacred_weavery | ⬜ | ⬜ | ⬜ | — |
+| desecrated_weavery | ⬜ | ⬜ | ⬜ | — |
 | infused_apothecary | ⬜ | ⬜ | ⬜ | — |
 | sacred_apothecary | ⬜ | ⬜ | ⬜ | — |
+| desecrated_apothecary | ⬜ | ⬜ | ⬜ | — |
 
 **Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
 
@@ -114,8 +117,8 @@ Converts adjacent blocks into magic materials. Produced via Petal Apothecary.
 | Mana network (pool/collector registry) | 🔨 | ⬜ | Per-dimension WeakHashMap |
 | GeneratingFlower → Pool mana push | 🔨 | ⬜ | `emptyManaIntoCollector()`, auto-binds ≤6 blocks |
 | Mana pool comparator output | ⬜ | ⬜ | Planned, not coded |
-| Petal apothecary water fill | ⬜ | ⬜ | |
-| Petal apothecary in-world crafting | ⬜ | ⬜ | Interaction hook exists, logic TODO |
+| Apothecary water fill | ⬜ | ⬜ | |
+| Apothecary in-world crafting | ⬜ | ⬜ | Interaction hook exists, logic TODO |
 | Mana spreader / bursts | ⬜ | ⬜ | Out of scope |
 
 ---
@@ -139,7 +142,7 @@ Converts adjacent blocks into magic materials. Produced via Petal Apothecary.
 | living_rock → slab (×3 variants) | shaped | 🔨 | ⬜ |
 | living_rock → wall (×3 variants) | shaped | 🔨 | ⬜ |
 | 8 living_rock_brick (U-shape) → mana_pool | shaped | 🔨 | ⬜ |
-| 8× any stone (ring) → apothecary | shaped | ✅ | ⬜ |
+| 7× any rock + 1 petal/mushroom (goblet) → apothecary | shaped | ✅ | ⬜ |
 | livingwood_log → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 | livingwood_log_stripped → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 | livingwood_planks → stairs | shaped | 🔨 | ⬜ |
@@ -170,8 +173,8 @@ Converts adjacent blocks into magic materials. Produced via Petal Apothecary.
 - [x] Livingwood planks: stairs/slab/fence/fence_gate
 - [x] Standard crafting recipes migrated to MamRecipeProvider (datagen)
 - [ ] Mana pool comparator support not coded
-- [ ] Petal apothecary water/lava interaction not coded
-- [ ] Petal apothecary in-world recipes (petals + seed → item)
+- [ ] Apothecary water/lava interaction not coded
+- [ ] Apothecary in-world recipes (petals + seed → item)
 - [ ] Pure daisy recipe (blocked on apothecary crafting)
 - [ ] Infused / sacred tiers of living rock, livingwood, mana pool, apothecary (future)
 - [ ] No sounds beyond vanilla defaults

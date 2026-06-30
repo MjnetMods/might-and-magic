@@ -111,6 +111,7 @@ Community docs: https://docs.neoforged.net/
 | `design/NN_*-path.md` | Creative / system design per magic path |
 | `design/N1_*-implementation-status.md` | In-game verification checklist per path |
 | `design/N2_*-test-plan.md` | Test coverage tracking per path |
+| `design/magic/NN_*.md` | Cross-school magic infrastructure (energy, Apothecary, Altar, Weavery, runes) — shared by all paths, not owned by one. Numbered loosely by dependency, not strict reading order. |
 | `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
 | `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `ref/site-guide.md` | Hugo site authoring — crafting shortcode usage, texture paths, running locally |

@@ -2,7 +2,7 @@
 type: design
 status: draft
 last-updated: 2026-06-30
-links: "[[01_rituals]], [[00_runes]], [[00_magic-energy]]"
+links: "[[01_rituals]], [[magic/25_runes]], [[magic/00_energy]]"
 ---
 
 # MAM — Staves & Spells

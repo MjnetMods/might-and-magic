@@ -52,7 +52,7 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:livingwood_log` | Livingwood Log | No |
 | `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | No |
 | `mam:mana_pool` | Mana Pool | Yes — `mam:mana_pool` |
-| `mam:petal_apothecary` | Petal Apothecary | Yes — `mam:petal_apothecary` |
+| `mam:apothecary` | Apothecary | Yes — `mam:apothecary` |
 
 ---
 
@@ -86,7 +86,7 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:living_rock_slab` / `_polished_slab` / `_brick_slab` | Shaped row | 3 source block | 6 slabs |
 | `mam:living_rock_wall` / `_polished_wall` / `_brick_wall` | Shaped 2 rows | 6 source block | 6 walls |
 | `mam:mana_pool` | Shaped U (3×3) | 8 living_rock_brick | 1 mana_pool |
-| `mam:petal_apothecary` | Shaped goblet | living_rock + polished | 1 petal_apothecary |
+| `mam:apothecary` | Shaped goblet | 7 any rock (`c:stones`) + 1 petal or mushroom | 1 apothecary |
 | `mam:livingwood_planks` | Shapeless | 1 livingwood_log | 4 livingwood_planks |
 | `mam:livingwood_planks_stairs` | Shaped stair | 6 livingwood_planks | 4 stairs |
 | `mam:livingwood_planks_slab` | Shaped row | 3 livingwood_planks | 6 slabs |

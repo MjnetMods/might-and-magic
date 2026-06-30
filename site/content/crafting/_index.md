@@ -23,7 +23,7 @@ The fluid determines which school's recipes are active:
 
 One block. Every school. Swap the fluid, change the craft.
 
-{{< crafting in="block/living_rock,block/living_rock,block/living_rock|block/living_rock,,block/living_rock|block/living_rock,block/living_rock,block/living_rock" out="block/apothecary_side" count=1 >}}
+{{< crafting in="block/stone,item/white_petal,block/stone|,block/stone,|block/stone,block/stone,block/stone" out="block/apothecary_side" count=1 >}}
 
 The Apothecary comes in four tiers. Higher tiers accept more ingredients and unlock more complex recipes — but the mechanic never changes.
 

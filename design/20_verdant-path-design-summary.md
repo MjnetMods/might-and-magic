@@ -2,7 +2,7 @@
 type: design
 status: draft
 last-updated: 2026-06-29
-links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[20_verdant-path-mana-pool]], [[20_verdant-path-items]]"
+links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[magic/15_mana-pool]], [[magic/17_trinkets]], [[20_verdant-path-items]]"
 ---
 
 # Verdant Path — Design Summary
@@ -41,7 +41,7 @@ Advancing a tier means building the next pool. That pool is itself made from the
 
 ### Step 1 — Bootstrap (no mana infrastructure yet)
 
-- Gather stone, craft **Apothecary** (8× any stone, ring shape)
+- Gather stone, craft **Apothecary** (7× any rock + 1 petal/mushroom, goblet shape)
 - Craft flowers in the Apothecary; use them to grow mana-generating flowers
 - Craft **Pure Daisy** in the Apothecary; place it to convert stone → **Living Rock**, logs → **Livingwood**
 
@@ -64,7 +64,7 @@ From the Mana Pool (75% cost per infusion):
 
 ### Step 4 — Tier 2 Gate (the double lock)
 
-To reach Infused tier you need an **Infused Mana Pool**, crafted from **Infused Living Rock**. But Infused Living Rock is only produced by infusing Living Rock in an Infused Mana Pool. The bootstrap path for acquiring the first Infused Pool is a design open question — see [[20_verdant-path-mana-pool]] § Open Questions.
+To reach Infused tier you need an **Infused Mana Pool**, crafted from **Infused Living Rock**. But Infused Living Rock is only produced by infusing Living Rock in an Infused Mana Pool. The bootstrap path for acquiring the first Infused Pool is a design open question — see [[magic/15_mana-pool]] § Open Questions.
 
 Once the Infused Pool exists:
 - Produce **Infused Living Rock** (Living Rock → Infused Mana Pool, 75%)
@@ -101,7 +101,7 @@ All Tier 2/3 materials are produced by pool infusion. All cost **75% of the pool
 | Infused Pearl        | Ender Pearl → Infused Mana Pool | —                     |
 | Sacred Pearl         | Ender Pearl → Sacred Mana Pool | —                      |
 
-*See [[20_verdant-path-mana-pool]] for the full infusion table.*
+*See [[magic/15_mana-pool]] for the full infusion table.*
 
 ---
 
@@ -109,13 +109,13 @@ All Tier 2/3 materials are produced by pool infusion. All cost **75% of the pool
 
 | Station            | Tiers | Recipe                         | Unlocks |
 |--------------------|-------|--------------------------------|---------|
-| Apothecary   | × 3   | 8× any stone (ring)            | Floral crafting per tier |
+| Apothecary   | × 4 (Desecrated TBD) | 7× rock + 1 petal/mushroom (goblet) | Floral crafting per tier |
 | Mana Pool          | × 3   | Living Rock tier (U shape)     | All pool infusion |
 | Weavery            | × 3   | 2 string + 4 Livingwood tier   | Cloth augmentation |
 
 All three station families follow the same recipe shape at every tier, substituting the tier's material.
 
-*See [[20_verdant-path-mana-pool]] for pool recipes and [[20_verdant-path]] for apothecary and weavery shapes.*
+*See [[magic/15_mana-pool]] for pool recipes, [[magic/10_apothecary]] for Apothecary detail, and [[magic/30_weavery]] for Weavery detail.*
 
 ---
 
@@ -177,7 +177,7 @@ Crafted items adapted from Botania's accessory system — renamed and themed for
 
 Each trinket is a choice point: wear standalone in a curio slot, or weave permanently into the matching cloth slot.
 
-*See [[20_verdant-path-items]] for gem, tablet, ring, and trinket detail.*
+*See [[magic/17_trinkets]] for gem, tablet, and ring detail, and [[20_verdant-path-items]] for the trinket catalog.*
 
 ---
 
@@ -199,7 +199,7 @@ A cloth piece can hold one ring merge (mana storage, any slot) and one trinket m
 
 ## Open Questions
 
-- [ ] **T2/T3 pool bootstrap** — how does the player get their first Infused Mana Pool without Infused Living Rock? See [[20_verdant-path-mana-pool]]
+- [ ] **T2/T3 pool bootstrap** — how does the player get their first Infused Mana Pool without Infused Living Rock? See [[magic/15_mana-pool]]
 - [ ] **Mana Pool recipe shape** — decided (U shape); Infused/Sacred pool recipes blocked on bootstrap resolution
 - [ ] **Trinket crafting recipes** — all TBD; materials and shapes not yet designed
 - [ ] **Tablet/ring slot** — does the tablet also fit a curio offhand slot, or inventory only?

@@ -2,7 +2,7 @@
 type: design
 status: draft
 last-updated: 2026-06-30
-links: "[[00_magic-energy]], [[01_rituals]]"
+links: "[[magic/00_energy]], [[01_rituals]]"
 ---
 
 # MAM — Side Effects & Gremlins

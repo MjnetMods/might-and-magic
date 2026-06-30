@@ -24,7 +24,7 @@ Mana is the fundamental resource of the Verdant Path. It is gathered passively b
 Mystical Flowers (placed in world)
   ↓ bonemeal → Tall Mystical Flowers (more petals)
   ↓ break → Petals (items)
-Petal Apothecary (petals + water + reagent → items)
+Apothecary (petals + water + reagent → items)
   ↓ craft Pure Daisy
 Pure Daisy (placed near stone/logs)
   ↓ converts to Living Rock / Livingwood Log
@@ -49,7 +49,7 @@ Functional Flowers / Abilities (consuming mana)
 | **Dewpetal** | Generating flower — draws from rain or an adjacent water source |
 | **Living Rock** | Crafting material; plain, polished, and brick variants |
 | **Livingwood Log** | Crafting material; refined into planks |
-| **Petal Apothecary** | Primary crafting station — fill with water, throw petals + seed to conjure items |
+| **Apothecary** | Primary crafting station — fill with water, throw petals + seed to conjure items |
 | **Mana Pool** | Stores up to 1,000,000 mana; filled by nearby generating flowers; comparator-readable |
 | **Verdant Tome** | Patchouli guidebook, written as a scholar's journal — lore, recipes, and mechanics |
 
@@ -73,10 +73,10 @@ All three flowers buffer up to their max mana before pushing to the pool, and bi
 
 1. Collect **Petals** by breaking Mystical Flowers (or bonemeal → tall → 2× yield)
 2. Craft: 1 flower → 4 petals (shapeless)
-3. Fill a **Petal Apothecary** with water, throw petals + a seed → conjure a **Pure Daisy**
+3. Fill an **Apothecary** with water, throw petals + a seed → conjure a **Pure Daisy**
 4. Place Pure Daisy near stone → **Living Rock**; near logs → **Livingwood Log**
 5. Craft Living Rock into polished → bricks → **Mana Pool** (U-shape, 8 brick)
-6. Craft generating flowers via Petal Apothecary → place within 6 blocks of Mana Pool
+6. Craft generating flowers via Apothecary → place within 6 blocks of Mana Pool
 7. Use accumulated mana for healing and buff abilities
 
 ---
@@ -143,4 +143,4 @@ Worn in [Curios](https://www.curseforge.com/minecraft/mc-mods/curios) slots:
 |---|---|---|
 | Verdant Amulet | Necklace | +20% mana pool capacity |
 | Bloom Ring | Ring | Mana regen from nearby flowers |
-| Petal Charm | Charm | Reduce Petal Apothecary cost |
+| Petal Charm | Charm | Reduce Apothecary cost |

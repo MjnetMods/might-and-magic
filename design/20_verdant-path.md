@@ -210,7 +210,7 @@ This includes:
 
 * mystical flowers and petals
 * mana generation and storage
-* petal apothecary-style crafting
+* apothecary-style crafting
 * living stone and floral materials
 * the visual identity of flower magic itself
 
@@ -261,15 +261,15 @@ Grove is the school’s **world-shaping and environmental** pillar.
 | **Sacred Mana Pool**                   | Highest-capacity pool; required to craft Sacred Ingots                                         |
 | **Infused Living Rock**                | Produced by infusing Living Rock in a pool with ≥4M Mana (75% cost); no crafting recipe       |
 | **Sacred Living Rock**                 | Produced by infusing Infused Living Rock in a pool with ≥16M Mana (75% cost); no crafting recipe |
-| **Desecrated Living Rock**             | Produced by infusing Infused Living Rock in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |
+| **Desecrated Living Rock**             | Produced by infusing Infused Living Rock in a Desecrated Mana Pool (≥16M Nox, 75% cost); no crafting recipe |
 | **Altar**                        | T1 ritual station (4 slots); produces runes and early rites via mana + Living Rock trigger     |
 | **Infused Altar**                | T2 ritual station (6 slots); mid-game rites and Rune of the Sacred                            |
 | **Sacred Altar**                 | T3 ritual station (16 slots); endgame sacred components and high rites                        |
-| **Desecrated Altar**             | T3 ritual station (16 slots); dark school parallel — draws from Desecrated Pool (Nox)         |
+| **Desecrated Altar**             | T3 ritual station (16 slots); dark school parallel — draws from Desecrated Mana Pool (Nox)         |
 | **Livingwood**                         | Structural material for sacred architecture and school-specific recipes                        |
 | **Infused Livingwood**                 | Produced by infusing Livingwood in a pool with ≥4M Mana (75% cost); no crafting recipe        |
 | **Sacred Livingwood**                  | Produced by infusing Infused Livingwood in a pool with ≥16M Mana (75% cost); no crafting recipe |
-| **Desecrated Livingwood**              | Produced by infusing Infused Livingwood in a Desecrated Pool (≥16M Nox, 75% cost); no crafting recipe |
+| **Desecrated Livingwood**              | Produced by infusing Infused Livingwood in a Desecrated Mana Pool (≥16M Nox, 75% cost); no crafting recipe |
 
 ### Weavery recipe shape
 
