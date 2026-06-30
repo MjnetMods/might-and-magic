@@ -39,7 +39,7 @@ public class TestVerdantBlocks {
         helper.succeed();
     }
 
-    /** LT-2: living_rock has requiresCorrectToolForDrops() — pickaxe harvests, bare hand does not. */
+    /** LT-2: living_rock requires a stone pickaxe (T1) — bare hand and wood both fail, stone succeeds. */
     @GameTest(template = PLATFORM)
     public static void livingRockRequiresPickaxe(GameTestHelper helper) {
         var state = VerdantRock.LIVING_ROCK.get().defaultBlockState();
@@ -48,8 +48,12 @@ public class TestVerdantBlocks {
             helper.fail("living_rock should not be harvestable with empty hand");
         }
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WOODEN_PICKAXE));
+        if (player.hasCorrectToolForDrops(state)) {
+            helper.fail("living_rock should not be harvestable with a wooden pickaxe (below T1)");
+        }
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STONE_PICKAXE));
         if (!player.hasCorrectToolForDrops(state)) {
-            helper.fail("living_rock should be harvestable with a wooden pickaxe");
+            helper.fail("living_rock should be harvestable with a stone pickaxe (T1)");
         }
         helper.succeed();
     }
