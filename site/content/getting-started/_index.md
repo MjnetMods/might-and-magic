@@ -1,66 +1,76 @@
 ---
 title: "Getting Started"
-date: 2026-06-29
+date: 2026-06-30
 draft: false
 weight: 10
 ---
 
-*This site documents the full design of Might & Magic — not just what is currently in code. We write docs first and implement after. If something isn't in-game yet, that's intentional.*
+**Might & Magic** is a NeoForge 1.21.1 mod that adds two forces to the world — magic and technology — and lets them collide.
+
+You do not have to pick one path. But the paths are not neutral. They push against each other, and against you. Committing deeply to one changes you. Dabbling in more than one carries consequences.
 
 ---
 
-**Might & Magic** is a NeoForge 1.21.1 mod that adds two parallel paths of progression: a magic side rooted in nature and divine energy, and a technology side built on machines and automation.
-
-You do not need to pick one path. But the paths are not neutral observers of each other — they are forces, and forces resist dilution. Dabbling in more than one carries consequences. In multiplayer, those consequences can be turned against you by someone who has committed.
-
-## Choose Your Path
+## The Paths
 
 ### The Verdant Path
 
-A light, supportive school of magic centered on floral mana and alignment with unnamed divine presences. You grow gardens, conjure living stone, fill mana pools, and channel that energy into healing and protective abilities.
+Flowers, living stone, and mana. The Verdant Path is a school of growth and alignment — not with named gods, but with ancient unnamed presences whose influence lingers in bloom and root. It plays like a healer and sustain builder. Not aggressive. Patient.
 
-Not powerful in a combat sense — intentionally. The Verdant Path rewards patience and ritual over aggression.
+[Verdant Path →](/verdant-path/)
 
-[Learn more about the Verdant Path →](/verdant-path/)
+### The Summoning Path
 
-### The Science Path
+Contracts and bargains. The Summoning Path deals in souls — harvested with a Scythe, traded for power. What comes through the ritual circle is not always what was invited.
 
-*(Coming soon)* — machines, automation, and the exploitation of natural resources. Technology that can be pointed at the Verdant Path's structures.
+[Summoning Path →](/summoning-path/)
 
-## First Steps (Verdant Path)
+### The Sanguine Path
 
-1. Find **Mystical Flowers** and **Mystical Mushrooms** growing in the world — they appear in most biomes
-2. Break flowers to collect **Petals**, or bonemeal them into tall variants for double yield
-3. Craft the **Grimoire** (petal + flower + mushroom + book) — it documents everything from here on
-4. Place a **Pure Daisy** near stone to grow **Living Rock**, or near logs for **Livingwood Log**
-5. Craft a **Mana Pool** from Living Rock and place generating flowers nearby
+Blood and sacrifice. The Anathema is the primary tool — you harm yourself to fuel transformation. The Sanguine Path does not ask for components. It asks for cost.
 
-From there, your mana pool fills passively and you can begin channeling mana into abilities.
+[Sanguine Path →](/sanguine-path/)
 
-## The Other Schools
+### The Rational Path
 
-The Verdant Path is the first implemented school. Three others are in the world:
+Machines, automation, and the suppression of magic. Where the other paths invoke and bargain, the Rational Path builds systems. It generates **Rational** — a field that weakens magical effects and empowers industrial infrastructure.
 
-- **The Summoning Path** — contracts and bargains with beings from beyond
-- **The Sanguine Path** — blood, ritual, and the cost of transformation
-- **The Rational Path** — industry, engineering, and the suppression of magic
+[Rational Path →](/science-path/)
 
-Each school has its own design, visual language, and Exposure counter. None are fully implemented yet — but they are designed, and they will interfere with each other.
+### Rituals
+
+A school that belongs to no single path. Chalk on stone, patterns in rings, a Focus in the center. Completed rituals are permanent structures in the world. The most powerful ones require Desecrated Chalk — which means Nox, which means going dark.
+
+[Rituals →](/rituals/)
 
 ---
 
-## The Grimoire
+## Shared Infrastructure
 
-Craft the **Grimoire** early. It is written in the voice of an unnamed scholar and documents every block, item, and mechanic as you unlock them. For hands-on mechanical explanations, Ponder scenes show you how things work in the world — the Grimoire tells you what and why.
+All paths use the same core stations — the Apothecary, the Altar, and the Weavery. The fluid in the Apothecary and the energy in the Altar determine which school's recipes fire. One set of blocks, every school.
+
+[Shared Craft →](/shared-craft/)
+
+---
+
+## Side Effects
+
+Magic accumulates. Every unit of mana generated, every ritual running, every kinetic shaft spinning near an active pool — it fills a chunk-scoped meter. When that meter overflows, something manifests.
+
+You cannot stop it once it starts. You can only manage it before it does.
+
+[Side Effects →](/side-effects/)
+
+---
+
+## First Steps
+
+1. Find **Mystical Flowers** growing in the world — they appear in most biomes
+2. Break flowers to collect **Petals**, or bonemeal them for double yield
+3. Craft the **Grimoire** — it documents everything from here
 
 {{< crafting in="item/pink_petal,block/pink_mystical_flower,block/pink_mystical_mushroom|,,|,," out="item/guide" type="Crafting Table (Shapeless)" >}}
 
 *Any color of petal, flower, and mushroom will work.*
 
----
-
-## For Modpack Makers & Spoilers
-
-Full item tables, block IDs, recipe IDs, and tag listings are available on the [reference page](/reference/) — not linked from the main nav.
-
-Internal dev notes, implementation status, and design decisions live in the [dev section](/dev/) — also not in the nav, accessible by direct URL.
+The Grimoire is written in the voice of an unnamed scholar. It documents every block, item, and mechanic as you unlock them.

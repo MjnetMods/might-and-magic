@@ -25,6 +25,11 @@ url = "/getting-started/"
 weight = 10
 
 [[menu.main]]
+name = "Shared Craft"
+url = "/shared-craft/"
+weight = 15
+
+[[menu.main]]
 name = "Verdant Path"
 url = "/verdant-path/"
 weight = 20
@@ -40,9 +45,19 @@ url = "/sanguine-path/"
 weight = 40
 
 [[menu.main]]
-name = "The Rational Path"
+name = "Rational Path"
 url = "/science-path/"
 weight = 50
+
+[[menu.main]]
+name = "Rituals"
+url = "/rituals/"
+weight = 55
+
+[[menu.main]]
+name = "Side Effects"
+url = "/side-effects/"
+weight = 60
 
 [[menu.main]]
 name = "Credits"

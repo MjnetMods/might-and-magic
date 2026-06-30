@@ -27,6 +27,9 @@ run/
 # Datagen output — run ./gradlew runData to regenerate
 src/generated/
 
+# Hugo build output
+site/public/
+
 # OS
 .DS_Store
 Thumbs.db
