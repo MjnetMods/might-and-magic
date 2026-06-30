@@ -9,11 +9,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.PatchouliAPI;
 
-public class VerdantPathGuideItem extends Item {
+public class GuideItem extends Item {
 
-    private static final ResourceLocation BOOK_ID = ResourceLocation.fromNamespaceAndPath("mam", "verdant_path");
+    private static final ResourceLocation BOOK_ID = ResourceLocation.fromNamespaceAndPath("mam", "guide");
 
-    public VerdantPathGuideItem(Properties props) {
+    public GuideItem(Properties props) {
         super(props);
     }
 

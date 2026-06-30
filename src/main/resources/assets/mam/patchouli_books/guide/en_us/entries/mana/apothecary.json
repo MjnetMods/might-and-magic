@@ -1,17 +1,17 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.apothecary",
+  "name": "patchouli.mam.guide.verdant.entry.apothecary",
   "category": "mam:mana",
   "icon": "mam:apothecary",
   "sortnum": 2,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.apothecary.0"
+      "text": "patchouli.mam.guide.verdant.page.apothecary.0"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "mam:apothecary",
-      "text": "patchouli.mam.verdant_path.page.apothecary.1"
+      "text": "patchouli.mam.guide.verdant.page.apothecary.1"
     }
   ]
 }

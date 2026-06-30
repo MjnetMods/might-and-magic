@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Items;
@@ -27,9 +28,23 @@ public class MamRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput output) {
+        guide(output);
         flowers(output);
         livingRock(output);
         livingWood(output);
+    }
+
+    private void guide(RecipeOutput output) {
+        var petals = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_petals"));
+        var flowers = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_flowers"));
+        var mushrooms = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_mushrooms"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VerdantFlowers.GUIDE.get())
+            .requires(petals)
+            .requires(flowers)
+            .requires(mushrooms)
+            .requires(Items.BOOK)
+            .unlockedBy("has_petal", has(petals))
+            .save(output, id("guide"));
     }
 
     private void flowers(RecipeOutput output) {

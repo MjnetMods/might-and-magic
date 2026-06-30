@@ -29,10 +29,10 @@ Not powerful in a combat sense — intentionally. The Verdant Path rewards patie
 
 ## First Steps (Verdant Path)
 
-1. Find **Mystical Flowers** growing in the world — they appear in most biomes
+1. Find **Mystical Flowers** and **Mystical Mushrooms** growing in the world — they appear in most biomes
 2. Break flowers to collect **Petals**, or bonemeal them into tall variants for double yield
-3. Craft a **Petal Apothecary** — fill it with water, throw in petals and a seed to conjure a **Pure Daisy**
-4. Place the Pure Daisy near stone to grow **Living Rock**, or near logs for **Livingwood Log**
+3. Craft the **Grimoire** (petal + flower + mushroom + book) — it documents everything from here on
+4. Place a **Pure Daisy** near stone to grow **Living Rock**, or near logs for **Livingwood Log**
 5. Craft a **Mana Pool** from Living Rock and place generating flowers nearby
 
 From there, your mana pool fills passively and you can begin channeling mana into abilities.
@@ -49,9 +49,13 @@ Each school has its own design, visual language, and Exposure counter. None are 
 
 ---
 
-## The Verdant Tome
+## The Grimoire
 
-Craft **The Verdant Tome** early. It is written in the voice of an unnamed scholar and documents every block, item, and mechanic as you unlock them. For hands-on mechanical explanations, Ponder scenes show you how things work in the world — the Tome tells you what and why.
+Craft the **Grimoire** early. It is written in the voice of an unnamed scholar and documents every block, item, and mechanic as you unlock them. For hands-on mechanical explanations, Ponder scenes show you how things work in the world — the Grimoire tells you what and why.
+
+{{< crafting in="item/pink_petal,block/pink_mystical_flower,block/pink_mystical_mushroom|,,|,," out="item/guide" type="Crafting Table (Shapeless)" >}}
+
+*Any color of petal, flower, and mushroom will work.*
 
 ---
 

@@ -1,5 +1,5 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.mystical_flowers",
+  "name": "patchouli.mam.guide.verdant.entry.mystical_flowers",
   "category": "mam:flowers",
   "icon": "mam:white_mystical_flower",
   "priority": true,
@@ -7,12 +7,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.mystical_flowers.0"
+      "text": "patchouli.mam.guide.verdant.page.mystical_flowers.0"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "mam:white_mystical_flower_to_petals",
-      "text": "patchouli.mam.verdant_path.page.mystical_flowers.1"
+      "text": "patchouli.mam.guide.verdant.page.mystical_flowers.1"
     }
   ]
 }

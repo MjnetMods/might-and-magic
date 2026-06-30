@@ -1,12 +1,12 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.floral_powder",
+  "name": "patchouli.mam.guide.verdant.entry.floral_powder",
   "category": "mam:flowers",
   "icon": "mam:floral_powder",
   "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.floral_powder.0"
+      "text": "patchouli.mam.guide.verdant.page.floral_powder.0"
     }
   ]
 }

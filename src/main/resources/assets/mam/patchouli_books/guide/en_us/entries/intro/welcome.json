@@ -1,0 +1,17 @@
+{
+  "name": "patchouli.mam.guide.entry.welcome",
+  "category": "mam:intro",
+  "icon": "mam:guide",
+  "priority": true,
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.guide.page.welcome.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.guide.page.welcome.1"
+    }
+  ]
+}

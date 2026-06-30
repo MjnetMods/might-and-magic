@@ -32,7 +32,7 @@ import org.mjli.mam.foundation.registration.DyedItemList;
 import org.mjli.mam.foundation.registration.MamBlockProperties;
 import org.mjli.mam.foundation.registration.MamRegistrate;
 import org.mjli.mam.item.FloralPowderItem;
-import org.mjli.mam.item.VerdantPathGuideItem;
+import org.mjli.mam.item.GuideItem;
 
 public class VerdantFlowers {
 
@@ -151,13 +151,13 @@ public class VerdantFlowers {
          .simpleItem()
          .register();
 
-    public static final ItemEntry<VerdantPathGuideItem> VERDANT_PATH_GUIDE =
-        R.item("verdant_path_guide", p -> new VerdantPathGuideItem(p.stacksTo(1)))
+    public static final ItemEntry<GuideItem> GUIDE =
+        R.item("guide", p -> new GuideItem(p.stacksTo(1)))
          .register();
 
     public static void appendToTab(CreativeModeTabModifier modifier) {
         var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
-        modifier.accept(new ItemStack(VERDANT_PATH_GUIDE.get()), tab);
+        modifier.accept(new ItemStack(GUIDE.get()), tab);
         PETALS.forEach(e -> modifier.accept(new ItemStack(e.get()), tab));
         FLOWERS.forEach(e -> modifier.accept(e.asStack(), tab));
         modifier.accept(new ItemStack(FLORAL_POWDER.get()), tab);

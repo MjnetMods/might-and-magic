@@ -1,5 +1,5 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.pure_daisy",
+  "name": "patchouli.mam.guide.verdant.entry.pure_daisy",
   "category": "mam:mana",
   "icon": "mam:pure_daisy",
   "priority": true,
@@ -7,11 +7,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.pure_daisy.0"
+      "text": "patchouli.mam.guide.verdant.page.pure_daisy.0"
     },
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.pure_daisy.1"
+      "text": "patchouli.mam.guide.verdant.page.pure_daisy.1"
     }
   ]
 }

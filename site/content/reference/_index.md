@@ -25,16 +25,17 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 
 | Item ID | Name | Notes |
 |---|---|---|
-| `mam:mystical_flower_white` … `_black` | Mystical Flowers (16 colors) | Drops 1 petal; bonemeal → tall variant |
-| `mam:tall_mystical_flower_*` | Tall Mystical Flowers (16 colors) | Drops 2 petals (lower half only) |
-| `mam:petal_white` … `_black` | Petals (16 colors) | Item; right-click ground → Buried Petal |
+| `mam:white_mystical_flower` … `mam:black_mystical_flower` | Mystical Flowers (16 colors) | Drops 1 petal; bonemeal → tall variant |
+| `mam:white_tall_mystical_flower` … `mam:black_tall_mystical_flower` | Tall Mystical Flowers (16 colors) | Drops 2 petals (lower half only) |
+| `mam:white_petal` … `mam:black_petal` | Petals (16 colors) | Item; right-click ground → Buried Petal |
+| `mam:white_mystical_mushroom` … `mam:black_mystical_mushroom` | Mystical Mushrooms (16 colors) | Decorative; ingredient for Grimoire |
 | `mam:floral_powder` | Floral Powder | Thrown; scatters random mystical flowers |
 | `mam:living_rock` / `_polished` / `_brick` | Living Rock variants | Crafting material |
 | `mam:living_rock_stairs` / `_slab` / `_wall` | Living Rock furniture (×3 variants) | Building block |
 | `mam:livingwood_log` | Livingwood Log | Crafting material |
 | `mam:livingwood_planks` | Livingwood Planks | Crafting material |
 | `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | Building block |
-| `mam:verdant_tome` | The Verdant Tome | Patchouli guidebook; Book ID `mam:verdant_tome` |
+| `mam:guide` | Grimoire | Patchouli guidebook; Book ID `mam:guide` |
 
 ---
 
@@ -57,13 +58,16 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 
 ## Verdant Path — Tags
 
-| Tag | Contents |
-|---|---|
-| `botania:mystical_flowers` | All 16 mam mystical flower blocks |
-| `botania:special_flowers` | `mam:pure_daisy` |
-| `minecraft:small_flowers` | All 16 mam mystical flower blocks |
-| `mam:living_rock` | `mam:living_rock`, `_polished`, `_brick` |
-| `mam:mystical_flowers` | All 16 mam mystical flower items |
+| Tag | Type | Contents |
+|---|---|---|
+| `botania:mystical_flowers` | block | All 16 `mam:*_mystical_flower` blocks |
+| `botania:double_mystical_flowers` | block | All 16 `mam:*_tall_mystical_flower` blocks |
+| `botania:special_flowers` | block | `mam:pure_daisy` |
+| `minecraft:small_flowers` | block | All 16 `mam:*_mystical_flower` blocks |
+| `mam:living_rock` | block | `mam:living_rock`, `_polished`, `_brick` |
+| `mam:mystical_petals` | item | All 16 `mam:*_petal` items |
+| `mam:mystical_flowers` | item | All 16 `mam:*_mystical_flower` items |
+| `mam:mystical_mushrooms` | item | All 16 `mam:*_mystical_mushroom` items |
 
 ---
 
@@ -73,7 +77,9 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 
 | Recipe ID | Type | Input | Output |
 |---|---|---|---|
+| `mam:guide` | Shapeless | 1 petal + 1 mystical flower + 1 mushroom + 1 book (any color) | 1 Grimoire |
 | `mam:<color>_mystical_flower_to_petals` (×16) | Shapeless | 1 mystical flower | 4 petals (matching color) |
+| `mam:<color>_petal_to_dye` (×16) | Shapeless | 1 petal | 1 dye (matching color) |
 | `mam:living_rock_polished` | Shaped 2×2 | 4 living_rock | 4 living_rock_polished |
 | `mam:living_rock_brick` | Shaped 2×2 | 4 living_rock_polished | 4 living_rock_brick |
 | `mam:living_rock_stairs` / `_polished_stairs` / `_brick_stairs` | Shaped stair | 6 source block | 4 stairs |

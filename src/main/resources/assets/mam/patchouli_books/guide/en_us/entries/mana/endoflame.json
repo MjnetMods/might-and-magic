@@ -1,16 +1,16 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.endoflame",
+  "name": "patchouli.mam.guide.verdant.entry.endoflame",
   "category": "mam:mana",
   "icon": "mam:endoflame",
   "sortnum": 11,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.endoflame.0"
+      "text": "patchouli.mam.guide.verdant.page.endoflame.0"
     },
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.endoflame.1"
+      "text": "patchouli.mam.guide.verdant.page.endoflame.1"
     }
   ]
 }

@@ -1,11 +1,11 @@
 {
-  "name": "item.mam.verdant_path_guide",
-  "landing_text": "patchouli.mam.verdant_path.landing",
+  "name": "item.mam.guide",
+  "landing_text": "patchouli.mam.guide.landing",
   "book_texture": "patchouli:textures/gui/book_green.png",
-  "model": "mam:verdant_path_guide",
+  "model": "mam:guide",
   "creative_tab": "mam:verdant_path",
   "dont_generate_book": true,
-  "custom_book_item": "mam:verdant_path_guide",
+  "custom_book_item": "mam:guide",
   "use_resource_pack": true,
   "i18n": true,
   "macros": {

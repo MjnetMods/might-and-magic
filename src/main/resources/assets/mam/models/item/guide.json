@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "mam:item/verdant_path_guide"
+    "layer0": "mam:item/guide"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "patchouli.mam.verdant_path.entry.mana_pool",
+  "name": "patchouli.mam.guide.verdant.entry.mana_pool",
   "category": "mam:mana",
   "icon": "mam:mana_pool",
   "priority": true,
@@ -7,16 +7,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.mana_pool.0"
+      "text": "patchouli.mam.guide.verdant.page.mana_pool.0"
     },
     {
       "type": "patchouli:crafting",
       "recipe": "mam:mana_pool",
-      "text": "patchouli.mam.verdant_path.page.mana_pool.1"
+      "text": "patchouli.mam.guide.verdant.page.mana_pool.1"
     },
     {
       "type": "patchouli:text",
-      "text": "patchouli.mam.verdant_path.page.mana_pool.2"
+      "text": "patchouli.mam.guide.verdant.page.mana_pool.2"
     }
   ]
 }

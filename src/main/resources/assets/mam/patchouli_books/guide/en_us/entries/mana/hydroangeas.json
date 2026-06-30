@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.mam.guide.verdant.entry.hydroangeas",
+  "category": "mam:mana",
+  "icon": "mam:hydroangeas",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.guide.verdant.page.hydroangeas.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.guide.verdant.page.hydroangeas.1"
+    }
+  ]
+}
