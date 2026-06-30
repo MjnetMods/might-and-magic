@@ -1,8 +1,8 @@
 ---
 path: verdant
 type: test
-status: pass3-complete
-last-updated: 2026-06-28
+status: pass6-complete
+last-updated: 2026-06-30
 links: "[[20_verdant-path]], [[21_verdant-implementation-status]], [[ref/gametest-guide]]"
 ---
 
@@ -146,6 +146,19 @@ Calls `ConfiguredFeature.place()` directly — bypasses placed_feature modifiers
 | WG-2 | `mysticalFlowerPatchPlacesBlock` | `white_mystical_flower_patch` places ≥1 `MysticalFlowerBlock` (5 invocations) |
 | WG-3 | `mysticalMushroomFeaturePlacesBlock` | `mystical_mushrooms` places ≥1 `MysticalMushroomBlock` (5 invocations) |
 
+### Pass 6 — `TestVerdantBlocks` (4 GameTests)
+
+Shared structure: `verdant_flowers/small_platform`. Covers loot table wiring and block harvest properties for living rock, mushrooms, and living wood.
+
+| ID | Test | What it verifies |
+|----|------|-----------------|
+| LT-1 | `livingRockDropsSelf` | `living_rock` loot table (dropSelf) yields the block item on break |
+| LT-2 | `livingRockRequiresPickaxe` | `requiresCorrectToolForDrops()` — bare hand → false, wooden pickaxe → true |
+| LT-3 | `mushroomDropsSelf` | `white_mystical_mushroom` loot table (dropSelf) yields the mushroom item |
+| LT-4 | `livingwoodLogDropsSelf` | `livingwood_log` loot table (dropSelf) yields the log item |
+
+**Side fix:** `TestWorldGen` was missing from `MamGameTests` registration list — added alongside `TestVerdantBlocks`.
+
 ---
 
 ## Backlog
@@ -190,7 +203,8 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 | ManaNetworkHandler (unit) | 4 (GF-2/3 variants) |
 | GeneratingFlowers (GameTest) | GF-1/2/3/4/5/6 |
 | Worldgen (GameTest) | WG-1/2/3 |
-| **Total** | **~60** |
+| Loot tables / block properties (GameTest) | LT-1/2/3/4 |
+| **Total** | **~64** |
 
 ### Remaining backlog
 
@@ -198,6 +212,7 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 |----------|-----------|-----|------|
 | Pure Daisy | ✅ 0 | — | — |
 | GeneratingFlower | ✅ 0 | — | — |
+| Loot tables | ✅ 0 | — | — |
 | Apothecary | 1 | 0 | 1 (blocked on impl) |
 | **Total** | **1** | **0** | **1** |
 

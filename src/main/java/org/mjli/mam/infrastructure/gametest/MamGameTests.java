@@ -4,12 +4,14 @@ import net.neoforged.neoforge.event.RegisterGameTestsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.mjli.mam.MightAndMagic;
+import org.mjli.mam.infrastructure.gametest.tests.TestApothecary;
 import org.mjli.mam.infrastructure.gametest.tests.TestGeneratingFlowers;
 import org.mjli.mam.infrastructure.gametest.tests.TestManaPool;
-import org.mjli.mam.infrastructure.gametest.tests.TestApothecary;
 import org.mjli.mam.infrastructure.gametest.tests.TestRecipes;
+import org.mjli.mam.infrastructure.gametest.tests.TestVerdantBlocks;
 import org.mjli.mam.infrastructure.gametest.tests.TestVerdantFlowers;
 import org.mjli.mam.infrastructure.gametest.tests.TestVerdantPath;
+import org.mjli.mam.infrastructure.gametest.tests.TestWorldGen;
 
 @EventBusSubscriber(modid = MightAndMagic.MODID)
 public class MamGameTests {
@@ -21,6 +23,8 @@ public class MamGameTests {
             TestManaPool.class,
             TestRecipes.class,
             TestApothecary.class,
+            TestWorldGen.class,
+            TestVerdantBlocks.class,
     };
 
     @SubscribeEvent

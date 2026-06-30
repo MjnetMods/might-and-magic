@@ -354,7 +354,7 @@ Book ID: `mam:verdant_path`
 ## Known Gaps / TODOs
 
 - [x] Loot tables — all blocks covered by datagen; stale hand-authored duplicates removed from `src/main/resources/data/mam/loot_table/blocks/`
-- [ ] Loot table tests — LT-1/2 (living rock drop with/without tool), LT-3 (mushroom dropSelf), LT-4 (livingwood dropSelf) not yet written
+- [x] Loot table tests — LT-1/2/3/4 written in `TestVerdantBlocks`; also fixed `TestWorldGen` missing from `MamGameTests` registration
 - [ ] Floral powder mechanic — item registered but `FloralPowderItem` logic not coded
 - [ ] BuriedPetalBlock random-tick growth — needs verification
 - [ ] Petal apothecary water/lava interaction not coded
