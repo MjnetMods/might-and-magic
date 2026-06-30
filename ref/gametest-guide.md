@@ -273,3 +273,54 @@ with flag `35` (`3 | UPDATE_SUPPRESS_DROPS`), which propagates `destroyBlock(UPP
 Log output: `run/gameTestServer/logs/debug.log`
 
 Result markers in log: `[++]` = pass, `[XX]` = fail, `[__]` = not yet run.
+
+---
+
+## 9. Timing races and flaky tests
+
+### BE-tick vs callback ordering
+
+Within a single server tick, block entity ticks and game test callbacks share the same thread but the
+execution order is not guaranteed. This creates a 1-tick race in any test that:
+
+1. samples a value in a callback
+2. immediately mutates the world
+3. then checks whether the value changed
+
+**Flaky pattern:**
+
+```java
+helper.runAfterDelay(5, () -> {
+    int valueBefore = be.getSomeState();   // snapshot
+    helper.setBlock(pos, newBlock);        // mutate
+
+    helper.runAfterDelay(15, () -> {
+        int valueAfter = be.getSomeState();
+        if (valueAfter > valueBefore) helper.fail(...); // races if BE ticks after setBlock in same tick
+    });
+});
+```
+
+If the BE ticks *after* the callback's `setBlock` in the same tick (before the world update fully
+propagates), `valueAfter` can be `valueBefore + 1` — an intermittent failure.
+
+**Robust pattern — sample baseline AFTER mutation, with a settle delay:**
+
+```java
+helper.runAfterDelay(5, () -> {
+    helper.setBlock(pos, newBlock);        // mutate first
+
+    helper.runAfterDelay(2, () -> {        // 2-tick settle: BE has re-evaluated the new world state
+        int snapshot = be.getSomeState();  // baseline is now in the post-mutation regime
+
+        helper.runAfterDelay(15, () -> {
+            int finalVal = be.getSomeState();
+            if (finalVal > snapshot) helper.fail(...);
+            helper.succeed();
+        });
+    });
+});
+```
+
+The 2-tick settle ensures the BE has ticked at least once with the new block in place before you
+record a baseline. Total budget: 5+2+15 = 22 ticks — well within a 60-tick timeout.
