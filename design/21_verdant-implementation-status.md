@@ -3,12 +3,14 @@ path: verdant
 type: impl
 status: wip
 last-updated: 2026-06-30
-links: "[[20_verdant-path]], [[22_verdant-test-plan]]"
+links: "[[20_verdant-path]], [[22_verdant-test-plan]], [[11_magic-implementation-status]]"
 ---
 
-# Implementation Status
+# Verdant Path — Implementation Status
 
-Quick-scan checklist for in-game verification. Legend:
+Verdant-specific content: flowers, petals, generating flowers, abilities, exposure. Magic infrastructure (living rock, livingwood, mana pool, apothecary, pure daisy) lives in [[11_magic-implementation-status]].
+
+Legend:
 - ✅ done & verified in-game
 - 🔨 code exists, not yet verified
 - ⬜ planned, not started
@@ -111,11 +113,12 @@ No block item. Invisible underground cross. Grows into matching short mystical f
 ---
 
 ### Floral Powder
+
 | Item | Registered | In Tab | Mechanic (scatters random flowers) |
 |---|:---:|:---:|:---:|
 | floral_powder | 🔨 | 🔨 | ⬜ |
 
-**Verify:** Right-click on ground (or throw?) → random mystical flowers appear in area.
+**Verify:** Right-click on ground → random mystical flowers appear in area.
 
 ---
 
@@ -128,34 +131,6 @@ All registered, cross model + Botania textures, light level 3.
 | *(15 others)* | 🔨 | 🔨 | ⬜ | ⬜ |
 
 **Verify:** Place in a dark cave. Should emit faint glow. Place on mycelium and on stone — both should survive.
-
----
-
-### Living Rock
-
-| Block | Registered | Model | Loot Table | Needs Tool |
-|---|:---:|:---:|:---:|:---:|
-| living_rock | 🔨 | 🔨 | 🔨 | ⬜ |
-| living_rock_polished | 🔨 | 🔨 | 🔨 | ⬜ |
-| living_rock_brick | 🔨 | 🔨 | 🔨 | ⬜ |
-| infused_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
-
-**Verify:** Break without a pickaxe → nothing drops. Break with pickaxe → drops self.
-
----
-
-### Special Flowers
-
-| Block | Registered | Model | Mechanic | Recipe |
-|---|:---:|:---:|:---:|:---:|
-| pure_daisy | 🔨 | 🔨 | 🔨 | ⬜ |
-
-**Verify Pure Daisy mechanic:** Place Pure Daisy. Surround with stone → each converts to `living_rock` after ~200 ticks. Surround with any log → converts to `livingwood_log`.
 
 ---
 
@@ -187,49 +162,6 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 
 ---
 
-### Mana System
-
-| Block | Registered | Model | Mechanic | Comparator |
-|---|:---:|:---:|:---:|:---:|
-| mana_pool | 🔨 | 🔨 | 🔨 | ⬜ |
-| infused_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
-| apothecary | 🔨 | 🔨 | ⬜ | — |
-| weavery | ⬜ | ⬜ | ⬜ | — |
-| infused_weavery | ⬜ | ⬜ | ⬜ | — |
-| sacred_weavery | ⬜ | ⬜ | ⬜ | — |
-| infused_apothecary | ⬜ | ⬜ | ⬜ | — |
-| sacred_apothecary | ⬜ | ⬜ | ⬜ | — |
-
-**Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
-
-**Verify Apothecary:** Place block. Right-click with a water bucket → should fill (not yet implemented).
-
----
-
-### Living Wood
-
-| Block | Registered | Model | In Tab | Loot Table |
-|---|:---:|:---:|:---:|:---:|
-| livingwood_log | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_log_stripped | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_log_glimmering | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_log_stripped_glimmering | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_stripped | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_planks | 🔨 | 🔨 | 🔨 | 🔨 |
-| livingwood_planks_mossy | 🔨 | 🔨 | 🔨 | 🔨 |
-| infused_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
-
-**Verify:** Log rotates on placement (axis x/y/z). Glimmering logs glow. **Not yet added:** stairs, slabs, fences, fence gates, wall.
-
----
-
 ## Items
 
 ### Verdant Path Guide
@@ -244,21 +176,9 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 
 | Mechanic | Implemented | Tested | Notes |
 |---|:---:|:---:|---|
-| Pure Daisy: stone → living_rock | 🔨 | ⬜ | ~200 ticks per block, checks 8 neighbors |
-| Pure Daisy: any log → livingwood_log | 🔨 | ⬜ | Tag-based BlockIngredient |
 | Short flower bonemeal → tall flower | 🔨 | ⬜ | `MysticalFlowerBlock.performBonemeal` |
 | Buried petal random-tick → short flower | 🔨 | ⬜ | `BuriedPetalBlock.randomTick` |
 | Floral powder scatter | ⬜ | ⬜ | `FloralPowderItem` — logic not yet coded |
-| Mana pool storage | 🔨 | ⬜ | MAX_MANA = 1,000,000 |
-| Mana network (pool/collector registry) | 🔨 | ⬜ | Per-dimension WeakHashMap |
-| GeneratingFlower → Pool mana push | 🔨 | ⬜ | `emptyManaIntoCollector()`, auto-binds ≤6 blocks |
-| Solarbud: sky+daylight → mana | 🔨 | ⬜ | `SolarbudBlockEntity.tickFlower()` |
-| Emberwort: fuel item → burn → mana | 🔨 | ⬜ | `EmberwortBlockEntity.tickFlower()`, radius 3 |
-| Dewpetal: rain/water → mana | 🔨 | ⬜ | `DewpetalBlockEntity.tickFlower()` |
-| Mana pool comparator output | ⬜ | ⬜ | Planned, not coded |
-| Petal apothecary water fill | ⬜ | ⬜ | |
-| Petal apothecary in-world crafting | ⬜ | ⬜ | Interaction hook exists, logic TODO |
-| Mana spreader / bursts | ⬜ | ⬜ | Out of scope |
 | Magic exposure counter | ⬜ | ⬜ | Player data attachment, future |
 | Verdant Path abilities (heal, regen) | ⬜ | ⬜ | Future |
 
@@ -266,30 +186,17 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 
 ## Recipes
 
-### Pure Daisy (mam:pure_daisy)
-
-| Input | Output | Data file | Verified |
-|---|---|:---:|:---:|
-| `minecraft:stone` | `mam:living_rock` | 🔨 | ⬜ |
-| `minecraft:logs` (tag) | `mam:livingwood_log` | 🔨 | ⬜ |
-
 ### Crafting Table (minecraft:crafting)
 
 | Recipe | Shape | Data file | Verified |
 |---|---|:---:|:---:|
 | Any mystical flower → 4 petals (×16) | shapeless | 🔨 | ⬜ |
-| 4 living_rock (2×2) → 4 living_rock_polished | shaped | 🔨 | ⬜ |
-| 4 living_rock_polished (2×2) → 4 living_rock_brick | shaped | 🔨 | ⬜ |
-| 8 living_rock (U-shape) → mana_pool | shaped | 🔨 | ⬜ |
-| 8× any stone (ring) → apothecary | shaped | ✅ | ⬜ |
-| livingwood_log → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
-| livingwood_log_stripped → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 
 ### Apothecary in-world (mam:apothecary)
 
 | Recipe | Status |
 |---|:---:|
-| *(none yet — petals + seed → item)* | ⬜ |
+| *(none yet — petals + seed → generating flower)* | ⬜ |
 
 ---
 
@@ -299,7 +206,6 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 |---|---|:---:|
 | `mam:mystical_flowers` | all 16 mam short flowers | 🔨 |
 | `mam:special_flowers` | pure_daisy | 🔨 |
-| `mam:living_rock` | living rock variants | 🔨 |
 | `botania:mystical_flowers` | adds mam flowers to Botania compat | 🔨 |
 | `minecraft:small_flowers` | adds mam flowers + pure_daisy | 🔨 |
 
@@ -314,23 +220,6 @@ Block entities extend `GeneratingFlowerBlockEntity`. Each auto-binds to the near
 | Patchouli 1.21.1-93-NEOFORGE | 🔨 | ⬜ |
 | Lodestone 1.8.2 | 🔨 | ⬜ |
 | Create *(planned)* | ⬜ | ⬜ |
-
----
-
-## Testing
-
-Uses NeoForge GameTest (in-world, not JUnit). Tests live in `infrastructure/gametest/`.
-
-| Test | Structure NBT | What it checks |
-|---|:---:|---|
-| `verdant_path/pure_daisy_converts_stone` | ⬜ | Stone → Living Rock conversion |
-| `verdant_path/mana_pool_empty_comparator` | ⬜ | Comparator output = 0 when pool empty |
-
-**To add a test:**
-1. Build the scenario in creative, run `/test export <name>` to get the NBT
-2. Copy NBT to `src/main/resources/data/mam/structures/gametest/verdant_path/`
-3. Add a `@GameTest(template = "mam:verdant_path/<name>")` method to `TestVerdantPath`
-4. Run with `./gradlew runGameTestServer` or `/test runall` in-game
 
 ---
 
@@ -353,17 +242,11 @@ Book ID: `mam:verdant_path`
 
 ## Known Gaps / TODOs
 
-- [x] Loot tables — all blocks covered by datagen; stale hand-authored duplicates removed from `src/main/resources/data/mam/loot_table/blocks/`
-- [x] Loot table tests — LT-1/2/3/4 written in `TestVerdantBlocks`; also fixed `TestWorldGen` missing from `MamGameTests` registration
 - [ ] Floral powder mechanic — item registered but `FloralPowderItem` logic not coded
 - [ ] BuriedPetalBlock random-tick growth — needs verification
-- [ ] Petal apothecary water/lava interaction not coded
-- [ ] Petal apothecary in-world recipes (petals + seed → item)
-- [ ] Mana pool comparator support not coded
 - [ ] World gen registered and WG-1/2/3 tests pass; natural biome placement not yet wired
-- [ ] Living wood: stairs/slabs/fences/walls not added
 - [ ] No sounds beyond vanilla defaults
 - [ ] No particle effects (Botania sparkles not ported)
-- [ ] GameTest structure NBT files need in-game creation
 - [ ] Patchouli entries for flowers/petals/powder/tall flowers
 - [ ] Verdant Path Guide crafting recipe (how does the player get the book?)
+- [ ] Generating flower apothecary recipes (petals + seed → flower item)

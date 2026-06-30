@@ -29,11 +29,11 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:tall_mystical_flower_*` | Tall Mystical Flowers (16 colors) | Drops 2 petals (lower half only) |
 | `mam:petal_white` … `_black` | Petals (16 colors) | Item; right-click ground → Buried Petal |
 | `mam:floral_powder` | Floral Powder | Thrown; scatters random mystical flowers |
-| `mam:living_rock` | Living Rock | Crafting material |
-| `mam:living_rock_polished` | Living Rock Polished | Crafting material |
-| `mam:living_rock_brick` | Living Rock Brick | Crafting material |
+| `mam:living_rock` / `_polished` / `_brick` | Living Rock variants | Crafting material |
+| `mam:living_rock_stairs` / `_slab` / `_wall` | Living Rock furniture (×3 variants) | Building block |
 | `mam:livingwood_log` | Livingwood Log | Crafting material |
 | `mam:livingwood_planks` | Livingwood Planks | Crafting material |
+| `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | Building block |
 | `mam:verdant_tome` | The Verdant Tome | Patchouli guidebook; Book ID `mam:verdant_tome` |
 
 ---
@@ -47,7 +47,9 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:buried_petal_*` | Buried Petals (16 colors, internal) | No |
 | `mam:pure_daisy` | Pure Daisy | Yes — `mam:pure_daisy` |
 | `mam:living_rock` / `_polished` / `_brick` | Living Rock variants | No |
+| `mam:living_rock_stairs` / `_slab` / `_wall` | Living Rock furniture (×3 variants, 9 blocks total) | No |
 | `mam:livingwood_log` | Livingwood Log | No |
+| `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | No |
 | `mam:mana_pool` | Mana Pool | Yes — `mam:mana_pool` |
 | `mam:petal_apothecary` | Petal Apothecary | Yes — `mam:petal_apothecary` |
 
@@ -71,12 +73,19 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 
 | Recipe ID | Type | Input | Output |
 |---|---|---|---|
-| `mam:petal_from_flower` | Shapeless | 1 mystical flower | 4 petals (matching color) |
+| `mam:<color>_mystical_flower_to_petals` (×16) | Shapeless | 1 mystical flower | 4 petals (matching color) |
 | `mam:living_rock_polished` | Shaped 2×2 | 4 living_rock | 4 living_rock_polished |
 | `mam:living_rock_brick` | Shaped 2×2 | 4 living_rock_polished | 4 living_rock_brick |
+| `mam:living_rock_stairs` / `_polished_stairs` / `_brick_stairs` | Shaped stair | 6 source block | 4 stairs |
+| `mam:living_rock_slab` / `_polished_slab` / `_brick_slab` | Shaped row | 3 source block | 6 slabs |
+| `mam:living_rock_wall` / `_polished_wall` / `_brick_wall` | Shaped 2 rows | 6 source block | 6 walls |
 | `mam:mana_pool` | Shaped U (3×3) | 8 living_rock_brick | 1 mana_pool |
 | `mam:petal_apothecary` | Shaped goblet | living_rock + polished | 1 petal_apothecary |
 | `mam:livingwood_planks` | Shapeless | 1 livingwood_log | 4 livingwood_planks |
+| `mam:livingwood_planks_stairs` | Shaped stair | 6 livingwood_planks | 4 stairs |
+| `mam:livingwood_planks_slab` | Shaped row | 3 livingwood_planks | 6 slabs |
+| `mam:livingwood_planks_fence` | Shaped 2×3 | planks + sticks | 3 fence |
+| `mam:livingwood_planks_fence_gate` | Shaped 2×3 | planks + sticks | 1 fence gate |
 
 ### Pure Daisy Conversions
 
