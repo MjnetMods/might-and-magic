@@ -187,36 +187,37 @@ Acceptance criteria:
 Out of scope: Infused/Sacred pools, Living Rock recipes, gear repair mechanic
 ```
 
-### WP-B — Tier 2/3 Pool Registration (unblocked; recipes blocked)
+### WP-B — Tier 2/3 Pool Registration (done; textures + infusion linkage pending)
 
 ```
 Role: Dev
 Design doc: design/magic/15_mana-pool.md § Pool Tiers
 File targets:
-  - src/main/java/org/mjli/mam/verdant/VerdantMana.java — register InfusedManaPool, SacredManaPool blocks
+  - src/main/java/org/mjli/mam/verdant/VerdantMana.java — register InfusedManaPool, SacredManaPool, DesecratedManaPool blocks
   - src/main/java/org/mjli/mam/MamBlockEntities.java — register block entity types for T2/T3
-  - src/main/java/org/mjli/mam/block_entity/mana/ — InfusedManaPoolBlockEntity, SacredManaPoolBlockEntity (subclass ManaPoolBlockEntity, override MAX_MANA)
+  - src/main/java/org/mjli/mam/block_entity/mana/ManaPoolBlockEntity.java — tiered via constructor (capacity, ManaEnergyType), not subclassing
   - src/main/resources/assets/mam/ — models and textures for T2/T3 pools
 Acceptance criteria:
-  - [ ] Infused Mana Pool and Sacred Mana Pool place and break without error
-  - [ ] Each has its own texture/model distinct from Tier 1
-  - [ ] MAX_MANA is 4,000,000 for T2 and 16,000,000 for T3
-  - [ ] Comparator output scales correctly for each tier's capacity
+  - [x] Infused/Sacred/Desecrated Mana Pool place and break without error
+  - [ ] Each has its own texture/model distinct from Tier 1 (placeholder: reuses Tier 1 art)
+  - [x] MAX_MANA is 4,000,000 for T2 and 16,000,000 for T3
+  - [x] Comparator output scales correctly for each tier's capacity
   - [ ] Infusion mechanic (from WP-A) works for T2 → Infused Ingot, T3 → Sacred Ingot
-Out of scope: crafting recipes for the pools themselves (blocked on Living Rock design)
+Out of scope: crafting recipes for the pools themselves (now covered by WP-C)
 ```
 
-### WP-C — Tier 1 Pool Recipe (unblocked)
+### WP-C — Pool Crafting Recipes (done)
 
 ```
 Role: Dev
 Design doc: design/magic/15_mana-pool.md § Pool Crafting Recipes
 File targets:
-  - src/main/resources/data/mam/recipes/ — mana_pool crafting recipe JSON
+  - src/main/java/org/mjli/mam/infrastructure/datagen/MamRecipeProvider.java — mana_pool, infused_mana_pool, sacred_mana_pool, desecrated_mana_pool recipes
 Acceptance criteria:
-  - [ ] Mana Pool is craftable in a crafting table from Living Rock (U shape, decided — see § Pool Crafting Recipes)
-  - [ ] Recipe appears in JEI/REI
-Out of scope: Infused/Sacred pool recipes
+  - [x] Mana Pool is craftable in a crafting table from Living Rock (U shape, 7× — see § Pool Crafting Recipes)
+  - [x] Infused/Sacred/Desecrated pools craftable from tier-matched Living Rock (same U shape, direct path)
+  - [ ] Recipe appears in JEI/REI (not yet verified in-game)
+Out of scope: bootstrap recipe (Rune + Pool item) — blocked on Altar/Runes
 ```
 
 ---
@@ -227,11 +228,14 @@ Out of scope: Infused/Sacred pool recipes
 |-----------------------------------|--------|
 | Tier 1 pool block + block entity  | ✅ implemented |
 | Tier 1 capacity (1M)              | ✅ implemented |
-| Tier 2/3 block registration       | ⬜ WP-B |
-| Desecrated Mana Pool block registration | ⬜ planned |
+| Tier 2/3 block registration       | ✅ implemented (WP-B) |
+| Desecrated Mana Pool block registration | ✅ implemented |
+| Tier 2/3 capacity (4M/16M) + energy type (Mana/Nox) | ✅ implemented |
+| Tier 1 pool crafting recipe       | ✅ implemented (WP-C, 7× Living Rock) |
+| Tier 2/3 pool crafting recipes    | ✅ implemented (direct path, tier-matched Living Rock) |
+| Desecrated Mana Pool crafting recipe | ✅ implemented |
+| Bootstrap pool recipe (Rune + Pool item) | ⬜ blocked — Altar/Runes |
+| Tiered pool textures/models        | ⬜ placeholder — reuse Tier 1 art |
 | Infusion mechanic                 | ⬜ WP-A |
 | Pool infusion recipes (data)      | ⬜ WP-A |
 | Desecrated infusion recipes (data) | ⬜ planned |
-| Tier 1 pool crafting recipe       | ⬜ WP-C (shape decided) |
-| Tier 2/3 pool crafting recipes    | ⬜ blocked — Living Rock design |
-| Desecrated Mana Pool crafting recipe | ⬜ blocked — Desecrated Living Rock needed |

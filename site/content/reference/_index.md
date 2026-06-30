@@ -32,8 +32,14 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:floral_powder` | Floral Powder | Thrown; scatters random mystical flowers |
 | `mam:living_rock` / `_polished` / `_brick` | Living Rock variants | Crafting material |
 | `mam:living_rock_stairs` / `_slab` / `_wall` | Living Rock furniture (×3 variants) | Building block |
+| `mam:infused_living_rock` / `_polished` / `_brick` | Infused Living Rock variants | Crafting material; Mana tier |
+| `mam:sacred_living_rock` / `_polished` / `_brick` | Sacred Living Rock variants | Crafting material; Mana tier |
+| `mam:desecrated_living_rock` / `_polished` / `_brick` | Desecrated Living Rock variants | Crafting material; Nox tier |
 | `mam:livingwood_log` | Livingwood Log | Crafting material |
 | `mam:livingwood_planks` | Livingwood Planks | Crafting material |
+| `mam:infused_livingwood_log` / `_planks` | Infused Livingwood variants | Crafting material; Mana tier |
+| `mam:sacred_livingwood_log` / `_planks` | Sacred Livingwood variants | Crafting material; Mana tier |
+| `mam:desecrated_livingwood_log` / `_planks` | Desecrated Livingwood variants | Crafting material; Nox tier |
 | `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | Building block |
 | `mam:guide` | Grimoire | Patchouli guidebook; Book ID `mam:guide` |
 
@@ -49,9 +55,18 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:pure_daisy` | Pure Daisy | Yes — `mam:pure_daisy` |
 | `mam:living_rock` / `_polished` / `_brick` | Living Rock variants | No |
 | `mam:living_rock_stairs` / `_slab` / `_wall` | Living Rock furniture (×3 variants, 9 blocks total) | No |
+| `mam:infused_living_rock` / `_polished` / `_brick` | Infused Living Rock variants | No |
+| `mam:sacred_living_rock` / `_polished` / `_brick` | Sacred Living Rock variants | No |
+| `mam:desecrated_living_rock` / `_polished` / `_brick` | Desecrated Living Rock variants | No |
 | `mam:livingwood_log` | Livingwood Log | No |
 | `mam:livingwood_planks_stairs` / `_slab` / `_fence` / `_fence_gate` | Livingwood Planks furniture | No |
-| `mam:mana_pool` | Mana Pool | Yes — `mam:mana_pool` |
+| `mam:infused_livingwood_log` / `_planks` | Infused Livingwood variants | No |
+| `mam:sacred_livingwood_log` / `_planks` | Sacred Livingwood variants | No |
+| `mam:desecrated_livingwood_log` / `_planks` | Desecrated Livingwood variants | No |
+| `mam:mana_pool` | Mana Pool (1M capacity, Mana) | Yes — `mam:mana_pool` |
+| `mam:infused_mana_pool` | Infused Mana Pool (4M capacity, Mana) | Yes — `mam:infused_mana_pool` |
+| `mam:sacred_mana_pool` | Sacred Mana Pool (16M capacity, Mana) | Yes — `mam:sacred_mana_pool` |
+| `mam:desecrated_mana_pool` | Desecrated Mana Pool (16M capacity, Nox) | Yes — `mam:desecrated_mana_pool` |
 | `mam:apothecary` | Apothecary | Yes — `mam:apothecary` |
 
 ---
@@ -85,7 +100,10 @@ This page reflects the **currently implemented** state of the mod. Items and rec
 | `mam:living_rock_stairs` / `_polished_stairs` / `_brick_stairs` | Shaped stair | 6 source block | 4 stairs |
 | `mam:living_rock_slab` / `_polished_slab` / `_brick_slab` | Shaped row | 3 source block | 6 slabs |
 | `mam:living_rock_wall` / `_polished_wall` / `_brick_wall` | Shaped 2 rows | 6 source block | 6 walls |
-| `mam:mana_pool` | Shaped U (3×3) | 8 living_rock_brick | 1 mana_pool |
+| `mam:mana_pool` | Shaped U (3×3) | 7 living_rock | 1 mana_pool |
+| `mam:infused_mana_pool` | Shaped U (3×3) | 7 infused_living_rock | 1 infused_mana_pool |
+| `mam:sacred_mana_pool` | Shaped U (3×3) | 7 sacred_living_rock | 1 sacred_mana_pool |
+| `mam:desecrated_mana_pool` | Shaped U (3×3) | 7 desecrated_living_rock | 1 desecrated_mana_pool |
 | `mam:apothecary` | Shaped goblet | 7 any rock (`c:stones`) + 1 petal or mushroom | 1 apothecary |
 | `mam:livingwood_planks` | Shapeless | 1 livingwood_log | 4 livingwood_planks |
 | `mam:livingwood_planks_stairs` | Shaped stair | 6 livingwood_planks | 4 stairs |

@@ -75,7 +75,7 @@ All three flowers buffer up to their max mana before pushing to the pool, and bi
 2. Craft: 1 flower → 4 petals (shapeless)
 3. Fill an **Apothecary** with water, throw petals + a seed → conjure a **Pure Daisy**
 4. Place Pure Daisy near stone → **Living Rock**; near logs → **Livingwood Log**
-5. Craft Living Rock into polished → bricks → **Mana Pool** (U-shape, 8 brick)
+5. Craft Living Rock directly into a **Mana Pool** (U-shape, 7 Living Rock)
 6. Craft generating flowers via Apothecary → place within 6 blocks of Mana Pool
 7. Use accumulated mana for healing and buff abilities
 
