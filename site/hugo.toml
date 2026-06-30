@@ -19,47 +19,54 @@ subtitle = "NeoForge 1.21.1"
 
 [menu]
 
-[[menu.main]]
-name = "Getting Started"
-url = "/getting-started/"
-weight = 10
-
-[[menu.main]]
-name = "Shared Craft"
-url = "/shared-craft/"
-weight = 15
-
+# Top nav — the four schools
 [[menu.main]]
 name = "Verdant Path"
 url = "/verdant-path/"
-weight = 20
+weight = 10
 
 [[menu.main]]
 name = "Summoning Path"
 url = "/summoning-path/"
-weight = 30
+weight = 20
 
 [[menu.main]]
 name = "Sanguine Path"
 url = "/sanguine-path/"
-weight = 40
+weight = 30
 
 [[menu.main]]
 name = "Rational Path"
 url = "/science-path/"
-weight = 50
+weight = 40
 
-[[menu.main]]
+# Sidebar — guides and shared content
+[[menu.subnavigation]]
+name = "Getting Started"
+url = "/getting-started/"
+weight = 10
+
+[[menu.subnavigation]]
+name = "First Steps"
+url = "/first-steps/"
+weight = 15
+
+[[menu.subnavigation]]
+name = "Crafting"
+url = "/crafting/"
+weight = 20
+
+[[menu.subnavigation]]
 name = "Rituals"
 url = "/rituals/"
-weight = 55
+weight = 30
 
-[[menu.main]]
+[[menu.subnavigation]]
 name = "Side Effects"
 url = "/side-effects/"
-weight = 60
+weight = 40
 
-[[menu.main]]
+[[menu.subnavigation]]
 name = "Credits"
 url = "/credits/"
 weight = 90

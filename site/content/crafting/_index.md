@@ -1,5 +1,5 @@
 ---
-title: "Shared Craft"
+title: "Crafting"
 date: 2026-06-30
 draft: false
 weight: 15
@@ -15,10 +15,10 @@ Fill it with a fluid. Throw ingredients in — they float above the surface. Dro
 
 The fluid determines which school's recipes are active:
 
-| Fluid | School |
-|-------|--------|
-| Water | Verdant — petals and seeds |
-| Lava | Summoning — mushrooms and contracts |
+| Fluid | School                                  |
+|-------|-----------------------------------------|
+| Water | Verdant — petals and seeds              |
+| Lava  | Summoning — mushrooms and contracts     |
 | Blood | Sanguine — sacrifice and transformation |
 
 One block. Every school. Swap the fluid, change the craft.
