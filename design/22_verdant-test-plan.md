@@ -121,7 +121,7 @@ Shared structure: `verdant_flowers/small_platform`. No pool placed — flowers b
 | ID | Test | What it verifies |
 |----|------|-----------------|
 | GF-1 | `solarbudGeneratesManaInDaylight` | Solarbud accumulates mana at time 6000 with open sky |
-| GF-2 | `solarbudNoManaAtNight` | Solarbud generates nothing at time 18000 (midnight) |
+| GF-2 | `solarbudNoManaWhenSkyBlocked` | Mana freezes for 15 ticks after stone is placed above the flower |
 | GF-3 | `emberwortBurnsCoalAndGeneratesMana` | Coal ItemEntity dropped at flower → mana > 0 after 40 ticks |
 | GF-4 | `emberwortIgnoresNonFuelItems` | Dirt ItemEntity dropped near flower → mana remains 0 |
 | GF-5 | `dewpetalGeneratesManaAdjacentToWater` | Water placed north of flower → mana > 0 after 20 ticks |

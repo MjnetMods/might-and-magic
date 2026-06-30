@@ -15,7 +15,7 @@ public class SolarbudBlockEntity extends GeneratingFlowerBlockEntity {
     public void tickFlower() {
         Level level = getLevel();
         if (level == null || level.isClientSide || isFull()) return;
-        if (level.isDay() && level.canSeeSky(worldPosition.above())) {
+        if (level.getDayTime() % 24000L < 12000L && level.canSeeSky(worldPosition)) {
             addMana(1);
         }
     }

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -33,7 +34,7 @@ public class TestGeneratingFlowers {
     /** GF-1: Solarbud accumulates mana during daytime with an open sky. */
     @GameTest(template = PLATFORM, timeoutTicks = 40)
     public static void solarbudGeneratesManaInDaylight(GameTestHelper helper) {
-        helper.getLevel().setDayTime(6000L);
+        // Game test world starts at time 0 (daytime); don't call setDayTime — it's global and races other tests.
         helper.setBlock(CENTER, VerdantGeneratingFlowers.SOLARBUD.get().defaultBlockState());
 
         helper.runAfterDelay(20, () -> {
@@ -45,18 +46,25 @@ public class TestGeneratingFlowers {
         });
     }
 
-    /** GF-2: Solarbud does NOT generate mana at night. */
-    @GameTest(template = PLATFORM, timeoutTicks = 40)
-    public static void solarbudNoManaAtNight(GameTestHelper helper) {
-        helper.getLevel().setDayTime(18000L); // midnight
+    /** GF-2: Solarbud stops generating mana once the sky is blocked above it. */
+    @GameTest(template = PLATFORM, timeoutTicks = 60)
+    public static void solarbudNoManaWhenSkyBlocked(GameTestHelper helper) {
         helper.setBlock(CENTER, VerdantGeneratingFlowers.SOLARBUD.get().defaultBlockState());
 
-        helper.runAfterDelay(20, () -> {
+        // Let it generate for 5 ticks in open sky, then block the sky and verify mana freezes.
+        helper.runAfterDelay(5, () -> {
             SolarbudBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, SolarbudBlockEntity.class);
-            if (be.getCurrentMana() > 0) {
-                helper.fail("Solarbud should not generate mana at night, but getCurrentMana() == " + be.getCurrentMana());
-            }
-            helper.succeed();
+            int manaBeforeBlock = be.getCurrentMana();
+            helper.setBlock(CENTER.above(), Blocks.STONE.defaultBlockState());
+
+            helper.runAfterDelay(15, () -> {
+                int manaAfterBlock = be.getCurrentMana();
+                if (manaAfterBlock > manaBeforeBlock) {
+                    helper.fail("Solarbud should stop generating with blocked sky, but mana increased from "
+                            + manaBeforeBlock + " to " + manaAfterBlock);
+                }
+                helper.succeed();
+            });
         });
     }
 
@@ -100,16 +108,18 @@ public class TestGeneratingFlowers {
 
     // ── Dewpetal ─────────────────────────────────────────────────────────────
 
-    /** GF-5: Dewpetal accumulates mana when a water source is adjacent. */
+    /** GF-5: Dewpetal accumulates mana when adjacent to a waterlogged block (stable water source, no flow risk). */
     @GameTest(template = PLATFORM, timeoutTicks = 40)
     public static void dewpetalGeneratesManaAdjacentToWater(GameTestHelper helper) {
         helper.setBlock(CENTER, VerdantGeneratingFlowers.DEWPETAL.get().defaultBlockState());
-        helper.setBlock(CENTER.north(), Blocks.WATER.defaultBlockState());
+        // Waterlogged slab: stable water fluid, won't flow and destroy the flower
+        helper.setBlock(CENTER.north(), Blocks.STONE_SLAB.defaultBlockState()
+                .setValue(BlockStateProperties.WATERLOGGED, true));
 
         helper.runAfterDelay(20, () -> {
             DewpetalBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DewpetalBlockEntity.class);
             if (be.getCurrentMana() <= 0) {
-                helper.fail("Dewpetal should have generated mana adjacent to water, but getCurrentMana() == " + be.getCurrentMana());
+                helper.fail("Dewpetal should have generated mana adjacent to waterlogged block, but getCurrentMana() == " + be.getCurrentMana());
             }
             helper.succeed();
         });

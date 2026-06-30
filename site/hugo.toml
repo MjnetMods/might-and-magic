@@ -43,3 +43,8 @@ weight = 40
 name = "The Rational Path"
 url = "/science-path/"
 weight = 50
+
+[[menu.main]]
+name = "Credits"
+url = "/credits/"
+weight = 90

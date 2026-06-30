@@ -25,7 +25,7 @@ public class DewpetalBlockEntity extends GeneratingFlowerBlockEntity {
 
     private boolean hasAdjacentWater(Level level) {
         for (Direction dir : Direction.Plane.HORIZONTAL) {
-            if (level.getBlockState(worldPosition.relative(dir)).getFluidState().is(FluidTags.WATER)) {
+            if (level.getFluidState(worldPosition.relative(dir)).is(FluidTags.WATER)) {
                 return true;
             }
         }
