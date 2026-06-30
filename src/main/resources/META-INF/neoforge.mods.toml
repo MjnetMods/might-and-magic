@@ -15,7 +15,7 @@ loaderVersion="${loader_version_range}" #mandatory
 license="${mod_license}"
 
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+issueTrackerURL="https://github.com/mjnetmods/might-and-magic/issues" #optional
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
@@ -33,20 +33,25 @@ displayName="${mod_name}" #mandatory
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="https://change.me.to.your.mods.homepage.example.invalid/" #optional
+displayURL="https://mjnetmods.github.io/might-and-magic/" #optional
 
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="examplemod.png" #optional
+logoFile="pack.png" #optional
 
 # A text field displayed in the mod UI
-#credits="" #optional
+credits="Inspired by Botania by Vazkii. Original mystical flower artwork by wiiv, used and upscaled under the Botania license. See /credits on the mod site for full attribution." #optional
 
 # The authors of the mod, displayed in the mod UI (optional)
-#authors=""
+authors="Manfred Nilsson"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Example mod description.
+Might & Magic adds two parallel paths of progression to Minecraft: a magic side
+rooted in nature and divine energy, and a technology side built on machines and
+automation. The paths are not neutral — they are forces, and forces resist
+dilution. Choose your allegiance, or face the cost of straddling both.
+
+Inspired by Botania by Vazkii.
 '''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.

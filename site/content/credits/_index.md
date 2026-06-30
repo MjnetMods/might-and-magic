@@ -32,4 +32,14 @@ This page will grow as more paths are implemented and more inspiration is credit
 
 ---
 
+## Compatibility & Modpacks
+
+Might & Magic is designed first as a standalone experience. The balance between paths — and between magic and technology — is tuned around a world where this mod is the primary source of those systems. Playing it that way gives the cleanest experience.
+
+That said, the mod is intended to play reasonably well in modpacks alongside other mods. We make an effort to tag blocks and items correctly, respect common conventions, and avoid stepping on other mods' toes where we can. If something breaks, conflicts, or behaves unexpectedly with another mod, that's worth fixing.
+
+**Suggestions, bug reports, and compatibility improvements are welcome.** If you find a conflict, an untagged block, a recipe that shouldn't exist, or anything that makes Might & Magic harder to use in a pack — [open an issue](https://github.com/mjnetmods/might-and-magic/issues). Same goes for ideas on how to improve compat with specific mods.
+
+---
+
 *Might & Magic is open source. See [GitHub](https://github.com/mjnetmods/might-and-magic) for source, license, and contribution guidelines.*

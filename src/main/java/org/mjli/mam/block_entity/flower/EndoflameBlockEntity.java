@@ -11,14 +11,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.mjli.mam.MamBlockEntities;
 
-public class EmberwortBlockEntity extends GeneratingFlowerBlockEntity {
+public class EndoflameBlockEntity extends GeneratingFlowerBlockEntity {
     private static final int RANGE = 3;
     private static final int FUEL_CAP = 32000;
 
     private int burnTime;
 
-    public EmberwortBlockEntity(BlockPos pos, BlockState state) {
-        super(MamBlockEntities.EMBERWORT.get(), pos, state);
+    public EndoflameBlockEntity(BlockPos pos, BlockState state) {
+        super(MamBlockEntities.ENDOFLAME.get(), pos, state);
     }
 
     @Override

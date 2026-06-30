@@ -7,10 +7,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
 
-public class DewpetalBlockEntity extends GeneratingFlowerBlockEntity {
+public class HydroangeasBlockEntity extends GeneratingFlowerBlockEntity {
 
-    public DewpetalBlockEntity(BlockPos pos, BlockState state) {
-        super(MamBlockEntities.DEWPETAL.get(), pos, state);
+    public HydroangeasBlockEntity(BlockPos pos, BlockState state) {
+        super(MamBlockEntities.HYDROANGEAS.get(), pos, state);
     }
 
     @Override

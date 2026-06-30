@@ -10,14 +10,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
-import org.mjli.mam.block_entity.flower.SolarbudBlockEntity;
+import org.mjli.mam.block_entity.flower.DaybloomBlockEntity;
 
 import javax.annotation.Nullable;
 
-public class SolarbudBlock extends GeneratingFlowerBlock {
-    public static final MapCodec<SolarbudBlock> CODEC = simpleCodec(SolarbudBlock::new);
+public class DaybloomBlock extends GeneratingFlowerBlock {
+    public static final MapCodec<DaybloomBlock> CODEC = simpleCodec(DaybloomBlock::new);
 
-    public SolarbudBlock(BlockBehaviour.Properties properties) {
+    public DaybloomBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
@@ -28,13 +28,13 @@ public class SolarbudBlock extends GeneratingFlowerBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SolarbudBlockEntity(pos, state);
+        return new DaybloomBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null
-                : createTickerHelper(type, MamBlockEntities.SOLARBUD.get(), (l, p, s, be) -> be.serverTick());
+                : createTickerHelper(type, MamBlockEntities.DAYBLOOM.get(), (l, p, s, be) -> be.serverTick());
     }
 }

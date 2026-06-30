@@ -27,9 +27,6 @@ run/
 # Datagen output — run ./gradlew runData to regenerate
 src/generated/
 
-# Texture working files — upscaled starting points, not shipped assets
-src/main/resources/assets/mam/textures/block/v2/
-
 # OS
 .DS_Store
 Thumbs.db

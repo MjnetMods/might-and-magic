@@ -1,0 +1,16 @@
+{
+  "name": "patchouli.mam.verdant_path.entry.daybloom",
+  "category": "mam:mana",
+  "icon": "mam:daybloom",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.daybloom.0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "patchouli.mam.verdant_path.page.daybloom.1"
+    }
+  ]
+}

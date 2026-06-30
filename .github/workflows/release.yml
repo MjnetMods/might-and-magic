@@ -36,6 +36,14 @@ jobs:
         env:
           OUTPUT: RELEASE_NOTES.md
 
+      - name: Export changelog
+        run: |
+          {
+            echo 'CHANGELOG<<CLIFF_EOF'
+            cat RELEASE_NOTES.md
+            echo 'CLIFF_EOF'
+          } >> "$GITHUB_ENV"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -44,3 +52,8 @@ jobs:
             build/libs/*.jar
             !build/libs/*-sources.jar
           fail_on_unmatched_files: true
+
+      - name: Publish to Modrinth
+        run: ./gradlew publishMods
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}

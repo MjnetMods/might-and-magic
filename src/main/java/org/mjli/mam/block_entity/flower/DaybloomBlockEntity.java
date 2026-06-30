@@ -5,10 +5,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
 
-public class SolarbudBlockEntity extends GeneratingFlowerBlockEntity {
+public class DaybloomBlockEntity extends GeneratingFlowerBlockEntity {
 
-    public SolarbudBlockEntity(BlockPos pos, BlockState state) {
-        super(MamBlockEntities.SOLARBUD.get(), pos, state);
+    public DaybloomBlockEntity(BlockPos pos, BlockState state) {
+        super(MamBlockEntities.DAYBLOOM.get(), pos, state);
     }
 
     @Override

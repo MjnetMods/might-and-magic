@@ -10,14 +10,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
-import org.mjli.mam.block_entity.flower.EmberwortBlockEntity;
+import org.mjli.mam.block_entity.flower.HydroangeasBlockEntity;
 
 import javax.annotation.Nullable;
 
-public class EmberwortBlock extends GeneratingFlowerBlock {
-    public static final MapCodec<EmberwortBlock> CODEC = simpleCodec(EmberwortBlock::new);
+public class HydroangeasBlock extends GeneratingFlowerBlock {
+    public static final MapCodec<HydroangeasBlock> CODEC = simpleCodec(HydroangeasBlock::new);
 
-    public EmberwortBlock(BlockBehaviour.Properties properties) {
+    public HydroangeasBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
@@ -28,13 +28,13 @@ public class EmberwortBlock extends GeneratingFlowerBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new EmberwortBlockEntity(pos, state);
+        return new HydroangeasBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null
-                : createTickerHelper(type, MamBlockEntities.EMBERWORT.get(), (l, p, s, be) -> be.serverTick());
+                : createTickerHelper(type, MamBlockEntities.HYDROANGEAS.get(), (l, p, s, be) -> be.serverTick());
     }
 }

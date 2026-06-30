@@ -4,8 +4,7 @@
   palette: [
     "minecraft:air",
     "minecraft:dirt",
-    "mam:dewpetal",
-    "minecraft:water",
+    "mam:daybloom",
     "mam:mana_pool"
   ],
   data: [
@@ -14,8 +13,7 @@
     {pos: [0,0,2], state: "minecraft:dirt"}, {pos: [1,0,2], state: "minecraft:dirt"}, {pos: [2,0,2], state: "minecraft:dirt"}, {pos: [3,0,2], state: "minecraft:dirt"}, {pos: [4,0,2], state: "minecraft:dirt"},
     {pos: [0,0,3], state: "minecraft:dirt"}, {pos: [1,0,3], state: "minecraft:dirt"}, {pos: [2,0,3], state: "minecraft:dirt"}, {pos: [3,0,3], state: "minecraft:dirt"}, {pos: [4,0,3], state: "minecraft:dirt"},
     {pos: [0,0,4], state: "minecraft:dirt"}, {pos: [1,0,4], state: "minecraft:dirt"}, {pos: [2,0,4], state: "minecraft:dirt"}, {pos: [3,0,4], state: "minecraft:dirt"}, {pos: [4,0,4], state: "minecraft:dirt"},
-    {pos: [2,1,2], state: "mam:dewpetal"},
-    {pos: [1,1,2], state: "minecraft:water"},
+    {pos: [2,1,2], state: "mam:daybloom"},
     {pos: [4,1,2], state: "mam:mana_pool"}
   ],
   entities: []

@@ -23,14 +23,14 @@ public class MamPonderScenes {
             .addStoryBoard("pure_daisy/converts_stone", MamPonderScenes::pureDaisyStone)
             .addStoryBoard("pure_daisy/converts_log",   MamPonderScenes::pureDaisyLog);
 
-        H.forComponents(VerdantGeneratingFlowers.SOLARBUD)
-            .addStoryBoard("solarbud/sunlight", MamPonderScenes::solarbudSunlight);
+        H.forComponents(VerdantGeneratingFlowers.DAYBLOOM)
+            .addStoryBoard("daybloom/sunlight", MamPonderScenes::daybloomSunlight);
 
-        H.forComponents(VerdantGeneratingFlowers.EMBERWORT)
-            .addStoryBoard("emberwort/burning_fuel", MamPonderScenes::emberwortBurningFuel);
+        H.forComponents(VerdantGeneratingFlowers.ENDOFLAME)
+            .addStoryBoard("endoflame/burning_fuel", MamPonderScenes::endoflameBurningFuel);
 
-        H.forComponents(VerdantGeneratingFlowers.DEWPETAL)
-            .addStoryBoard("dewpetal/rain_and_water", MamPonderScenes::dewpetalRainAndWater);
+        H.forComponents(VerdantGeneratingFlowers.HYDROANGEAS)
+            .addStoryBoard("hydroangeas/rain_and_water", MamPonderScenes::hydroangeasRainAndWater);
     }
 
     public static void pureDaisyStone(SceneBuilder scene, SceneBuildingUtil util) {
@@ -103,8 +103,8 @@ public class MamPonderScenes {
         scene.idle(80);
     }
 
-    public static void solarbudSunlight(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("solarbud.sunlight", "Absorbing Sunlight");
+    public static void daybloomSunlight(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("daybloom.sunlight", "Absorbing Sunlight");
         scene.configureBasePlate(0, 0, 5);
 
         scene.showBasePlate();
@@ -114,7 +114,7 @@ public class MamPonderScenes {
         scene.idle(15);
 
         scene.overlay().showText(60)
-            .text("The Solarbud passively absorbs sunlight during the day, as long as it can see the sky…")
+            .text("The Daybloom passively absorbs sunlight during the day, as long as it can see the sky…")
             .pointAt(util.vector().topOf(2, 1, 2))
             .attachKeyFrame();
         scene.idle(30);
@@ -129,8 +129,8 @@ public class MamPonderScenes {
         scene.idle(80);
     }
 
-    public static void emberwortBurningFuel(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("emberwort.burning_fuel", "Burning Fuel");
+    public static void endoflameBurningFuel(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("endoflame.burning_fuel", "Burning Fuel");
         scene.configureBasePlate(0, 0, 5);
 
         scene.showBasePlate();
@@ -140,7 +140,7 @@ public class MamPonderScenes {
         scene.idle(15);
 
         scene.overlay().showText(60)
-            .text("Drop any furnace fuel within 3 blocks of the Emberwort…")
+            .text("Drop any furnace fuel within 3 blocks of the Endoflame…")
             .pointAt(util.vector().topOf(2, 1, 2))
             .attachKeyFrame();
         scene.idle(30);
@@ -155,8 +155,8 @@ public class MamPonderScenes {
         scene.idle(80);
     }
 
-    public static void dewpetalRainAndWater(SceneBuilder scene, SceneBuildingUtil util) {
-        scene.title("dewpetal.rain_and_water", "Rain and Water");
+    public static void hydroangeasRainAndWater(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("hydroangeas.rain_and_water", "Rain and Water");
         scene.configureBasePlate(0, 0, 5);
 
         scene.showBasePlate();
@@ -166,7 +166,7 @@ public class MamPonderScenes {
         scene.idle(15);
 
         scene.overlay().showText(60)
-            .text("The Dewpetal generates mana in the rain — or when placed adjacent to a water source.")
+            .text("The Hydroangeas generates mana in the rain — or when placed adjacent to a water source.")
             .pointAt(util.vector().topOf(2, 1, 2))
             .attachKeyFrame();
         scene.idle(30);

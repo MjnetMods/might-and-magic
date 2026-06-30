@@ -134,7 +134,7 @@ MAM treats its flowers as the **same flowers** as Botania — shared furniture i
 |------|--------|
 | `mystical_flowers.json` | All 16 `mam:<color>_mystical_flower` blocks |
 | `double_mystical_flowers.json` | All 16 `mam:<color>_tall_mystical_flower` blocks |
-| `generating_special_flowers.json` | `mam:solarbud`, `mam:emberwort`, `mam:dewpetal` — add new generating flowers here |
+| `generating_special_flowers.json` | `mam:daybloom`, `mam:endoflame`, `mam:hydroangeas` — add new generating flowers here |
 
 Add entries to the relevant file whenever a new flower block is registered. Do not add functional flowers (no mana generation) to `generating_special_flowers`.
 

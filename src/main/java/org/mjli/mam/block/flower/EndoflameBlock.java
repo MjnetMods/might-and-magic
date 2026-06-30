@@ -10,14 +10,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
-import org.mjli.mam.block_entity.flower.DewpetalBlockEntity;
+import org.mjli.mam.block_entity.flower.EndoflameBlockEntity;
 
 import javax.annotation.Nullable;
 
-public class DewpetalBlock extends GeneratingFlowerBlock {
-    public static final MapCodec<DewpetalBlock> CODEC = simpleCodec(DewpetalBlock::new);
+public class EndoflameBlock extends GeneratingFlowerBlock {
+    public static final MapCodec<EndoflameBlock> CODEC = simpleCodec(EndoflameBlock::new);
 
-    public DewpetalBlock(BlockBehaviour.Properties properties) {
+    public EndoflameBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
@@ -28,13 +28,13 @@ public class DewpetalBlock extends GeneratingFlowerBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new DewpetalBlockEntity(pos, state);
+        return new EndoflameBlockEntity(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide ? null
-                : createTickerHelper(type, MamBlockEntities.DEWPETAL.get(), (l, p, s, be) -> be.serverTick());
+                : createTickerHelper(type, MamBlockEntities.ENDOFLAME.get(), (l, p, s, be) -> be.serverTick());
     }
 }

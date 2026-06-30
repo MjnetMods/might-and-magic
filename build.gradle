@@ -2,6 +2,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '7.1.38'
+    id 'me.modmuss50.mod-publish-plugin' version '0.7.4'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -239,6 +240,20 @@ publishing {
         maven {
             url "file://${project.projectDir}/repo"
         }
+    }
+}
+
+publishMods {
+    file = tasks.jar.archiveFile
+    version = mod_version
+    changelog = providers.environmentVariable("CHANGELOG").orElse("See release notes.")
+    type = STABLE
+
+    modrinth {
+        projectId = "hjcHRg1d"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.add("1.21.1")
+        modLoaders.add("neoforge")
     }
 }
 
