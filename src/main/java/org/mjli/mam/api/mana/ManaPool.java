@@ -8,4 +8,5 @@ public interface ManaPool extends ManaReceiver {
     Optional<DyeColor> getColor();
     void setColor(Optional<DyeColor> color);
     ManaEnergyType getEnergyType();
+    void receiveMana(int amount, ManaEnergyType incomingType);
 }

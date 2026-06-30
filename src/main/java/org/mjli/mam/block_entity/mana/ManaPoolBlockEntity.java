@@ -22,16 +22,18 @@ public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
     public static final int MAX_CAPACITY_TIER_3 = 16_000_000;
 
     private final int maxMana;
+    private final boolean aligned;
     private ManaEnergyType energyType;
     private int mana;
     private boolean outputting;
     private Optional<DyeColor> color = Optional.empty();
     private boolean addedToNetwork;
 
-    public ManaPoolBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int maxMana, ManaEnergyType energyType) {
+    public ManaPoolBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int maxMana, ManaEnergyType energyType, boolean aligned) {
         super(type, pos, state);
         this.maxMana = maxMana;
         this.energyType = energyType;
+        this.aligned = aligned;
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ManaPoolBlockEntity self) {
@@ -59,11 +61,24 @@ public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
     @Override public void setColor(Optional<DyeColor> color) { this.color = color; setChanged(); }
     @Override public ManaEnergyType getEnergyType() { return energyType; }
 
+    @Override
+    public void receiveMana(int amount, ManaEnergyType incomingType) {
+        if (incomingType == energyType) {
+            mana = Math.max(0, Math.min(mana + amount, maxMana));
+        } else if (aligned) {
+            mana -= Math.min(mana, amount);
+        } else {
+            energyType = incomingType;
+            mana = Math.max(0, Math.min(mana + amount, maxMana));
+        }
+        setChanged();
+    }
+
     // ManaReceiver
     @Override public int getCurrentMana() { return mana; }
     @Override public int getMaxMana() { return maxMana; }
     @Override public boolean isFull() { return mana >= maxMana; }
-    @Override public void receiveMana(int amount) { mana = Math.max(0, Math.min(mana + amount, maxMana)); setChanged(); }
+    @Override public void receiveMana(int amount) { receiveMana(amount, energyType); }
     @Override public boolean canReceiveManaFromBursts() { return true; }
 
     @Override

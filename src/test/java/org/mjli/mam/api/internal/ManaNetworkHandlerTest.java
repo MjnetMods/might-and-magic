@@ -20,6 +20,7 @@ class ManaNetworkHandlerTest {
             @Override public int getMaxMana() { return 1_000_000; }
             @Override public boolean isFull() { return false; }
             @Override public void receiveMana(int m) {}
+            @Override public void receiveMana(int m, ManaEnergyType t) {}
             @Override public boolean canReceiveManaFromBursts() { return true; }
             @Override public boolean isOutputtingPower() { return false; }
             @Override public Optional<DyeColor> getColor() { return Optional.empty(); }

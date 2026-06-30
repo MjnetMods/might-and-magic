@@ -104,4 +104,68 @@ public class TestManaPool {
         }
         helper.succeed();
     }
+
+    /** MP-6: Nox entering a Mana Pool (T1) taints all stored Mana to Nox at 1:1, instant. */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void manaPoolTaintsToNoxOnContact(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveMana(500, ManaEnergyType.MANA);
+            be.receiveMana(500, ManaEnergyType.NOX);
+            if (be.getCurrentMana() != 1000 || be.getEnergyType() != ManaEnergyType.NOX) {
+                helper.fail("Expected 1000 Nox after taint, got " + be.getCurrentMana() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
+
+    /** MP-7: Nox entering an Infused Mana Pool (T2) taints all stored Mana to Nox at 1:1, instant. */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void infusedManaPoolTaintsToNoxOnContact(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.INFUSED_MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveMana(500, ManaEnergyType.MANA);
+            be.receiveMana(500, ManaEnergyType.NOX);
+            if (be.getCurrentMana() != 1000 || be.getEnergyType() != ManaEnergyType.NOX) {
+                helper.fail("Expected 1000 Nox after taint, got " + be.getCurrentMana() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
+
+    /** MP-8: Nox entering a Sacred Mana Pool (T3, aligned) is rejected — equal Mana is destroyed, no Nox stored. */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void sacredManaPoolRejectsNox(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.SACRED_MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveMana(500, ManaEnergyType.MANA);
+            be.receiveMana(500, ManaEnergyType.NOX);
+            if (be.getCurrentMana() != 0 || be.getEnergyType() != ManaEnergyType.MANA) {
+                helper.fail("Expected 0 Mana after rejection, got " + be.getCurrentMana() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
+
+    /** MP-9: Mana entering a Desecrated Mana Pool (T3, aligned) is rejected — equal Nox is destroyed, no Mana stored. */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void desecratedManaPoolRejectsMana(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.DESECRATED_MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveMana(500, ManaEnergyType.NOX);
+            be.receiveMana(500, ManaEnergyType.MANA);
+            if (be.getCurrentMana() != 0 || be.getEnergyType() != ManaEnergyType.NOX) {
+                helper.fail("Expected 0 Nox after rejection, got " + be.getCurrentMana() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
 }
