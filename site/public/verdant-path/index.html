@@ -226,7 +226,7 @@ Power level: intentionally basic and supportive, not aggressive">
     
     
     "mainEntityOfPage": "true",
-    "wordCount": "636"
+    "wordCount": "787"
   }]
   </script>
 
@@ -386,6 +386,24 @@ Power level: intentionally basic and supportive, not aggressive">
       
         <span class="text-base font-medium break-normal">
           The Rational Path
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="http://localhost:1313/credits/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Credits"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Credits
         </span>
       
     </a>
@@ -569,6 +587,23 @@ Power level: intentionally basic and supportive, not aggressive">
       
     </div>
   
+    
+    <div class="px-2">
+      <a
+        href="http://localhost:1313/credits/"
+        aria-label="Credits"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Credits
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
 
         
   
@@ -715,6 +750,18 @@ Power level: intentionally basic and supportive, not aggressive">
           <td>Converts adjacent blocks (stone → living rock, any log → livingwood log)</td>
       </tr>
       <tr>
+          <td><strong>Solarbud</strong></td>
+          <td>Generating flower — absorbs sunlight during daytime; requires open sky</td>
+      </tr>
+      <tr>
+          <td><strong>Emberwort</strong></td>
+          <td>Generating flower — burns furnace fuel dropped nearby</td>
+      </tr>
+      <tr>
+          <td><strong>Dewpetal</strong></td>
+          <td>Generating flower — draws from rain or an adjacent water source</td>
+      </tr>
+      <tr>
           <td><strong>Living Rock</strong></td>
           <td>Crafting material; plain, polished, and brick variants</td>
       </tr>
@@ -736,6 +783,49 @@ Power level: intentionally basic and supportive, not aggressive">
       </tr>
   </tbody>
 </table>
+<hr>
+
+<h2 class="relative group">Generating Flowers
+    <div id="generating-flowers" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#generating-flowers" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Generating flowers are special flowers that produce mana and push it into a nearby Mana Pool (within 6 blocks). Place one near a pool to start filling it.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Flower</th>
+          <th>Source</th>
+          <th>Rate</th>
+          <th>Notes</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Solarbud</strong></td>
+          <td>Sunlight</td>
+          <td>1 mana/tick while active</td>
+          <td>Requires clear sky and daytime; stops at night or underground</td>
+      </tr>
+      <tr>
+          <td><strong>Emberwort</strong></td>
+          <td>Furnace fuel dropped nearby</td>
+          <td>3 mana/2 ticks while burning</td>
+          <td>Scans within 3 blocks; consumes one item at a time</td>
+      </tr>
+      <tr>
+          <td><strong>Dewpetal</strong></td>
+          <td>Rain or adjacent water</td>
+          <td>1 mana/2 ticks while active</td>
+          <td>A single water source block adjacent is enough for constant generation</td>
+      </tr>
+  </tbody>
+</table>
+<p>All three flowers buffer up to their max mana before pushing to the pool, and bind automatically to the closest pool within 6 blocks on first tick.</p>
 <hr>
 
 <h2 class="relative group">Crafting Progression
