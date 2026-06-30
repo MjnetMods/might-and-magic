@@ -24,6 +24,15 @@ jobs:
       - name: Build
         run: ./gradlew build
 
+      - name: Run data generators
+        run: ./gradlew runData
+
+      - name: Run unit tests
+        run: ./gradlew test
+
+      - name: Run game tests
+        run: ./gradlew runGameTestServer
+
       - name: Upload JAR
         uses: actions/upload-artifact@v4
         with:
