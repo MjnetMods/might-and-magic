@@ -7,4 +7,5 @@ public interface ManaPool extends ManaReceiver {
     boolean isOutputtingPower();
     Optional<DyeColor> getColor();
     void setColor(Optional<DyeColor> color);
+    ManaEnergyType getEnergyType();
 }

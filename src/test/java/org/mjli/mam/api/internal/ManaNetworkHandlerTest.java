@@ -3,6 +3,7 @@ package org.mjli.mam.api.internal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.DyeColor;
 import org.junit.jupiter.api.Test;
+import org.mjli.mam.api.mana.ManaEnergyType;
 import org.mjli.mam.api.mana.ManaPool;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ class ManaNetworkHandlerTest {
             @Override public boolean isOutputtingPower() { return false; }
             @Override public Optional<DyeColor> getColor() { return Optional.empty(); }
             @Override public void setColor(Optional<DyeColor> c) {}
+            @Override public ManaEnergyType getEnergyType() { return ManaEnergyType.MANA; }
         };
     }
 

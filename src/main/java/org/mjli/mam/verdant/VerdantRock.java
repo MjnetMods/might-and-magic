@@ -164,6 +164,82 @@ public class VerdantRock {
          .item().model((ctx, p) -> p.blockWithInventoryModel(ctx::getEntry)).build()
          .register();
 
+    // ── Infused / Sacred tiers (placeholder: reuse tier-1 textures, no art yet) ──
+
+    public static final BlockEntry<Block> INFUSED_LIVING_ROCK =
+        R.block("infused_living_rock", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> INFUSED_LIVING_ROCK_POLISHED =
+        R.block("infused_living_rock_polished", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> INFUSED_LIVING_ROCK_BRICK =
+        R.block("infused_living_rock_brick", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> SACRED_LIVING_ROCK =
+        R.block("sacred_living_rock", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> SACRED_LIVING_ROCK_POLISHED =
+        R.block("sacred_living_rock_polished", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> SACRED_LIVING_ROCK_BRICK =
+        R.block("sacred_living_rock_brick", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    // ── Desecrated tier (Nox/Dark branch, placeholder: reuse tier-1 textures, no art yet) ──
+
+    public static final BlockEntry<Block> DESECRATED_LIVING_ROCK =
+        R.block("desecrated_living_rock", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> DESECRATED_LIVING_ROCK_POLISHED =
+        R.block("desecrated_living_rock_polished", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> DESECRATED_LIVING_ROCK_BRICK =
+        R.block("desecrated_living_rock_brick", Block::new)
+         .properties(p -> MamBlockProperties.livingRock())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
     public static void appendToTab(CreativeModeTabModifier modifier) {
         var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
         modifier.accept(LIVING_ROCK.asStack(), tab);
@@ -178,6 +254,15 @@ public class VerdantRock {
         modifier.accept(LIVING_ROCK_BRICK_STAIRS.asStack(), tab);
         modifier.accept(LIVING_ROCK_BRICK_SLAB.asStack(), tab);
         modifier.accept(LIVING_ROCK_BRICK_WALL.asStack(), tab);
+        modifier.accept(INFUSED_LIVING_ROCK.asStack(), tab);
+        modifier.accept(INFUSED_LIVING_ROCK_POLISHED.asStack(), tab);
+        modifier.accept(INFUSED_LIVING_ROCK_BRICK.asStack(), tab);
+        modifier.accept(SACRED_LIVING_ROCK.asStack(), tab);
+        modifier.accept(SACRED_LIVING_ROCK_POLISHED.asStack(), tab);
+        modifier.accept(SACRED_LIVING_ROCK_BRICK.asStack(), tab);
+        modifier.accept(DESECRATED_LIVING_ROCK.asStack(), tab);
+        modifier.accept(DESECRATED_LIVING_ROCK_POLISHED.asStack(), tab);
+        modifier.accept(DESECRATED_LIVING_ROCK_BRICK.asStack(), tab);
     }
 
     public static void init() {}

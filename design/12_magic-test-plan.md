@@ -37,7 +37,7 @@ Tests for shared magic infrastructure: Pure Daisy, Living Rock/Wood, Mana Pool, 
 
 Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload trigger in GameTest).
 
-### Unit tests — `ManaPoolTest` (12 tests)
+### Unit tests — `ManaPoolTest` (15 tests)
 
 | Test | What it verifies |
 |------|-----------------|
@@ -53,6 +53,9 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | `nbt_manaAndOutputting_roundtrip` | mana + outputting survive CompoundTag round-trip |
 | `nbt_color_presentRoundtrip` | DyeColor present → survives round-trip |
 | `nbt_color_absentRoundtrip` | Color absent → loads as Optional.empty() |
+| `nbt_energyType_roundtripsNox` | NOX written → reads back as NOX |
+| `nbt_energyType_roundtripsMana` | MANA written → reads back as MANA |
+| `nbt_energyType_absentKeepsConstructorDefault` | energyType key absent → keeps the value set at construction (no silent reset) |
 
 ### Unit tests — `ManaNetworkHandlerTest` (4 tests)
 
@@ -63,13 +66,15 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | `queryClosest_prefersNearer_whenMultiplePools` | Two in-range pools → closer wins |
 | `queryClosest_excludesFarPool_whenOnlyNearIsInRadius` | One in, one out → only near returned |
 
-### `TestManaPool` (3 GameTests)
+### `TestManaPool` (5 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
 | MP-1 | `manaPoolComparatorSignalInGame` | `getAnalogOutputSignal` returns 7 at 500k mana in-game |
 | MP-2 | `manaPoolRegistersOnPlace` | Pool BE is in ManaNetworkHandler set after first server tick |
 | MP-3 | `manaPoolDeregistersOnRemove` | Removing pool block removes it from ManaNetworkHandler synchronously |
+| MP-4 | `poolTierCapacityIsCorrect` | mana_pool/infused/sacred/desecrated report max capacity 1M/4M/16M/16M |
+| MP-5 | `poolTierEnergyTypeIsCorrect` | mana_pool/infused/sacred report MANA; desecrated reports NOX |
 
 ### `TestApothecary` (2 GameTests)
 
@@ -78,7 +83,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | PA-1 | `apothecaryInteractEmptyHandPasses` | `interact()` with empty hand → `PASS` |
 | PA-2 | `apothecaryNbtRoundtrip` | `FluidState` + petal list survive `saveCustomOnly`/`loadCustomOnly` |
 
-### `TestVerdantBlocks` — loot tables & harvest (4 GameTests)
+### `TestVerdantBlocks` — loot tables & harvest (6 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
@@ -86,8 +91,10 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | LT-2 | `livingRockRequiresPickaxe` | `requiresCorrectToolForDrops()` — bare hand → false, wooden pickaxe → true |
 | LT-3 | `mushroomDropsSelf` | `white_mystical_mushroom` loot table (dropSelf) yields the mushroom item |
 | LT-4 | `livingwoodLogDropsSelf` | `livingwood_log` loot table (dropSelf) yields the log item |
+| LT-5 | `tieredLivingRockDropsSelf` | All 9 infused/sacred/desecrated living rock variants drop themselves |
+| LT-6 | `tieredLivingwoodDropsSelf` | All 9 infused/sacred/desecrated livingwood variants drop themselves |
 
-### `TestRecipes` — crafting chain & furniture (4 GameTests)
+### `TestRecipes` — crafting chain & furniture (5 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
@@ -95,6 +102,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | RC-5 | `livingwoodPlanksFromLog` | livingwood_log → 4 planks |
 | RC-6 | `livingwoodFurnitureRecipes` | planks stairs→4, slab→6, fence→3, fence_gate→1 |
 | RC-7 | `livingRockFurnitureRecipes` | stairs→4, slab→6, wall→6 for all 3 rock variants (9 checks) |
+| RC-8 | `manaPoolCraftingRecipes` | mana_pool/infused/sacred/desecrated U-shape recipes all exist, yield 1 |
 
 ---
 
@@ -111,10 +119,10 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | Category | Tests |
 |----------|-------|
 | Pure Daisy integration + edge cases | 6 |
-| ManaPool (unit) | 12 |
+| ManaPool (unit) | 15 |
 | ManaNetworkHandler (unit) | 4 |
-| ManaPool (GameTest) | 3 |
+| ManaPool (GameTest) | 5 |
 | Apothecary (GameTest) | 2 |
-| Loot tables / harvest (GameTest) | 4 |
-| Recipes — crafting chain + furniture (GameTest) | 4 |
-| **Total** | **35** |
+| Loot tables / harvest (GameTest) | 6 |
+| Recipes — crafting chain + furniture (GameTest) | 5 |
+| **Total** | **43** |

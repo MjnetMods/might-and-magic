@@ -3,6 +3,7 @@ package org.mjli.mam;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import org.junit.jupiter.api.Test;
+import org.mjli.mam.api.mana.ManaEnergyType;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
 
 import java.util.Optional;
@@ -49,24 +50,24 @@ class ManaPoolTest {
     }
 
     // ── receiveMana clamping formula ─────────────────────────────────────────
-    // Tests the inline logic: mana = clamp(mana + amount, 0, MAX_MANA)
+    // Tests the inline logic: mana = clamp(mana + amount, 0, maxMana)
 
     @Test
     void manaClamping_cannotExceedMax() {
-        int max = ManaPoolBlockEntity.MAX_MANA;
+        int max = ManaPoolBlockEntity.MAX_CAPACITY_TIER_1;
         int result = Math.max(0, Math.min(max + 1, max));
         assertEquals(max, result);
     }
 
     @Test
     void manaClamping_cannotGoBelowZero() {
-        int result = Math.max(0, Math.min(0 - 500, ManaPoolBlockEntity.MAX_MANA));
+        int result = Math.max(0, Math.min(0 - 500, ManaPoolBlockEntity.MAX_CAPACITY_TIER_1));
         assertEquals(0, result);
     }
 
     @Test
     void manaClamping_normalAddition() {
-        int max = ManaPoolBlockEntity.MAX_MANA;
+        int max = ManaPoolBlockEntity.MAX_CAPACITY_TIER_1;
         int current = 100_000;
         int added = 50_000;
         int result = Math.max(0, Math.min(current + added, max));
@@ -102,5 +103,38 @@ class ManaPoolTest {
                 ? Optional.of(DyeColor.byId(tag.getByte("color")))
                 : Optional.empty();
         assertTrue(loaded.isEmpty());
+    }
+
+    // ── energyType NBT round-trip (Mana/Nox, mirrors loadAdditional's guarded read) ────
+
+    @Test
+    void nbt_energyType_roundtripsNox() {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("energyType", ManaEnergyType.NOX.name());
+        ManaEnergyType loaded = tag.contains("energyType")
+                ? ManaEnergyType.valueOf(tag.getString("energyType"))
+                : ManaEnergyType.MANA;
+        assertEquals(ManaEnergyType.NOX, loaded);
+    }
+
+    @Test
+    void nbt_energyType_roundtripsMana() {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("energyType", ManaEnergyType.MANA.name());
+        ManaEnergyType loaded = tag.contains("energyType")
+                ? ManaEnergyType.valueOf(tag.getString("energyType"))
+                : ManaEnergyType.MANA;
+        assertEquals(ManaEnergyType.MANA, loaded);
+    }
+
+    @Test
+    void nbt_energyType_absentKeepsConstructorDefault() {
+        CompoundTag tag = new CompoundTag();
+        // no energyType key written — mirrors loadAdditional's "if absent, keep the value set at construction"
+        ManaEnergyType constructorDefault = ManaEnergyType.NOX;
+        ManaEnergyType loaded = tag.contains("energyType")
+                ? ManaEnergyType.valueOf(tag.getString("energyType"))
+                : constructorDefault;
+        assertEquals(ManaEnergyType.NOX, loaded);
     }
 }

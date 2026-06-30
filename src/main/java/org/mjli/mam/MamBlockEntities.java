@@ -10,6 +10,7 @@ import org.mjli.mam.block_entity.flower.DaybloomBlockEntity;
 import org.mjli.mam.block_entity.flower.EndoflameBlockEntity;
 import org.mjli.mam.block_entity.flower.HydroangeasBlockEntity;
 import org.mjli.mam.block_entity.flower.PureDaisyBlockEntity;
+import org.mjli.mam.api.mana.ManaEnergyType;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
 import org.mjli.mam.verdant.VerdantFlowers;
 import org.mjli.mam.verdant.VerdantGeneratingFlowers;
@@ -25,7 +26,27 @@ public class MamBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ManaPoolBlockEntity>> MANA_POOL =
             BLOCK_ENTITY_TYPES.register("mana_pool",
-                    () -> BlockEntityType.Builder.of(ManaPoolBlockEntity::new, VerdantMana.MANA_POOL.get()).build(null));
+                    () -> BlockEntityType.Builder.of(
+                            (pos, state) -> new ManaPoolBlockEntity(MamBlockEntities.MANA_POOL.get(), pos, state, ManaPoolBlockEntity.MAX_CAPACITY_TIER_1, ManaEnergyType.MANA),
+                            VerdantMana.MANA_POOL.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ManaPoolBlockEntity>> INFUSED_MANA_POOL =
+            BLOCK_ENTITY_TYPES.register("infused_mana_pool",
+                    () -> BlockEntityType.Builder.of(
+                            (pos, state) -> new ManaPoolBlockEntity(MamBlockEntities.INFUSED_MANA_POOL.get(), pos, state, ManaPoolBlockEntity.MAX_CAPACITY_TIER_2, ManaEnergyType.MANA),
+                            VerdantMana.INFUSED_MANA_POOL.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ManaPoolBlockEntity>> SACRED_MANA_POOL =
+            BLOCK_ENTITY_TYPES.register("sacred_mana_pool",
+                    () -> BlockEntityType.Builder.of(
+                            (pos, state) -> new ManaPoolBlockEntity(MamBlockEntities.SACRED_MANA_POOL.get(), pos, state, ManaPoolBlockEntity.MAX_CAPACITY_TIER_3, ManaEnergyType.MANA),
+                            VerdantMana.SACRED_MANA_POOL.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ManaPoolBlockEntity>> DESECRATED_MANA_POOL =
+            BLOCK_ENTITY_TYPES.register("desecrated_mana_pool",
+                    () -> BlockEntityType.Builder.of(
+                            (pos, state) -> new ManaPoolBlockEntity(MamBlockEntities.DESECRATED_MANA_POOL.get(), pos, state, ManaPoolBlockEntity.MAX_CAPACITY_TIER_3, ManaEnergyType.NOX),
+                            VerdantMana.DESECRATED_MANA_POOL.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ApothecaryBlockEntity>> APOTHECARY =
             BLOCK_ENTITY_TYPES.register("apothecary",

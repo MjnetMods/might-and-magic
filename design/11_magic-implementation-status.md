@@ -16,6 +16,26 @@ Shared magic infrastructure used across all paths. Legend:
 
 ---
 
+## Implementation Plan (next up)
+
+Design audit complete as of 2026-07-01 (see design/magic/*.md) — no contradictions, core loop ready to implement. Ordered by dependency, not priority:
+
+1. ✅ **Mana Pool crafting recipe** — datagen entry in `MamRecipeProvider`, same pattern as the Apothecary recipe already shipped. Design: [[magic/15_mana-pool]] § Pool Crafting Recipes. Code done; not yet verified in-game.
+2. **Mana Pool infusion mechanic** — `ManaPoolBlockEntity` needs item-scan + recipe matching; new `PoolInfusionRecipe` type; recipe JSONs from the Infusion Recipes table. Design: [[magic/15_mana-pool]] § Infusion Mechanic. Depends on #1 existing (pool needs to be obtainable to test).
+3. **Gems** (Mana/Infused/Sacred/Desecrated Diamond + Pearl) — items + pool-infusion recipes. Design: [[magic/17_trinkets]] § Gems. Depends on #2 (infusion recipe type).
+4. **Tablets** — crafting recipe + passive repair drain. Design: [[magic/17_trinkets]] § Tablets. Depends on #3 (Gems) + tier-matched Living Rock.
+5. **Rings** — Tablet → Ring conversion. Design: [[magic/17_trinkets]] § Rings. Depends on #4.
+6. **Altar station shell** — block, block entity, tier registration, crafting recipes, ingredient-detection/trigger/mana-sourcing mechanic. Design: [[magic/20_altar]]. No blockers.
+7. **Infrastructure Runes** (`rune_infusion`, `rune_sacred`, `rune_desecrated`) — recipe data, registered as Altar recipes. Design: [[magic/25_runes]] § Infrastructure Runes. Depends on #6 (Altar must exist as the crafting station).
+8. **Weavery station shell** — block (SmithingTableBlock subclass), crafting recipes. Design: [[magic/30_weavery]]. No blockers. Trinket catalog itself stays design-only (recipes TBD).
+
+**Explicitly NOT in this pass** (blocked on open design questions, not doc gaps):
+- Apothecary `interact()` — needs `ApothecaryRecipe` data-model rework first ([[magic/10_apothecary]] § Open Questions)
+- The 22 school Runes (T1/T2/T3a/T3b) — ingredients TBD, balancing pass
+- Weavery's actual Trinket items — recipes TBD ([[20_verdant-path-items]])
+
+---
+
 ## Blocks
 
 ### Living Rock
@@ -34,12 +54,17 @@ Shared magic infrastructure used across all paths. Legend:
 | living_rock_brick_stairs | 🔨 | 🔨 | 🔨 | ⬜ |
 | living_rock_brick_slab | 🔨 | 🔨 | 🔨 | ⬜ |
 | living_rock_brick_wall | 🔨 | 🔨 | 🔨 | ⬜ |
-| infused_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock_polished | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_living_rock_brick | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_living_rock | 🔨 | 🔨* | 🔨 | ⬜ |
+| infused_living_rock_polished | 🔨 | 🔨* | 🔨 | ⬜ |
+| infused_living_rock_brick | 🔨 | 🔨* | 🔨 | ⬜ |
+| sacred_living_rock | 🔨 | 🔨* | 🔨 | ⬜ |
+| sacred_living_rock_polished | 🔨 | 🔨* | 🔨 | ⬜ |
+| sacred_living_rock_brick | 🔨 | 🔨* | 🔨 | ⬜ |
+| desecrated_living_rock | 🔨 | 🔨* | 🔨 | ⬜ |
+| desecrated_living_rock_polished | 🔨 | 🔨* | 🔨 | ⬜ |
+| desecrated_living_rock_brick | 🔨 | 🔨* | 🔨 | ⬜ |
+
+\* placeholder model — reuses the tier-1 texture 1:1, no infused/sacred art yet (no tint logic either). See [[magic/15_mana-pool]] § Visual Design for the intended white/green/purple-tint scheme to implement later.
 
 **Verify:** Break without a pickaxe → nothing drops. Break with pickaxe → drops self.
 
@@ -61,12 +86,17 @@ Shared magic infrastructure used across all paths. Legend:
 | livingwood_planks_slab | 🔨 | 🔨 | 🔨 | 🔨 |
 | livingwood_planks_fence | 🔨 | 🔨 | 🔨 | 🔨 |
 | livingwood_planks_fence_gate | 🔨 | 🔨 | 🔨 | 🔨 |
-| infused_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
-| infused_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood_log | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_livingwood_planks | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_livingwood_log | 🔨 | 🔨* | 🔨 | 🔨 |
+| infused_livingwood | 🔨 | 🔨* | 🔨 | 🔨 |
+| infused_livingwood_planks | 🔨 | 🔨* | 🔨 | 🔨 |
+| sacred_livingwood_log | 🔨 | 🔨* | 🔨 | 🔨 |
+| sacred_livingwood | 🔨 | 🔨* | 🔨 | 🔨 |
+| sacred_livingwood_planks | 🔨 | 🔨* | 🔨 | 🔨 |
+| desecrated_livingwood_log | 🔨 | 🔨* | 🔨 | 🔨 |
+| desecrated_livingwood | 🔨 | 🔨* | 🔨 | 🔨 |
+| desecrated_livingwood_planks | 🔨 | 🔨* | 🔨 | 🔨 |
+
+\* placeholder model — reuses the tier-1 texture 1:1, no infused/sacred/desecrated art yet.
 
 **Verify:** Log rotates on placement (axis x/y/z). Glimmering logs glow.
 
@@ -89,9 +119,9 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 | Block | Registered | Model | Mechanic | Comparator |
 |---|:---:|:---:|:---:|:---:|
 | mana_pool | 🔨 | 🔨 | 🔨 | ⬜ |
-| infused_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
-| sacred_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
-| desecrated_mana_pool | ⬜ | ⬜ | ⬜ | ⬜ |
+| infused_mana_pool | 🔨 | 🔨* | ⬜ | ⬜ |
+| sacred_mana_pool | 🔨 | 🔨* | ⬜ | ⬜ |
+| desecrated_mana_pool | 🔨 | 🔨* | ⬜ | ⬜ |
 | apothecary | 🔨 | 🔨 | ⬜ | — |
 | weavery | ⬜ | ⬜ | ⬜ | — |
 | infused_weavery | ⬜ | ⬜ | ⬜ | — |
@@ -100,6 +130,8 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 | infused_apothecary | ⬜ | ⬜ | ⬜ | — |
 | sacred_apothecary | ⬜ | ⬜ | ⬜ | — |
 | desecrated_apothecary | ⬜ | ⬜ | ⬜ | — |
+
+\* placeholder model — reuses the tier-1 `mana_pool` model/textures, no infused/sacred/desecrated art yet (see [[magic/15_mana-pool]] § Visual Design). Capacity is correct (4M / 16M via `MAX_CAPACITY_TIER_2/3` in `ManaPoolBlockEntity`); `sacred_mana_pool`/`desecrated_mana_pool` both correctly carry `MAX_CAPACITY_TIER_3` (same capacity, different `ManaEnergyType`). Energy-type field exists (`getEnergyType()`) but tainting/rejection mechanics are not implemented — see [[magic/00_energy]].
 
 **Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
 
@@ -141,7 +173,10 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 | living_rock → stairs (×3 variants) | shaped | 🔨 | ⬜ |
 | living_rock → slab (×3 variants) | shaped | 🔨 | ⬜ |
 | living_rock → wall (×3 variants) | shaped | 🔨 | ⬜ |
-| 8 living_rock_brick (U-shape) → mana_pool | shaped | 🔨 | ⬜ |
+| 7 living_rock (U-shape) → mana_pool | shaped | 🔨 | ⬜ |
+| 7 infused_living_rock (U-shape) → infused_mana_pool | shaped | 🔨 | ⬜ |
+| 7 sacred_living_rock (U-shape) → sacred_mana_pool | shaped | 🔨 | ⬜ |
+| 7 desecrated_living_rock (U-shape) → desecrated_mana_pool | shaped | 🔨 | ⬜ |
 | 7× any rock + 1 petal/mushroom (goblet) → apothecary | shaped | ✅ | ⬜ |
 | livingwood_log → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
 | livingwood_log_stripped → 4 livingwood_planks | shapeless | 🔨 | ⬜ |
@@ -176,5 +211,14 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 - [ ] Apothecary water/lava interaction not coded
 - [ ] Apothecary in-world recipes (petals + seed → item)
 - [ ] Pure daisy recipe (blocked on apothecary crafting)
-- [ ] Infused / sacred tiers of living rock, livingwood, mana pool, apothecary (future)
+- [x] Infused / sacred / desecrated living rock & livingwood blocks registered (placeholder textures, no obtain path yet — needs the Mana Pool infusion mechanic, plan item #2)
+- [x] Infused / sacred / desecrated mana pool blocks registered + U-shape recipes from tier-matched Living Rock (placeholder textures, correct tiered capacity)
+- [x] Mana/Nox energy-type groundwork — `ManaEnergyType` enum, `ManaPool.getEnergyType()`, persisted on `ManaPoolBlockEntity`; sacred=MANA, desecrated=NOX, mana_pool/infused_mana_pool=MANA
+- [ ] Infused / sacred / desecrated living rock & livingwood real texture art + tint
+- [ ] Infused / sacred / desecrated mana pool real texture art + tint
+- [ ] Infused / sacred / desecrated mana pool bootstrap recipe (Rune + Pool item) — blocked on Altar/Runes (plan items #6/#7)
+- [ ] Infused / sacred / desecrated tiers of apothecary (future)
+- [ ] Tainting mechanic (Nox entering a pool converts mana 1:1) — not implemented, see [[magic/00_energy]]
+- [ ] T3 pool alignment/rejection (wrong energy type → mutual loss) — not implemented
+- [ ] Nox generation (dark flowers/sources) — design TBD, no obtain path for any Nox at all yet
 - [ ] No sounds beyond vanilla defaults

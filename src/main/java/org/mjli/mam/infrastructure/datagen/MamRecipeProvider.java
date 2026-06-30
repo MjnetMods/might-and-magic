@@ -36,6 +36,7 @@ public class MamRecipeProvider extends RecipeProvider {
         livingRock(output);
         livingWood(output);
         apothecary(output);
+        manaPool(output);
     }
 
     private void guide(RecipeOutput output) {
@@ -199,6 +200,40 @@ public class MamRecipeProvider extends RecipeProvider {
             .unlockedBy("has_petal", has(petals))
             .unlockedBy("has_mushroom", has(mushrooms))
             .save(output, id("apothecary"));
+    }
+
+    private void manaPool(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.MANA_POOL.get())
+            .pattern("R R")
+            .pattern("R R")
+            .pattern("RRR")
+            .define('R', VerdantRock.LIVING_ROCK.get())
+            .unlockedBy("has_living_rock", has(VerdantRock.LIVING_ROCK.get()))
+            .save(output, id("mana_pool"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.INFUSED_MANA_POOL.get())
+            .pattern("R R")
+            .pattern("R R")
+            .pattern("RRR")
+            .define('R', VerdantRock.INFUSED_LIVING_ROCK.get())
+            .unlockedBy("has_infused_living_rock", has(VerdantRock.INFUSED_LIVING_ROCK.get()))
+            .save(output, id("infused_mana_pool"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.SACRED_MANA_POOL.get())
+            .pattern("R R")
+            .pattern("R R")
+            .pattern("RRR")
+            .define('R', VerdantRock.SACRED_LIVING_ROCK.get())
+            .unlockedBy("has_sacred_living_rock", has(VerdantRock.SACRED_LIVING_ROCK.get()))
+            .save(output, id("sacred_mana_pool"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.DESECRATED_MANA_POOL.get())
+            .pattern("R R")
+            .pattern("R R")
+            .pattern("RRR")
+            .define('R', VerdantRock.DESECRATED_LIVING_ROCK.get())
+            .unlockedBy("has_desecrated_living_rock", has(VerdantRock.DESECRATED_LIVING_ROCK.get()))
+            .save(output, id("desecrated_mana_pool"));
     }
 
     private static ResourceLocation id(String name) {

@@ -133,6 +133,94 @@ public class VerdantWood {
          .simpleItem()
          .register();
 
+    // ── Infused / Sacred tiers (placeholder: reuse tier-1 textures, no art yet) ──
+
+    public static final BlockEntry<RotatedPillarBlock> INFUSED_LIVINGWOOD_LOG =
+        R.block("infused_livingwood_log", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log_top")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<RotatedPillarBlock> INFUSED_LIVINGWOOD =
+        R.block("infused_livingwood", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> INFUSED_LIVINGWOOD_PLANKS =
+        R.block("infused_livingwood_planks", Block::new)
+         .properties(p -> MamBlockProperties.livingWood())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<RotatedPillarBlock> SACRED_LIVINGWOOD_LOG =
+        R.block("sacred_livingwood_log", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log_top")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<RotatedPillarBlock> SACRED_LIVINGWOOD =
+        R.block("sacred_livingwood", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> SACRED_LIVINGWOOD_PLANKS =
+        R.block("sacred_livingwood_planks", Block::new)
+         .properties(p -> MamBlockProperties.livingWood())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    // ── Desecrated tier (Nox/Dark branch, placeholder: reuse tier-1 textures, no art yet) ──
+
+    public static final BlockEntry<RotatedPillarBlock> DESECRATED_LIVINGWOOD_LOG =
+        R.block("desecrated_livingwood_log", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log_top")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<RotatedPillarBlock> DESECRATED_LIVINGWOOD =
+        R.block("desecrated_livingwood", RotatedPillarBlock::new)
+         .properties(p -> MamBlockProperties.livingWoodLog())
+         .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
+             p.modLoc("block/livingwood_log"),
+             p.modLoc("block/livingwood_log")))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<Block> DESECRATED_LIVINGWOOD_PLANKS =
+        R.block("desecrated_livingwood_planks", Block::new)
+         .properties(p -> MamBlockProperties.livingWood())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
     public static void appendToTab(CreativeModeTabModifier modifier) {
         var tab = CreativeModeTab.TabVisibility.PARENT_TAB_ONLY;
         modifier.accept(LIVINGWOOD_LOG.asStack(), tab);
@@ -147,6 +235,15 @@ public class VerdantWood {
         modifier.accept(LIVINGWOOD_PLANKS_SLAB.asStack(), tab);
         modifier.accept(LIVINGWOOD_PLANKS_FENCE.asStack(), tab);
         modifier.accept(LIVINGWOOD_PLANKS_FENCE_GATE.asStack(), tab);
+        modifier.accept(INFUSED_LIVINGWOOD_LOG.asStack(), tab);
+        modifier.accept(INFUSED_LIVINGWOOD.asStack(), tab);
+        modifier.accept(INFUSED_LIVINGWOOD_PLANKS.asStack(), tab);
+        modifier.accept(SACRED_LIVINGWOOD_LOG.asStack(), tab);
+        modifier.accept(SACRED_LIVINGWOOD.asStack(), tab);
+        modifier.accept(SACRED_LIVINGWOOD_PLANKS.asStack(), tab);
+        modifier.accept(DESECRATED_LIVINGWOOD_LOG.asStack(), tab);
+        modifier.accept(DESECRATED_LIVINGWOOD.asStack(), tab);
+        modifier.accept(DESECRATED_LIVINGWOOD_PLANKS.asStack(), tab);
     }
 
     public static void init() {}

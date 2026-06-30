@@ -6,25 +6,32 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import org.mjli.mam.MamBlockEntities;
 import org.mjli.mam.api.internal.ManaBlockType;
 import org.mjli.mam.api.internal.ManaNetworkAction;
 import org.mjli.mam.api.internal.ManaNetworkHandler;
+import org.mjli.mam.api.mana.ManaEnergyType;
 import org.mjli.mam.api.mana.ManaPool;
 
 import java.util.Optional;
 
 public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
-    public static final int MAX_MANA = 1_000_000;
+    public static final int MAX_CAPACITY_TIER_1 = 1_000_000;
+    public static final int MAX_CAPACITY_TIER_2 = 4_000_000;
+    public static final int MAX_CAPACITY_TIER_3 = 16_000_000;
 
+    private final int maxMana;
+    private ManaEnergyType energyType;
     private int mana;
     private boolean outputting;
     private Optional<DyeColor> color = Optional.empty();
     private boolean addedToNetwork;
 
-    public ManaPoolBlockEntity(BlockPos pos, BlockState state) {
-        super(MamBlockEntities.MANA_POOL.get(), pos, state);
+    public ManaPoolBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, int maxMana, ManaEnergyType energyType) {
+        super(type, pos, state);
+        this.maxMana = maxMana;
+        this.energyType = energyType;
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ManaPoolBlockEntity self) {
@@ -50,12 +57,13 @@ public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
     @Override public boolean isOutputtingPower() { return outputting; }
     @Override public Optional<DyeColor> getColor() { return color; }
     @Override public void setColor(Optional<DyeColor> color) { this.color = color; setChanged(); }
+    @Override public ManaEnergyType getEnergyType() { return energyType; }
 
     // ManaReceiver
     @Override public int getCurrentMana() { return mana; }
-    @Override public int getMaxMana() { return MAX_MANA; }
-    @Override public boolean isFull() { return mana >= MAX_MANA; }
-    @Override public void receiveMana(int amount) { mana = Math.max(0, Math.min(mana + amount, MAX_MANA)); setChanged(); }
+    @Override public int getMaxMana() { return maxMana; }
+    @Override public boolean isFull() { return mana >= maxMana; }
+    @Override public void receiveMana(int amount) { mana = Math.max(0, Math.min(mana + amount, maxMana)); setChanged(); }
     @Override public boolean canReceiveManaFromBursts() { return true; }
 
     @Override
@@ -63,6 +71,7 @@ public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
         super.saveAdditional(tag, registries);
         tag.putInt("mana", mana);
         tag.putBoolean("outputting", outputting);
+        tag.putString("energyType", energyType.name());
         color.ifPresent(c -> tag.putByte("color", (byte) c.getId()));
     }
 
@@ -71,6 +80,7 @@ public class ManaPoolBlockEntity extends BlockEntity implements ManaPool {
         super.loadAdditional(tag, registries);
         mana = tag.getInt("mana");
         outputting = tag.getBoolean("outputting");
+        if (tag.contains("energyType")) energyType = ManaEnergyType.valueOf(tag.getString("energyType"));
         color = tag.contains("color") ? Optional.of(DyeColor.byId(tag.getByte("color"))) : Optional.empty();
     }
 }

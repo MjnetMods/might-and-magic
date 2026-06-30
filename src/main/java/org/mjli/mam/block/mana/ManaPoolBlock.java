@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import org.mjli.mam.MamBlockEntities;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
+import org.mjli.mam.verdant.VerdantMana;
 
 import javax.annotation.Nullable;
 
@@ -33,13 +34,20 @@ public class ManaPoolBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ManaPoolBlockEntity(pos, state);
+        if (state.is(VerdantMana.INFUSED_MANA_POOL.get())) return MamBlockEntities.INFUSED_MANA_POOL.get().create(pos, state);
+        if (state.is(VerdantMana.SACRED_MANA_POOL.get())) return MamBlockEntities.SACRED_MANA_POOL.get().create(pos, state);
+        if (state.is(VerdantMana.DESECRATED_MANA_POOL.get())) return MamBlockEntities.DESECRATED_MANA_POOL.get().create(pos, state);
+        return MamBlockEntities.MANA_POOL.get().create(pos, state);
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type, MamBlockEntities.MANA_POOL.get(), ManaPoolBlockEntity::tick);
+        BlockEntityTicker<T> ticker = createTickerHelper(type, MamBlockEntities.MANA_POOL.get(), ManaPoolBlockEntity::tick);
+        if (ticker == null) ticker = createTickerHelper(type, MamBlockEntities.INFUSED_MANA_POOL.get(), ManaPoolBlockEntity::tick);
+        if (ticker == null) ticker = createTickerHelper(type, MamBlockEntities.SACRED_MANA_POOL.get(), ManaPoolBlockEntity::tick);
+        if (ticker == null) ticker = createTickerHelper(type, MamBlockEntities.DESECRATED_MANA_POOL.get(), ManaPoolBlockEntity::tick);
+        return ticker;
     }
 
     @Override

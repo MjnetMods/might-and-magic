@@ -111,7 +111,7 @@ The Spreader is energy-agnostic — it carries whatever energy type the connecte
 
 | Item | Status |
 |------|--------|
-| Two energy types (Mana / Nox) | ✅ decided |
+| Two energy types (Mana / Nox) | ✅ decided, groundwork implemented (`ManaEnergyType` enum on `ManaPool`/`ManaPoolBlockEntity`) |
 | Tainting rule (any Nox → all mana converts to Nox 1:1, instant) | ✅ decided |
 | Tier branching (Infused → Sacred or Desecrated) | ✅ decided |
 | Desecrated Mana Pool (capacity, mechanic) | ✅ decided |

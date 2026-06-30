@@ -12,6 +12,7 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.verdant.VerdantFlowers;
+import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
 
@@ -157,6 +158,21 @@ public class TestRecipes {
         if (count != 1) {
             helper.fail("Expected recipe to yield 1 floral powder, got " + count);
             return;
+        }
+        helper.succeed();
+    }
+
+    /** RC-8: mana pool U-shape recipes — all four tiers craft and yield 1. */
+    @GameTest(template = PLATFORM)
+    public static void manaPoolCraftingRecipes(GameTestHelper helper) {
+        record Check(Item result, int count, String label) {}
+        for (var c : List.of(
+            new Check(VerdantMana.MANA_POOL.asItem(), 1, "mana_pool"),
+            new Check(VerdantMana.INFUSED_MANA_POOL.asItem(), 1, "infused_mana_pool"),
+            new Check(VerdantMana.SACRED_MANA_POOL.asItem(), 1, "sacred_mana_pool"),
+            new Check(VerdantMana.DESECRATED_MANA_POOL.asItem(), 1, "desecrated_mana_pool")
+        )) {
+            assertRecipeYields(helper, c.result(), c.count(), c.label());
         }
         helper.succeed();
     }

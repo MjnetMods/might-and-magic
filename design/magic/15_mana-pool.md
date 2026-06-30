@@ -27,9 +27,14 @@ Capacity numbers are a starting point — adjust in the balancing pass. The 4× 
 
 ## Pool Crafting Recipes
 
-The Tier 1 pool is crafted directly from Living Rock. Tier 2 and 3 pools are produced by combining a **Rune** with the existing pool at a crafting table — breaking the circular dependency on higher-tier Living Rock entirely.
+The Tier 1 pool is crafted directly from Living Rock. Tier 2/3 pools have **two** crafting paths:
 
-Tier 1 pool — U shape, 8× Living Rock:
+1. **Bootstrap path — Rune + Pool item.** A Tier 1 pool only holds 1,000,000 mana, but infusing Living Rock into Infused Living Rock needs ≥4,000,000 mana present at once — impossible with only a Tier 1 pool. Combining a **Rune** with the existing pool at a crafting table upgrades the pool's capacity directly, without needing any higher-tier Living Rock. This is the only way to obtain your *first* pool of a given tier.
+2. **Direct path — U shape from tier-matched Living Rock.** Once you own one Infused/Sacred pool, its higher capacity lets you infuse more Living Rock into that tier, so additional copies of the pool can be built the same way as Tier 1 — U shape, tier-matched rock.
+
+Both paths are intentional, not redundant: the Rune path breaks the circular dependency for the first pool of a tier; the U-shape path is the normal repeat-build path afterward.
+
+Tier 1 pool — U shape, 7× Living Rock:
 
 ```
 R . R
@@ -50,10 +55,13 @@ The mana loss on pickup is an intentional cost — you are committing your infra
 
 | Output            | Recipe                                                          | Status    |
 |-------------------|-----------------------------------------------------------------|-----------|
-| Mana Pool         | Living Rock — U shape (crafting table)                          | ✅ decided |
-| Infused Mana Pool | Rune of Infusion + Mana Pool item (crafting table)              | ✅ decided |
-| Sacred Mana Pool  | Rune of the Sacred + Infused Mana Pool item (crafting table)    | ✅ decided |
-| Desecrated Mana Pool | Rune of the Desecrated + Infused Mana Pool item (crafting table) | ✅ decided |
+| Mana Pool         | Living Rock — U shape (crafting table)                          | ✅ implemented |
+| Infused Mana Pool | Bootstrap: Rune of Infusion + Mana Pool item (crafting table)   | ✅ decided, blocked on Altar/Runes |
+| Infused Mana Pool | Direct: Infused Living Rock — U shape (crafting table)          | ✅ implemented |
+| Sacred Mana Pool  | Bootstrap: Rune of the Sacred + Infused Mana Pool item (crafting table) | ✅ decided, blocked on Altar/Runes |
+| Sacred Mana Pool  | Direct: Sacred Living Rock — U shape (crafting table)           | ✅ implemented |
+| Desecrated Mana Pool | Bootstrap: Rune of the Desecrated + Infused Mana Pool item (crafting table) | ✅ decided, blocked on Altar/Runes |
+| Desecrated Mana Pool | Direct: Desecrated Living Rock — U shape (crafting table)    | ✅ implemented |
 
 ---
 
@@ -153,7 +161,7 @@ Color of fluid is green for mana, purple for nox
 
 ## Open Questions
 
-- [x] **Mana Pool recipe shape** — ring/U shape, 8× Living Rock (same shape for all tiers). WP-C unblocked.
+- [x] **Mana Pool recipe shape** — ring/U shape, 7× Living Rock (same shape for all tiers). WP-C unblocked.
 - [x] **Infused / Sacred pool recipes** — Rune + existing pool item at crafting table. Unblocked.
 - [ ] **Fluid rendering** — custom renderer or repurposed water? Decide before Dev work on Tier 2/3 visual.
 - [x] **Pool upgrade path** — pick up existing pool (mana lost), combine with rune at crafting table → next tier pool. Not in-place.
