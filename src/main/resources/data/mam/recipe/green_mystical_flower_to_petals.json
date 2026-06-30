@@ -1,5 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [{ "item": "mam:green_mystical_flower" }],
-  "result": { "id": "mam:green_petal", "count": 4 }
-}

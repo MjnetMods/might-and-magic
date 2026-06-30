@@ -1,5 +1,0 @@
-{
-  "type": "minecraft:crafting_shapeless",
-  "ingredients": [{ "item": "mam:livingwood_log" }],
-  "result": { "id": "mam:livingwood_planks", "count": 4 }
-}
