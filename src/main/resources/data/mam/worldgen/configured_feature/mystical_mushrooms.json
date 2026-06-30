@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "tries": 40,
+    "xz_spread": 16,
+    "y_spread": 4,
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:weighted_state_provider",
+            "entries": [
+              { "weight": 1, "data": { "Name": "mam:white_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:orange_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:magenta_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:light_blue_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:yellow_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:lime_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:pink_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:gray_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:light_gray_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:cyan_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:purple_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:blue_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:brown_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:green_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:red_mystical_mushroom" } },
+              { "weight": 1, "data": { "Name": "mam:black_mystical_mushroom" } }
+            ]
+          }
+        }
+      },
+      "placement": []
+    }
+  }
+}

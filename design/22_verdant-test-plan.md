@@ -135,6 +135,17 @@ Shared structure: `verdant_flowers/small_platform`. No pool placed — flowers b
 | RC-2 | `petalToDyeYields1` | Petal → 1 matching dye (spot-check white/red/blue) |
 | RC-3 | `floralPowderRecipeCorrect` | Floral powder recipe exists, yields 1, requires bonemeal |
 
+### Pass 5 — `TestWorldGen` (3 GameTests)
+
+Shared structure: `worldgen/large_platform` (40×5×40 dirt floor, center at helper (19,2,19)).  
+Calls `ConfiguredFeature.place()` directly — bypasses placed_feature modifiers, fires the feature at a fixed position.
+
+| ID | Test | What it verifies |
+|----|------|-----------------|
+| WG-1 | `allWorldgenFeaturesRegistered` | All 18 `configured_feature` ResourceLocations resolve in the registry |
+| WG-2 | `mysticalFlowerPatchPlacesBlock` | `white_mystical_flower_patch` places ≥1 `MysticalFlowerBlock` (5 invocations) |
+| WG-3 | `mysticalMushroomFeaturePlacesBlock` | `mystical_mushrooms` places ≥1 `MysticalMushroomBlock` (5 invocations) |
+
 ---
 
 ## Backlog
@@ -178,7 +189,8 @@ Won't implement: **FP-4** (nether ultraWarm check — no dimension override in G
 | ManaPool (unit) | 12 (comparator math, NBT, clamp) |
 | ManaNetworkHandler (unit) | 4 (GF-2/3 variants) |
 | GeneratingFlowers (GameTest) | GF-1/2/3/4/5/6 |
-| **Total** | **~57** |
+| Worldgen (GameTest) | WG-1/2/3 |
+| **Total** | **~60** |
 
 ### Remaining backlog
 

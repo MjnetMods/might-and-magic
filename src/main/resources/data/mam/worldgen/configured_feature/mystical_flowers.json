@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      "mam:white_mystical_flower_patch",
+      "mam:orange_mystical_flower_patch",
+      "mam:magenta_mystical_flower_patch",
+      "mam:light_blue_mystical_flower_patch",
+      "mam:yellow_mystical_flower_patch",
+      "mam:lime_mystical_flower_patch",
+      "mam:pink_mystical_flower_patch",
+      "mam:gray_mystical_flower_patch",
+      "mam:light_gray_mystical_flower_patch",
+      "mam:cyan_mystical_flower_patch",
+      "mam:purple_mystical_flower_patch",
+      "mam:blue_mystical_flower_patch",
+      "mam:brown_mystical_flower_patch",
+      "mam:green_mystical_flower_patch",
+      "mam:red_mystical_flower_patch",
+      "mam:black_mystical_flower_patch"
+    ]
+  }
+}
