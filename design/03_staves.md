@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-30
 links: "[[01_rituals]], [[magic/25_runes]], [[magic/00_energy]]"
 ---

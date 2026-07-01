@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-29
 links: "[[20_verdant-path]], [[21_verdant-implementation-status]]"
 ---

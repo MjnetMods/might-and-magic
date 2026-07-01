@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-29
 links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[21_verdant-implementation-status]], [[magic/00_energy]], [[magic/10_apothecary]], [[magic/20_altar]], [[magic/25_runes]]"
 ---

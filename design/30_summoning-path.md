@@ -1,3 +1,9 @@
+---
+type: design
+status: wip
+last-updated: 2026-06-28
+---
+
 # The Summoning Path
 
 A transactional school of magic centered on contracts, offerings, circles, and summoned entities who trade, labor, carry, refine, and bargain.

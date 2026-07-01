@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-30
 links: "[[magic/00_energy]], [[01_rituals]], [[30_summoning-path]], [[40_sanguine-path]]"
 ---

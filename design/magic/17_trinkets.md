@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-07-01
 links: "[[magic/00_energy]], [[magic/15_mana-pool]], [[magic/30_weavery]], [[20_verdant-path-items]], [[20_verdant-path-quipment]]"
 ---

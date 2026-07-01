@@ -1,3 +1,9 @@
+---
+type: design
+status: wip
+last-updated: 2026-06-28
+---
+
 # The Sanguine Path
 
 A dark ceremonial school of magic centered on **blood, soul remnants, funerary rites, vampiric transformation, and forbidden liturgy**. Where the Verdant Path nurtures life and the Summoning Path bargains with outsiders, the Sanguine Path turns inward and downward — into the body, the grave, memory, and the cost of changing what one is.
@@ -212,7 +218,7 @@ This aura represents:
 
 The Sanguine Path is one school, but internally it has **three strongly linked sub-themes**.
 
-# 1) Blood
+### 1) Blood
 
 The language of vitality, sacrifice, lineage, hunger, and oath.
 
@@ -226,7 +232,7 @@ This includes:
 
 Blood is the most immediate and bodily part of the school.
 
-# 2) Soul
+### 2) Soul
 
 The language of death, memory, funerary sanctity, and spirit remnants.
 
@@ -240,7 +246,7 @@ This includes:
 
 Soul is the school’s connection to **Malum-like spirit arcana**.
 
-# 3) Transformation
+### 3) Transformation
 
 The language of becoming other than human.
 

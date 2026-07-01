@@ -130,10 +130,14 @@ runs {
 afterEvaluate {
     tasks.named('runGameTestServer') { dependsOn('runData') }
     tasks.named('runClient') { dependsOn('runData') }
+    tasks.named('validateDesignDocs') { mustRunAfter 'clean' }
+    tasks.named('test') { mustRunAfter 'clean', 'validateDesignDocs' }
+    tasks.named('runData') { mustRunAfter 'test' }
 }
 
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    mustRunAfter 'clean'
 }
 
 // Sets up a dependency configuration called 'localRuntime'.
@@ -268,6 +272,20 @@ tasks.register('syncTextures', Copy) {
     from 'src/main/resources/assets/mam/textures'
     into 'site/static/textures'
     include '**/*.png'
+}
+
+tasks.register('validateDesignDocs', Exec) {
+    group = 'verification'
+    description = 'Checks design/ docs against ref/design-doc-guide.md conventions.'
+    commandLine 'bash', 'tools/validate-design-docs.sh', 'design'
+}
+
+// Not wired into `check`/`build` on purpose — a design-doc format issue
+// shouldn't block an ordinary build. Run the full suite explicitly instead.
+tasks.register('verifyAll') {
+    group = 'verification'
+    description = 'Runs validateDesignDocs, test, runData, runGameTestServer in sequence. Run `clean` separately first if needed.'
+    dependsOn 'validateDesignDocs', 'test', 'runData', 'runGameTestServer'
 }
 
 test {

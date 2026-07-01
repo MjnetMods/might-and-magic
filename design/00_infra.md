@@ -1,6 +1,6 @@
 ---
 type: infra
-status: planned
+status: todo
 last-updated: 2026-06-28
 links: "[[21_verdant-implementation-status]]"
 ---

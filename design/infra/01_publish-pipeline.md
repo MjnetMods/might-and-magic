@@ -1,6 +1,6 @@
 ---
 type: infra
-status: active
+status: done
 last-updated: 2026-06-30
 ---
 

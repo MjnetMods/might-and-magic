@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-29
 links: "[[magic/20_altar]], [[00_infra]]"
 ---

@@ -1,6 +1,6 @@
 ---
 type: infra
-status: planned
+status: todo
 last-updated: 2026-06-30
 ---
 

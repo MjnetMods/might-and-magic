@@ -1,3 +1,9 @@
+---
+type: design
+status: wip
+last-updated: 2026-07-01
+---
+
 # The Verdant Path
 
 A gentle but foundational school of magic centered on **living mana, sacred gardens, floral rites, healing, and the quiet grace of the natural world**. Where the Rational Path builds engines and the Sanguine Path sanctifies blood and death, the Verdant Path cultivates life — not through domination, but through growth, patience, and attunement.
@@ -202,7 +208,7 @@ Verdant Aura represents:
 
 The Verdant Path is one school, but it should internally feel like it has **three linked faces**.
 
-# 1) Bloom
+### 1) Bloom
 
 The language of flowers, petals, mana generation, and floral craft.
 
@@ -216,7 +222,7 @@ This includes:
 
 Bloom is the school’s **resource and infrastructure** pillar.
 
-# 2) Grace
+### 2) Grace
 
 The language of healing, blessing, warding, comfort, and quiet support.
 
@@ -230,7 +236,7 @@ This includes:
 
 Grace is the school’s **support and protection** pillar.
 
-# 3) Grove
+### 3) Grove
 
 The language of place, roots, sacred stone, shrines, and life-rich environments.
 

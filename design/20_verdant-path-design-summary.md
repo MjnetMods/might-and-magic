@@ -1,6 +1,6 @@
 ---
 type: design
-status: draft
+status: wip
 last-updated: 2026-06-29
 links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[magic/15_mana-pool]], [[magic/17_trinkets]], [[20_verdant-path-items]]"
 ---

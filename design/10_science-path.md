@@ -1,3 +1,9 @@
+---
+type: design
+status: wip
+last-updated: 2026-06-28
+---
+
 # The Rational Path
 
 A school of industry, measurement, and mechanical certainty centered on Create-style engineering, precision manufacturing, and the suppression of magical instability.

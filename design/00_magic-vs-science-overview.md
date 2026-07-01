@@ -1,3 +1,9 @@
+---
+type: design
+status: wip
+last-updated: 2026-06-29
+---
+
 # Might and Magic: Science vs Magic
 
 A modpack and companion addon centered on the tension between **industrial science** and **multiple magical traditions**. Players are not locked into one path, but every school leaves marks on the world and on the player. Machines suppress the wild and unpredictable; magic resists control, reshapes land, and distorts the reliable logic of industry.
