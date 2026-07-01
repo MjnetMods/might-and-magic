@@ -43,6 +43,7 @@ public class MightAndMagic {
             VerdantMana.appendToTab(modifier);
         });
 
+        MamDataComponents.register(modEventBus);
         MamBlockEntities.register(modEventBus);
         MamRecipes.register(modEventBus);
         MamCreativeTabs.register(modEventBus);

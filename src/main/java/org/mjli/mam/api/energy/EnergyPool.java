@@ -1,12 +1,12 @@
-package org.mjli.mam.api.mana;
+package org.mjli.mam.api.energy;
 
 import java.util.Optional;
 import net.minecraft.world.item.DyeColor;
 
-public interface ManaPool extends ManaReceiver {
+public interface EnergyPool extends EnergyReceiver {
     boolean isOutputtingPower();
     Optional<DyeColor> getColor();
     void setColor(Optional<DyeColor> color);
-    ManaEnergyType getEnergyType();
-    void receiveMana(int amount, ManaEnergyType incomingType);
+    EnergyType getEnergyType();
+    void receiveEnergy(int amount, EnergyType incomingType);
 }

@@ -3,25 +3,25 @@ package org.mjli.mam.api.internal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import org.mjli.mam.api.mana.ManaCollector;
-import org.mjli.mam.api.mana.ManaPool;
+import org.mjli.mam.api.energy.EnergyCollector;
+import org.mjli.mam.api.energy.EnergyPool;
 
 import javax.annotation.Nullable;
 import java.util.*;
 
-public class ManaNetworkHandler implements ManaNetwork {
-    public static final ManaNetworkHandler INSTANCE = new ManaNetworkHandler();
+public class EnergyNetworkHandler implements EnergyNetwork {
+    public static final EnergyNetworkHandler INSTANCE = new EnergyNetworkHandler();
 
-    private final Map<Level, Map<BlockPos, ManaCollector>> collectors = new WeakHashMap<>();
-    private final Map<Level, Map<BlockPos, ManaPool>> pools = new WeakHashMap<>();
+    private final Map<Level, Map<BlockPos, EnergyCollector>> collectors = new WeakHashMap<>();
+    private final Map<Level, Map<BlockPos, EnergyPool>> pools = new WeakHashMap<>();
 
     @Override
-    public @Nullable ManaCollector getClosestCollector(BlockPos pos, Level level, int radius) {
+    public @Nullable EnergyCollector getClosestCollector(BlockPos pos, Level level, int radius) {
         return queryClosest(collectors.getOrDefault(level, Collections.emptyMap()), pos, radius);
     }
 
     @Override
-    public @Nullable ManaPool getClosestPool(BlockPos pos, Level level, int radius) {
+    public @Nullable EnergyPool getClosestPool(BlockPos pos, Level level, int radius) {
         return queryClosest(pools.getOrDefault(level, Collections.emptyMap()), pos, radius);
     }
 
@@ -40,27 +40,27 @@ public class ManaNetworkHandler implements ManaNetwork {
     }
 
     @Override
-    public Set<ManaCollector> getAllCollectorsInWorld(Level level) {
+    public Set<EnergyCollector> getAllCollectorsInWorld(Level level) {
         return Collections.unmodifiableSet(new HashSet<>(collectors.getOrDefault(level, Collections.emptyMap()).values()));
     }
 
     @Override
-    public Set<ManaPool> getAllPoolsInWorld(Level level) {
+    public Set<EnergyPool> getAllPoolsInWorld(Level level) {
         return Collections.unmodifiableSet(new HashSet<>(pools.getOrDefault(level, Collections.emptyMap()).values()));
     }
 
     @Override
-    public void fireManaNetworkEvent(Object thing, ManaBlockType type, ManaNetworkAction action) {
+    public void fireEvent(Object thing, EnergyBlockType type, EnergyNetworkAction action) {
         if (!(thing instanceof BlockEntity be)) return;
         Level level = be.getLevel();
         if (level == null) return;
         BlockPos pos = be.getBlockPos();
-        if (type == ManaBlockType.COLLECTOR && thing instanceof ManaCollector c) {
-            Map<BlockPos, ManaCollector> map = collectors.computeIfAbsent(level, k -> new HashMap<>());
-            if (action == ManaNetworkAction.ADD) map.put(pos, c); else map.remove(pos);
-        } else if (type == ManaBlockType.POOL && thing instanceof ManaPool p) {
-            Map<BlockPos, ManaPool> map = pools.computeIfAbsent(level, k -> new HashMap<>());
-            if (action == ManaNetworkAction.ADD) map.put(pos, p); else map.remove(pos);
+        if (type == EnergyBlockType.COLLECTOR && thing instanceof EnergyCollector c) {
+            Map<BlockPos, EnergyCollector> map = collectors.computeIfAbsent(level, k -> new HashMap<>());
+            if (action == EnergyNetworkAction.ADD) map.put(pos, c); else map.remove(pos);
+        } else if (type == EnergyBlockType.POOL && thing instanceof EnergyPool p) {
+            Map<BlockPos, EnergyPool> map = pools.computeIfAbsent(level, k -> new HashMap<>());
+            if (action == EnergyNetworkAction.ADD) map.put(pos, p); else map.remove(pos);
         }
     }
 }

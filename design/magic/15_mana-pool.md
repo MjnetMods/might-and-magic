@@ -195,7 +195,7 @@ Design doc: design/magic/15_mana-pool.md § Pool Tiers
 File targets:
   - src/main/java/org/mjli/mam/verdant/VerdantMana.java — register InfusedManaPool, SacredManaPool, DesecratedManaPool blocks
   - src/main/java/org/mjli/mam/MamBlockEntities.java — register block entity types for T2/T3
-  - src/main/java/org/mjli/mam/block_entity/mana/ManaPoolBlockEntity.java — tiered via constructor (capacity, ManaEnergyType), not subclassing
+  - src/main/java/org/mjli/mam/block_entity/mana/ManaPoolBlockEntity.java — tiered via constructor (capacity, EnergyType), not subclassing
   - src/main/resources/assets/mam/ — models and textures for T2/T3 pools
 Acceptance criteria:
   - [x] Infused/Sacred/Desecrated Mana Pool place and break without error

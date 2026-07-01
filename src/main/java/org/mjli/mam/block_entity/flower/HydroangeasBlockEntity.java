@@ -33,7 +33,7 @@ public class HydroangeasBlockEntity extends GeneratingFlowerBlockEntity {
     }
 
     @Override
-    public int getMaxMana() {
+    public int getMaxEnergy() {
         return 900;
     }
 }

@@ -1,6 +1,6 @@
 package org.mjli.mam.api.internal;
 
-public enum ManaNetworkAction {
+public enum EnergyNetworkAction {
     ADD,
     REMOVE
 }

@@ -39,8 +39,8 @@ public class TestGeneratingFlowers {
 
         helper.runAfterDelay(20, () -> {
             DaybloomBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DaybloomBlockEntity.class);
-            if (be.getCurrentMana() <= 0) {
-                helper.fail("Daybloom should have generated mana in daylight, but getCurrentMana() == " + be.getCurrentMana());
+            if (be.getCurrentEnergy() <= 0) {
+                helper.fail("Daybloom should have generated mana in daylight, but getCurrentEnergy() == " + be.getCurrentEnergy());
             }
             helper.succeed();
         });
@@ -59,10 +59,10 @@ public class TestGeneratingFlowers {
 
             helper.runAfterDelay(2, () -> {
                 DaybloomBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DaybloomBlockEntity.class);
-                int manaSnapshot = be.getCurrentMana();
+                int manaSnapshot = be.getCurrentEnergy();
 
                 helper.runAfterDelay(15, () -> {
-                    int manaFinal = be.getCurrentMana();
+                    int manaFinal = be.getCurrentEnergy();
                     if (manaFinal > manaSnapshot) {
                         helper.fail("Daybloom should stop generating with blocked sky, but mana increased from "
                                 + manaSnapshot + " to " + manaFinal);
@@ -86,8 +86,8 @@ public class TestGeneratingFlowers {
 
         helper.runAfterDelay(40, () -> {
             EndoflameBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, EndoflameBlockEntity.class);
-            if (be.getCurrentMana() <= 0) {
-                helper.fail("Endoflame should have generated mana from coal, but getCurrentMana() == " + be.getCurrentMana());
+            if (be.getCurrentEnergy() <= 0) {
+                helper.fail("Endoflame should have generated mana from coal, but getCurrentEnergy() == " + be.getCurrentEnergy());
             }
             helper.succeed();
         });
@@ -104,8 +104,8 @@ public class TestGeneratingFlowers {
 
         helper.runAfterDelay(20, () -> {
             EndoflameBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, EndoflameBlockEntity.class);
-            if (be.getCurrentMana() > 0) {
-                helper.fail("Endoflame should ignore non-fuel dirt item, but getCurrentMana() == " + be.getCurrentMana());
+            if (be.getCurrentEnergy() > 0) {
+                helper.fail("Endoflame should ignore non-fuel dirt item, but getCurrentEnergy() == " + be.getCurrentEnergy());
             }
             helper.succeed();
         });
@@ -123,8 +123,8 @@ public class TestGeneratingFlowers {
 
         helper.runAfterDelay(20, () -> {
             HydroangeasBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, HydroangeasBlockEntity.class);
-            if (be.getCurrentMana() <= 0) {
-                helper.fail("Hydroangeas should have generated mana adjacent to waterlogged block, but getCurrentMana() == " + be.getCurrentMana());
+            if (be.getCurrentEnergy() <= 0) {
+                helper.fail("Hydroangeas should have generated mana adjacent to waterlogged block, but getCurrentEnergy() == " + be.getCurrentEnergy());
             }
             helper.succeed();
         });
@@ -139,8 +139,8 @@ public class TestGeneratingFlowers {
 
         helper.runAfterDelay(20, () -> {
             HydroangeasBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, HydroangeasBlockEntity.class);
-            if (be.getCurrentMana() > 0) {
-                helper.fail("Hydroangeas should not generate mana in dry air, but getCurrentMana() == " + be.getCurrentMana());
+            if (be.getCurrentEnergy() > 0) {
+                helper.fail("Hydroangeas should not generate mana in dry air, but getCurrentEnergy() == " + be.getCurrentEnergy());
             }
             helper.succeed();
         });

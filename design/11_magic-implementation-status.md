@@ -2,7 +2,7 @@
 path: magic
 type: impl
 status: wip
-last-updated: 2026-06-30
+last-updated: 2026-07-01
 links: "[[12_magic-test-plan]], [[21_verdant-implementation-status]]"
 ---
 
@@ -23,7 +23,7 @@ Design audit complete as of 2026-07-01 (see design/magic/*.md) — no contradict
 1. ✅ **Mana Pool crafting recipe** — datagen entry in `MamRecipeProvider`, same pattern as the Apothecary recipe already shipped. Design: [[magic/15_mana-pool]] § Pool Crafting Recipes. Code done; not yet verified in-game.
 2. **Mana Pool infusion mechanic** — `ManaPoolBlockEntity` needs item-scan + recipe matching; new `PoolInfusionRecipe` type; recipe JSONs from the Infusion Recipes table. Design: [[magic/15_mana-pool]] § Infusion Mechanic. Depends on #1 existing (pool needs to be obtainable to test).
 3. **Gems** (Mana/Infused/Sacred/Desecrated Diamond + Pearl) — items + pool-infusion recipes. Design: [[magic/17_trinkets]] § Gems. Depends on #2 (infusion recipe type).
-4. **Tablets** — crafting recipe + passive repair drain. Design: [[magic/17_trinkets]] § Tablets. Depends on #3 (Gems) + tier-matched Living Rock.
+4. **Tablets** — crafting recipe + passive repair drain. Design: [[magic/17_trinkets]] § Tablets. Depends on #3 (Gems) + tier-matched Living Rock. *(Ahead of order: Mana Tablet (T1) item + Pool load/unload already implemented via `/give`-only stub, since the pool-side mechanic didn't need Gems to exist first — see Known Gaps/TODOs.)*
 5. **Rings** — Tablet → Ring conversion. Design: [[magic/17_trinkets]] § Rings. Depends on #4.
 6. **Altar station shell** — block, block entity, tier registration, crafting recipes, ingredient-detection/trigger/mana-sourcing mechanic. Design: [[magic/20_altar]]. No blockers.
 7. **Infrastructure Runes** (`rune_infusion`, `rune_sacred`, `rune_desecrated`) — recipe data, registered as Altar recipes. Design: [[magic/25_runes]] § Infrastructure Runes. Depends on #6 (Altar must exist as the crafting station).
@@ -131,7 +131,7 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 | sacred_apothecary | ⬜ | ⬜ | ⬜ | — |
 | desecrated_apothecary | ⬜ | ⬜ | ⬜ | — |
 
-\* placeholder model — reuses the tier-1 `mana_pool` model/textures, no infused/sacred/desecrated art yet (see [[magic/15_mana-pool]] § Visual Design). Capacity is correct (4M / 16M via `MAX_CAPACITY_TIER_2/3` in `ManaPoolBlockEntity`); `sacred_mana_pool`/`desecrated_mana_pool` both correctly carry `MAX_CAPACITY_TIER_3` (same capacity, different `ManaEnergyType`). Energy-type field exists (`getEnergyType()`) but tainting/rejection mechanics are not implemented — see [[magic/00_energy]].
+\* placeholder model — reuses the tier-1 `mana_pool` model/textures, no infused/sacred/desecrated art yet (see [[magic/15_mana-pool]] § Visual Design). Capacity is correct (4M / 16M via `MAX_CAPACITY_TIER_2/3` in `ManaPoolBlockEntity`); `sacred_mana_pool`/`desecrated_mana_pool` both correctly carry `MAX_CAPACITY_TIER_3` (same capacity, different `EnergyType`). Tainting (unaligned T1/T2 flip to incoming type) and T3 aligned rejection (opposing energy drains instead of converting) are implemented and covered by `TestManaPool` MP-6..MP-9 — see [[magic/00_energy]].
 
 **Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
 
@@ -213,12 +213,14 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 - [ ] Pure daisy recipe (blocked on apothecary crafting)
 - [x] Infused / sacred / desecrated living rock & livingwood blocks registered (placeholder textures, no obtain path yet — needs the Mana Pool infusion mechanic, plan item #2)
 - [x] Infused / sacred / desecrated mana pool blocks registered + U-shape recipes from tier-matched Living Rock (placeholder textures, correct tiered capacity)
-- [x] Mana/Nox energy-type groundwork — `ManaEnergyType` enum, `ManaPool.getEnergyType()`, persisted on `ManaPoolBlockEntity`; sacred=MANA, desecrated=NOX, mana_pool/infused_mana_pool=MANA
+- [x] Mana/Nox energy-type groundwork — `EnergyType` enum, `EnergyPool.getEnergyType()`, persisted on `ManaPoolBlockEntity`; sacred=MANA, desecrated=NOX, mana_pool/infused_mana_pool=MANA
+- [x] Tainting mechanic (Nox entering a pool converts mana 1:1) — implemented via `EnergyContainer.receive()`, covered by `TestManaPool` MP-6/MP-7
+- [x] T3 pool alignment/rejection (wrong energy type → mutual loss) — implemented via `EnergyContainer.receive()`'s aligned branch, covered by MP-8/MP-9
+- [x] Internal energy API generalized beyond Mana-only naming (`api.mana` → `api.energy`, `ManaPool`/`ManaReceiver`/`ManaCollector`/`ManaNetworkHandler` → `Energy*`) — more energy types than Mana/Nox are planned, so the API no longer assumes "Mana" as the default/only polarity
+- [x] Mana Tablet (T1) — item registered with `EnergyContainer` data component; Mana Pool gained an internal charging slot (`interact()`/`transferChargingItem()` on `ManaPoolBlockEntity`) for insert/retrieve/bidirectional transfer. No crafting recipe (blocked on Gems, plan item #3) or repair drain yet. Design: [[magic/17_trinkets]] § Loading / unloading mana
 - [ ] Infused / sacred / desecrated living rock & livingwood real texture art + tint
 - [ ] Infused / sacred / desecrated mana pool real texture art + tint
 - [ ] Infused / sacred / desecrated mana pool bootstrap recipe (Rune + Pool item) — blocked on Altar/Runes (plan items #6/#7)
 - [ ] Infused / sacred / desecrated tiers of apothecary (future)
-- [ ] Tainting mechanic (Nox entering a pool converts mana 1:1) — not implemented, see [[magic/00_energy]]
-- [ ] T3 pool alignment/rejection (wrong energy type → mutual loss) — not implemented
 - [ ] Nox generation (dark flowers/sources) — design TBD, no obtain path for any Nox at all yet
 - [ ] No sounds beyond vanilla defaults

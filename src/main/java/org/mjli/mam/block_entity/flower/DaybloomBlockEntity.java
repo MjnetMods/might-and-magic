@@ -21,7 +21,7 @@ public class DaybloomBlockEntity extends GeneratingFlowerBlockEntity {
     }
 
     @Override
-    public int getMaxMana() {
+    public int getMaxEnergy() {
         return 900;
     }
 }

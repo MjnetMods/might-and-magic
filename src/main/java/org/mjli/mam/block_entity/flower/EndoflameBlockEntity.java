@@ -50,7 +50,7 @@ public class EndoflameBlockEntity extends GeneratingFlowerBlockEntity {
     }
 
     @Override
-    public int getMaxMana() {
+    public int getMaxEnergy() {
         return 300;
     }
 

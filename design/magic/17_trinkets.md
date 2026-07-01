@@ -52,6 +52,18 @@ A Mana Tablet is an item held in the inventory (or curio slot) that stores mana 
 
 Capacity = 50% of the matching pool tier. This means a full tablet can repair gear from a single pool fill without the pool needing to be completely drained.
 
+### Loading / unloading mana (implemented, T1 only)
+
+A Tablet charges by touching down on a Mana Pool — same "drop it on the pool" interaction as infusion ([[magic/15_mana-pool]] § Infusion Mechanic), but the pool captures the item into an internal slot instead of consuming it through a recipe. This avoids the item ever existing as a world `ItemEntity` (so it can't despawn, burn, or be picked up by mobs) while it charges.
+
+- **Insert** — right-click the pool while holding a mana-storage item and the slot is empty
+- **Retrieve** — right-click the pool empty-handed while the slot is occupied; item returns to the player's inventory (or drops in front of them if inventory is full)
+- **Transfer** — each pool tick, mana moves in whichever direction has room: pool → item (load) if the item isn't full and the pool has mana; item → pool (unload) if the item has spare mana and the pool isn't full
+- **Cross-polarity behaviour matches pool tiering exactly** — a T1/T2 Tablet is unaligned (same as T1/T2 pools): charging it at the opposite-polarity pool *converts* it to that polarity. A T3 Sacred/Desecrated Tablet is aligned (same as T3 pools): opposite-polarity contact drains it instead of converting.
+- Transfer rate is a placeholder (`CHARGE_RATE = 10,000/tick` in `ManaPoolBlockEntity`) — tune during balancing, same as repair drain rate below.
+
+Only the base **Mana Tablet (T1)** exists so far — registered with no crafting recipe yet (`/give` only), matching the "Tablet recipe: after ingots and gems are implemented" open question below. Repair behaviour (draining the tablet to fix equipped gear) is not implemented.
+
 ### Tablet repair behaviour
 
 - Passively drains mana from the tablet to repair equipped gear each tick
@@ -154,7 +166,7 @@ Keep simple for initial implementation — mana storage and repair only.
 | Infused Pearl (T2)      | ⬜ planned |
 | Sacred Pearl (T3)       | ⬜ planned |
 | Desecrated Pearl (T3)   | ⬜ planned |
-| Mana Tablet (T1)        | ⬜ planned |
+| Mana Tablet (T1)        | ⬜ item + pool load/unload implemented — no crafting recipe or repair yet |
 | Infused Tablet (T2)     | ⬜ planned |
 | Sacred Tablet (T3)      | ⬜ planned |
 | Desecrated Tablet (T3)  | ⬜ planned |

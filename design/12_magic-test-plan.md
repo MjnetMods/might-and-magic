@@ -2,7 +2,7 @@
 path: magic
 type: test
 status: wip
-last-updated: 2026-06-30
+last-updated: 2026-07-01
 links: "[[11_magic-implementation-status]], [[ref/gametest-guide]]"
 ---
 
@@ -57,7 +57,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | `nbt_energyType_roundtripsMana` | MANA written → reads back as MANA |
 | `nbt_energyType_absentKeepsConstructorDefault` | energyType key absent → keeps the value set at construction (no silent reset) |
 
-### Unit tests — `ManaNetworkHandlerTest` (4 tests)
+### Unit tests — `EnergyNetworkHandlerTest` (4 tests)
 
 | Test | What it verifies |
 |------|-----------------|
@@ -66,15 +66,19 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | `queryClosest_prefersNearer_whenMultiplePools` | Two in-range pools → closer wins |
 | `queryClosest_excludesFarPool_whenOnlyNearIsInRadius` | One in, one out → only near returned |
 
-### `TestManaPool` (5 GameTests)
+### `TestManaPool` (9 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
 | MP-1 | `manaPoolComparatorSignalInGame` | `getAnalogOutputSignal` returns 7 at 500k mana in-game |
-| MP-2 | `manaPoolRegistersOnPlace` | Pool BE is in ManaNetworkHandler set after first server tick |
-| MP-3 | `manaPoolDeregistersOnRemove` | Removing pool block removes it from ManaNetworkHandler synchronously |
+| MP-2 | `manaPoolRegistersOnPlace` | Pool BE is in EnergyNetworkHandler set after first server tick |
+| MP-3 | `manaPoolDeregistersOnRemove` | Removing pool block removes it from EnergyNetworkHandler synchronously |
 | MP-4 | `poolTierCapacityIsCorrect` | mana_pool/infused/sacred/desecrated report max capacity 1M/4M/16M/16M |
 | MP-5 | `poolTierEnergyTypeIsCorrect` | mana_pool/infused/sacred report MANA; desecrated reports NOX |
+| MP-6 | `manaPoolTaintsToNoxOnContact` | T1 pool: Nox entering taints all stored Mana to Nox at 1:1, instant |
+| MP-7 | `infusedManaPoolTaintsToNoxOnContact` | T2 pool: same taint behavior as MP-6 |
+| MP-8 | `sacredManaPoolRejectsNox` | T3 aligned (Mana): Nox contact destroys equal Mana, no Nox stored |
+| MP-9 | `desecratedManaPoolRejectsMana` | T3 aligned (Nox): Mana contact destroys equal Nox, no Mana stored |
 
 ### `TestApothecary` (2 GameTests)
 
@@ -111,6 +115,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | ID | Test | Complexity | Notes |
 |----|------|------------|-------|
 | PA-3 | `apothecary_crafts_recipe_output` | high | **Blocked** — crafting logic is a TODO stub |
+| — | Tablet ↔ Pool load/unload | medium | No automated test yet for `ManaPoolBlockEntity.interact()`/`transferChargingItem()` (insert, retrieve, bidirectional transfer, T1/T2 convert vs T3 aligned-drain). Manually verified only. Design: [[magic/17_trinkets]] § Loading / unloading mana |
 
 ---
 
@@ -120,9 +125,9 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 |----------|-------|
 | Pure Daisy integration + edge cases | 6 |
 | ManaPool (unit) | 15 |
-| ManaNetworkHandler (unit) | 4 |
-| ManaPool (GameTest) | 5 |
+| EnergyNetworkHandler (unit) | 4 |
+| ManaPool (GameTest) | 9 |
 | Apothecary (GameTest) | 2 |
 | Loot tables / harvest (GameTest) | 6 |
 | Recipes — crafting chain + furniture (GameTest) | 5 |
-| **Total** | **43** |
+| **Total** | **47** |

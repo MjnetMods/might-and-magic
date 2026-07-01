@@ -1,6 +1,6 @@
 package org.mjli.mam.api.internal;
 
-public enum ManaBlockType {
+public enum EnergyBlockType {
     COLLECTOR,
     POOL
 }
