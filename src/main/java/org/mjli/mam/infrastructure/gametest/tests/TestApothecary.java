@@ -5,11 +5,15 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.mjli.mam.MightAndMagic;
@@ -89,5 +93,59 @@ public class TestApothecary {
             helper.fail("Petal item did not survive round-trip");
         }
         helper.succeed();
+    }
+
+    // ── PA-3 ─────────────────────────────────────────────────────────────────
+
+    /**
+     * PA-3: filling with water, throwing 4 white petals, then throwing a seed reagent
+     * crafts a Pure Daisy, clears the ingredient list, and drains the fluid.
+     */
+    @GameTest(template = PLATFORM)
+    public static void apothecaryCraftsPureDaisyFromPetalsAndSeed(GameTestHelper helper) {
+        BlockState state = VerdantMana.APOTHECARY.get().defaultBlockState();
+        helper.setBlock(CENTER, state);
+        BlockPos absCenter = helper.absolutePos(CENTER);
+        ApothecaryBlockEntity be = (ApothecaryBlockEntity) helper.getLevel().getBlockEntity(absCenter);
+        if (be == null) { helper.fail("No BlockEntity at CENTER"); return; }
+
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        be.interact(player);
+        if (be.getFluidState() != ApothecaryBlockEntity.FluidState.WATER) {
+            helper.fail("Expected WATER after bucket fill, got " + be.getFluidState());
+            return;
+        }
+
+        double x = absCenter.getX() + 0.5, y = absCenter.getY() + 1.0, z = absCenter.getZ() + 0.5;
+        for (int i = 0; i < 4; i++) {
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                    new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get())));
+        }
+
+        helper.runAfterDelay(2, () -> {
+            if (be.getPetals().size() != 4) {
+                helper.fail("Expected 4 petals ingested, got " + be.getPetals().size());
+                return;
+            }
+
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                    new ItemStack(Items.WHEAT_SEEDS)));
+
+            helper.runAfterDelay(2, () -> {
+                if (be.getFluidState() != ApothecaryBlockEntity.FluidState.EMPTY) {
+                    helper.fail("Expected fluid drained after craft, got " + be.getFluidState());
+                }
+                if (!be.getPetals().isEmpty()) {
+                    helper.fail("Expected petals cleared after craft, got " + be.getPetals().size());
+                }
+                boolean foundOutput = helper.getLevel()
+                        .getEntitiesOfClass(ItemEntity.class, new AABB(absCenter.above()))
+                        .stream()
+                        .anyMatch(e -> e.getItem().is(VerdantFlowers.PURE_DAISY.get().asItem()));
+                if (!foundOutput) helper.fail("Expected Pure Daisy output item entity above the apothecary");
+                helper.succeed();
+            });
+        });
     }
 }

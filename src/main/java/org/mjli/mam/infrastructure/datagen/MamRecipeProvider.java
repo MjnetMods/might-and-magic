@@ -16,11 +16,13 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import org.mjli.mam.MightAndMagic;
+import org.mjli.mam.recipe.ApothecaryRecipe;
 import org.mjli.mam.verdant.VerdantFlowers;
 import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class MamRecipeProvider extends RecipeProvider {
@@ -36,6 +38,7 @@ public class MamRecipeProvider extends RecipeProvider {
         livingRock(output);
         livingWood(output);
         apothecary(output);
+        apothecaryPureDaisy(output);
         manaPool(output);
     }
 
@@ -200,6 +203,17 @@ public class MamRecipeProvider extends RecipeProvider {
             .unlockedBy("has_petal", has(petals))
             .unlockedBy("has_mushroom", has(mushrooms))
             .save(output, id("apothecary"));
+    }
+
+    // In-world Apothecary recipe: 4x white petal + seed reagent -> Pure Daisy. Ported from
+    // Botania's data/botania/recipes/petal_apothecary/pure_daisy.json (see design/magic/10_apothecary.md).
+    private void apothecaryPureDaisy(RecipeOutput output) {
+        Ingredient whitePetal = Ingredient.of(VerdantFlowers.PETALS.get(DyeColor.WHITE).get());
+        ApothecaryRecipe pureDaisy = new ApothecaryRecipe(
+                List.of(whitePetal, whitePetal, whitePetal, whitePetal),
+                Ingredient.of(Tags.Items.SEEDS),
+                VerdantFlowers.PURE_DAISY.asStack());
+        output.accept(id("apothecary/pure_daisy"), pureDaisy, null);
     }
 
     private void manaPool(RecipeOutput output) {
