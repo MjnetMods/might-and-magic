@@ -77,10 +77,13 @@ while IFS= read -r -d '' file; do
     fi
   done < <(printf '%s\n' "$stripped" | grep -oE '\[\[[^]]+\]\]' || true)
 
-  # informational: how many open questions remain
+  # informational: how many open questions remain — each resolved question is
+  # a **Q:**/**A:** pair, so open count is just Q's minus A's
   q_count=$(grep -c '\*\*Q:\*\*' "$file" || true)
-  if [[ "$q_count" -gt 0 ]]; then
-    echo "INFO: $rel — $q_count open question(s)"
+  a_count=$(grep -c '\*\*A:\*\*' "$file" || true)
+  open_count=$((q_count - a_count))
+  if [[ "$open_count" -gt 0 ]]; then
+    echo "INFO: $rel — $open_count open question(s)"
   fi
 
 done < <(find "$root" -name '*.md' -print0)
