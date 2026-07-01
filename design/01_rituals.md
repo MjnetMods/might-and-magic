@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[magic/00_energy]], [[magic/25_runes]], [[00_infra]]"
+links: ["[[magic/00_energy]]", "[[magic/25_runes]]", "[[00_infra]]"]
 ---
 
 # MAM — Rituals & Chalk
@@ -134,11 +134,15 @@ Ward and Anchor are school-specific — each targets one meter type (Tangle, Cor
 
 ## Open Questions
 
-- [ ] **Color → rune mapping** — which colors map to which rune types / ritual schools? TBD with ritual content design.
-- [ ] **Focus item type** — dedicated focus item, or a rune? TBD with first ritual design.
-- [ ] **Ritual persistence** — persistent until substrate destroyed, or single-use on trigger? Leaning persistent, but per-ritual TBD.
-- [ ] **Chalk recipe ingredients** — runes + mushrooms + petals + pig fat confirmed as direction; exact recipe TBD.
-- [ ] **Ring count per ritual** — how many concentric rings max? TBD with ritual designs.
+**Q:** Color → rune mapping — which colors map to which rune types / ritual schools? TBD with ritual content design.
+
+**Q:** Focus item type — dedicated focus item, or a rune? TBD with first ritual design.
+
+**Q:** Ritual persistence — persistent until substrate destroyed, or single-use on trigger? Leaning persistent, but per-ritual TBD.
+
+**Q:** Chalk recipe ingredients — runes + mushrooms + petals + pig fat confirmed as direction; exact recipe TBD.
+
+**Q:** Ring count per ritual — how many concentric rings max? TBD with ritual designs.
 
 ---
 

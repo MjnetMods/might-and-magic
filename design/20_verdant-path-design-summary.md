@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-29
-links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[magic/15_mana-pool]], [[magic/17_trinkets]], [[20_verdant-path-items]]"
+links: ["[[20_verdant-path]]", "[[20_verdant-path-quipment]]", "[[magic/15_mana-pool]]", "[[magic/17_trinkets]]", "[[20_verdant-path-items]]"]
 ---
 
 # Verdant Path — Design Summary
@@ -199,12 +199,18 @@ A cloth piece can hold one ring merge (mana storage, any slot) and one trinket m
 
 ## Open Questions
 
-- [ ] **T2/T3 pool bootstrap** — how does the player get their first Infused Mana Pool without Infused Living Rock? See [[magic/15_mana-pool]]
-- [ ] **Mana Pool recipe shape** — decided (U shape); Infused/Sacred pool recipes blocked on bootstrap resolution
-- [ ] **Trinket crafting recipes** — all TBD; materials and shapes not yet designed
-- [ ] **Tablet/ring slot** — does the tablet also fit a curio offhand slot, or inventory only?
-- [ ] **Repair rate** — how fast does the ring drain to repair gear? Affects feel significantly
-- [ ] **Ring passive bonuses** — held for post-launch pass
+**Q:** T2/T3 pool bootstrap — how does the player get their first Infused Mana Pool without Infused Living Rock? See [[magic/15_mana-pool]]
+
+**Q:** Mana Pool recipe shape — what shape and material?
+**A:** U shape. Infused/Sacred pool recipes still blocked on bootstrap resolution above.
+
+**Q:** Trinket crafting recipes — all TBD; materials and shapes not yet designed
+
+**Q:** Tablet/ring slot — does the tablet also fit a curio offhand slot, or inventory only?
+
+**Q:** Repair rate — how fast does the ring drain to repair gear? Affects feel significantly
+
+**Q:** Ring passive bonuses — held for post-launch pass
 
 ---
 

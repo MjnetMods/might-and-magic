@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-29
-links: "[[20_verdant-path]], [[21_verdant-implementation-status]]"
+links: ["[[20_verdant-path]]", "[[21_verdant-implementation-status]]"]
 ---
 
 # Verdant Path — Equipment
@@ -61,7 +61,6 @@ S S S
 | Sacred Ingot + 8 string  | 1× Sacred Weave Patch  |                                    |
 
 Expensive is intentional. It should feel like a real investment.
-
 
 ### Step 3 — Gear Crafting
 
@@ -167,10 +166,15 @@ Pool capacity values (absolute mana numbers) are TBD — set during balancing pa
 
 ## Open Questions
 
-- [x] **Infused tier recipe** — requires Tier 2 Mana Pool; costs 75% of its capacity (same rule as all tiers)
-- [x] **Sacred tier recipe** — drop Block of Diamond in Sacred Mana Pool; costs 75% capacity. Same pattern as all tiers.
-- [ ] **Mana drain rate?** How much mana per durability point repaired? Affects how quickly a tablet depletes.
-- [ ] **Cloth bonuses?** Full set mana capacity / cost reduction — design TBD, hold for post-launch pass.
+**Q:** Infused tier recipe — what does repairing an Infused-tier tablet cost?
+**A:** Requires Tier 2 Mana Pool; costs 75% of its capacity (same rule as all tiers).
+
+**Q:** Sacred tier recipe — what does repairing a Sacred-tier tablet cost?
+**A:** Drop Block of Diamond in Sacred Mana Pool; costs 75% capacity. Same pattern as all tiers.
+
+**Q:** Mana drain rate — how much mana per durability point repaired? Affects how quickly a tablet depletes.
+
+**Q:** Cloth bonuses — full set mana capacity / cost reduction? Design TBD, hold for post-launch pass.
 
 ---
 

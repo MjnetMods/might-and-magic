@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[magic/00_energy]], [[01_rituals]], [[30_summoning-path]], [[40_sanguine-path]]"
+links: ["[[magic/00_energy]]", "[[01_rituals]]", "[[30_summoning-path]]", "[[40_sanguine-path]]"]
 ---
 
 # MAM — Cross-Cutting Items
@@ -84,9 +84,11 @@ The Altar activation trigger. Thrown last into a loaded Altar to fire recipe mat
 
 ## Open Questions
 
-- [ ] Butcher's Knife durability and recipe
-- [ ] Candle uses in rituals — decoration only, or functional ingredient?
-- [ ] Basic Chalk recipe shape (shapeless? shaped?)
+**Q:** Butcher's Knife durability and recipe
+
+**Q:** Candle uses in rituals — decoration only, or functional ingredient?
+
+**Q:** Basic Chalk recipe shape (shapeless? shaped?)
 
 ---
 

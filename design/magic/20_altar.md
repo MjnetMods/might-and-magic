@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[20_verdant-path]], [[magic/15_mana-pool]], [[magic/17_trinkets]], [[magic/00_energy]], [[magic/10_apothecary]]"
+links: ["[[20_verdant-path]]", "[[magic/15_mana-pool]]", "[[magic/17_trinkets]]", "[[magic/00_energy]]", "[[magic/10_apothecary]]"]
 ---
 
 # Verdant Path — Altar
@@ -192,10 +192,13 @@ See [[magic/10_apothecary]] for the Apothecary's full design.
 
 ## Open Questions
 
-- [ ] **Mana pool scan range** — 8 blocks suggested; tune during implementation
-- [ ] **Rune ingredients and mana costs** — TBD, balancing pass
-- [ ] **Other T1/T2/T3 recipe content** — what else does the altar produce beyond runes?
-- [ ] **Visual** — ingredients orbit above altar? Particle effects during mana fill? Decide before client implementation
+**Q:** Mana pool scan range — 8 blocks suggested; tune during implementation
+
+**Q:** Rune ingredients and mana costs — TBD, balancing pass
+
+**Q:** Other T1/T2/T3 recipe content — what else does the altar produce beyond runes?
+
+**Q:** Visual — ingredients orbit above altar? Particle effects during mana fill? Decide before client implementation
 
 ---
 

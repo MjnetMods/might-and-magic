@@ -45,10 +45,10 @@ baseURL = "https://mjli.org/"
 
 ### 4. Verify
 
-- [ ] DNS propagated (`dig mjli.org` returns GitHub's IPs)
-- [ ] `https://mjli.org/` loads the site with valid TLS
-- [ ] All internal links resolve correctly (canonifyURLs handles this)
-- [ ] Old GitHub Pages URL redirects or returns 404 (expected)
+- `todo` — DNS propagated (`dig mjli.org` returns GitHub's IPs)
+- `todo` — `https://mjli.org/` loads the site with valid TLS
+- `todo` — All internal links resolve correctly (canonifyURLs handles this)
+- `todo` — Old GitHub Pages URL redirects or returns 404 (expected)
 
 ## Notes
 

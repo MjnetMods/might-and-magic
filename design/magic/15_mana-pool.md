@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-29
-links: "[[20_verdant-path]], [[20_verdant-path-quipment]], [[21_verdant-implementation-status]], [[magic/00_energy]], [[magic/10_apothecary]], [[magic/20_altar]], [[magic/25_runes]]"
+links: ["[[20_verdant-path]]", "[[20_verdant-path-quipment]]", "[[21_verdant-implementation-status]]", "[[magic/00_energy]]", "[[magic/10_apothecary]]", "[[magic/20_altar]]", "[[magic/25_runes]]"]
 ---
 
 # Verdant Path — Mana Pools
@@ -51,7 +51,6 @@ Tier 2/3 upgrade — pick up the existing pool (breaks as an item, stored mana l
 ```
 
 The mana loss on pickup is an intentional cost — you are committing your infrastructure to the next tier.
-
 
 | Output            | Recipe                                                          | Status    |
 |-------------------|-----------------------------------------------------------------|-----------|
@@ -161,10 +160,16 @@ Color of fluid is green for mana, purple for nox
 
 ## Open Questions
 
-- [x] **Mana Pool recipe shape** — ring/U shape, 7× Living Rock (same shape for all tiers). WP-C unblocked.
-- [x] **Infused / Sacred pool recipes** — Rune + existing pool item at crafting table. Unblocked.
-- [ ] **Fluid rendering** — custom renderer or repurposed water? Decide before Dev work on Tier 2/3 visual.
-- [x] **Pool upgrade path** — pick up existing pool (mana lost), combine with rune at crafting table → next tier pool. Not in-place.
+**Q:** Mana Pool recipe shape — what shape and material?
+**A:** Ring/U shape, 7× Living Rock (same shape for all tiers). WP-C unblocked.
+
+**Q:** Infused / Sacred pool recipes — how are Tier 2/3 pools obtained?
+**A:** Rune + existing pool item at crafting table. Unblocked.
+
+**Q:** Fluid rendering — custom renderer or repurposed water? Decide before Dev work on Tier 2/3 visual.
+
+**Q:** Pool upgrade path — how does a pool move to the next tier?
+**A:** Pick up existing pool (mana lost), combine with rune at crafting table → next tier pool. Not in-place.
 
 ---
 
@@ -180,10 +185,10 @@ File targets:
   - src/main/java/org/mjli/mam/recipe/ — new PoolInfusionRecipe type (data-driven)
   - src/main/resources/data/mam/recipes/ — add copper_block → mana_ingot infusion recipe JSON
 Acceptance criteria:
-  - [ ] Drop a Block of Copper on a full Mana Pool → Mana Ingot ejects, pool loses 750,000 mana
-  - [ ] Drop same block on a pool with < 750,000 mana → nothing happens, block stays
-  - [ ] Drop an unrecognised item → passes through, no mana consumed
-  - [ ] Recipe is in a JSON file, not hardcoded
+  - `todo` — Drop a Block of Copper on a full Mana Pool → Mana Ingot ejects, pool loses 750,000 mana
+  - `todo` — Drop same block on a pool with < 750,000 mana → nothing happens, block stays
+  - `todo` — Drop an unrecognised item → passes through, no mana consumed
+  - `todo` — Recipe is in a JSON file, not hardcoded
 Out of scope: Infused/Sacred pools, Living Rock recipes, gear repair mechanic
 ```
 
@@ -198,11 +203,11 @@ File targets:
   - src/main/java/org/mjli/mam/block_entity/mana/ManaPoolBlockEntity.java — tiered via constructor (capacity, EnergyType), not subclassing
   - src/main/resources/assets/mam/ — models and textures for T2/T3 pools
 Acceptance criteria:
-  - [x] Infused/Sacred/Desecrated Mana Pool place and break without error
-  - [ ] Each has its own texture/model distinct from Tier 1 (placeholder: reuses Tier 1 art)
-  - [x] MAX_MANA is 4,000,000 for T2 and 16,000,000 for T3
-  - [x] Comparator output scales correctly for each tier's capacity
-  - [ ] Infusion mechanic (from WP-A) works for T2 → Infused Ingot, T3 → Sacred Ingot
+  - `done` — Infused/Sacred/Desecrated Mana Pool place and break without error
+  - `todo` — Each has its own texture/model distinct from Tier 1 (placeholder: reuses Tier 1 art)
+  - `done` — MAX_MANA is 4,000,000 for T2 and 16,000,000 for T3
+  - `done` — Comparator output scales correctly for each tier's capacity
+  - `todo` — Infusion mechanic (from WP-A) works for T2 → Infused Ingot, T3 → Sacred Ingot
 Out of scope: crafting recipes for the pools themselves (now covered by WP-C)
 ```
 
@@ -214,9 +219,9 @@ Design doc: design/magic/15_mana-pool.md § Pool Crafting Recipes
 File targets:
   - src/main/java/org/mjli/mam/infrastructure/datagen/MamRecipeProvider.java — mana_pool, infused_mana_pool, sacred_mana_pool, desecrated_mana_pool recipes
 Acceptance criteria:
-  - [x] Mana Pool is craftable in a crafting table from Living Rock (U shape, 7× — see § Pool Crafting Recipes)
-  - [x] Infused/Sacred/Desecrated pools craftable from tier-matched Living Rock (same U shape, direct path)
-  - [ ] Recipe appears in JEI/REI (not yet verified in-game)
+  - `done` — Mana Pool is craftable in a crafting table from Living Rock (U shape, 7× — see § Pool Crafting Recipes)
+  - `done` — Infused/Sacred/Desecrated pools craftable from tier-matched Living Rock (same U shape, direct path)
+  - `todo` — Recipe appears in JEI/REI (not yet verified in-game)
 Out of scope: bootstrap recipe (Rune + Pool item) — blocked on Altar/Runes
 ```
 

@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[magic/00_energy]], [[01_rituals]]"
+links: ["[[magic/00_energy]]", "[[01_rituals]]"]
 ---
 
 # MAM — Side Effects & Gremlins
@@ -45,7 +45,6 @@ Each energy type has a chunk-scoped meter that fills as magic is actively used. 
 - **Spawn chance** — random % roll per tick/interval. Higher meter = worse manifestation tier available, not just more frequent. The higher you push it, the more dangerous what emerges.
 - **Drain** — each manifestation that spawns lowers the meter. Side effects are self-limiting if left alone, but the manifestations themselves are the problem.
 - **No suppression** — once active, manifestations cannot be cancelled. They drain naturally.
-
 
 ## Side Effects
 
@@ -93,9 +92,7 @@ When summoning daemons sometime other things sneak through into our realm ...
 
 The sky is falling, literally ... quite destructive !
 
-
 ... upside is you can mine the meteorite for ores.
-
 
 ---
 
@@ -129,16 +126,25 @@ Not a storage device — a detonator. Use it when you want maximum chaos now, re
 
 ## Open Questions
 
-- [ ] **Meter capacity** — TBD, balancing pass (accumulation rate is 1:1 with energy generated)
-- [ ] **Spawn % curve** — how does manifestation tier scale with meter level? TBD
-- [ ] **Gremlin count on spawn** — fixed, or scales with meter level?
-- [ ] **Gremlin despawn** — when meter drains to zero? Timer? Killed only?
-- [ ] **Affected machine block list** — Create machines confirmed; other mods TBD / config-gated
-- [ ] **Meter visualisation** — how does the player know the meter is near overflow?
-- [ ] **Ward/Anchor range** — how many chunks does displacement reach? TBD
-- [ ] **Bottle capacity** — how much meter does one bottle hold? Stack behaviour? TBD
-- [ ] **Pandora's Box variants** — different box types per meter type? Per manifestation tier? TBD
-- [ ] **Other school manifestations** — Corruption / Rational / Warp / Wyrd manifestation types TBD with per-school design
+**Q:** Meter capacity — TBD, balancing pass (accumulation rate is 1:1 with energy generated)
+
+**Q:** Spawn % curve — how does manifestation tier scale with meter level? TBD
+
+**Q:** Gremlin count on spawn — fixed, or scales with meter level?
+
+**Q:** Gremlin despawn — when meter drains to zero? Timer? Killed only?
+
+**Q:** Affected machine block list — Create machines confirmed; other mods TBD / config-gated
+
+**Q:** Meter visualisation — how does the player know the meter is near overflow?
+
+**Q:** Ward/Anchor range — how many chunks does displacement reach? TBD
+
+**Q:** Bottle capacity — how much meter does one bottle hold? Stack behaviour? TBD
+
+**Q:** Pandora's Box variants — different box types per meter type? Per manifestation tier? TBD
+
+**Q:** Other school manifestations — Corruption / Rational / Warp / Wyrd manifestation types TBD with per-school design
 
 ---
 

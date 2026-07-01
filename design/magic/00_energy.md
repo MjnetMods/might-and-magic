@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[magic/25_runes]], [[magic/15_mana-pool]], [[magic/20_altar]], [[magic/10_apothecary]], [[magic/30_weavery]]"
+links: ["[[magic/25_runes]]", "[[magic/15_mana-pool]]", "[[magic/20_altar]]", "[[magic/10_apothecary]]", "[[magic/30_weavery]]"]
 ---
 
 # MAM — Magic Energy System
@@ -100,10 +100,13 @@ The Spreader is energy-agnostic — it carries whatever energy type the connecte
 
 ## Open Questions
 
-- [ ] **Nox generation** — primary sources TBD (dark flowers, corruption structures, rituals — per-school dark design). Apothecary bootstrap path is decided — see [[magic/10_apothecary]] § Nox bootstrap.
-- [ ] **Tainting mechanic** — Nox enters a pool via Mana Spreader (a Nox-generating source pointed at a Mana/Infused Pool fires Nox bursts, triggering instant taint). Spreader burst details TBD.
-- [ ] **Blood fluid** — is Blood a custom fluid item, or a vanilla fluid substitute? Sanguine school design
-- [ ] **Desecrated Weavery** — does the Weavery also get a Desecrated tier? TBD
+**Q:** Nox generation — primary sources TBD (dark flowers, corruption structures, rituals — per-school dark design). Apothecary bootstrap path is decided — see [[magic/10_apothecary]] § Nox bootstrap.
+
+**Q:** Tainting mechanic — Nox enters a pool via Mana Spreader (a Nox-generating source pointed at a Mana/Infused Pool fires Nox bursts, triggering instant taint). Spreader burst details TBD.
+
+**Q:** Blood fluid — is Blood a custom fluid item, or a vanilla fluid substitute? Sanguine school design
+
+**Q:** Desecrated Weavery — does the Weavery also get a Desecrated tier? TBD
 
 ---
 

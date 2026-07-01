@@ -2,7 +2,7 @@
 type: infra
 status: todo
 last-updated: 2026-06-28
-links: "[[21_verdant-implementation-status]]"
+links: ["[[21_verdant-implementation-status]]"]
 ---
 
 # Infrastructure
@@ -80,9 +80,9 @@ Reference: `best/site/.github/workflows/build.yml` — strip the CV download ste
 
 ### Verification
 
-- [ ] `./gradlew publishModrinth` locally with `MODRINTH_TOKEN` env var set → file appears on Modrinth project page
-- [ ] `./gradlew publishCurseforge` locally with `CURSEFORGE_TOKEN` env var set → file appears on CurseForge project page
-- [ ] Push a `v0.0.1-test` tag → GitHub Release created, both platform uploads triggered
+- `todo` — `./gradlew publishModrinth` locally with `MODRINTH_TOKEN` env var set → file appears on Modrinth project page
+- `todo` — `./gradlew publishCurseforge` locally with `CURSEFORGE_TOKEN` env var set → file appears on CurseForge project page
+- `todo` — Push a `v0.0.1-test` tag → GitHub Release created, both platform uploads triggered
 
 ---
 
@@ -116,8 +116,8 @@ Design doc: design/<NN_filename.md> § <Section heading>
 File targets:
   - <path/to/file> — <what to change>
 Acceptance criteria:
-  - [ ] <verifiable check>
-  - [ ] <verifiable check>
+  - `todo` — <verifiable check>
+  - `todo` — <verifiable check>
 Out of scope: <explicit list of what NOT to touch>
 ```
 

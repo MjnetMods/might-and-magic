@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-07-01
-links: "[[magic/00_energy]], [[magic/15_mana-pool]], [[magic/30_weavery]], [[20_verdant-path-items]], [[20_verdant-path-quipment]]"
+links: ["[[magic/00_energy]]", "[[magic/15_mana-pool]]", "[[magic/30_weavery]]", "[[20_verdant-path-items]]", "[[20_verdant-path-quipment]]"]
 ---
 
 # MAM — Gems, Tablets & Rings
@@ -147,10 +147,13 @@ Keep simple for initial implementation — mana storage and repair only.
 
 ## Open Questions
 
-- [ ] **Tablet recipe** — what materials? After ingots and gems are implemented.
-- [ ] **Ring passive bonuses** — hold for post-launch pass; implement storage + repair only first.
-- [ ] **Tablet slot** — inventory-only or also fits curio offhand slot? Affects repair reliability when no hands-free slot.
-- [ ] **Repair rate** — how fast does the tablet drain to repair? Affects tablet capacity feel.
+**Q:** Tablet recipe — what materials? After ingots and gems are implemented.
+
+**Q:** Ring passive bonuses — hold for post-launch pass; implement storage + repair only first.
+
+**Q:** Tablet slot — inventory-only or also fits curio offhand slot? Affects repair reliability when no hands-free slot.
+
+**Q:** Repair rate — how fast does the tablet drain to repair? Affects tablet capacity feel.
 
 ---
 

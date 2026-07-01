@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-29
-links: "[[magic/20_altar]], [[00_infra]]"
+links: ["[[magic/20_altar]]", "[[00_infra]]"]
 ---
 
 # MAM — Rune Taxonomy
@@ -175,12 +175,18 @@ Implement runes alongside the content that first requires them — not speculati
 
 ## Open Questions
 
-- [x] **Mana Dust** — pool infusion: Gunpowder **or** Redstone **or** Glowstone Dust **or** Sugar (any one), 500 mana, any T1 pool. OR logic — single item in, single item out. Adapted from Botania `mana_powder_dust.json`. Tag: add `mam:mana_dust` to `botania:mana_dusts` via `data/botania/tags/items/mana_dusts.json` (`replace: false`) — MAM and Botania dust are then interchangeable in all recipes using that tag.
-- [ ] **T1 recipe ingredients** — specific natural items per rune TBD, balancing pass
-- [ ] **T2 recipe ingredients** — thematic natural items per rune TBD, balancing pass
-- [ ] **Mana costs** — all values approximate; tune during implementation
-- [ ] **`rune_chaos` / `rune_void` alignment** — Nox is cross-school; these two runes are unassigned pending further school design. May become school-specific or stay as generic dark primitives.
-- [ ] **Alternative production routes** — each non-Verdant school adds its own when designed
+**Q:** Mana Dust — how is it produced?
+**A:** Pool infusion: Gunpowder **or** Redstone **or** Glowstone Dust **or** Sugar (any one), 500 mana, any T1 pool. OR logic — single item in, single item out. Adapted from Botania `mana_powder_dust.json`. Tag: add `mam:mana_dust` to `botania:mana_dusts` via `data/botania/tags/items/mana_dusts.json` (`replace: false`) — MAM and Botania dust are then interchangeable in all recipes using that tag.
+
+**Q:** T1 recipe ingredients — specific natural items per rune TBD, balancing pass
+
+**Q:** T2 recipe ingredients — thematic natural items per rune TBD, balancing pass
+
+**Q:** Mana costs — all values approximate; tune during implementation
+
+**Q:** `rune_chaos` / `rune_void` alignment — Nox is cross-school; these two runes are unassigned pending further school design. May become school-specific or stay as generic dark primitives.
+
+**Q:** Alternative production routes — each non-Verdant school adds its own when designed
 
 ---
 

@@ -190,11 +190,11 @@ make serve       # http://localhost:1313 — live reload, drafts visible
 
 ### Acceptance criteria
 
-- [ ] `make modules` (from `site/`) pulls Blowfish and generates `go.sum`
-- [ ] `make serve` starts without errors, site loads at `localhost:1313`
-- [ ] Nav shows: Getting Started, Verdant Path
-- [ ] `/dev/` accessible by direct URL, not in nav
-- [ ] Dark mode, avocado color scheme
+- `todo` — `make modules` (from `site/`) pulls Blowfish and generates `go.sum`
+- `todo` — `make serve` starts without errors, site loads at `localhost:1313`
+- `todo` — Nav shows: Getting Started, Verdant Path
+- `todo` — `/dev/` accessible by direct URL, not in nav
+- `todo` — Dark mode, avocado color scheme
 
 ---
 
@@ -247,10 +247,10 @@ Scale factor 3× (16px → 48px) keeps pixel art crisp at doc-page widths.
 
 ### Acceptance criteria
 
-- [ ] `./gradlew syncTextures` → PNGs appear in `site/static/textures/item/`
-- [ ] Shortcode renders correctly in `hugo server` local preview
-- [ ] Missing texture (air slot) shows as grey box, no broken-image icon
-- [ ] CI: textures synced before Hugo build step
+- `todo` — `./gradlew syncTextures` → PNGs appear in `site/static/textures/item/`
+- `todo` — Shortcode renders correctly in `hugo server` local preview
+- `todo` — Missing texture (air slot) shows as grey box, no broken-image icon
+- `todo` — CI: textures synced before Hugo build step
 
 ---
 
@@ -264,8 +264,8 @@ New file: `.github/workflows/site.yml`
 
 ### Acceptance criteria
 
-- [ ] Push to `main` → GitHub Pages URL serves player content
-- [ ] `/dev/getting-started` accessible by direct URL, not in nav
+- `todo` — Push to `main` → GitHub Pages URL serves player content
+- `todo` — `/dev/getting-started` accessible by direct URL, not in nav
 
 ---
 

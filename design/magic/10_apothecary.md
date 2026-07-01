@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[magic/00_energy]], [[20_verdant-path]], [[magic/20_altar]], [[11_magic-implementation-status]]"
+links: ["[[magic/00_energy]]", "[[20_verdant-path]]", "[[magic/20_altar]]", "[[11_magic-implementation-status]]"]
 ---
 
 # MAM — Apothecary
@@ -71,8 +71,9 @@ Yield intentionally tiny (1 per tick, 10 ticks to empty an Apothecary) — boots
 
 ## Open Questions
 
-- [ ] **T1 base slot count (`x`)** — the Slots column above (`x+1`, `4*x+1`, `4*4*x+1`) is defined relative to a base value `x` that hasn't been pinned down yet. Set during balancing pass.
-- [ ] **In-world recipe data format** — `ApothecaryRecipe` currently models `(petals: List<Ingredient>, reagent: Ingredient, output: ItemStack)` as a `Recipe<SingleRecipeInput>`, which doesn't fit the multi-petal-list + reagent matching this mechanic actually needs (`matches()` is hardcoded `false`). Needs rework before `interact()` can be implemented — manual matching against `RecipeManager.getAllRecipesFor(...)` instead of the `Recipe<>` interface is one option.
+**Q:** T1 base slot count (`x`) — the Slots column above (`x+1`, `4*x+1`, `4*4*x+1`) is defined relative to a base value `x` that hasn't been pinned down yet. Set during balancing pass.
+
+**Q:** In-world recipe data format — `ApothecaryRecipe` currently models `(petals: List<Ingredient>, reagent: Ingredient, output: ItemStack)` as a `Recipe<SingleRecipeInput>`, which doesn't fit the multi-petal-list + reagent matching this mechanic actually needs (`matches()` is hardcoded `false`). Needs rework before `interact()` can be implemented — manual matching against `RecipeManager.getAllRecipesFor(...)` instead of the `Recipe<>` interface is one option.
 
 ---
 

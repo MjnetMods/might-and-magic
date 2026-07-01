@@ -3,7 +3,7 @@ path: verdant
 type: test
 status: wip
 last-updated: 2026-06-30
-links: "[[21_verdant-implementation-status]], [[12_magic-test-plan]], [[ref/gametest-guide]]"
+links: ["[[21_verdant-implementation-status]]", "[[12_magic-test-plan]]", "[[ref/gametest-guide]]"]
 ---
 
 # Verdant Path — Test Plan

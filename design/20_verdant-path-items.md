@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-07-01
-links: "[[20_verdant-path]], [[magic/17_trinkets]], [[20_verdant-path-quipment]]"
+links: ["[[20_verdant-path]]", "[[magic/17_trinkets]]", "[[20_verdant-path-quipment]]"]
 ---
 
 # Verdant Path — Items
@@ -58,7 +58,7 @@ Recipes TBD — all crafted from Verdant materials, then woven into cloth via th
 
 ## Open Questions
 
-- [ ] **Trinket recipes** — what materials? All TBD, crafted from Verdant materials, woven into cloth via the Weavery.
+**Q:** Trinket recipes — what materials? All TBD, crafted from Verdant materials, woven into cloth via the Weavery.
 
 ---
 

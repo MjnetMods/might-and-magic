@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-06-30
-links: "[[01_rituals]], [[magic/25_runes]], [[magic/00_energy]]"
+links: ["[[01_rituals]]", "[[magic/25_runes]]", "[[magic/00_energy]]"]
 ---
 
 # MAM — Staves & Spells
@@ -49,10 +49,13 @@ Exact recipes TBD with spell/school design. Staff tier is gated by Focus tier.
 
 ## Open Questions
 
-- [ ] **Spell engine** — borrow from existing mod or MAM-native? TBD
-- [ ] **Staff types per school** — what does each school's staff do? TBD with school design
-- [ ] **Mana/Nox cost per cast** — TBD, balancing pass
-- [ ] **Living Wood form** — Botania-compatible or MAM-native? See `[[01_rituals]]`
+**Q:** Spell engine — borrow from existing mod or MAM-native? TBD
+
+**Q:** Staff types per school — what does each school's staff do? TBD with school design
+
+**Q:** Mana/Nox cost per cast — TBD, balancing pass
+
+**Q:** Living Wood form — Botania-compatible or MAM-native? See `[[01_rituals]]`
 
 ---
 
