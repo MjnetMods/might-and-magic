@@ -1,8 +1,8 @@
 ---
 type: design
 status: wip
-last-updated: 2026-06-30
-links: ["[[magic/25_runes]]", "[[magic/15_mana-pool]]", "[[magic/20_altar]]", "[[magic/10_apothecary]]", "[[magic/30_weavery]]"]
+last-updated: 2026-07-01
+links: ["[[magic/25_runes]]", "[[magic/15_mana-pool]]", "[[magic/16_mana-spreader]]", "[[magic/20_altar]]", "[[magic/10_apothecary]]", "[[magic/30_weavery]]"]
 ---
 
 # MAM — Magic Energy System
@@ -32,10 +32,10 @@ Both energies follow the same basic mechanics
 Mana and Nox are mutually hostile. The moment any Nox enters a pool, all mana converts to Nox instantly at 1:1:
 
 ```
-800,000 mana + any Nox  →  800,000 Nox  (instant, complete)
+500,000 mana + 500 Nox  →  500,500 Nox  (instant, complete)
 ```
 
-The quantity of energy is preserved — nothing is lost. But it is now Nox and cannot be used as mana. No partial taint state exists.
+Existing mana flips to Nox, and the incoming Nox amount is added on top — nothing is lost, nothing is discarded. But the total is now Nox and cannot be used as mana. No partial taint state exists.
 
 This creates:
 - **Risk** — any Nox near a Verdant player's pool converts their entire mana supply instantly
@@ -59,12 +59,14 @@ A player pursues one branch, not both, unless doing intentional cross-school pla
 
 ### Pool tiers
 
-T1 and T2 pools accept either energy type — Nox taints them (see above). T3 pools are **aligned**: they only accept their native energy type. Wrong energy input triggers a rejection — equal amounts of both the incoming energy and the pool's stored energy are lost.
+T1 and T2 pools accept either energy type — Nox taints them (see above). T3 pools are **aligned**: they only accept their native energy type. Wrong energy input triggers a rejection: the incoming energy is discarded entirely (no in-transit storage to hold it), and the pool's own stored energy takes a matching loss — capped at whichever is smaller, since the pool can never go negative.
 
 ```
-Nox into Sacred Mana Pool  →  lose X Nox + X Mana (equal proportions)
-Mana into Desecrated Mana Pool  →  lose X Mana + X Nox (equal proportions)
+Nox into Sacred Mana Pool       →  incoming Nox fully discarded; pool loses min(incoming, stored) Mana
+Mana into Desecrated Mana Pool  →  incoming Mana fully discarded; pool loses min(incoming, stored) Nox
 ```
+
+When incoming ≤ stored, this looks symmetric — both sides lose the same amount. When incoming exceeds stored, the pool only drains to zero (it can't lose more than it has), while the full incoming amount is discarded regardless.
 
 T3 pools are pure vessels — they resist contamination at a cost. This makes Sacred and Desecrated infrastructure genuinely distinct rather than just named differently.
 
@@ -76,50 +78,45 @@ Concrete capacities, crafting recipes, and infusion recipes: [[magic/15_mana-poo
 
 The Apothecary, Altar, and Weavery are **cross-school infrastructure**. None are Verdant-exclusive — any school can have recipes for them. The Verdant path builds them first; other schools add their own recipe support alongside their own content.
 
-| Station    | Selector                      | School determined by                | Detail                    |
-|------------|-------------------------------|-------------------------------------|---------------------------|
-| Apothecary | Fluid (Water/Lava/Blood/Milk) | Fluid type                          | [[magic/10_apothecary]]      |
-| Altar      | Pool energy (Mana/Nox)        | Energy type                         | [[magic/20_altar]] |
-| Weavery    | — (universal, trinket-based)  | N/A — accepts any school's trinkets | [[magic/30_weavery]] |
+| Station    | Selector                      | School determined by                | Detail                  |
+|------------|-------------------------------|-------------------------------------|-------------------------|
+| Apothecary | Fluid (Water/Lava/Blood/Milk) | Fluid type                          | [[magic/10_apothecary]] |
+| Altar      | Pool energy (Mana/Nox)        | Energy type                         | [[magic/20_altar]]      |
+| Weavery    | — (universal, trinket-based)  | N/A — accepts any school's trinkets | [[magic/30_weavery]]    |
 
 ---
 
-## Energy Transport — Mana Spreader
+## Energy Transport
 
-The **Mana Spreader** is the universal transport block for both Mana and Nox. Any generator (flower, dark source, Apothecary bootstrap) emits energy into a Spreader; the Spreader fires a burst at a target Pool.
-
-```
-Generator → Mana Spreader → Pool
-```
-
-The Spreader is energy-agnostic — it carries whatever energy type the connected generator produces. A Spreader fed by a Nox source delivers Nox; fed by a Mana source delivers Mana. Pointed at a T3 aligned pool, the pool's rejection mechanic applies on receipt.
-
-> **Design status:** Spreader details (range, burst size, tiers) TBD — tracked separately. The transport model is decided.
+Energy moves from generator to pool through the **Mana Spreader** — the universal transport block for both Mana and Nox, energy-agnostic (carries whatever type its connected generator produces). Full transport model, mechanics, and open questions: [[magic/16_mana-spreader]].
 
 ---
 
 ## Open Questions
 
-**Q:** Nox generation — primary sources TBD (dark flowers, corruption structures, rituals — per-school dark design). Apothecary bootstrap path is decided — see [[magic/10_apothecary]] § Nox bootstrap.
+**Q:** T3 rejection — when incoming energy exceeds the pool's stored amount, what happens to the un-rejected remainder?
+**A:** Discarded entirely — no partial acceptance, no in-transit storage to hold it. Consistent with the pool's existing constraints (can't exceed max capacity, can't go negative). Covered by `TestManaPool` MP-10/MP-11.
 
-**Q:** Tainting mechanic — Nox enters a pool via Mana Spreader (a Nox-generating source pointed at a Mana/Infused Pool fires Nox bursts, triggering instant taint). Spreader burst details TBD.
+**Q:** Nox bootstrap / gate ?
+**A:** Apothecary bootstrap path is decided — see [[magic/10_apothecary]] § Nox bootstrap.
 
-**Q:** Blood fluid — is Blood a custom fluid item, or a vanilla fluid substitute? Sanguine school design
+**Q:** Nox generation — primary sources (dark flowers, corruption structures, rituals) ?
+**A:** Out of scope for this doc — per-school dark design. Not this doc's blocker; resolved when a dark-school doc exists.
 
-**Q:** Desecrated Weavery — does the Weavery also get a Desecrated tier? TBD
+**Q:** Tainting mechanic — does Nox delivered via Mana Spreader trigger taint the same way as any other Nox contact?
+**A:** Yes — no separate mechanic; the standard Tainting rule above applies regardless of delivery path. Spreader burst mechanics themselves (range, size, frequency, tiers) are out of scope here — see [[magic/16_mana-spreader]].
+
+**Q:** Blood fluid — is Blood a custom fluid item, or a vanilla fluid substitute?
+**A:** Out of scope for this doc — Sanguine school design. Not this doc's blocker; resolved when the Sanguine school doc exists.
+
+**Q:** Desecrated Weavery — does the Weavery also get a Desecrated tier?
+**A:** Yes
 
 ---
 
-## Status
+## Validation
 
-| Item | Status |
-|------|--------|
-| Two energy types (Mana / Nox) | ✅ decided, groundwork implemented (`EnergyType` enum on `EnergyPool`/`ManaPoolBlockEntity`) |
-| Tainting rule (any Nox → all mana converts to Nox 1:1, instant) | ✅ decided |
-| Tier branching (Infused → Sacred or Desecrated) | ✅ decided |
-| Desecrated Mana Pool (capacity, mechanic) | ✅ decided |
-| Mana Spreader as universal transport (Mana and Nox, generator → spreader → pool) | ✅ decided |
-| Cross-school station model (Apothecary/Altar/Weavery, fluid or energy selects school) | ✅ decided |
-| Nox generation | ⬜ TBD — per-school dark design (TBD) |
-| Blood fluid implementation | ⬜ TBD — Sanguine school design |
-| Tainting trigger mechanic | ⬜ TBD — per-school dark design (TBD) |
+- `done` — Two energy types exist, pools report the correct type — [`EnergyType`](../../src/main/java/org/mjli/mam/api/energy/EnergyType.java) enum, tested by `poolTierEnergyTypeIsCorrect` (MP-5) in [`TestManaPool`](../../src/main/java/org/mjli/mam/infrastructure/gametest/tests/TestManaPool.java)
+- `done` — Tainting (any Nox → all mana flips to Nox, incoming amount adds on top) — [`EnergyContainer.receive()`](../../src/main/java/org/mjli/mam/api/energy/EnergyContainer.java) unaligned branch, tested by `manaPoolTaintsToNoxOnContact` (MP-6) and `infusedManaPoolTaintsToNoxOnContact` (MP-7)
+- `done` — T3 aligned rejection, including the incoming > stored discard case — same method's aligned branch, tested by `sacredManaPoolRejectsNox` / `desecratedManaPoolRejectsMana` (MP-8/MP-9) and `sacredManaPoolRejectionCapsAtStoredAmount` / `desecratedManaPoolRejectionCapsAtStoredAmount` (MP-10/MP-11)
+- `wip` — Tier branching (Infused/Sacred/Desecrated Living Rock & Livingwood blocks registered) — [`VerdantWood`](../../src/main/java/org/mjli/mam/verdant/VerdantWood.java) — only drop-self behavior is tested (`tieredLivingRockDropsSelf` / `tieredLivingwoodDropsSelf`, LT-5/LT-6); no test yet for the taint-triggered obtain path itself

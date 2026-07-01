@@ -132,7 +132,7 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 | sacred_apothecary | `todo` | `todo` | `todo` | — |
 | desecrated_apothecary | `todo` | `todo` | `todo` | — |
 
-\* placeholder model — reuses the tier-1 `mana_pool` model/textures, no infused/sacred/desecrated art yet (see [[magic/15_mana-pool]] § Visual Design). Capacity is correct (4M / 16M via `MAX_CAPACITY_TIER_2/3` in `ManaPoolBlockEntity`); `sacred_mana_pool`/`desecrated_mana_pool` both correctly carry `MAX_CAPACITY_TIER_3` (same capacity, different `EnergyType`). Tainting (unaligned T1/T2 flip to incoming type) and T3 aligned rejection (opposing energy drains instead of converting) are implemented and covered by `TestManaPool` MP-6..MP-9 — see [[magic/00_energy]].
+\* placeholder model — reuses the tier-1 `mana_pool` model/textures, no infused/sacred/desecrated art yet (see [[magic/15_mana-pool]] § Visual Design). Capacity is correct (4M / 16M via `MAX_CAPACITY_TIER_2/3` in `ManaPoolBlockEntity`); `sacred_mana_pool`/`desecrated_mana_pool` both correctly carry `MAX_CAPACITY_TIER_3` (same capacity, different `EnergyType`). Tainting (unaligned T1/T2 flip to incoming type) and T3 aligned rejection (opposing energy drains instead of converting) are implemented and covered by `TestManaPool` MP-6..MP-11 — see [[magic/00_energy]].
 
 **Verify Mana Pool:** Place pool. Place a comparator next to it → output 0 when empty.
 
@@ -216,7 +216,7 @@ Converts adjacent blocks into magic materials. Produced via Apothecary.
 - `done` — Infused / sacred / desecrated mana pool blocks registered + U-shape recipes from tier-matched Living Rock (placeholder textures, correct tiered capacity)
 - `done` — Mana/Nox energy-type groundwork — `EnergyType` enum, `EnergyPool.getEnergyType()`, persisted on `ManaPoolBlockEntity`; sacred=MANA, desecrated=NOX, mana_pool/infused_mana_pool=MANA
 - `done` — Tainting mechanic (Nox entering a pool converts mana 1:1) — implemented via `EnergyContainer.receive()`, covered by `TestManaPool` MP-6/MP-7
-- `done` — T3 pool alignment/rejection (wrong energy type → mutual loss) — implemented via `EnergyContainer.receive()`'s aligned branch, covered by MP-8/MP-9
+- `done` — T3 pool alignment/rejection (wrong energy type → mutual loss, capped at `min(incoming, stored)` so the pool never goes negative and excess incoming is discarded) — implemented via `EnergyContainer.receive()`'s aligned branch, covered by MP-8/MP-9 (incoming == stored) and MP-10/MP-11 (incoming > stored)
 - `done` — Internal energy API generalized beyond Mana-only naming (`api.mana` → `api.energy`, `ManaPool`/`ManaReceiver`/`ManaCollector`/`ManaNetworkHandler` → `Energy*`) — more energy types than Mana/Nox are planned, so the API no longer assumes "Mana" as the default/only polarity
 - `done` — Mana Tablet (T1) — item registered with `EnergyContainer` data component; Mana Pool gained an internal charging slot (`interact()`/`transferChargingItem()` on `ManaPoolBlockEntity`) for insert/retrieve/bidirectional transfer. No crafting recipe (blocked on Gems, plan item #3) or repair drain yet. Design: [[magic/17_trinkets]] § Loading / unloading mana
 - `todo` — Infused / sacred / desecrated living rock & livingwood real texture art + tint

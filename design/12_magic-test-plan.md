@@ -66,7 +66,7 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | `queryClosest_prefersNearer_whenMultiplePools` | Two in-range pools → closer wins |
 | `queryClosest_excludesFarPool_whenOnlyNearIsInRadius` | One in, one out → only near returned |
 
-### `TestManaPool` (9 GameTests)
+### `TestManaPool` (11 GameTests)
 
 | ID | Test | What it verifies |
 |----|------|-----------------|
@@ -79,6 +79,8 @@ Won't implement: **PD-3** (chunk unload/timer persistence — no chunk-unload tr
 | MP-7 | `infusedManaPoolTaintsToNoxOnContact` | T2 pool: same taint behavior as MP-6 |
 | MP-8 | `sacredManaPoolRejectsNox` | T3 aligned (Mana): Nox contact destroys equal Mana, no Nox stored |
 | MP-9 | `desecratedManaPoolRejectsMana` | T3 aligned (Nox): Mana contact destroys equal Nox, no Mana stored |
+| MP-10 | `sacredManaPoolRejectionCapsAtStoredAmount` | T3 aligned (Mana): incoming Nox (500) exceeds stored Mana (200) → drains to 0, never negative, excess Nox discarded |
+| MP-11 | `desecratedManaPoolRejectionCapsAtStoredAmount` | T3 aligned (Nox): incoming Mana (500) exceeds stored Nox (200) → drains to 0, never negative, excess Mana discarded |
 
 ### `TestApothecary` (2 GameTests)
 

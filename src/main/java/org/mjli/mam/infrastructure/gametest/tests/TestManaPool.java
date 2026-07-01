@@ -168,4 +168,36 @@ public class TestManaPool {
             }
         });
     }
+
+    /** MP-10: incoming Nox exceeding stored Mana caps the loss at what's stored — pool drains to 0, never negative, excess Nox discarded (not stored). */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void sacredManaPoolRejectionCapsAtStoredAmount(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.SACRED_MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveEnergy(200, EnergyType.MANA);
+            be.receiveEnergy(500, EnergyType.NOX);
+            if (be.getCurrentEnergy() != 0 || be.getEnergyType() != EnergyType.MANA) {
+                helper.fail("Expected 0 Mana (drained, not negative) after oversized rejection, got " + be.getCurrentEnergy() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
+
+    /** MP-11: incoming Mana exceeding stored Nox caps the loss at what's stored — pool drains to 0, never negative, excess Mana discarded (not stored). */
+    @GameTest(template = PLATFORM, timeoutTicks = 20)
+    public static void desecratedManaPoolRejectionCapsAtStoredAmount(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantMana.DESECRATED_MANA_POOL.get().defaultBlockState());
+        helper.runAfterDelay(2, () -> {
+            ManaPoolBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, ManaPoolBlockEntity.class);
+            be.receiveEnergy(200, EnergyType.NOX);
+            be.receiveEnergy(500, EnergyType.MANA);
+            if (be.getCurrentEnergy() != 0 || be.getEnergyType() != EnergyType.NOX) {
+                helper.fail("Expected 0 Nox (drained, not negative) after oversized rejection, got " + be.getCurrentEnergy() + " " + be.getEnergyType());
+            } else {
+                helper.succeed();
+            }
+        });
+    }
 }
