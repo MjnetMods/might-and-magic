@@ -179,6 +179,7 @@
   "patchouli.mam.guide.verdant.entry.apothecary": "Apothecary",
   "patchouli.mam.guide.verdant.page.apothecary.0": "The $(thing)Apothecary$() is the primary crafting station of the Verdant Path. Fill it with water using a bucket, then throw $(thing)Mystical Petals$() into the basin along with a seed as a reagent. When the recipe is satisfied, the finished item rises from the water.",
   "patchouli.mam.guide.verdant.page.apothecary.1": "Craft the Apothecary from any $(thing)stone$() in the shape of a pedestal and bowl — no Living Rock required.",
+  "patchouli.mam.guide.verdant.page.apothecary.2": "Once you've won $(thing)Infused Living Rock$() from the lava, rebuild the goblet around it — six Infused blocks in the same ring, with a working $(thing)Apothecary$() itself set in the bowl where the petal used to go. The result is the $(thing)Infused Apothecary$(). Use it exactly as before — same water, same petals, same seed thrown last — only now the basin holds six ingredients circling at once instead of four.",
 
   "mam.configuration.title": "Might And Magic Configs",
   "mam.configuration.section.mam.common.toml": "Might And Magic Configs",

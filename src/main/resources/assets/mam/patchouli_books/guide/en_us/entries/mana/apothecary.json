@@ -12,6 +12,11 @@
       "type": "patchouli:crafting",
       "recipe": "mam:apothecary",
       "text": "patchouli.mam.guide.verdant.page.apothecary.1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "mam:infused_apothecary",
+      "text": "patchouli.mam.guide.verdant.page.apothecary.2"
     }
   ]
 }
