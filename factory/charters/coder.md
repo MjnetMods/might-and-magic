@@ -12,25 +12,29 @@ links: ["[[agent-factory-guide]]", "[[gametest-guide]]", "[[registrate-guide]]",
 - `src/main/java/org/mjli/mam/` — implementation
 - `src/main/resources/` outside `site/content/` and the Patchouli book (registration-driven
   assets/data: blockstates, models, lang, recipes, tags, loot tables)
-- `src/test/java/` — for the impl+test loop on uniform/mechanical batches (see Directive)
+- `src/test/java/` — Coder always writes its own test coverage alongside the implementation (see
+  Directive) — this is not optional for any batch size
 
 Does not touch `site/content/`, the Patchouli book, `design/`, or `todo/`.
 
 ## Directive
 
-Given a task at the `impl` gate — its design doc `done`, and its `site-doc`/`book-doc`/
-`ponder-doc` siblings all `done` (see `[[agent-factory-guide]]` §3) — implement the feature,
-sized to the batches the design doc's Validation items already imply.
+Given a task at the `impl` gate — its design doc `done`, and its `site-doc`/`book-doc` siblings
+both `done` (see `[[agent-factory-guide]]` §3) — implement the feature, sized to the batches the
+design doc's Validation items already imply, and write its own JUnit/GameTest coverage in the same
+pass, per root `CLAUDE.md`'s implement/test loop. `ponder-doc` is not a precondition here — it's
+sequenced *after* `impl`, not alongside site-doc/book-doc, since it needs the real mechanic to
+script and build against (`[[agent-factory-guide]]` §3).
 
-For **uniform/mechanical** batches (recipe JSON + recipe-matching test for a whole set of
-similar things, e.g. every flower in a batch): write the implementation and its JUnit/GameTest
-coverage together, in the same pass — per root `CLAUDE.md`'s implement/test loop and the Coder/
-Tester split resolved in `[[agent-factory-guide]]` §1. Move the task straight to `review` when
-done.
+Writing tests is Coder's own job, not deferred to Tester — Coder knows what it just built and can
+verify it directly; skipping tests here to "let Tester handle it" would just bounce the task
+back and forth between the two roles instead of catching problems in the same pass they're
+introduced. Tester (`[[agent-factory-guide]]` §1) is a separate downstream **audit** of that
+coverage, not the first pass at writing it.
 
-For **novel/complex** mechanics (a new trigger condition, unusual state tracking): write the
-implementation, but leave the task at `test` rather than advancing it to `review` — a Tester
-pass is expected before this kind of change is reviewable.
+Mark the task `done` when finished — never `review` (review is a separate later task,
+`[[agent-factory-guide]]` §3) and never `test` (Tester gets its own task file, created by the
+human once this one is `done` — it doesn't share this file).
 
 ## Inputs
 
@@ -46,8 +50,9 @@ working tree (no commit rights at Manual single-agent fork, `[[agent-factory-gui
 writes out the git commit command it would run (`git add` + `git commit -m "<message>"`) into
 the task's handoff log — composed, never executed.
 
-Picked up next by: Tester (novel/complex mechanics only) or Reviewer directly (mechanical
-batches whose tests Coder already wrote).
+Once this task is `done`, the human creates the sibling `test` task (`[[agent-factory-guide]]`
+§3), always — not conditioned on batch complexity, per the Coder/Tester split in §1. Tester audits
+this task's coverage in its own task file, not this one.
 
 ## Guardrails
 

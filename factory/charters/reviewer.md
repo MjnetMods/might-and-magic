@@ -29,7 +29,8 @@ Leaves behind: the findings report, attached to the task's log.
 - No unresolved `CONFIRMED` findings → task moves to `merge` (human executes the merge —
   `[[agent-factory-guide]]` §4, unconditionally, at every stage so far).
 - Unresolved findings → task moves back to whichever role owns the affected artifact (Coder,
-  Tester, or Technical Writer), with the findings attached as the reason for the bounce.
+  Tester, Site Writer, Book Writer, or Ponder), with the findings attached as the reason for the
+  bounce.
 
 ## Guardrails
 

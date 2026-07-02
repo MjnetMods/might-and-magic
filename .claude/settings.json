@@ -10,7 +10,11 @@
       "Edit(src/main/java/**)",
       "Write(src/main/java/**)",
       "Edit(src/test/java/**)",
-      "Write(src/test/java/**)"
+      "Write(src/test/java/**)",
+      "Edit(src/ponder/structure/**)",
+      "Write(src/ponder/structure/**)",
+      "Edit(test/**)",
+      "Write(test/**)"
     ]
   }
 }

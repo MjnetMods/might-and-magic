@@ -2,7 +2,7 @@
 type: guide
 status: wip
 last-updated: 2026-07-02
-links: ["[[design-doc-guide]]", "[[todo-doc-guide]]", "[[gametest-guide]]", "[[site-guide]]", "[[collaboration-stages]]"]
+links: ["[[design-doc-guide]]", "[[todo-doc-guide]]", "[[gametest-guide]]", "[[site-guide]]", "[[book-guide]]", "[[ponder-guide]]", "[[verify-man]]", "[[collaboration-stages]]"]
 ---
 
 # Agent Factory Guide
@@ -19,23 +19,35 @@ One agent role per pipeline stage, minus Design and Merge (see §4 — both stay
 
 | Role | Pipeline stage | Scope | Reads |
 |---|---|---|---|
-| **Technical Writer** | Site docs, book docs, ponder-doc | `site/content/`, Patchouli book JSON, ponder-doc content in the task file | `[[site-guide]]`, `[[ponder-guide]]` |
-| **Coder** | Implement | `src/main/java/` | design doc, `[[gametest-guide]]`, `[[registrate-guide]]`, `[[worldgen-guide]]` |
-| **Tester** | Implement (test half) | `src/test/java/`, GameTest classes | same design doc, `[[gametest-guide]]` |
+| **Site Writer** | Site docs | `site/content/` | `[[site-guide]]` |
+| **Book Writer** | Book docs | Patchouli book JSON + `patchouli.mam.guide.*` lang keys | `[[book-guide]]` |
+| **Coder** | Implement | `src/main/java/`, `src/test/java/` (writes its own tests) | design doc, `[[gametest-guide]]`, `[[registrate-guide]]`, `[[worldgen-guide]]` |
+| **Tester** | Test (audit) | `src/test/java/`, GameTest classes, `test/` (last resort) | same design doc, Coder's diff, `[[gametest-guide]]`, `[[verify-man]]` |
+| **Ponder** | Ponder | ponder-doc script/spec + scene registration + SNBT + `mam.ponder.*` lang keys | `[[ponder-guide]]`, `[[verify-man]]` |
 | **Reviewer** | Review | read-only, whole diff | `code-review` skill conventions |
+
+**Q:** Site docs, book docs, and ponder-doc were originally one "Technical Writer" role covering
+all three. Why split it into three charters (`[[site-writer]]`, `[[book-writer]]`, `[[ponder]]`)?
+**A:** The generic role produced real mistakes the first time it was actually exercised: wrong
+tone (spec-like prose instead of thematic copy) on the site-doc pass, and a Scope pointing at the
+wrong path entirely (`data/mam/patchouli_books/` instead of `assets/mam/patchouli_books/`) on the
+book-doc pass. A charter that reads only its own format/voice guide, with nothing to guess at
+across artifact types, is the fix — same principle as Coder/Tester below, just discovered on the
+docs side instead of the impl side. (2026-07-02)
 
 **Q:** Coder and Tester — one agent doing both halves of the implement/test loop per batch (as
 root `CLAUDE.md` already prescribes for a human), or two separate agents handing off within the
 same stage?
-**A:** Coder does the impl+test loop for uniform/mechanical batches (matches the risk-sized
-batching already in `CLAUDE.md`). Tester exists as a separate agent only for novel/complex
-mechanics, where a second, adversarial pass at test coverage is worth the extra handoff. (2026-07-02)
-
-The ponder-doc (a script/spec for the eventual Ponder scene, written before code same as site and
-book docs) is Technical Writer's output, one of the three sibling tasks forked at Task
-Introduction — see §3. The actual Ponder *implementation* (pipeline stage 5, the in-game SNBT
-scene) has no dedicated role yet — folded into Coder until a task reaches that stage and the
-split proves necessary or not.
+**A:** Both write tests, but not the same tests. Coder always writes its own JUnit/GameTest
+coverage alongside the implementation — deferring that to Tester would just bounce the task
+between the two roles for no reason, since Coder is the one who knows what it just built. Tester
+is a separate, always-on task created once Coder's is `done` (not skipped for "simple" batches):
+an audit of that coverage for completeness, closing real gaps, and — as a last resort, only when
+something genuinely can't be automated — flagging a manual verification note (`[[verify-man]]`).
+Making this checkpoint unconditional means "coverage is adequate" is always a verified conclusion,
+not an assumption nobody checked, and Coder can't leave gaps for the human to discover later.
+(Revised 2026-07-02 — the original version of this answer had Tester skipped entirely for
+mechanical batches; that undercut the actual point of the checkpoint.)
 
 ## 2. Charter format
 
@@ -58,13 +70,15 @@ One file per role under `factory/charters/`. Front matter same as a design doc
   rights yet," so it holds even if a charter is read on its own.
 
 Each charter's **Scope** is backed by matching `Write`/`Edit` allow-rules in the project's
-`.claude/settings.json`, keyed to the same paths (`site/content/**` and the Patchouli book path
-for Technical Writer, `src/main/java/**` for Coder, `src/test/java/**` for Tester). Without this,
-a backgrounded charter agent stalls on an interactive permission prompt the human isn't present to
-answer — the allow-rule just lets the agent write inside the boundary its own charter already
-declares, it doesn't widen that boundary. Git-mutating commands (`add`/`commit`/`push`/merge) are
-never added to this allow-list; the no-commit-rights guardrail above stays enforced at the
-permission layer too, not just as a written rule an agent could ignore.
+`.claude/settings.json`, keyed to the same paths (`site/content/**` for Site Writer, the Patchouli
+book path for Book Writer, `src/main/java/**` and `src/test/java/**` for Coder, `src/test/java/**`
+and `test/**` for Tester, `src/ponder/structure/**`, `mam.ponder.*` lang keys, and `test/**` for
+Ponder). Without this, a backgrounded charter agent stalls on an interactive permission prompt the
+human isn't present to answer — the allow-rule just lets the agent write inside the boundary its
+own charter already declares, it doesn't widen that boundary. Git-mutating commands
+(`add`/`commit`/`push`/merge) are never added to this allow-list; the no-commit-rights guardrail
+above stays enforced at the permission layer too, not just as a written rule an agent could
+ignore.
 
 ## 3. Task list format
 
@@ -81,15 +95,36 @@ links: ["[[23_verdant-generating-flowers]]"]
 ---
 ```
 
+That's the full vocabulary across all task *kinds*, not a chain every task's `gate` climbs
+end-to-end — each task file starts at one label and ends at `done`, no exceptions. Every stage
+transition (site-doc → impl, impl → test, test → ponder-doc, ponder-doc → review, review → merge)
+is a **new task file** the human creates once its prerequisite task reaches `done` — see the
+impl/test/ponder-doc/review split below for what this looks like in practice. (Earlier versions of
+this guide had Coder and Tester sharing one file for the `impl`→`test` handoff — dropped once
+Tester became an always-on task rather than a conditional one; see the Coder/Tester Q&A above.)
+
 Body: what the task is, a link to the design doc it's implementing, and a running log of
 handoffs (one line per gate transition, who/what did it, when). A master `factory/tasks.md`
 index lists all open tasks and their current gate — the tick-off list.
 
 A task file is created only once its design doc is `done` (per `[[design-doc-guide]]` status
 vocabulary, §3) — this is the boundary where the factory takes over from you. Promoting a design
-forks **three sibling tasks** at once — `site-doc`, `book-doc`, `ponder-doc` — all pointing at
-the same design doc, each independently picked up by Technical Writer. There's no single `impl`
-task yet at this point; see §4 for when and how that gets created.
+forks **two sibling tasks** at once — `site-doc` (picked up by `[[site-writer]]`), `book-doc`
+(picked up by `[[book-writer]]`) — both pointing at the same design doc.
+
+`ponder-doc` is **not** a same-day sibling of those two — root `CLAUDE.md`'s Feature Pipeline
+places Ponder at stage 5, "once the mechanic is real and testable," strictly after Implement
+(stage 4) and, per the Coder/Tester Q&A above, after that implementation's coverage has actually
+been audited too. Writing a ponder script/spec before the mechanic exists (or before its test
+coverage is verified — Tester might still turn up a real behavior fix) doesn't fit the same
+"docs precede code" logic that justifies site-doc/book-doc running ahead of implementation. The
+human creates `impl` once site-doc/book-doc are both `done`, then `test` once `impl` is `done`,
+then `ponder-doc` (picked up by `[[ponder]]`) once `test` is `done`, then `review` once
+`ponder-doc` is `done` — the review pass then covers the finished feature — implementation, its
+audited tests, and the tutorial scene together — as a player will actually encounter it, not just
+the code diff in isolation. (Corrected 2026-07-02, after the first real run of this pipeline — see
+`factory/tasks/03_apothecary-t2-impl.md` through `06_apothecary-t2-review.md` for the task
+sequence this produces in practice.)
 
 **Q:** How does a task avoid colliding with another task touching the same file (e.g. two tasks
 both registering blocks in `MightAndMagic.java`)?
