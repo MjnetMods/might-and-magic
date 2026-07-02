@@ -25,8 +25,10 @@ C C C
 |-----------------------|------------------------|---------------------------------------------------|----------------|-----------------------------------------------------|-----------------------------------------|--------------|
 | Apothecary            | Any rock (`c:stones`)  | `mam:mystical_petals` OR `mam:mystical_mushrooms` | All schools T1 | **Implemented**                                     | Uses skin from Botania, unscaled 16=>32 | 4 + 1 (seed) |
 | Infused Apothecary    | Infused Living Rock    | Apothecary                                        | All schools T2 | Not yet implemented                                 | Recolor, use living rock texture        | 6 + 1 (seed) |
-| Sacred Apothecary     | Sacred Living Rock     | Infused Apothecary                                | Verdant T3     | Not yet implemented                                 | ... tint it green                       | 8 + 1 (seed) |
-| Desecrated Apothecary | Desecrated Living Rock | Infused Apothecary                                | Dark T3        | Dark-flavour parallel — TBD with dark-school design | ... tint it purple                      | 8 + 1 (seed) |
+| Sacred Apothecary     | Sacred Living Rock     | Infused Apothecary                                | Verdant T3     | Not yet implemented                                 | ... tint it green                       | 16 + 1 (seed) |
+| Desecrated Apothecary | Desecrated Living Rock | Infused Apothecary                                | Dark T3        | Dark-flavour parallel — TBD with dark-school design | ... tint it purple                      | 16 + 1 (seed) |
+
+**Balancing note (2026-07-02):** T3 slot count doubled from 8 to 16 (no T3 recipe changes) — headroom for future endgame recipes, matching the same doubling applied to the [[magic/20_altar]] T3 tier.
 
 **Progression note:** T1 uses any rock because the player has no Living Rock yet — you need to craft a Pure Daisy in the Apothecary, place it, and let it convert stone → Living Rock before you can build a Mana Pool. The Apothecary must be craftable before that loop begins.
 

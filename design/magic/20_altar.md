@@ -38,12 +38,14 @@ Four tiers, each with a larger ingredient capacity. Slot count is the primary ti
 |----------------------|-------------|--------------------|-------------------------------|
 | **Altar**      | 4           | Any pool ≥ recipe cost | T1 runes, early rites     |
 | **Infused Altar** | 6        | Any pool ≥ recipe cost | T2 runes, mid rites       |
-| **Sacred Altar**       | 16          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
-| **Desecrated Altar**   | 16          | Desecrated Mana Pool ≥ recipe cost | Dark school T3 parallel     |
+| **Sacred Altar**       | 32          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
+| **Desecrated Altar**   | 32          | Desecrated Mana Pool ≥ recipe cost | Dark school T3 parallel     |
 
 Mana gating follows the pool capacity model — T1/T2 altars accept any pool; T3 altars are energy-aligned (Sacred uses Mana, Desecrated uses Nox). The altar tier gates recipe access via slot count, not by pool type.
 
-Slot counts are the progression gate: a recipe requiring 8 ingredients physically cannot run on a 6-slot altar, regardless of mana available. The jump from 6 → 16 at T3 is intentional — T3 recipes are meaningfully more complex than T2.
+Slot counts are the progression gate: a recipe requiring 8 ingredients physically cannot run on a 6-slot altar, regardless of mana available. The jump from 6 → 32 at T3 is intentional — T3 recipes are meaningfully more complex than T2.
+
+**Balancing note (2026-07-02):** T3 slot count doubled from 16 to 32 (no T3 recipe changes). No current recipe needs more than 8 slots — this is headroom for future endgame recipes, not a response to an existing content gap.
 
 ---
 
@@ -145,8 +147,8 @@ Slot counts define which recipes land at which altar:
 |------------|-------|-------------|
 | ≤4 slots   | Altar            | T1 — elemental runes, early rites             |
 | 5–6 slots  | Infused Altar    | T2 — concept runes, mid rites                 |
-| 7–16 slots | Sacred Altar     | T3 — complex runes, endgame components (Mana) |
-| 7–16 slots | Desecrated Altar | T3 — Nox recipes, dark school components      |
+| 7–32 slots | Sacred Altar     | T3 — complex runes, endgame components (Mana) |
+| 7–32 slots | Desecrated Altar | T3 — Nox recipes, dark school components      |
 
 | Category | Altar Tier | Slots | Examples |
 |----------|------------|-------|---------|
@@ -182,7 +184,7 @@ See [[magic/10_apothecary]] for the Apothecary's full design.
 
 ## Implementation Notes
 
-- Internal storage: `SimpleContainer` sized to the altar tier's slot limit (4 / 6 / 16)
+- Internal storage: `SimpleContainer` sized to the altar tier's slot limit (4 / 6 / 32)
 - Nearby pool scan: same pattern as pool infusion entity scan — once per second is sufficient
 - `drainMana()` on the pool block entity — already needed for pool infusion; shared API
 - Output item flagging: custom tag on `ItemEntity` NBT to prevent re-ingest (mirror Botania's `runicAltarSpawned`)
