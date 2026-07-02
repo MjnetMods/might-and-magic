@@ -32,6 +32,14 @@ back and forth between the two roles instead of catching problems in the same pa
 introduced. Tester (`[[agent-factory-guide]]` §1) is a separate downstream **audit** of that
 coverage, not the first pass at writing it.
 
+**Run `./gradlew test` and, for any GameTest you write, `./gradlew runGameTestServer` yourself
+before marking done.** `runGameTestServer` is headless — it runs a dedicated test server, not the
+graphical client, and does not need a display. Don't assume you can't run it; try it. Only report
+a test as unexecuted if the command genuinely fails or times out in your environment, and say so
+explicitly rather than silently skipping it. (`./gradlew runClient`, the actual graphical client,
+is the one that legitimately needs a display and stays a human-only check — don't confuse the
+two.)
+
 Mark the task `done` when finished — never `review` (review is a separate later task,
 `[[agent-factory-guide]]` §3) and never `test` (Tester gets its own task file, created by the
 human once this one is `done` — it doesn't share this file).

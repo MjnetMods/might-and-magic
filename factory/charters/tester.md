@@ -44,8 +44,16 @@ Given Coder's implementation, its tests, and the design doc:
    would be — the manual doc is for what's genuinely impossible to automate, not what's
    inconvenient to automate.
 
+**Run any test you add — `./gradlew test` for JUnit, `./gradlew runGameTestServer` for GameTest —
+before marking done.** `runGameTestServer` is headless (a dedicated test server, not the graphical
+client) and does not need a display; don't assume you can't run it without trying. Only report a
+test as unexecuted if the command genuinely fails or times out in your environment, and say so
+explicitly. (`./gradlew runClient` is the one that legitimately needs a display and stays
+human-only — that's a different command for a different purpose.)
+
 Done means: every stated behavior either has a test that would fail on regression, or an explicit,
-justified manual-verification note explaining why it can't.
+justified manual-verification note explaining why it can't — and every test you added has actually
+been run, not just written.
 
 ## Inputs
 

@@ -31,6 +31,18 @@ Given a `ponder-doc` task whose linked design doc's `impl` task is `done` (the m
 actually exist and work — see `[[agent-factory-guide]]` §3 for why this gate is sequenced after
 `impl`, not alongside site-doc/book-doc):
 
+**First, check whether a scene is actually warranted.** Not every mechanic benefits from a Ponder
+tutorial — a static crafting-table recipe (already visible via the vanilla recipe book) is not
+Ponder material; a dynamic in-world mechanic (fill/throw/catalyst, tick-based conversion, anything
+a player couldn't infer just by looking at a recipe grid) is. If the task's brief asks for a scene
+that doesn't clear this bar, don't build one to avoid seeming unproductive — write into the task
+file *why* no scene is warranted, mark the task `done` on that basis, and move on. A real example
+of the mistake this guards against: an earlier task in this project asked for a scene showing a T2
+tier-upgrade recipe that turned out to be a plain shaped crafting recipe with no in-world
+component — a scene got built for it anyway, and had to be reverted once reviewed. Motivating "no
+scene needed" and stopping is a valid, positive outcome, not a shortfall.
+
+If a scene is warranted:
 - Write the scene script/spec into the task file first: what beats it walks through, what it
   demonstrates, in what order. Base this on the real, implemented mechanic — not just the design
   doc's description of intended behavior, since implementation details (exact block positions,
@@ -45,8 +57,9 @@ actually exist and work — see `[[agent-factory-guide]]` §3 for why this gate 
   in-game and why GameTest can't cover it — since the human reviewing this task can't easily
   re-derive "does the scene actually read well" from the diff alone.
 
-Done means: the scene plays in-game exactly as the spec's beats describe, and a human running
-`runClient` can verify it without also having to write the verification steps themselves.
+Done means either: the scene plays in-game exactly as the spec's beats describe, and a human
+running `runClient` can verify it without also having to write the verification steps themselves —
+or a clearly-justified "no scene needed" note, per the check above.
 
 ## Inputs
 

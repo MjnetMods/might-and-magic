@@ -11,3 +11,4 @@ Open tasks and their current gate. One row per task file under `factory/tasks/`.
 | [04_apothecary-t2-test](tasks/04_apothecary-t2-test.md) | test | [[magic/10_apothecary]] |
 | [05_apothecary-t2-ponder-doc](tasks/05_apothecary-t2-ponder-doc.md) | ponder-doc | [[magic/10_apothecary]] |
 | [06_apothecary-t2-review](tasks/06_apothecary-t2-review.md) | review | [[magic/10_apothecary]] |
+| [07_apothecary-t1-mechanic-ponder-doc](tasks/07_apothecary-t1-mechanic-ponder-doc.md) | ponder-doc | [[magic/10_apothecary]] |
