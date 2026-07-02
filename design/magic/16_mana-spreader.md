@@ -2,7 +2,7 @@
 type: design
 status: wip
 last-updated: 2026-07-02
-links: ["[[magic/00_energy]]", "[[magic/15_mana-pool]]", "[[magic/27_tier-tinting]]", "[[11_magic-implementation-status]]"]
+links: ["[[magic/00_energy]]", "[[magic/15_mana-pool]]", "[[magic/27_tier-tinting]]", "[[magic/25_runes]]", "[[11_magic-implementation-status]]"]
 ---
 
 # MAM — Mana Spreader
@@ -90,6 +90,22 @@ Companion item to the Spreader — right-click a target block while holding it (
 
 ---
 
+## Loop Marking
+
+Problem: dropping Botania's per-craft petal-color padding (see Crafting above — MAM's recipe uses any petal, color carries no meaning) means a build with several independent Spreader relay chains has no visual way to tell which Spreader belongs to which chain. Tier tinting ([[magic/27_tier-tinting]]) already owns the block's base color, so it can't double up as a per-loop label.
+
+**Mechanic:** right-click a placed Spreader with any mystical petal to mark it with a rune-glyph decal tinted to that petal's color, rendered on the 4 housing faces not involved in aiming (`west`/`east`/`top`/`bottom` in the current shape geometry — the faces `mana_spreader.json`'s `outside` texture covers). Right-clicking again with a different-colored petal overwrites the mark. This is purely a player organization aid — it does not affect targeting, burst routing, or any gameplay rule; two differently-marked Spreaders behave identically.
+
+- **State, not item property:** implemented as a blockstate property (e.g. `mark: none|white|orange|...`), not a BlockEntity/NBT field. Breaking the block uses the same `dropSelf` loot table already in place for every tier — no state-copying logic needed — so picking it back up always yields a plain, unmarked Spreader item. This is what makes "no drop-preservation needed, mark resets on break" free rather than something to implement.
+- **Disambiguated from aim rotation:** the Targeting Q&A above already has right-click-empty-hand rotating the Spreader's aim. Marking triggers on right-click-with-a-petal instead, so the two interactions never collide — held item selects the behavior.
+- **Asset:** `assets/mam/textures/misc/rune_marks/rune_mana_mark.png` — part of a shared, reusable glyph set covering all 25 `mam:rune_*` items (plus their 16 unique underlying Botania source icons), extracted once and kept at this shared path specifically so other features needing a tintable rune decal — Rituals' chalk-drawn substrate markings ([[../01_rituals]] § Substrate) chief among them — don't have to redo the extraction. Pipeline: for each source icon, keep only pixels whose exact color repeats in the image (the multi-shade "gem body"), drop singleton one-off pixels (anti-alias/highlight blends) — more robust than a hue/saturation cutoff, since some source icons (e.g. `rune_winter`, `rune_gluttony`) have a low-saturation or fully achromatic gem that a saturation filter would wrongly discard. Then: 2x nearest-neighbor upscale to the project's 32x32 convention, desaturate to grayscale (preserve alpha), then crop-double-recenter for bolder strokes (same treatment as every other tinted texture in this pass).
+- **Symbol does not vary — only color does.** This is one glyph standing in generically for "marked," not a lookup from petal color to a specific one of the 25 rune concepts; no semantic tie to the Rune Taxonomy's rune types is implied.
+
+**Q:** Does marking consume the petal, like a standard vanilla dye-block interaction (dyeing a sign, shulker box, etc.)?
+**A:** Yes — 1 petal consumed per mark/re-mark in survival, no-op in creative (`player.getAbilities().instabuild`), matching vanilla dye-item convention. Re-clicking with the *same* color the Spreader is already marked is a no-op (doesn't consume a petal for nothing).
+
+---
+
 ## Validation
 
 - `done` — Crafting recipe locked in (Crafting section above) and wired into datagen ([`MamRecipeProvider.spreader()`](../../src/main/java/org/mjli/mam/infrastructure/datagen/MamRecipeProvider.java))
@@ -100,3 +116,7 @@ Companion item to the Spreader — right-click a target block while holding it (
 - `todo` — Burst projectile entity (flight, `preLossTicks`/`lossPerTick` decay, hit detection against Pools and other Spreaders, relay-onward on hitting a Spreader)
 - `todo` — Precision-aim tool ("Spreader Wand" above) — item + recipe + right-click aim-set interaction, built alongside the Spreader itself rather than deferred
 - `todo` — Tier stat tuning/balancing pass on the table above (placeholder numbers, not verified in-game)
+- `done` — Loop Marking — `mark` blockstate property (17 states), right-click-with-petal interaction, purpose-made glyph decal (isolated + desaturated from `rune_mana.png`, not the full texture) on the 4 housing faces at a second tintindex, `RenderType.cutout()` for the added alpha —
+  [`SpreaderBlock.java`](../../src/main/java/org/mjli/mam/block/SpreaderBlock.java),
+  [`SpreaderMarkColor.java`](../../src/main/java/org/mjli/mam/block/SpreaderMarkColor.java),
+  [`MightAndMagicClient.java`](../../src/main/java/org/mjli/mam/MightAndMagicClient.java) (2026-07-02)

@@ -1,0 +1,10 @@
+{
+  "parent": "mam:block/shapes/mana_spreader_marked",
+  "textures": {
+    "outside": "mam:block/livingwood_log",
+    "inside": "mam:block/livingwood_log_stripped",
+    "back": "mam:block/mana_spreader_back",
+    "side": "mam:block/mana_spreader_side",
+    "mark": "mam:misc/rune_marks/rune_mana_mark"
+  }
+}

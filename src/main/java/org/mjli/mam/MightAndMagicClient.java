@@ -1,7 +1,10 @@
 package org.mjli.mam;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -13,6 +16,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import org.mjli.mam.block.SpreaderBlock;
 import org.mjli.mam.client.render.ApothecaryBlockEntityRenderer;
 import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
@@ -36,6 +40,12 @@ public class MightAndMagicClient {
         if (ModList.get().isLoaded("create")) {
             initPonder();
         }
+        // Loop Marking's rune-glyph decal has real alpha transparency (design/magic/16_mana-spreader.md).
+        event.enqueueWork(() -> {
+            for (Block spreader : spreaderBlocks()) {
+                ItemBlockRenderTypes.setRenderLayer(spreader, RenderType.cutout());
+            }
+        });
     }
 
     private static void initPonder() {
@@ -60,8 +70,7 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.INFUSED_LIVING_ROCK.get(), VerdantRock.INFUSED_LIVING_ROCK_POLISHED.get(), VerdantRock.INFUSED_LIVING_ROCK_BRICK.get(),
             VerdantWood.INFUSED_LIVINGWOOD_LOG.get(), VerdantWood.INFUSED_LIVINGWOOD.get(), VerdantWood.INFUSED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.INFUSED_MANA_POOL.get(), VerdantMana.INFUSED_APOTHECARY.get(), VerdantMana.INFUSED_ALTAR.get(),
-            VerdantMana.INFUSED_SPREADER.get()
+            VerdantMana.INFUSED_MANA_POOL.get(), VerdantMana.INFUSED_APOTHECARY.get(), VerdantMana.INFUSED_ALTAR.get()
         };
     }
 
@@ -69,8 +78,7 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.SACRED_LIVING_ROCK.get(), VerdantRock.SACRED_LIVING_ROCK_POLISHED.get(), VerdantRock.SACRED_LIVING_ROCK_BRICK.get(),
             VerdantWood.SACRED_LIVINGWOOD_LOG.get(), VerdantWood.SACRED_LIVINGWOOD.get(), VerdantWood.SACRED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.SACRED_MANA_POOL.get(), VerdantMana.SACRED_APOTHECARY.get(), VerdantMana.SACRED_ALTAR.get(),
-            VerdantMana.SACRED_SPREADER.get()
+            VerdantMana.SACRED_MANA_POOL.get(), VerdantMana.SACRED_APOTHECARY.get(), VerdantMana.SACRED_ALTAR.get()
         };
     }
 
@@ -78,13 +86,35 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.DESECRATED_LIVING_ROCK.get(), VerdantRock.DESECRATED_LIVING_ROCK_POLISHED.get(), VerdantRock.DESECRATED_LIVING_ROCK_BRICK.get(),
             VerdantWood.DESECRATED_LIVINGWOOD_LOG.get(), VerdantWood.DESECRATED_LIVINGWOOD.get(), VerdantWood.DESECRATED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.DESECRATED_MANA_POOL.get(), VerdantMana.DESECRATED_APOTHECARY.get(), VerdantMana.DESECRATED_ALTAR.get(),
-            VerdantMana.DESECRATED_SPREADER.get()
+            VerdantMana.DESECRATED_MANA_POOL.get(), VerdantMana.DESECRATED_APOTHECARY.get(), VerdantMana.DESECRATED_ALTAR.get()
         };
     }
 
     private static Block[] neutralTintedBlocks() {
         return new Block[] { VerdantMana.APOTHECARY.get() };
+    }
+
+    // Spreader carries two independent tints on the same block (design/magic/16_mana-spreader.md
+    // § Loop Marking) — tintindex 0 is the fixed tier color (same as every other tiered block),
+    // tintindex 1 is the mark color read off the MARK blockstate property. NeoForge only lets one
+    // handler own a given block, so unlike the groups above this can't reuse a flat constant lambda.
+    private static Block[] spreaderBlocks() {
+        return new Block[] {
+            VerdantMana.SPREADER.get(), VerdantMana.INFUSED_SPREADER.get(),
+            VerdantMana.SACRED_SPREADER.get(), VerdantMana.DESECRATED_SPREADER.get()
+        };
+    }
+
+    private static int spreaderTierTint(Block block) {
+        if (block == VerdantMana.INFUSED_SPREADER.get()) return TINT_INFUSED;
+        if (block == VerdantMana.SACRED_SPREADER.get()) return TINT_SACRED;
+        if (block == VerdantMana.DESECRATED_SPREADER.get()) return TINT_DESECRATED;
+        return TINT_NEUTRAL;
+    }
+
+    private static int spreaderBlockTint(BlockState state, int tintIndex) {
+        if (tintIndex == 1) return state.getValue(SpreaderBlock.MARK).getTint();
+        return spreaderTierTint(state.getBlock());
     }
 
     @SubscribeEvent
@@ -93,6 +123,7 @@ public class MightAndMagicClient {
         event.register((state, level, pos, tint) -> TINT_SACRED, sacredTintedBlocks());
         event.register((state, level, pos, tint) -> TINT_DESECRATED, desecratedTintedBlocks());
         event.register((state, level, pos, tint) -> TINT_NEUTRAL, neutralTintedBlocks());
+        event.register((state, level, pos, tint) -> spreaderBlockTint(state, tint), spreaderBlocks());
     }
 
     @SubscribeEvent
@@ -101,5 +132,8 @@ public class MightAndMagicClient {
         event.register((stack, tint) -> TINT_SACRED, sacredTintedBlocks());
         event.register((stack, tint) -> TINT_DESECRATED, desecratedTintedBlocks());
         event.register((stack, tint) -> TINT_NEUTRAL, neutralTintedBlocks());
+        // Item form is always the unmarked model (see VerdantMana's spreader .item() registration),
+        // so tintindex 1 is never actually sampled here — only the tier constant matters.
+        event.register((stack, tint) -> spreaderTierTint(Block.byItem(stack.getItem())), spreaderBlocks());
     }
 }

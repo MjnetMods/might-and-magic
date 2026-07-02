@@ -1,17 +1,22 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import org.mjli.mam.MamDataComponents;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.api.energy.EnergyContainer;
 import org.mjli.mam.api.energy.EnergyType;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import org.mjli.mam.block.AltarBlock;
 import org.mjli.mam.block.ApothecaryBlock;
 import org.mjli.mam.block.SpreaderBlock;
+import org.mjli.mam.block.SpreaderMarkColor;
 import org.mjli.mam.block.mana.ManaPoolBlock;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
 import org.mjli.mam.foundation.registration.MamBlockProperties;
@@ -146,8 +151,7 @@ public class VerdantMana {
     public static final BlockEntry<SpreaderBlock> SPREADER =
         R.block("mana_spreader", SpreaderBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .blockstate((ctx, p) -> spreaderVariants(ctx, p, ctx.getName()))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -155,8 +159,7 @@ public class VerdantMana {
     public static final BlockEntry<SpreaderBlock> INFUSED_SPREADER =
         R.block("infused_mana_spreader", SpreaderBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .blockstate((ctx, p) -> spreaderVariants(ctx, p, ctx.getName()))
          .loot((t, b) -> t.dropSelf(b))
          .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
@@ -164,8 +167,7 @@ public class VerdantMana {
     public static final BlockEntry<SpreaderBlock> SACRED_SPREADER =
         R.block("sacred_mana_spreader", SpreaderBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .blockstate((ctx, p) -> spreaderVariants(ctx, p, ctx.getName()))
          .loot((t, b) -> t.dropSelf(b))
          .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
@@ -173,11 +175,20 @@ public class VerdantMana {
     public static final BlockEntry<SpreaderBlock> DESECRATED_SPREADER =
         R.block("desecrated_mana_spreader", SpreaderBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .blockstate((ctx, p) -> spreaderVariants(ctx, p, ctx.getName()))
          .loot((t, b) -> t.dropSelf(b))
          .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
+
+    // Loop Marking (design/magic/16_mana-spreader.md) — MARK == NONE uses the tier's plain
+    // model, any other value swaps in the "_marked" model (same shape + a rune-glyph decal on
+    // tintindex 1). Both models already exist per tier; this only wires the blockstate switch.
+    private static void spreaderVariants(DataGenContext<Block, SpreaderBlock> ctx, RegistrateBlockstateProvider p, String name) {
+        var unmarked = p.models().getExistingFile(p.modLoc("block/" + name));
+        var marked = p.models().getExistingFile(p.modLoc("block/" + name + "_marked"));
+        p.getVariantBuilder(ctx.getEntry()).forAllStates(state -> new ConfiguredModel[] { new ConfiguredModel(
+            state.getValue(SpreaderBlock.MARK) == SpreaderMarkColor.NONE ? unmarked : marked) });
+    }
 
     // T1 only — Infused/Sacred/Desecrated Tablets are blocked on gem infusion (design/magic/17_trinkets.md)
     public static final ItemEntry<Item> MANA_TABLET =

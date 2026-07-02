@@ -1,8 +1,8 @@
 ---
 type: design
 status: wip
-last-updated: 2026-06-30
-links: ["[[magic/00_energy]]", "[[magic/25_runes]]", "[[00_infra]]"]
+last-updated: 2026-07-02
+links: ["[[magic/00_energy]]", "[[magic/25_runes]]", "[[00_infra]]", "[[magic/16_mana-spreader]]"]
 ---
 
 # MAM — Rituals & Chalk
@@ -48,6 +48,8 @@ Runes are drawn on stone placed in the world. Substrate type affects both **cost
 | Desecrated Living Rock | High cost, dark-aligned amplification |
 
 Destroying a substrate block destroys the rune marking on it.
+
+**Art asset note:** rendering a drawn rune marking on a substrate face is the same problem Loop Marking already solved for the Mana Spreader ([[magic/16_mana-spreader]] § Loop Marking) — a desaturated glyph decal tinted per-color via a second BlockColor tintindex, `RenderType.cutout()` for the alpha. A full set of desaturated, tintable glyph textures for all 25 `mam:rune_*` items (plus the 16 unique underlying Botania source icons) already exists at `assets/mam/textures/misc/rune_marks/<name>_mark.png`, extracted from Botania's placeholder rune art via a frequency-based pixel filter (keeps repeated "gem body" colors, drops singleton anti-alias/highlight pixels — more robust than a hue/saturation cutoff, since some source icons have low-saturation or achromatic gems). Reuse these rather than re-extracting when Ritual marking rendering is implemented.
 
 ---
 
