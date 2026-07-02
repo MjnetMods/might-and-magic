@@ -67,11 +67,13 @@ one tier exists) and registered a `0xFFFFFF` identity tint — the grayscale alo
 stone, no hue multiply needed. When Infused/Sacred/Desecrated Apothecary tiers get built later,
 they reuse this same desaturated base tinted blue/green/purple like every other family.
 
-**Blocked, not implemented this pass:** Apothecary's Infused/Sacred/Desecrated tiers and all of
-Altar don't exist as registered blocks yet ([[10_apothecary]]'s tier table marks them "Not yet
-implemented"; Altar has no Java class at all) — there's nothing to attach a tint handler to.
-Building those tier blocks is separate, larger work belonging to those features' own
-implementation stage, not this tinting pass.
+**Follow-up pass (2026-07-02):** Apothecary's Infused/Sacred/Desecrated tiers and all four Altar
+tiers were registered (block + item only, no in-world mechanic — see [[20_altar]]), and Mana Pool's
+existing Infused/Sacred/Desecrated tiers (which predate this doc and were found still sharing T1's
+model with no tint) were given the same treatment. Mana Pool and Altar both use custom multi-element
+shapes, so each needed its own `_tinted` shape variant (`shapes/mana_pool_tinted.json`,
+`shapes/altar_tinted.json`) rather than reusing `tinted_cube_all` — Apothecary's tiers reuse T1's
+existing shape/textures directly, same as the original pass anticipated.
 
 **Known, intentionally untouched:** `living_rock.png` (32×192) and `apothecary_top.png`
 (32×128) are packed multi-frame sheets (used with explicit UV elsewhere, by T1's own custom
@@ -96,4 +98,14 @@ here, to keep this pass scoped to "add a tint."
   generated output for `sacred_living_rock`/`sacred_livingwood_log`)
 - `done` — visual confirmation in a running client (rotation correctness, actual tint colors,
   Apothecary gray correction) — [manual steps](../../test/09_tier-tinting.md) (2026-07-02)
-- `blocked` — Apothecary/Altar higher-tier tinting — blocked on those tier blocks being built
+- `done` — Apothecary Infused/Sacred/Desecrated registered and tinted (reuse T1 shape/textures) —
+  [`VerdantMana.java`](../../src/main/java/org/mjli/mam/verdant/VerdantMana.java)
+- `done` — Mana Pool Infused/Sacred/Desecrated given distinct tinted models (previously shared
+  T1's untinted model) — `shapes/mana_pool_tinted.json`
+- `done` — Altar registered (all 4 tiers, block + item, no mechanic) and tinted, art upscaled
+  2x from Botania's `runic_altar_*` — [`AltarBlock.java`](../../src/main/java/org/mjli/mam/block/AltarBlock.java)
+- `done` — fixed two stale hand-authored item models (Apothecary, Mana Pool) that shadowed
+  datagen's correct 3D-parent output with a flat `item/generated` sprite
+- `done` — fixed missing collision/outline `VoxelShape` on Apothecary/Altar/Mana Pool (all three
+  fell back to a full 16x16x16 cube, causing an oversized hitbox and wrongly culling neighboring
+  blocks' faces) — visually confirmed in a running client (2026-07-02)

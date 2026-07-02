@@ -206,6 +206,12 @@ See [[magic/10_apothecary]] for the Apothecary's full design.
 
 ## Validation
 
+- `done` — Block + item registration for all 4 tiers, no in-world mechanic yet — art upscaled 2x
+  from Botania's `runic_altar_*` (see [[27_tier-tinting]]) —
+  [`AltarBlock.java`](../../src/main/java/org/mjli/mam/block/AltarBlock.java),
+  [`VerdantMana.java`](../../src/main/java/org/mjli/mam/verdant/VerdantMana.java) (2026-07-02)
+- `todo` — Site docs + Patchouli book entry (deferred; registered ahead of docs by deliberate
+  exception to the usual pipeline order, see [[../../CLAUDE|CLAUDE.md]] feature pipeline)
 - `todo` — Crafting recipes (Altar / Infused Altar / Sacred Altar / Desecrated Altar craft recipes)
 - `todo` — In-world mechanic (ingredient detection, Living Rock trigger, mana draw, output eject, guard conditions)
 - `todo` — Recipe format / data model (`mam:altar` recipe type, `AltarRecipe`)
