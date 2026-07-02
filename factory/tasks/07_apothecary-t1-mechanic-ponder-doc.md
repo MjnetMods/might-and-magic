@@ -176,3 +176,21 @@ task-brief assumption for future Ponder tasks involving block entities with cust
   git add src/main/java/org/mjli/mam/ponder/MamPonderScenes.java
   git commit -m "feat: apothecary ponder scene applies to all tiers"
   ```
+
+  (Composed but never separately executed — confirmed by later review the four-tier
+  registration is already present in the working tree and was folded into commit `a9e7682`
+  directly; no second commit exists under this message. No functional impact, just a
+  handoff-log/commit-count mismatch.)
+
+- 2026-07-02 — reviewed (reviewer). No `CONFIRMED` findings — empty list, a positive outcome
+  per the charter. Confirmed `getFluidTank()`/`getIngredients()` usage matches
+  `ApothecaryBlockEntity`'s real public API; confirmed the sibling per-tier capacity fix (commit
+  `3f061fc`) doesn't affect this scene (only touched the constructor and one internal
+  comparison, getters unchanged); confirmed the 4 staged text beats match the shipped
+  `text_1`–`text_4` lang keys in order; confirmed the fill→throw×4→catalyst→craft sequence
+  matches `TestApothecary.apothecaryCraftsPureDaisyFromPetalsAndSeed` (PA-3) beat-for-beat. No
+  bounce needed. Only open item: `test/10_apothecary-ponder-scene.md` is still `status: pending`
+  — needs a human with a display to run `./gradlew runClient` and confirm the scene visually
+  plays correctly; this is a pre-existing known gap (no runClient capability in this
+  environment), not something this review found. Ready to move to `merge` once that visual
+  confirmation lands.
