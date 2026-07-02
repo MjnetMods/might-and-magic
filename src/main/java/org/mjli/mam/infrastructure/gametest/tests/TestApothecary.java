@@ -153,4 +153,142 @@ public class TestApothecary {
             });
         });
     }
+
+    // ── PA-4 ─────────────────────────────────────────────────────────────────
+
+    /**
+     * PA-4: throwing a white then a red petal, then interacting empty-handed, retracts only
+     * the most recently thrown (red) petal back into the player's inventory — LIFO, one per click.
+     */
+    @GameTest(template = PLATFORM)
+    public static void apothecaryRetractsLastIngredientEmptyHanded(GameTestHelper helper) {
+        BlockState state = VerdantMana.APOTHECARY.get().defaultBlockState();
+        helper.setBlock(CENTER, state);
+        BlockPos absCenter = helper.absolutePos(CENTER);
+        ApothecaryBlockEntity be = (ApothecaryBlockEntity) helper.getLevel().getBlockEntity(absCenter);
+        if (be == null) { helper.fail("No BlockEntity at CENTER"); return; }
+
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        be.interact(player);
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+
+        double x = absCenter.getX() + 0.5, y = absCenter.getY() + 1.0, z = absCenter.getZ() + 0.5;
+        helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get())));
+
+        helper.runAfterDelay(2, () -> {
+            if (be.getIngredients().size() != 1) {
+                helper.fail("Expected 1 ingredient after first throw, got " + be.getIngredients().size());
+                return;
+            }
+
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                    new ItemStack(VerdantFlowers.PETALS.get(DyeColor.RED).get())));
+
+            helper.runAfterDelay(2, () -> {
+                if (be.getIngredients().size() != 2) {
+                    helper.fail("Expected 2 ingredients after second throw, got " + be.getIngredients().size());
+                    return;
+                }
+
+                var result = be.interact(player);
+                if (result != net.minecraft.world.InteractionResult.SUCCESS) {
+                    helper.fail("Expected SUCCESS retracting an ingredient, got " + result);
+                    return;
+                }
+                if (be.getIngredients().size() != 1) {
+                    helper.fail("Expected 1 ingredient left after retract, got " + be.getIngredients().size());
+                    return;
+                }
+                if (!be.getIngredients().get(0).is(VerdantFlowers.PETALS.get(DyeColor.WHITE).get())) {
+                    helper.fail("Expected the white petal (thrown first) to remain — LIFO retract took the wrong one");
+                    return;
+                }
+
+                boolean retractedInInventory = false;
+                for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                    if (player.getInventory().getItem(i).is(VerdantFlowers.PETALS.get(DyeColor.RED).get())) {
+                        retractedInInventory = true;
+                        break;
+                    }
+                }
+                if (!retractedInInventory) {
+                    helper.fail("Expected retracted red petal in player inventory");
+                    return;
+                }
+                helper.succeed();
+            });
+        });
+    }
+
+    // ── PA-5 ─────────────────────────────────────────────────────────────────
+
+    /**
+     * PA-5: after a successful craft, refilling the fluid and interacting empty-handed within
+     * the recraft window re-pulls the same ingredients from the player's inventory.
+     */
+    @GameTest(template = PLATFORM)
+    public static void apothecaryRecraftsLastRecipeFromPlayerInventory(GameTestHelper helper) {
+        BlockState state = VerdantMana.APOTHECARY.get().defaultBlockState();
+        helper.setBlock(CENTER, state);
+        BlockPos absCenter = helper.absolutePos(CENTER);
+        ApothecaryBlockEntity be = (ApothecaryBlockEntity) helper.getLevel().getBlockEntity(absCenter);
+        if (be == null) { helper.fail("No BlockEntity at CENTER"); return; }
+
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        be.interact(player);
+
+        double x = absCenter.getX() + 0.5, y = absCenter.getY() + 1.0, z = absCenter.getZ() + 0.5;
+        for (int i = 0; i < 4; i++) {
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                    new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get())));
+        }
+
+        helper.runAfterDelay(2, () -> {
+            if (be.getIngredients().size() != 4) {
+                helper.fail("Expected 4 petals ingested, got " + be.getIngredients().size());
+                return;
+            }
+
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z,
+                    new ItemStack(Items.WHEAT_SEEDS)));
+
+            helper.runAfterDelay(2, () -> {
+                if (!be.getIngredients().isEmpty() || !be.getFluidTank().isEmpty()) {
+                    helper.fail("Expected craft to clear ingredients and drain fluid before recraft check");
+                    return;
+                }
+
+                player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+                be.interact(player);
+                player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+                if (be.getFluidTank().isEmpty()) {
+                    helper.fail("Expected fluid refilled before recraft attempt");
+                    return;
+                }
+
+                // Slot 1, not 0 — slot 0 is the player's selected hotbar slot, i.e. their main
+                // hand; putting the petals there would defeat the "main hand empty" check below.
+                player.getInventory().setItem(1, new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get(), 4));
+
+                var result = be.interact(player);
+                if (result != net.minecraft.world.InteractionResult.SUCCESS) {
+                    helper.fail("Expected SUCCESS recrafting last recipe, got " + result);
+                    return;
+                }
+                if (be.getIngredients().size() != 4) {
+                    helper.fail("Expected 4 ingredients re-added from recraft, got " + be.getIngredients().size());
+                    return;
+                }
+                if (!player.getInventory().getItem(1).isEmpty()) {
+                    helper.fail("Expected player's 4 petals consumed by recraft, got "
+                            + player.getInventory().getItem(1).getCount());
+                    return;
+                }
+                helper.succeed();
+            });
+        });
+    }
 }

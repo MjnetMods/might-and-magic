@@ -34,6 +34,9 @@ public class ApothecaryBlockEntity extends BlockEntity {
     // T1 capacity per design/magic/10_apothecary.md tier table (4 + 1 seed reagent)
     private static final int MAX_INGREDIENTS = 4;
 
+    // 20s window to recraft the last recipe, matching Botania's PetalApothecaryBlockEntity
+    private static final int RECIPE_KEEP_TICKS = 400;
+
     // 1 bucket; no validator — accepts any bucket-compatible fluid per design/magic/10_apothecary.md
     private final FluidTank tank = new FluidTank(1000) {
         @Override
@@ -44,6 +47,11 @@ public class ApothecaryBlockEntity extends BlockEntity {
 
     private final List<ItemStack> ingredients = new ArrayList<>();
 
+    // Transient recraft memory — intentionally not saved to NBT, same as Botania's reference
+    @Nullable
+    private List<ItemStack> lastRecipe = null;
+    private int recipeKeepTicks = 0;
+
     public ApothecaryBlockEntity(BlockPos pos, BlockState state) {
         super(MamBlockEntities.APOTHECARY.get(), pos, state);
     }
@@ -53,6 +61,15 @@ public class ApothecaryBlockEntity extends BlockEntity {
         List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, new AABB(pos.above()));
         for (ItemEntity item : items) {
             self.collideEntityItem(item);
+        }
+        self.tickRecipeKeep();
+    }
+
+    private void tickRecipeKeep() {
+        if (recipeKeepTicks > 0) {
+            recipeKeepTicks--;
+        } else {
+            lastRecipe = null;
         }
     }
 
@@ -67,6 +84,9 @@ public class ApothecaryBlockEntity extends BlockEntity {
         if (match.isPresent() && match.get().value().getReagent().test(stack)) {
             ApothecaryRecipe recipe = match.get().value();
             ItemStack result = recipe.assemble(view, level.registryAccess());
+
+            lastRecipe = ingredients.stream().map(ItemStack::copy).toList();
+            recipeKeepTicks = RECIPE_KEEP_TICKS;
 
             ingredients.clear();
             stack.shrink(1);
@@ -92,8 +112,46 @@ public class ApothecaryBlockEntity extends BlockEntity {
     }
 
     public InteractionResult interact(Player player) {
+        boolean mainHandEmpty = player.getMainHandItem().isEmpty();
+
+        if (mainHandEmpty && canAddLastRecipe()) {
+            return trySetLastRecipe(player);
+        }
+
+        if (mainHandEmpty && !ingredients.isEmpty()) {
+            ItemStack retracted = ingredients.remove(ingredients.size() - 1);
+            player.getInventory().placeItemBackInInventory(retracted);
+            setChanged();
+            return InteractionResult.SUCCESS;
+        }
+
         boolean handled = FluidUtil.interactWithFluidHandler(player, InteractionHand.MAIN_HAND, getLevel(), worldPosition, null);
         return handled ? InteractionResult.SUCCESS : InteractionResult.PASS;
+    }
+
+    // Ingredients drained on craft (see collideEntityItem), so both the ingredient list
+    // and the fluid must be empty/refilled before a recraft can be offered again.
+    private boolean canAddLastRecipe() {
+        return ingredients.isEmpty() && !tank.isEmpty() && lastRecipe != null && !lastRecipe.isEmpty();
+    }
+
+    // Pulls whatever ingredients the player happens to be carrying, one at a time — a partial
+    // match still helps (matches Botania's InventoryHelper.tryToSetLastRecipe: best-effort, not all-or-nothing).
+    private InteractionResult trySetLastRecipe(Player player) {
+        boolean addedAny = false;
+        for (ItemStack want : lastRecipe) {
+            for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+                ItemStack held = player.getInventory().getItem(i);
+                if (player.isCreative() || (!held.isEmpty() && ItemStack.isSameItemSameComponents(want, held))) {
+                    ingredients.add(player.isCreative() ? want.copyWithCount(1) : held.split(1));
+                    addedAny = true;
+                    break;
+                }
+            }
+        }
+
+        if (addedAny) setChanged();
+        return addedAny ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
     public FluidTank getFluidTank() { return tank; }
