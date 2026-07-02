@@ -50,7 +50,9 @@ public class MamBlockEntities {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ApothecaryBlockEntity>> APOTHECARY =
             BLOCK_ENTITY_TYPES.register("apothecary",
-                    () -> BlockEntityType.Builder.of(ApothecaryBlockEntity::new, VerdantMana.APOTHECARY.get()).build(null));
+                    () -> BlockEntityType.Builder.of(ApothecaryBlockEntity::new,
+                            VerdantMana.APOTHECARY.get(), VerdantMana.INFUSED_APOTHECARY.get(),
+                            VerdantMana.SACRED_APOTHECARY.get(), VerdantMana.DESECRATED_APOTHECARY.get()).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DaybloomBlockEntity>> DAYBLOOM =
             BLOCK_ENTITY_TYPES.register("daybloom",

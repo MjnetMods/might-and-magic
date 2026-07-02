@@ -9,6 +9,7 @@ import org.mjli.mam.MamDataComponents;
 import org.mjli.mam.MightAndMagic;
 import org.mjli.mam.api.energy.EnergyContainer;
 import org.mjli.mam.api.energy.EnergyType;
+import org.mjli.mam.block.AltarBlock;
 import org.mjli.mam.block.ApothecaryBlock;
 import org.mjli.mam.block.mana.ManaPoolBlock;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
@@ -35,27 +36,27 @@ public class VerdantMana {
         R.block("infused_mana_pool", ManaPoolBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
          .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/mana_pool"))))
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
-         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/mana_pool"))).build()
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
 
     public static final BlockEntry<ManaPoolBlock> SACRED_MANA_POOL =
         R.block("sacred_mana_pool", ManaPoolBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
          .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/mana_pool"))))
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
-         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/mana_pool"))).build()
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
 
     public static final BlockEntry<ManaPoolBlock> DESECRATED_MANA_POOL =
         R.block("desecrated_mana_pool", ManaPoolBlock::new)
          .properties(p -> MamBlockProperties.manaPool())
          .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
-             p.models().getExistingFile(p.modLoc("block/mana_pool"))))
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
-         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/mana_pool"))).build()
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
 
     public static final BlockEntry<ApothecaryBlock> APOTHECARY =
@@ -65,6 +66,77 @@ public class VerdantMana {
              p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
+         .register();
+
+    // Infused/Sacred/Desecrated share T1's shape+textures (already tinted/desaturated,
+    // see design/magic/27_tier-tinting.md) and ApothecaryBlockEntity behavior — registration
+    // only, no tier-specific mechanic yet.
+    public static final BlockEntry<ApothecaryBlock> INFUSED_APOTHECARY =
+        R.block("infused_apothecary", ApothecaryBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/apothecary"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/apothecary"))).build()
+         .register();
+
+    public static final BlockEntry<ApothecaryBlock> SACRED_APOTHECARY =
+        R.block("sacred_apothecary", ApothecaryBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/apothecary"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/apothecary"))).build()
+         .register();
+
+    public static final BlockEntry<ApothecaryBlock> DESECRATED_APOTHECARY =
+        R.block("desecrated_apothecary", ApothecaryBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/apothecary"))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/apothecary"))).build()
+         .register();
+
+    // Verdant ritual station (design/magic/20_altar.md) — registration only, no in-world
+    // mechanic yet (ingredient detection/trigger/recipe firing are separate follow-up work).
+    // T1 keeps its original colored texture; higher tiers reuse the tinted-shape + desaturated-
+    // texture pattern from design/magic/27_tier-tinting.md, each tier with its own model since
+    // (unlike Apothecary) the desaturated textures are distinct files, not a shared reused model.
+    public static final BlockEntry<AltarBlock> ALTAR =
+        R.block("altar", AltarBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<AltarBlock> INFUSED_ALTAR =
+        R.block("infused_altar", AltarBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
+         .register();
+
+    public static final BlockEntry<AltarBlock> SACRED_ALTAR =
+        R.block("sacred_altar", AltarBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
+         .register();
+
+    public static final BlockEntry<AltarBlock> DESECRATED_ALTAR =
+        R.block("desecrated_altar", AltarBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
 
     // T1 only — Infused/Sacred/Desecrated Tablets are blocked on gem infusion (design/magic/17_trinkets.md)
@@ -81,6 +153,13 @@ public class VerdantMana {
         modifier.accept(SACRED_MANA_POOL.asStack(), tab);
         modifier.accept(DESECRATED_MANA_POOL.asStack(), tab);
         modifier.accept(APOTHECARY.asStack(), tab);
+        modifier.accept(INFUSED_APOTHECARY.asStack(), tab);
+        modifier.accept(SACRED_APOTHECARY.asStack(), tab);
+        modifier.accept(DESECRATED_APOTHECARY.asStack(), tab);
+        modifier.accept(ALTAR.asStack(), tab);
+        modifier.accept(INFUSED_ALTAR.asStack(), tab);
+        modifier.accept(SACRED_ALTAR.asStack(), tab);
+        modifier.accept(DESECRATED_ALTAR.asStack(), tab);
         modifier.accept(MANA_TABLET.asStack(), tab);
     }
 
