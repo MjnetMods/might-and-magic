@@ -1,6 +1,6 @@
 ---
 type: design
-status: wip
+status: done
 last-updated: 2026-07-02
 links: ["[[magic/00_energy]]", "[[20_verdant-path]]", "[[magic/20_altar]]", "[[magic/15_mana-pool]]", "[[magic/27_tier-tinting]]"]
 ---
