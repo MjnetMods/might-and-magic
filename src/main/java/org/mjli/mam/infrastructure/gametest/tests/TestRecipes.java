@@ -7,6 +7,7 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -210,6 +211,55 @@ public class TestRecipes {
         }
         if (apothecaryIngredients != 1) {
             helper.fail("Expected 1 base Apothecary ingredient, got " + apothecaryIngredients);
+            return;
+        }
+        helper.succeed();
+    }
+
+    /**
+     * RC-10: infused apothecary recipe actually enforces the goblet shape, not just ingredient
+     * composition. RC-9 counts ingredient matches via {@code getIngredients()}, which for a
+     * {@code ShapedRecipe} is the pattern's flat positional list (blank cells included) — so a
+     * same-composition-but-wrong-position grid (6x rock + 1x apothecary, just rearranged) would
+     * pass RC-9's counts unchanged. This test drives the real matching path instead
+     * ({@code RecipeManager.getRecipeFor} against a positioned {@code CraftingInput}), so a
+     * transposition bug in the pattern string would actually be caught: the correct goblet layout
+     * must match, and the same items with the apothecary moved off-center must not.
+     */
+    @GameTest(template = PLATFORM)
+    public static void infusedApothecaryRequiresGobletShape(GameTestHelper helper) {
+        var rm = helper.getLevel().getServer().getRecipeManager();
+        var level = helper.getLevel();
+        var registries = level.registryAccess();
+        var infusedApothecary = VerdantMana.INFUSED_APOTHECARY.asItem();
+        var rock = new ItemStack(VerdantRock.INFUSED_LIVING_ROCK.get());
+        var apothecary = new ItemStack(VerdantMana.APOTHECARY.get());
+
+        // Correct goblet shape: "#P#" / " # " / "###"
+        var correctShape = CraftingInput.of(3, 3, List.of(
+            rock, apothecary, rock,
+            ItemStack.EMPTY, rock, ItemStack.EMPTY,
+            rock, rock, rock
+        ));
+        var correctMatch = rm.getRecipeFor(RecipeType.CRAFTING, correctShape, level)
+            .filter(r -> r.value().getResultItem(registries).is(infusedApothecary));
+        if (correctMatch.isEmpty()) {
+            helper.fail("Correct goblet shape did not match the infused apothecary recipe");
+            return;
+        }
+
+        // Same aggregate counts (6x rock + 1x apothecary), apothecary moved from top-center to
+        // top-left — must NOT match if the shape is actually enforced, not just counted.
+        var wrongShape = CraftingInput.of(3, 3, List.of(
+            apothecary, rock, rock,
+            ItemStack.EMPTY, rock, ItemStack.EMPTY,
+            rock, rock, rock
+        ));
+        var wrongMatch = rm.getRecipeFor(RecipeType.CRAFTING, wrongShape, level)
+            .filter(r -> r.value().getResultItem(registries).is(infusedApothecary));
+        if (wrongMatch.isPresent()) {
+            helper.fail("Misplaced apothecary (same ingredient counts, wrong position) incorrectly "
+                + "matched the infused apothecary recipe");
             return;
         }
         helper.succeed();
