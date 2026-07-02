@@ -12,6 +12,22 @@ hugo serve
 
 `hugo serve` hot-reloads on save. `site/public/` is the build output — don't edit it directly; run `hugo` to regenerate.
 
+## Voice
+
+Site content sells the feature to a player — prose-first and thematic, not a design-doc summary.
+A design doc's tier table, slot counts, and tags are source material to translate, not content to
+transcribe: read the existing prose immediately around where you're writing (same file, same
+section) and match that voice before adding anything.
+
+- Lead with what the feature *means* to the player, then back it with detail — not the reverse.
+- Numeric/tabular reference content (tier tables, slot counts) is allowed but stays minor and
+  secondary to the prose, never the section's opening or its bulk.
+- No ASCII diagrams. If a recipe needs a visual, use the real `{{< crafting >}}` shortcode (below)
+  — this site already has precedent for a representative stand-in texture when the exact one
+  doesn't exist yet (e.g. the base Apothecary recipe renders `out="block/apothecary_side"` even
+  though T1 accepts any rock, not literally stone). Reuse that pattern rather than reaching for
+  prose-as-diagram.
+
 ## Content structure
 
 | Path | Purpose |

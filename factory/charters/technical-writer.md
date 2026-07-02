@@ -26,7 +26,10 @@ Only the path matching the task's current gate. Does not touch `src/main/java/`,
 Given a task whose linked design doc is `done`, produce the artifact for that task's gate:
 
 - `site-doc` — site content selling the feature to a player, written as if the mechanic already
-  exists, per the Feature Pipeline's "docs precede code" rule (root `CLAUDE.md`).
+  exists, per the Feature Pipeline's "docs precede code" rule (root `CLAUDE.md`). Voice and format
+  conventions (prose-first and thematic, not a design-doc transcription; no ASCII diagrams — use
+  the real `{{< crafting >}}` shortcode) are in `[[site-guide]]` §Voice — read it, don't just skim
+  for shortcode syntax.
 - `book-doc` — a Patchouli book entry covering the same content for in-game reference.
 - `ponder-doc` — a script/spec for the eventual Ponder scene: what beats it walks through, what
   it demonstrates, per `[[ponder-guide]]`.
