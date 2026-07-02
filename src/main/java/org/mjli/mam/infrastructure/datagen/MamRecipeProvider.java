@@ -40,6 +40,7 @@ public class MamRecipeProvider extends RecipeProvider {
         apothecary(output);
         apothecaryPureDaisy(output);
         manaPool(output);
+        spreader(output);
     }
 
     private void guide(RecipeOutput output) {
@@ -248,6 +249,50 @@ public class MamRecipeProvider extends RecipeProvider {
             .define('R', VerdantRock.DESECRATED_LIVING_ROCK.get())
             .unlockedBy("has_desecrated_living_rock", has(VerdantRock.DESECRATED_LIVING_ROCK.get()))
             .save(output, id("desecrated_mana_pool"));
+    }
+
+    private void spreader(RecipeOutput output) {
+        var petals = ItemTags.create(ResourceLocation.fromNamespaceAndPath(MightAndMagic.MODID, "mystical_petals"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.SPREADER.get())
+            .pattern("WWW")
+            .pattern("LPL")
+            .pattern("WWW")
+            .define('W', VerdantWood.LIVINGWOOD_LOG.get())
+            .define('L', VerdantRock.LIVING_ROCK.get())
+            .define('P', petals)
+            .unlockedBy("has_livingwood_log", has(VerdantWood.LIVINGWOOD_LOG.get()))
+            .save(output, id("mana_spreader"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.INFUSED_SPREADER.get())
+            .pattern("WWW")
+            .pattern("LPL")
+            .pattern("WWW")
+            .define('W', VerdantWood.INFUSED_LIVINGWOOD_LOG.get())
+            .define('L', VerdantRock.INFUSED_LIVING_ROCK.get())
+            .define('P', petals)
+            .unlockedBy("has_infused_livingwood_log", has(VerdantWood.INFUSED_LIVINGWOOD_LOG.get()))
+            .save(output, id("infused_mana_spreader"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.SACRED_SPREADER.get())
+            .pattern("WWW")
+            .pattern("LPL")
+            .pattern("WWW")
+            .define('W', VerdantWood.SACRED_LIVINGWOOD_LOG.get())
+            .define('L', VerdantRock.SACRED_LIVING_ROCK.get())
+            .define('P', petals)
+            .unlockedBy("has_sacred_livingwood_log", has(VerdantWood.SACRED_LIVINGWOOD_LOG.get()))
+            .save(output, id("sacred_mana_spreader"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.DESECRATED_SPREADER.get())
+            .pattern("WWW")
+            .pattern("LPL")
+            .pattern("WWW")
+            .define('W', VerdantWood.DESECRATED_LIVINGWOOD_LOG.get())
+            .define('L', VerdantRock.DESECRATED_LIVING_ROCK.get())
+            .define('P', petals)
+            .unlockedBy("has_desecrated_livingwood_log", has(VerdantWood.DESECRATED_LIVINGWOOD_LOG.get()))
+            .save(output, id("desecrated_mana_spreader"));
     }
 
     private static ResourceLocation id(String name) {

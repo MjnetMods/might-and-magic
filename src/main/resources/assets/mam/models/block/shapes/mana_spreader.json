@@ -1,0 +1,58 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": { "particle": "#outside" },
+  "elements": [
+    { "name": "west", "from": [2, 2, 2], "to": [3, 14, 14], "faces": {
+        "north": { "texture": "#outside" },
+        "east": { "texture": "#inside" },
+        "south": { "texture": "#back" },
+        "west": { "texture": "#side" },
+        "up": { "texture": "#outside" },
+        "down": { "texture": "#outside" }
+    }},
+    { "name": "east", "from": [13, 2, 2], "to": [14, 14, 14], "faces": {
+        "north": { "texture": "#outside" },
+        "east": { "texture": "#side", "uv": [14, 2, 2, 14] },
+        "south": { "texture": "#back" },
+        "west": { "texture": "#inside" },
+        "up": { "texture": "#outside" },
+        "down": { "texture": "#outside" }
+    }},
+    { "name": "top", "from": [3, 13, 2], "to": [13, 14, 14], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#back" },
+        "up": { "texture": "#outside" },
+        "down": { "texture": "#inside" }
+    }},
+    { "name": "bottom", "from": [3, 2, 2], "to": [13, 3, 14], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#back" },
+        "up": { "texture": "#inside" },
+        "down": { "texture": "#outside" }
+    }},
+    { "name": "back", "from": [3, 3, 13], "to": [13, 13, 14], "faces": {
+        "north": { "texture": "#inside" },
+        "south": { "texture": "#back" }
+    }},
+    { "name": "front_top", "from": [6, 10, 2], "to": [13, 13, 3], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#inside" },
+        "down": { "texture": "#outside" }
+    }},
+    { "name": "front_bottom", "from": [3, 3, 2], "to": [10, 6, 3], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#inside" },
+        "up": { "texture": "#outside" }
+    }},
+    { "name": "front_west", "from": [3, 6, 2], "to": [6, 13, 3], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#inside" },
+        "east": { "texture": "#outside" }
+    }},
+    { "name": "front_east", "from": [10, 3, 2], "to": [13, 10, 3], "faces": {
+        "north": { "texture": "#outside" },
+        "south": { "texture": "#inside" },
+        "west": { "texture": "#outside" }
+    }}
+  ]
+}

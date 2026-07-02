@@ -1,0 +1,9 @@
+{
+  "parent": "mam:block/shapes/mana_spreader_tinted",
+  "textures": {
+    "outside": "mam:block/livingwood_log_desaturated",
+    "inside": "mam:block/livingwood_log_stripped_desaturated",
+    "back": "mam:block/mana_spreader_back_desaturated",
+    "side": "mam:block/mana_spreader_side_desaturated"
+  }
+}

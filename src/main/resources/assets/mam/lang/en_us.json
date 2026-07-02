@@ -65,6 +65,10 @@
   "block.mam.infused_altar": "Infused Altar",
   "block.mam.sacred_altar": "Sacred Altar",
   "block.mam.desecrated_altar": "Desecrated Altar",
+  "block.mam.mana_spreader": "Mana Spreader",
+  "block.mam.infused_mana_spreader": "Infused Mana Spreader",
+  "block.mam.sacred_mana_spreader": "Sacred Mana Spreader",
+  "block.mam.desecrated_mana_spreader": "Desecrated Mana Spreader",
 
   "item.mam.white_petal": "White Mystical Petal",
   "item.mam.orange_petal": "Orange Mystical Petal",

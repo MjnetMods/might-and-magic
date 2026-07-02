@@ -60,7 +60,8 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.INFUSED_LIVING_ROCK.get(), VerdantRock.INFUSED_LIVING_ROCK_POLISHED.get(), VerdantRock.INFUSED_LIVING_ROCK_BRICK.get(),
             VerdantWood.INFUSED_LIVINGWOOD_LOG.get(), VerdantWood.INFUSED_LIVINGWOOD.get(), VerdantWood.INFUSED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.INFUSED_MANA_POOL.get(), VerdantMana.INFUSED_APOTHECARY.get(), VerdantMana.INFUSED_ALTAR.get()
+            VerdantMana.INFUSED_MANA_POOL.get(), VerdantMana.INFUSED_APOTHECARY.get(), VerdantMana.INFUSED_ALTAR.get(),
+            VerdantMana.INFUSED_SPREADER.get()
         };
     }
 
@@ -68,7 +69,8 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.SACRED_LIVING_ROCK.get(), VerdantRock.SACRED_LIVING_ROCK_POLISHED.get(), VerdantRock.SACRED_LIVING_ROCK_BRICK.get(),
             VerdantWood.SACRED_LIVINGWOOD_LOG.get(), VerdantWood.SACRED_LIVINGWOOD.get(), VerdantWood.SACRED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.SACRED_MANA_POOL.get(), VerdantMana.SACRED_APOTHECARY.get(), VerdantMana.SACRED_ALTAR.get()
+            VerdantMana.SACRED_MANA_POOL.get(), VerdantMana.SACRED_APOTHECARY.get(), VerdantMana.SACRED_ALTAR.get(),
+            VerdantMana.SACRED_SPREADER.get()
         };
     }
 
@@ -76,7 +78,8 @@ public class MightAndMagicClient {
         return new Block[] {
             VerdantRock.DESECRATED_LIVING_ROCK.get(), VerdantRock.DESECRATED_LIVING_ROCK_POLISHED.get(), VerdantRock.DESECRATED_LIVING_ROCK_BRICK.get(),
             VerdantWood.DESECRATED_LIVINGWOOD_LOG.get(), VerdantWood.DESECRATED_LIVINGWOOD.get(), VerdantWood.DESECRATED_LIVINGWOOD_PLANKS.get(),
-            VerdantMana.DESECRATED_MANA_POOL.get(), VerdantMana.DESECRATED_APOTHECARY.get(), VerdantMana.DESECRATED_ALTAR.get()
+            VerdantMana.DESECRATED_MANA_POOL.get(), VerdantMana.DESECRATED_APOTHECARY.get(), VerdantMana.DESECRATED_ALTAR.get(),
+            VerdantMana.DESECRATED_SPREADER.get()
         };
     }
 

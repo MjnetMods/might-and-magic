@@ -11,6 +11,7 @@ import org.mjli.mam.api.energy.EnergyContainer;
 import org.mjli.mam.api.energy.EnergyType;
 import org.mjli.mam.block.AltarBlock;
 import org.mjli.mam.block.ApothecaryBlock;
+import org.mjli.mam.block.SpreaderBlock;
 import org.mjli.mam.block.mana.ManaPoolBlock;
 import org.mjli.mam.block_entity.mana.ManaPoolBlockEntity;
 import org.mjli.mam.foundation.registration.MamBlockProperties;
@@ -139,6 +140,45 @@ public class VerdantMana {
          .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
          .register();
 
+    // Cross-school transport block (design/magic/16_mana-spreader.md) — registration only, no
+    // burst/aim mechanic yet. T1 keeps original Livingwood coloring; higher tiers reuse the
+    // tinted-shape + desaturated-texture pattern from design/magic/27_tier-tinting.md.
+    public static final BlockEntry<SpreaderBlock> SPREADER =
+        R.block("mana_spreader", SpreaderBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .simpleItem()
+         .register();
+
+    public static final BlockEntry<SpreaderBlock> INFUSED_SPREADER =
+        R.block("infused_mana_spreader", SpreaderBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
+         .register();
+
+    public static final BlockEntry<SpreaderBlock> SACRED_SPREADER =
+        R.block("sacred_mana_spreader", SpreaderBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
+         .register();
+
+    public static final BlockEntry<SpreaderBlock> DESECRATED_SPREADER =
+        R.block("desecrated_mana_spreader", SpreaderBlock::new)
+         .properties(p -> MamBlockProperties.manaPool())
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().getExistingFile(p.modLoc("block/" + ctx.getName()))))
+         .loot((t, b) -> t.dropSelf(b))
+         .item().model((ctx, p) -> p.withExistingParent(ctx.getName(), p.modLoc("block/" + ctx.getName()))).build()
+         .register();
+
     // T1 only — Infused/Sacred/Desecrated Tablets are blocked on gem infusion (design/magic/17_trinkets.md)
     public static final ItemEntry<Item> MANA_TABLET =
         R.item("mana_tablet", p -> new Item(p.stacksTo(1)
@@ -160,6 +200,10 @@ public class VerdantMana {
         modifier.accept(INFUSED_ALTAR.asStack(), tab);
         modifier.accept(SACRED_ALTAR.asStack(), tab);
         modifier.accept(DESECRATED_ALTAR.asStack(), tab);
+        modifier.accept(SPREADER.asStack(), tab);
+        modifier.accept(INFUSED_SPREADER.asStack(), tab);
+        modifier.accept(SACRED_SPREADER.asStack(), tab);
+        modifier.accept(DESECRATED_SPREADER.asStack(), tab);
         modifier.accept(MANA_TABLET.asStack(), tab);
     }
 
