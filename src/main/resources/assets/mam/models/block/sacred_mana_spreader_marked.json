@@ -5,6 +5,6 @@
     "inside": "mam:block/livingwood_log_stripped_desaturated",
     "back": "mam:block/mana_spreader_back_desaturated",
     "side": "mam:block/mana_spreader_side_desaturated",
-    "mark": "mam:misc/rune_marks/rune_mana_mark"
+    "mark": "mam:block/rune_marks/rune_mana_mark"
   }
 }
