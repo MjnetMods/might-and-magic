@@ -2,7 +2,7 @@
 type: charter
 status: wip
 last-updated: 2026-07-02
-links: ["[[agent-factory-guide]]", "[[site-guide]]", "[[ponder-guide]]"]
+links: ["[[agent-factory-guide]]", "[[site-guide]]", "[[book-guide]]", "[[ponder-guide]]"]
 ---
 
 # Technical Writer Charter
@@ -14,7 +14,10 @@ design doc.
 ## Scope
 
 - `site-doc` gate: `site/content/` — player-facing docs
-- `book-doc` gate: Patchouli book JSON under `src/main/resources/data/mam/patchouli_books/`
+- `book-doc` gate: `src/main/resources/assets/mam/patchouli_books/guide/en_us/` (entries and
+  categories) and the `patchouli.mam.guide.*` keys in `src/main/resources/assets/mam/lang/en_us.json`.
+  **Not** `data/mam/patchouli_books/` — that's the one-time book shell (`book.json`), not per-task
+  content. See `[[book-guide]]` for the split.
 - `ponder-doc` gate: the ponder-doc content lives in the task file itself (no scene exists yet —
   this is the script/spec, not the SNBT, see `[[ponder-guide]]`)
 
@@ -30,7 +33,9 @@ Given a task whose linked design doc is `done`, produce the artifact for that ta
   conventions (prose-first and thematic, not a design-doc transcription; no ASCII diagrams — use
   the real `{{< crafting >}}` shortcode) are in `[[site-guide]]` §Voice — read it, don't just skim
   for shortcode syntax.
-- `book-doc` — a Patchouli book entry covering the same content for in-game reference.
+- `book-doc` — a Patchouli book entry covering the same content for in-game reference. Structure
+  and voice conventions are in `[[book-guide]]` — read it before writing; entry JSON is structure
+  only, all prose is a lang key, and the existing entries there are the tone reference.
 - `ponder-doc` — a script/spec for the eventual Ponder scene: what beats it walks through, what
   it demonstrates, per `[[ponder-guide]]`.
 
@@ -40,7 +45,8 @@ trigger it, without needing to read the design doc or the (not-yet-written) code
 ## Inputs
 
 - The linked design doc (must be `status: done`, no open `Q:` — see `[[agent-factory-guide]]` §5)
-- `[[site-guide]]` (site-doc gate) or `[[ponder-guide]]` (ponder-doc gate) for format conventions
+- `[[site-guide]]` (site-doc gate), `[[book-guide]]` (book-doc gate), or `[[ponder-guide]]`
+  (ponder-doc gate) for format conventions
 - Existing sibling entries in `site/content/`, the book, or prior ponder-docs, for tone/format
   consistency
 

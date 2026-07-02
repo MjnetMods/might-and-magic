@@ -137,6 +137,7 @@ Community docs: https://docs.neoforged.net/
 | `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
 | `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `ref/site-guide.md` | Hugo site authoring — crafting shortcode usage, texture paths, running locally |
+| `ref/book-guide.md` | Patchouli book authoring — entry/category JSON structure, lang-key content split, voice conventions |
 | `site/content/` | Player-facing documentation (source of truth — `docs/` removed) |
 
 Current active tracking files:

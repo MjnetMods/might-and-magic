@@ -3,8 +3,10 @@
     "allow": [
       "Edit(site/content/**)",
       "Write(site/content/**)",
-      "Edit(src/main/resources/data/mam/patchouli_books/**)",
-      "Write(src/main/resources/data/mam/patchouli_books/**)",
+      "Edit(src/main/resources/assets/mam/patchouli_books/**)",
+      "Write(src/main/resources/assets/mam/patchouli_books/**)",
+      "Edit(src/main/resources/assets/mam/lang/en_us.json)",
+      "Write(src/main/resources/assets/mam/lang/en_us.json)",
       "Edit(src/main/java/**)",
       "Write(src/main/java/**)",
       "Edit(src/test/java/**)",
