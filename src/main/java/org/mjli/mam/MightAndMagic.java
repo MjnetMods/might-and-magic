@@ -47,6 +47,7 @@ public class MightAndMagic {
         MamBlockEntities.register(modEventBus);
         MamRecipes.register(modEventBus);
         MamCreativeTabs.register(modEventBus);
+        MamCapabilities.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }

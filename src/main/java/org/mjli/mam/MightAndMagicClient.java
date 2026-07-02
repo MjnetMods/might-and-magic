@@ -8,8 +8,10 @@ import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import org.mjli.mam.client.render.ApothecaryBlockEntityRenderer;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = MightAndMagic.MODID, dist = Dist.CLIENT)
@@ -33,5 +35,10 @@ public class MightAndMagicClient {
 
     private static void initPonder() {
         net.createmod.ponder.foundation.PonderIndex.addPlugin(new org.mjli.mam.ponder.MamPonderPlugin());
+    }
+
+    @SubscribeEvent
+    static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(MamBlockEntities.APOTHECARY.get(), ApothecaryBlockEntityRenderer::new);
     }
 }

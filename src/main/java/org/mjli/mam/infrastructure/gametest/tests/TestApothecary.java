@@ -13,7 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 import org.mjli.mam.MightAndMagic;
@@ -67,7 +70,9 @@ public class TestApothecary {
 
         // Build state tag matching saveAdditional layout
         CompoundTag stateTag = new CompoundTag();
-        stateTag.putByte("fluid", (byte) ApothecaryBlockEntity.FluidState.WATER.ordinal());
+        FluidTank seedTank = new FluidTank(1000);
+        seedTank.setFluid(new FluidStack(Fluids.WATER, 1000));
+        stateTag.put("fluid", seedTank.writeToNBT(registries, new CompoundTag()));
         CompoundTag petalsTag = new CompoundTag();
         ItemStack petal = new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get());
         petalsTag.put("0", petal.save(registries));
@@ -83,8 +88,8 @@ public class TestApothecary {
         CompoundTag saved = beA.saveCustomOnly(registries);
         beB.loadCustomOnly(saved, registries);
 
-        if (beB.getFluidState() != ApothecaryBlockEntity.FluidState.WATER) {
-            helper.fail("Expected WATER fluid, got " + beB.getFluidState());
+        if (beB.getFluidTank().isEmpty() || beB.getFluidTank().getFluid().getFluid() != Fluids.WATER) {
+            helper.fail("Expected WATER fluid, got " + beB.getFluidTank().getFluid());
         }
         if (beB.getPetals().size() != 1) {
             helper.fail("Expected 1 petal, got " + beB.getPetals().size());
@@ -112,8 +117,8 @@ public class TestApothecary {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
         be.interact(player);
-        if (be.getFluidState() != ApothecaryBlockEntity.FluidState.WATER) {
-            helper.fail("Expected WATER after bucket fill, got " + be.getFluidState());
+        if (be.getFluidTank().isEmpty() || be.getFluidTank().getFluid().getFluid() != Fluids.WATER) {
+            helper.fail("Expected WATER after bucket fill, got " + be.getFluidTank().getFluid());
             return;
         }
 
@@ -133,8 +138,8 @@ public class TestApothecary {
                     new ItemStack(Items.WHEAT_SEEDS)));
 
             helper.runAfterDelay(2, () -> {
-                if (be.getFluidState() != ApothecaryBlockEntity.FluidState.EMPTY) {
-                    helper.fail("Expected fluid drained after craft, got " + be.getFluidState());
+                if (!be.getFluidTank().isEmpty()) {
+                    helper.fail("Expected fluid drained after craft, got " + be.getFluidTank().getFluid());
                 }
                 if (!be.getPetals().isEmpty()) {
                     helper.fail("Expected petals cleared after craft, got " + be.getPetals().size());

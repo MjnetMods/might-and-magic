@@ -3,17 +3,25 @@ package org.mjli.mam.block_entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.phys.AABB;
+import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.mjli.mam.MamBlockEntities;
+import javax.annotation.Nullable;
 import org.mjli.mam.MamRecipes;
 import org.mjli.mam.recipe.ApothecaryInput;
 import org.mjli.mam.recipe.ApothecaryRecipe;
@@ -23,13 +31,18 @@ import java.util.List;
 import java.util.Optional;
 
 public class ApothecaryBlockEntity extends BlockEntity {
-    public enum FluidState { EMPTY, WATER, LAVA }
-
     // T1 capacity per design/magic/10_apothecary.md tier table (4 + 1 seed reagent)
     private static final int MAX_INGREDIENTS = 4;
 
+    // 1 bucket; no validator — accepts any bucket-compatible fluid per design/magic/10_apothecary.md
+    private final FluidTank tank = new FluidTank(1000) {
+        @Override
+        protected void onContentsChanged() {
+            setChanged();
+        }
+    };
+
     private final List<ItemStack> petals = new ArrayList<>();
-    private FluidState fluid = FluidState.EMPTY;
 
     public ApothecaryBlockEntity(BlockPos pos, BlockState state) {
         super(MamBlockEntities.APOTHECARY.get(), pos, state);
@@ -45,7 +58,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
 
     private boolean collideEntityItem(ItemEntity item) {
         ItemStack stack = item.getItem();
-        if (stack.isEmpty() || fluid == FluidState.EMPTY) return false;
+        if (stack.isEmpty() || tank.isEmpty()) return false;
 
         Level level = getLevel();
         ApothecaryInput view = new ApothecaryInput(List.copyOf(petals));
@@ -63,7 +76,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
                     worldPosition.getX() + 0.5, worldPosition.getY() + 1.5, worldPosition.getZ() + 0.5, result);
             level.addFreshEntity(outputEntity);
 
-            fluid = FluidState.EMPTY;
+            tank.drain(tank.getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
             setChanged();
             return true;
         }
@@ -79,33 +92,38 @@ public class ApothecaryBlockEntity extends BlockEntity {
     }
 
     public InteractionResult interact(Player player) {
-        ItemStack held = player.getMainHandItem();
-        if (held.isEmpty()) return InteractionResult.PASS;
-
-        if (fluid == FluidState.EMPTY) {
-            FluidState fillState = held.is(Items.WATER_BUCKET) ? FluidState.WATER
-                    : held.is(Items.LAVA_BUCKET) ? FluidState.LAVA
-                    : null;
-            if (fillState != null) {
-                fluid = fillState;
-                held.shrink(1);
-                ItemStack emptyBucket = new ItemStack(Items.BUCKET);
-                if (!player.getInventory().add(emptyBucket)) player.drop(emptyBucket, false);
-                setChanged();
-                return InteractionResult.SUCCESS;
-            }
-        }
-
-        return InteractionResult.PASS;
+        boolean handled = FluidUtil.interactWithFluidHandler(player, InteractionHand.MAIN_HAND, getLevel(), worldPosition, null);
+        return handled ? InteractionResult.SUCCESS : InteractionResult.PASS;
     }
 
-    public FluidState getFluidState() { return fluid; }
+    public FluidTank getFluidTank() { return tank; }
     public List<ItemStack> getPetals() { return petals; }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        // Client rendering depends on the fluid tank; setChanged() alone only marks the chunk
+        // dirty for saving, it does not by itself notify watching clients.
+        if (level != null && !level.isClientSide) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+        }
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.putByte("fluid", (byte) fluid.ordinal());
+        tag.put("fluid", tank.writeToNBT(registries, new CompoundTag()));
         CompoundTag petalTag = new CompoundTag();
         for (int i = 0; i < petals.size(); i++) {
             petalTag.put(String.valueOf(i), petals.get(i).save(registries));
@@ -116,8 +134,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        byte fluidId = tag.getByte("fluid");
-        fluid = fluidId >= 0 && fluidId < FluidState.values().length ? FluidState.values()[fluidId] : FluidState.EMPTY;
+        tank.readFromNBT(registries, tag.getCompound("fluid"));
         petals.clear();
         CompoundTag petalTag = tag.getCompound("petals");
         for (String key : petalTag.getAllKeys()) {
