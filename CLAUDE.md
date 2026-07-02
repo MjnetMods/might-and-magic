@@ -130,8 +130,10 @@ Community docs: https://docs.neoforged.net/
 | `design/N2_*-test-plan.md` | Test coverage tracking per path |
 | `design/magic/NN_*.md` | Cross-school magic infrastructure (energy, Apothecary, Altar, Weavery, runes) — shared by all paths, not owned by one. Numbered loosely by dependency, not strict reading order. |
 | `todo/NN_*.md` | Pre-design ideas and tasks-to-validate, one per file. Promote into `design/` once work starts (fold into the relevant doc or start a new numbered one), then delete the todo file. |
+| `test/NN_*.md` | Manual/visual regression checks GameTest can't cover (renderer output, in-game feel) — one small file per check: steps + expected result. Link to it from a design doc's Validation line the same way you'd link to a GameTest class. Disposable like `/todo`: delete once no longer needed (automated coverage lands, or the risk has passed), not tracked forever by default. See `ref/verify-man.md`. |
 | `ref/design-doc-guide.md` | Generic design-doc format (front matter, status vocabulary, Q&A decisions, Validation items) — applies to `design/`, portable to other projects |
 | `ref/todo-doc-guide.md` | Format for `/todo` — reuses design-doc-guide's numbering/dependency rules, adds the idea→design promotion lifecycle |
+| `ref/verify-man.md` | Format for `/test` — one file per manual/visual regression check GameTest can't cover, `pending`/`verified` status, required "delete this file when" clause |
 | `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
 | `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `ref/site-guide.md` | Hugo site authoring — crafting shortcode usage, texture paths, running locally |
