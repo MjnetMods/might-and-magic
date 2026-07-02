@@ -37,10 +37,24 @@ public class TestGeneratingFlowers {
         // Game test world starts at time 0 (daytime); don't call setDayTime — it's global and races other tests.
         helper.setBlock(CENTER, VerdantGeneratingFlowers.DAYBLOOM.get().defaultBlockState());
 
-        helper.runAfterDelay(20, () -> {
+        // Sample well before the 10-tick lifetime cap (GF-7) so the flower is still alive to read.
+        helper.runAfterDelay(5, () -> {
             DaybloomBlockEntity be = MamGameTestHelper.getBlockEntity(helper, CENTER, DaybloomBlockEntity.class);
             if (be.getCurrentEnergy() <= 0) {
                 helper.fail("Daybloom should have generated mana in daylight, but getCurrentEnergy() == " + be.getCurrentEnergy());
+            }
+            helper.succeed();
+        });
+    }
+
+    /** GF-7: Daybloom withers and dies after its 10-tick lifetime (bootstrap trickle, not a production source). */
+    @GameTest(template = PLATFORM, timeoutTicks = 40)
+    public static void daybloomWithersAfterLifetimeTicks(GameTestHelper helper) {
+        helper.setBlock(CENTER, VerdantGeneratingFlowers.DAYBLOOM.get().defaultBlockState());
+
+        helper.runAfterDelay(15, () -> {
+            if (helper.getBlockState(CENTER).is(VerdantGeneratingFlowers.DAYBLOOM.get())) {
+                helper.fail("Daybloom should have withered and died after its 10-tick lifetime, but block is still present");
             }
             helper.succeed();
         });

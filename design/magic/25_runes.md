@@ -1,8 +1,8 @@
 ---
 type: design
 status: wip
-last-updated: 2026-06-29
-links: ["[[magic/20_altar]]", "[[00_infra]]"]
+last-updated: 2026-07-02
+links: ["[[magic/20_altar]]", "[[00_infra]]", "[[magic/26_runes-botania-compat]]"]
 ---
 
 # MAM — Rune Taxonomy
@@ -185,20 +185,13 @@ Implement runes alongside the content that first requires them — not speculati
 **Q:** Mana costs — all values approximate; tune during implementation
 
 **Q:** `rune_chaos` / `rune_void` alignment — Nox is cross-school; these two runes are unassigned pending further school design. May become school-specific or stay as generic dark primitives.
+**A:** Out of scope for this doc — per-school dark design. Not this doc's blocker; resolved when a dark-school doc exists.
 
 **Q:** Alternative production routes — each non-Verdant school adds its own when designed
 
 ---
 
-## Status
+## Validation
 
-| Item | Status |
-|------|--------|
-| Taxonomy (T1/T2/T3a/T3b) | ✅ decided |
-| Item keys (`mam:rune_*`) | ✅ decided |
-| T3 recipe template | ✅ decided (2× Mana Rune + 4× Mana Dust + 2× T2 runes) |
-| T1/T2 recipe ingredients | ⬜ TBD — balancing pass |
-| Mana Dust design | ✅ decided |
-| Infrastructure runes (recipe + keys) | ✅ decided |
-| Item registration | ⬜ not started |
-| Recipe JSONs | ⬜ not started |
+- `done` — Item registration (25 `mam:rune_*` items across Infrastructure/T1/T2/T3a/T3b) — [`VerdantRunes`](../../src/main/java/org/mjli/mam/verdant/VerdantRunes.java). Placeholder art + Botania `runes` tag compat: [[magic/26_runes-botania-compat]]
+- `todo` — Recipe JSONs (Altar recipes producing runes — blocked on T1/T2 ingredient balancing pass, see Open Questions above)

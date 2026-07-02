@@ -1,7 +1,7 @@
 ---
 type: design
 status: wip
-last-updated: 2026-06-30
+last-updated: 2026-07-02
 links: ["[[20_verdant-path]]", "[[magic/15_mana-pool]]", "[[magic/17_trinkets]]", "[[magic/00_energy]]", "[[magic/10_apothecary]]"]
 ---
 
@@ -38,14 +38,14 @@ Four tiers, each with a larger ingredient capacity. Slot count is the primary ti
 |----------------------|-------------|--------------------|-------------------------------|
 | **Altar**      | 4           | Any pool ≥ recipe cost | T1 runes, early rites     |
 | **Infused Altar** | 6        | Any pool ≥ recipe cost | T2 runes, mid rites       |
-| **Sacred Altar**       | 32          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
-| **Desecrated Altar**   | 32          | Desecrated Mana Pool ≥ recipe cost | Dark school T3 parallel     |
+| **Sacred Altar**       | 64          | Sacred Pool ≥ recipe cost     | T3 rites, endgame recipes   |
+| **Desecrated Altar**   | 64          | Desecrated Mana Pool ≥ recipe cost | Dark school T3 parallel     |
 
 Mana gating follows the pool capacity model — T1/T2 altars accept any pool; T3 altars are energy-aligned (Sacred uses Mana, Desecrated uses Nox). The altar tier gates recipe access via slot count, not by pool type.
 
 Slot counts are the progression gate: a recipe requiring 8 ingredients physically cannot run on a 6-slot altar, regardless of mana available. The jump from 6 → 32 at T3 is intentional — T3 recipes are meaningfully more complex than T2.
 
-**Balancing note (2026-07-02):** T3 slot count doubled from 16 to 32 (no T3 recipe changes). No current recipe needs more than 8 slots — this is headroom for future endgame recipes, not a response to an existing content gap.
+**Balancing note (2026-07-02):** T3 slot count doubled from 16 to 32, then raised again to 64 (one full stack — an easy number to remember, not a literal stacking mechanic) — no T3 recipe changes. No current recipe needs more than 8 slots; this is headroom for future endgame recipes and likely relevant once the [[magic/15_mana-pool]] tier work lands, not a response to an existing content gap.
 
 ---
 
@@ -147,8 +147,8 @@ Slot counts define which recipes land at which altar:
 |------------|-------|-------------|
 | ≤4 slots   | Altar            | T1 — elemental runes, early rites             |
 | 5–6 slots  | Infused Altar    | T2 — concept runes, mid rites                 |
-| 7–32 slots | Sacred Altar     | T3 — complex runes, endgame components (Mana) |
-| 7–32 slots | Desecrated Altar | T3 — Nox recipes, dark school components      |
+| 7–64 slots | Sacred Altar     | T3 — complex runes, endgame components (Mana) |
+| 7–64 slots | Desecrated Altar | T3 — Nox recipes, dark school components      |
 
 | Category | Altar Tier | Slots | Examples |
 |----------|------------|-------|---------|
@@ -156,7 +156,7 @@ Slot counts define which recipes land at which altar:
 | Elemental runes | T1 | ≤4 | TBD |
 | Concept runes | T2 | 5–6 | TBD |
 | Complex runes (2× Mana Rune + 4× Mana Dust + 2× Concept Rune) | T3 | 8 | TBD |
-| Endgame sacred components | T3 | 8–16 | TBD |
+| Endgame sacred components | T3 | 8–64 | TBD |
 
 ### Rune recipes
 
@@ -204,14 +204,9 @@ See [[magic/10_apothecary]] for the Apothecary's full design.
 
 ---
 
-## Status
+## Validation
 
-| Item | Status |
-|------|--------|
-| Tier design (slots, recipe shape) | ✅ decided |
-| Crafting recipes | ✅ decided |
-| Mechanic (trigger, mana, output) | ✅ decided |
-| Recipe format | ✅ decided |
-| Rune recipes (ingredients, costs) | ⬜ TBD |
-| Other altar recipe content | ⬜ TBD |
-| Implementation | ⬜ not started |
+- `todo` — Crafting recipes (Altar / Infused Altar / Sacred Altar / Desecrated Altar craft recipes)
+- `todo` — In-world mechanic (ingredient detection, Living Rock trigger, mana draw, output eject, guard conditions)
+- `todo` — Recipe format / data model (`mam:altar` recipe type, `AltarRecipe`)
+- `todo` — Rune recipe content (ingredients, mana costs — blocked on balancing pass, see Open Questions above)

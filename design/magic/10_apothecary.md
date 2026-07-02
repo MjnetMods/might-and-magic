@@ -1,8 +1,8 @@
 ---
 type: design
 status: wip
-last-updated: 2026-07-01
-links: ["[[magic/00_energy]]", "[[20_verdant-path]]", "[[magic/20_altar]]"]
+last-updated: 2026-07-02
+links: ["[[magic/00_energy]]", "[[20_verdant-path]]", "[[magic/20_altar]]", "[[magic/15_mana-pool]]"]
 ---
 
 # MAM — Apothecary
@@ -25,10 +25,10 @@ C C C
 |-----------------------|------------------------|---------------------------------------------------|----------------|-----------------------------------------------------|-----------------------------------------|--------------|
 | Apothecary            | Any rock (`c:stones`)  | `mam:mystical_petals` OR `mam:mystical_mushrooms` | All schools T1 | **Implemented**                                     | Uses skin from Botania, unscaled 16=>32 | 4 + 1 (seed) |
 | Infused Apothecary    | Infused Living Rock    | Apothecary                                        | All schools T2 | Not yet implemented                                 | Recolor, use living rock texture        | 6 + 1 (seed) |
-| Sacred Apothecary     | Sacred Living Rock     | Infused Apothecary                                | Verdant T3     | Not yet implemented                                 | ... tint it green                       | 16 + 1 (seed) |
-| Desecrated Apothecary | Desecrated Living Rock | Infused Apothecary                                | Dark T3        | Dark-flavour parallel — TBD with dark-school design | ... tint it purple                      | 16 + 1 (seed) |
+| Sacred Apothecary     | Sacred Living Rock     | Infused Apothecary                                | Verdant T3     | Not yet implemented                                 | ... tint it green                       | 64 + 1 (seed) |
+| Desecrated Apothecary | Desecrated Living Rock | Infused Apothecary                                | Dark T3        | Dark-flavour parallel — TBD with dark-school design | ... tint it purple                      | 64 + 1 (seed) |
 
-**Balancing note (2026-07-02):** T3 slot count doubled from 8 to 16 (no T3 recipe changes) — headroom for future endgame recipes, matching the same doubling applied to the [[magic/20_altar]] T3 tier.
+**Balancing note (2026-07-02):** T3 slot count increased 8 → 16 → 64 (one full stack — no T3 recipe changes), matching the same increases applied to the [[magic/20_altar]] T3 tier. No current recipe needs more than 8 slots; this is headroom for future endgame recipes and likely relevant once the [[magic/15_mana-pool]] tier work lands.
 
 **Progression note:** T1 uses any rock because the player has no Living Rock yet — you need to craft a Pure Daisy in the Apothecary, place it, and let it convert stone → Living Rock before you can build a Mana Pool. The Apothecary must be craftable before that loop begins.
 

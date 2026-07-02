@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "mam:rune_infusion",
+    "mam:rune_sacred",
+    "mam:rune_desecrated",
+    "mam:rune_life",
+    "mam:rune_death",
+    "mam:rune_order",
+    "mam:rune_chaos",
+    "mam:rune_flow",
+    "mam:rune_force",
+    "mam:rune_growth",
+    "mam:rune_decay",
+    "mam:rune_will",
+    "mam:rune_binding",
+    "mam:rune_mana",
+    "mam:rune_cycle",
+    "mam:rune_dominion",
+    "mam:rune_manifestation",
+    "mam:rune_entropy",
+    "mam:rune_resonance",
+    "mam:rune_transcendence",
+    "mam:rune_grove",
+    "mam:rune_sanguine",
+    "mam:rune_rational",
+    "mam:rune_pact",
+    "mam:rune_void"
+  ]
+}

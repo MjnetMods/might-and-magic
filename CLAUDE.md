@@ -150,7 +150,7 @@ MAM treats its flowers as the **same flowers** as Botania — shared furniture i
 **Policy:**
 - Never rename flower block IDs to diverge from Botania naming (`<color>_mystical_flower`, `<color>_tall_mystical_flower`, `pure_daisy`, etc.)
 - Always write MAM flower blocks into the relevant `botania:` namespace tags so they are recognised if both mods are loaded
-- Texture strategy: Scale2x upscales of wiiv's originals live in `textures/block/v2/` (gitignored) as a starting point. Hand-edit in Aseprite as bandwidth permits. Ship the v2 upscale if no hand-edit exists — it is better than the raw 16×16.
+- Texture strategy: originals are wiiv's 16×16 Botania textures, upscaled 2x (nearest-neighbor, no interpolation) directly into the final asset path. Hand-edit in Aseprite as bandwidth permits — ship the 2x upscale if no hand-edit exists yet, it's better than raw 16×16.
 
 **Botania tags to maintain** (files under `data/botania/tags/block/`):
 
@@ -160,7 +160,11 @@ MAM treats its flowers as the **same flowers** as Botania — shared furniture i
 | `double_mystical_flowers.json` | All 16 `mam:<color>_tall_mystical_flower` blocks |
 | `generating_special_flowers.json` | `mam:daybloom`, `mam:endoflame`, `mam:hydroangeas` — add new generating flowers here |
 
-Add entries to the relevant file whenever a new flower block is registered. Do not add functional flowers (no mana generation) to `generating_special_flowers`.
+Add entries to the relevant file whenever a new flower block is registered. Do not add functional flowers (no mana generation) to `generating_special_flowers`. Full name↔tag mapping: `design/24_verdant-flowers-botania-compat.md`.
+
+### Rune identity & Botania compat
+
+Runes (`design/magic/25_runes.md`) are MAM-native — no dependency on Botania runes. Separately, additive Botania compat: all `mam:rune_*` items go into `data/botania/tags/items/runes.json` (Botania's single flat `runes` tag — it has no per-concept tags, so this is "recognised as a rune", not a semantic pairing). Add new rune items to this file the same session they're registered. Full name↔tag mapping and placeholder-art provenance: `design/magic/26_runes-botania-compat.md`.
 
 **Attribution:** Original artwork by wiiv (Botania). See `site/content/credits/` and `neoforge.mods.toml`.
 

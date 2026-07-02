@@ -11,6 +11,7 @@ import org.mjli.mam.verdant.VerdantFlowers;
 import org.mjli.mam.verdant.VerdantGeneratingFlowers;
 import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
+import org.mjli.mam.verdant.VerdantRunes;
 import org.mjli.mam.verdant.VerdantWood;
 import org.slf4j.Logger;
 
@@ -33,6 +34,7 @@ public class MightAndMagic {
         VerdantRock.init();
         VerdantWood.init();
         VerdantMana.init();
+        VerdantRunes.init();
 
         // One consumer, fires once per tab build — avoids Registrate's per-item double-add
         REGISTRATE.modifyCreativeModeTab(MamCreativeTabs.VERDANT_PATH_KEY, modifier -> {
@@ -41,6 +43,7 @@ public class MightAndMagic {
             VerdantRock.appendToTab(modifier);
             VerdantWood.appendToTab(modifier);
             VerdantMana.appendToTab(modifier);
+            VerdantRunes.appendToTab(modifier);
         });
 
         MamDataComponents.register(modEventBus);

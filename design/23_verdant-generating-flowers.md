@@ -49,9 +49,12 @@ A new flower only needs to define its trigger condition and its `getMaxEnergy()`
 ### Daybloom (`mam:daybloom`)
 
 - **Trigger:** daytime (`dayTime % 24000 < 12000`) and the flower can see the sky.
-- **Rate:** +1 mana/tick while the condition holds.
-- **Max energy:** 900.
+- **Rate:** +1 mana per qualifying tick, capped at 10 lifetime ticks (10 mana total, ever) — then the flower withers and dies. Bootstrap trickle, not a production source; deliberately mirrors the Nox bootstrap's tiny yield ([[magic/10_apothecary]] § Nox bootstrap: "1 per tick, 10 ticks... bootstrap only, not a viable production source"). Supersedes the old uncapped-duration behavior, which let it sit at max energy indefinitely and out-produce the tier it's supposed to gate. (2026-07-02)
+- **Max energy:** 900 — now effectively vestigial given the 10-mana lifetime cap; kept as the buffer ceiling in case that changes.
 - **Recipe:** 4× yellow petal + seed. No Botania reference exists — current Botania has no generating Daybloom class at all (decorative "motif" block only in this version) — yellow chosen thematically (day/sun) since there's no recipe to port.
+
+**Q:** Wither/death visuals and drops — distinct withered block state before removal, or straight to removal? Any item drop (seed back?) or nothing? Reversible (bonemeal/mana) or final?
+**A:** Not yet decided beyond "withers and dies" — this is also the first concrete instance of the general flower wither mechanic (`/todo/12_flower-wither-and-die-mechanic.md`), which stays open for the remaining flowers and these unresolved specifics.
 
 ### Endoflame (`mam:endoflame`)
 
@@ -164,16 +167,17 @@ Levitates and eats Shulkers.
 ## Validation
 
 - `todo` — Daybloom: Apothecary recipe (4× yellow + seed)
+- `done` — Daybloom: rescaled to a 10-tick bootstrap trickle (10 mana lifetime, then withers and dies) — [`DaybloomBlockEntity`](../src/main/java/org/mjli/mam/block_entity/flower/DaybloomBlockEntity.java), tested by `daybloomGeneratesManaInDaylight` (GF-1) and `daybloomWithersAfterLifetimeTicks` (GF-7) in [`TestGeneratingFlowers`](../src/main/java/org/mjli/mam/infrastructure/gametest/tests/TestGeneratingFlowers.java)
 - `todo` — Endoflame: Apothecary recipe (2 brown + 1 red + 1 light gray + seed)
 - `todo` — Hydroangeas: Apothecary recipe (2 blue + 2 cyan + seed)
 - `todo` — Thermalily: block, item, block entity mechanic
-- `blocked` — Thermalily: Apothecary recipe (needs `rune_flow`, [[magic/25_runes]] item registration not started)
+- `todo` — Thermalily: Apothecary recipe (needs `rune_flow` — item registered, see [[magic/25_runes]]; recipe itself not yet written)
 - `todo` — Rosa Arcana: block, item, block entity mechanic
-- `blocked` — Rosa Arcana: Apothecary recipe (needs `rune_mana`)
+- `todo` — Rosa Arcana: Apothecary recipe (needs `rune_mana` — item registered, see [[magic/25_runes]]; recipe itself not yet written)
 - `todo` — Munchdew: block, item, block entity mechanic
-- `blocked` — Munchdew: Apothecary recipe (needs `rune_death`)
+- `todo` — Munchdew: Apothecary recipe (needs `rune_death` — item registered, see [[magic/25_runes]]; recipe itself not yet written)
 - `todo` — Narslimmus: block, item, block entity mechanic
-- `blocked` — Narslimmus: Apothecary recipe (needs `rune_chaos`)
+- `todo` — Narslimmus: Apothecary recipe (needs `rune_chaos` — item registered, see [[magic/25_runes]]; recipe itself not yet written)
 - `todo` — Kekimurus: block, item, block entity mechanic
 - `blocked` — Kekimurus: Apothecary recipe (needs `rune_growth`, [[magic/20_altar]] Infused Altar not implemented)
 - `todo` — Gourmaryllis: block, item, block entity mechanic
