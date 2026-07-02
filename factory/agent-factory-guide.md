@@ -57,6 +57,15 @@ One file per role under `factory/charters/`. Front matter same as a design doc
   Manual single-agent fork — stated explicitly in each charter, not just implied by "no commit
   rights yet," so it holds even if a charter is read on its own.
 
+Each charter's **Scope** is backed by matching `Write`/`Edit` allow-rules in the project's
+`.claude/settings.json`, keyed to the same paths (`site/content/**` and the Patchouli book path
+for Technical Writer, `src/main/java/**` for Coder, `src/test/java/**` for Tester). Without this,
+a backgrounded charter agent stalls on an interactive permission prompt the human isn't present to
+answer — the allow-rule just lets the agent write inside the boundary its own charter already
+declares, it doesn't widen that boundary. Git-mutating commands (`add`/`commit`/`push`/merge) are
+never added to this allow-list; the no-commit-rights guardrail above stays enforced at the
+permission layer too, not just as a written rule an agent could ignore.
+
 ## 3. Task list format
 
 One file per task under `factory/tasks/`, numbered like `/todo` (`[[todo-doc-guide]]` §1, §6 —

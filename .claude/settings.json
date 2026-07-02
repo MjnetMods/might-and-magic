@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(site/content/**)",
+      "Write(site/content/**)",
+      "Edit(src/main/resources/data/mam/patchouli_books/**)",
+      "Write(src/main/resources/data/mam/patchouli_books/**)",
+      "Edit(src/main/java/**)",
+      "Write(src/main/java/**)",
+      "Edit(src/test/java/**)",
+      "Write(src/test/java/**)"
+    ]
+  }
+}
