@@ -39,6 +39,7 @@ public class MamRecipeProvider extends RecipeProvider {
         livingWood(output);
         apothecary(output);
         apothecaryPureDaisy(output);
+        infusedApothecary(output);
         manaPool(output);
         spreader(output);
     }
@@ -204,6 +205,20 @@ public class MamRecipeProvider extends RecipeProvider {
             .unlockedBy("has_petal", has(petals))
             .unlockedBy("has_mushroom", has(mushrooms))
             .save(output, id("apothecary"));
+    }
+
+    // T2 Apothecary: same goblet shape as T1, tier-matched rock (Infused Living Rock) and a base
+    // Apothecary consumed in the center slot instead of the petal/mushroom compound ingredient.
+    // See design/magic/10_apothecary.md, "Crafting the Apothecary" tier table.
+    private void infusedApothecary(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VerdantMana.INFUSED_APOTHECARY.get())
+            .pattern("#P#")
+            .pattern(" # ")
+            .pattern("###")
+            .define('#', VerdantRock.INFUSED_LIVING_ROCK.get())
+            .define('P', Ingredient.of(VerdantMana.APOTHECARY.get()))
+            .unlockedBy("has_infused_living_rock", has(VerdantRock.INFUSED_LIVING_ROCK.get()))
+            .save(output, id("infused_apothecary"));
     }
 
     // In-world Apothecary recipe: 4x white petal + seed reagent -> Pure Daisy. Ported from

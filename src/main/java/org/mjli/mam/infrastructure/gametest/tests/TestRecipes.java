@@ -177,6 +177,44 @@ public class TestRecipes {
         helper.succeed();
     }
 
+    /** RC-9 (PA-6): infused apothecary — 6x Infused Living Rock + 1 base Apothecary yields 1. */
+    @GameTest(template = PLATFORM)
+    public static void infusedApothecaryCraftingRecipe(GameTestHelper helper) {
+        var rm = helper.getLevel().getServer().getRecipeManager();
+        var registries = helper.getLevel().registryAccess();
+        var infusedApothecary = VerdantMana.INFUSED_APOTHECARY.asItem();
+
+        var match = rm.getAllRecipesFor(RecipeType.CRAFTING).stream()
+            .filter(r -> r.value().getResultItem(registries).is(infusedApothecary))
+            .findFirst();
+        if (match.isEmpty()) {
+            helper.fail("No recipe for infused_apothecary");
+            return;
+        }
+
+        int count = match.get().value().getResultItem(registries).getCount();
+        if (count != 1) {
+            helper.fail("Expected 1 infused apothecary, got " + count);
+            return;
+        }
+
+        var rockStack = new ItemStack(VerdantRock.INFUSED_LIVING_ROCK.get());
+        var apothecaryStack = new ItemStack(VerdantMana.APOTHECARY.get());
+        long rockIngredients = match.get().value().getIngredients().stream()
+            .filter(i -> i.test(rockStack)).count();
+        long apothecaryIngredients = match.get().value().getIngredients().stream()
+            .filter(i -> i.test(apothecaryStack)).count();
+        if (rockIngredients != 6) {
+            helper.fail("Expected 6 Infused Living Rock ingredients, got " + rockIngredients);
+            return;
+        }
+        if (apothecaryIngredients != 1) {
+            helper.fail("Expected 1 base Apothecary ingredient, got " + apothecaryIngredients);
+            return;
+        }
+        helper.succeed();
+    }
+
     private static void assertRecipeYields(GameTestHelper helper, Item result, int expectedCount, String label) {
         var rm = helper.getLevel().getServer().getRecipeManager();
         var registries = helper.getLevel().registryAccess();
