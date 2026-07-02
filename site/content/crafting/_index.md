@@ -25,7 +25,15 @@ One block. Every school. Swap the fluid, change the craft.
 
 {{< crafting in="block/stone,item/white_petal,block/stone|,block/stone,|block/stone,block/stone,block/stone" out="block/apothecary_side" count=1 >}}
 
-The Apothecary comes in four tiers. Higher tiers accept more ingredients and unlock more complex recipes — but the mechanic never changes.
+The Apothecary comes in four tiers, and you craft your way up by feeding the tier below into the tier above.
+
+### Infused Apothecary
+
+Once you've got Infused Living Rock, the Apothecary itself becomes an ingredient. Six blocks of it fill the goblet where plain stone used to go — and sitting in the center, right where the petal or mushroom went for the base recipe, is an Apothecary, consumed whole to seed the next one.
+
+{{< crafting in="block/living_rock,block/apothecary_side,block/living_rock|,block/living_rock,|block/living_rock,block/living_rock,block/living_rock" out="block/apothecary_side" count=1 >}}
+
+Using it feels exactly the same — same fluids, same fill-throw-catalyst rhythm, same retract if you throw the wrong petal. It's just got more hands: six ingredients aloft at once instead of four, enough room for recipes the base Apothecary can't fit. Sacred and Desecrated Apothecaries repeat the trick further up the tree, trading rock and reagent again for even more room.
 
 ---
 
