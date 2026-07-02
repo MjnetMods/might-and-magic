@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "mam:livingwood_log",
+    "mam:livingwood_log_stripped",
+    "mam:livingwood_log_glimmering",
+    "mam:livingwood_log_stripped_glimmering",
+    "mam:livingwood",
+    "mam:livingwood_stripped",
+    "mam:livingwood_planks",
+    "mam:livingwood_planks_mossy",
+    "mam:livingwood_planks_stairs",
+    "mam:livingwood_planks_slab",
+    "mam:livingwood_planks_fence",
+    "mam:livingwood_planks_fence_gate",
+    "mam:infused_livingwood_log",
+    "mam:infused_livingwood",
+    "mam:infused_livingwood_planks",
+    "mam:sacred_livingwood_log",
+    "mam:sacred_livingwood",
+    "mam:sacred_livingwood_planks",
+    "mam:desecrated_livingwood_log",
+    "mam:desecrated_livingwood",
+    "mam:desecrated_livingwood_planks"
+  ]
+}

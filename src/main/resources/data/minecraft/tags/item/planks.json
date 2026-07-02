@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "mam:livingwood_planks",
+    "mam:livingwood_planks_mossy",
+    "mam:infused_livingwood_planks",
+    "mam:sacred_livingwood_planks",
+    "mam:desecrated_livingwood_planks"
+  ]
+}
