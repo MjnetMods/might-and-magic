@@ -291,4 +291,41 @@ public class TestApothecary {
             });
         });
     }
+
+    // ── PA-6 ─────────────────────────────────────────────────────────────────
+
+    /**
+     * PA-6: an Infused Apothecary (T2) accepts up to 6 ingredients, not T1's 4 — regression
+     * guard for the per-tier capacity fix (design/magic/10_apothecary.md tier table: T1 = 4,
+     * T2 = 6). A 7th item must be left uningested once the T2 cap is reached.
+     */
+    @GameTest(template = PLATFORM)
+    public static void apothecaryTier2AcceptsSixIngredients(GameTestHelper helper) {
+        BlockState state = VerdantMana.INFUSED_APOTHECARY.get().defaultBlockState();
+        helper.setBlock(CENTER, state);
+        BlockPos absCenter = helper.absolutePos(CENTER);
+        ApothecaryBlockEntity be = (ApothecaryBlockEntity) helper.getLevel().getBlockEntity(absCenter);
+        if (be == null) { helper.fail("No BlockEntity at CENTER"); return; }
+
+        double x = absCenter.getX() + 0.5, y = absCenter.getY() + 1.0, z = absCenter.getZ() + 0.5;
+        for (int i = 0; i < 7; i++) {
+            helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z, new ItemStack(Items.STICK)));
+        }
+
+        helper.runAfterDelay(2, () -> {
+            if (be.getIngredients().size() != 6) {
+                helper.fail("Expected 6 ingredients accepted (T2 cap), got " + be.getIngredients().size());
+                return;
+            }
+            boolean leftoverStick = helper.getLevel()
+                    .getEntitiesOfClass(ItemEntity.class, new AABB(absCenter.above()))
+                    .stream()
+                    .anyMatch(e -> e.getItem().is(Items.STICK));
+            if (!leftoverStick) {
+                helper.fail("Expected the 7th stick to remain uningested once the T2 cap (6) was reached");
+                return;
+            }
+            helper.succeed();
+        });
+    }
 }

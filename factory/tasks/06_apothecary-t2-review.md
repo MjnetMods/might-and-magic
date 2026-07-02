@@ -17,3 +17,39 @@ diff in isolation.
 ## Handoffs
 
 - 2026-07-02 — task created (human), gate: review
+- 2026-07-02 — reviewed (reviewer), gate: review → bounced to Coder. Diff reviewed: `03` impl
+  (commit `3a856a4`) + `04` test (commit `8d12a45`) against `design/magic/10_apothecary.md`'s tier
+  table and the `01`/`02` site-doc/book-doc tasks. Two findings, both `CONFIRMED`:
+  1. **Real bug** — the design doc, site doc, and book doc all promise the Infused Apothecary (T2)
+     gets 6 ingredient slots vs. T1's 4, but `ApothecaryBlockEntity.MAX_INGREDIENTS` was a single
+     hardcoded `4` shared by every tier's block entity (confirmed by grep — zero tier branching). A
+     crafted T2 block behaved identically to T1; the recipe worked but the payoff it's supposed to
+     unlock didn't exist. Coder's and Tester's own `03`/`04` handoff logs had already surfaced "no
+     tier-specific branching" as a neutral fact (no regression risk) without connecting it back to
+     what the docs promised the player — exactly the check this charter's Directive calls out.
+  2. **Minor** — `design/magic/10_apothecary.md`'s Validation line for the Infused/Sacred/
+     Desecrated recipes still read `todo`, stale since T2's recipe was actually done and tested.
+- 2026-07-02 — fixed (coder), gate: review (pending re-verification). Root cause: unlike
+  `ManaPoolBlockEntity` (separate `BlockEntityType` per tier, each constructed with its own
+  capacity constant — the established precedent for tiered capacity in this codebase),
+  `ApothecaryBlockEntity` shares one `BlockEntityType` across all four tier blocks via a no-arg
+  constructor, so no tier signal ever reached it. Fix: `ApothecaryBlockEntity`'s constructor now
+  resolves capacity from `state.getBlock()` (already available at construction) against
+  `VerdantMana`'s tier blocks — T1/`APOTHECARY` = 4, `INFUSED_APOTHECARY` = 6,
+  `SACRED_APOTHECARY`/`DESECRATED_APOTHECARY` = 64, matching the design doc's tier table exactly.
+  Chose this over splitting into 4 `BlockEntityType`s (Mana Pool's approach) as the narrower fix —
+  avoids rippling into `MamBlockEntities` registration, capability wiring, and existing GameTest
+  block-entity casts, none of which need to change for this bug.
+
+  Added `apothecaryTier2AcceptsSixIngredients` (PA-6) to `TestApothecary.java` — throws 7 generic
+  items at an `INFUSED_APOTHECARY` block entity and asserts exactly 6 are accepted with the 7th
+  left uningested; this test would have failed under the old hardcoded-4 cap, so it's a genuine
+  regression guard, not a restatement of the fix. Also closed finding 2: updated
+  `design/magic/10_apothecary.md`'s Validation section — split the old combined `todo` line into a
+  `done` line for T2 (cross-referencing RC-9/RC-10/PA-6) and a `todo` line for the still-unbuilt
+  Sacred/Desecrated recipes.
+
+  **Verification:** `./gradlew compileJava compileTestJava` — clean. Did **not** run
+  `./gradlew runGameTestServer` — same no-display/long-running constraint every prior handoff in
+  this task chain has flagged. PA-6 is compiled and read for correctness only, not executed yet.
+  Flagging for the human to run alongside a re-review before this task can move to `merge`.

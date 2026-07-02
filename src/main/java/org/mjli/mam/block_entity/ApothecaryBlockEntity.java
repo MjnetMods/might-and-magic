@@ -25,14 +25,22 @@ import javax.annotation.Nullable;
 import org.mjli.mam.MamRecipes;
 import org.mjli.mam.recipe.ApothecaryInput;
 import org.mjli.mam.recipe.ApothecaryRecipe;
+import org.mjli.mam.verdant.VerdantMana;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class ApothecaryBlockEntity extends BlockEntity {
-    // T1 capacity per design/magic/10_apothecary.md tier table (4 + 1 seed reagent)
-    private static final int MAX_INGREDIENTS = 4;
+    // Slot capacity per design/magic/10_apothecary.md tier table (each tier + 1 seed reagent).
+    // One BlockEntityType is shared across all four tier blocks, so capacity is resolved per
+    // instance from the block state rather than split into per-tier BlockEntityTypes like
+    // ManaPoolBlockEntity does.
+    private static final int TIER_1_INGREDIENTS = 4;
+    private static final int TIER_2_INGREDIENTS = 6;
+    private static final int TIER_3_INGREDIENTS = 64;
+
+    private final int maxIngredients;
 
     // 20s window to recraft the last recipe, matching Botania's PetalApothecaryBlockEntity
     private static final int RECIPE_KEEP_TICKS = 400;
@@ -54,6 +62,17 @@ public class ApothecaryBlockEntity extends BlockEntity {
 
     public ApothecaryBlockEntity(BlockPos pos, BlockState state) {
         super(MamBlockEntities.APOTHECARY.get(), pos, state);
+        this.maxIngredients = capacityFor(state.getBlock());
+    }
+
+    private static int capacityFor(Block block) {
+        if (block == VerdantMana.SACRED_APOTHECARY.get() || block == VerdantMana.DESECRATED_APOTHECARY.get()) {
+            return TIER_3_INGREDIENTS;
+        }
+        if (block == VerdantMana.INFUSED_APOTHECARY.get()) {
+            return TIER_2_INGREDIENTS;
+        }
+        return TIER_1_INGREDIENTS;
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, ApothecaryBlockEntity self) {
@@ -101,7 +120,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
             return true;
         }
 
-        if (ingredients.size() < MAX_INGREDIENTS) {
+        if (ingredients.size() < maxIngredients) {
             ingredients.add(stack.split(1));
             if (stack.isEmpty()) item.discard(); else item.setItem(stack);
             setChanged();
