@@ -9,6 +9,23 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Fork research:** If a question requires more than 2 file reads to answer, fork it — don't fill the main conversation with raw output.
 - **Continuous improvement is the top priority:** When working patterns break down, stop and fix the process before continuing the task.
 
+## Feature pipeline
+
+New content (a flower, a mechanic, a school feature) moves through five stages, in order:
+
+1. **Design** — write the design doc first (see `ref/design-doc-guide.md`). Surface tradeoffs as `Q:`/`A:` pairs in the doc itself, not just in chat — a decision resolved only in conversation is lost the moment the session ends.
+2. **Site docs** (`site/content/`) — sell the feature to the player. Written before implementation exists, describing the intended behavior.
+3. **In-game docs** — the Patchouli book entry. Also written before implementation, alongside the site docs.
+4. **Implement — as an implement/test loop, sized to match risk.** Don't build an entire batch (e.g. all 6 flowers' mechanics) and then test everything at the end — that's how tests get skipped under momentum. But the loop's unit doesn't have to be "one flower" either: uniform, low-risk, mechanical work (e.g. the recipe JSON + recipe-matching test for every flower in a batch) can be done together as one pass, since there's little to go wrong between instances. Novel or complex mechanics (a new trigger condition, unusual state tracking) should be looped one at a time, since that's where bugs actually hide. Pick the batch size the risk justifies, then implement → test → confirm before moving to the next batch.
+
+   **JUnit vs GameTest — pick the right one, not whichever is habitual:**
+   - **JUnit** (`src/test/java/`, `./gradlew test`) — pure logic that runs in a bare JVM with no live Minecraft server: math/formulas, state machines, NBT round-trips on a directly-instantiated object. Existing examples: `ManaPoolTest`, `EnergyNetworkHandlerTest`. Fast, no world needed — prefer this whenever the thing under test doesn't actually require a running world.
+   - **GameTest** (`src/main/java/org/mjli/mam/infrastructure/gametest/tests/`, `./gradlew runGameTestServer`) — anything needing a real world: block placement, block entity ticking in-world, entity spawning/collision, capability interaction across blocks, recipe matching against a live `RecipeManager`. Read `ref/gametest-guide.md` before writing one. Existing examples: `TestGeneratingFlowers`, `TestApothecary`.
+   - A single mechanic often needs both: JUnit for its internal math/state, GameTest for its in-world trigger/placement behavior. Don't force one to cover what the other is better suited for.
+5. **Ponder** — polish pass, in-game tutorial scene, once the mechanic is real and testable.
+
+Docs precede code deliberately: writing the site/book copy before implementation forces the design to be concrete enough to explain to a player, and catches gaps (missing mechanic, unclear recipe) before they're baked into code.
+
 ## Project
 
 **Might And Magic** (`mam`) — a Minecraft 1.21.1 mod built on NeoForge 21.1.234, using Java 21. Currently scaffolded from the NeoForge MDK template with placeholder content.
@@ -112,7 +129,9 @@ Community docs: https://docs.neoforged.net/
 | `design/N1_*-implementation-status.md` | In-game verification checklist per path |
 | `design/N2_*-test-plan.md` | Test coverage tracking per path |
 | `design/magic/NN_*.md` | Cross-school magic infrastructure (energy, Apothecary, Altar, Weavery, runes) — shared by all paths, not owned by one. Numbered loosely by dependency, not strict reading order. |
+| `todo/NN_*.md` | Pre-design ideas and tasks-to-validate, one per file. Promote into `design/` once work starts (fold into the relevant doc or start a new numbered one), then delete the todo file. |
 | `ref/design-doc-guide.md` | Generic design-doc format (front matter, status vocabulary, Q&A decisions, Validation items) — applies to `design/`, portable to other projects |
+| `ref/todo-doc-guide.md` | Format for `/todo` — reuses design-doc-guide's numbering/dependency rules, adds the idea→design promotion lifecycle |
 | `ref/gametest-guide.md` | NeoForge GameTest reference — read this before writing any `@GameTest` |
 | `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `ref/site-guide.md` | Hugo site authoring — crafting shortcode usage, texture paths, running locally |
