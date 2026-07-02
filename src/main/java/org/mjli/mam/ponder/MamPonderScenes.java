@@ -2,15 +2,27 @@ package org.mjli.mam.ponder;
 
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import net.createmod.catnip.math.Pointing;
+import net.createmod.ponder.api.element.ElementLink;
+import net.createmod.ponder.api.element.EntityElement;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import org.mjli.mam.block_entity.ApothecaryBlockEntity;
 import org.mjli.mam.verdant.VerdantFlowers;
 import org.mjli.mam.verdant.VerdantGeneratingFlowers;
+import org.mjli.mam.verdant.VerdantMana;
 import org.mjli.mam.verdant.VerdantRock;
 import org.mjli.mam.verdant.VerdantWood;
 
@@ -31,6 +43,10 @@ public class MamPonderScenes {
 
         H.forComponents(VerdantGeneratingFlowers.HYDROANGEAS)
             .addStoryBoard("hydroangeas/rain_and_water", MamPonderScenes::hydroangeasRainAndWater);
+
+        H.forComponents(VerdantMana.APOTHECARY, VerdantMana.INFUSED_APOTHECARY,
+                VerdantMana.SACRED_APOTHECARY, VerdantMana.DESECRATED_APOTHECARY)
+            .addStoryBoard("apothecary/brews_pure_daisy", MamPonderScenes::apothecaryBrewsPureDaisy);
     }
 
     public static void pureDaisyStone(SceneBuilder scene, SceneBuildingUtil util) {
@@ -181,5 +197,89 @@ public class MamPonderScenes {
             .pointAt(util.vector().topOf(1, 1, 2))
             .attachKeyFrame();
         scene.idle(80);
+    }
+
+    // Mirrors TestApothecary.apothecaryCraftsPureDaisyFromPetalsAndSeed (PA-3) beat-for-beat:
+    // fill with water, throw 4 white petals, throw a seed catalyst last, craft.
+    // Mutates the real ApothecaryBlockEntity's fluid tank / ingredient list through its existing
+    // public getters (getFluidTank(), getIngredients()) so the scene drives the actual production
+    // renderer (ApothecaryBlockEntityRenderer) instead of inventing a parallel visual.
+    public static void apothecaryBrewsPureDaisy(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.title("apothecary.brews_pure_daisy", "Brewing at the Apothecary");
+        scene.configureBasePlate(0, 0, 5);
+        BlockPos pos = new BlockPos(2, 1, 2);
+
+        scene.showBasePlate();
+        scene.idle(10);
+
+        scene.world().showSection(util.select().position(pos), Direction.DOWN);
+        scene.idle(15);
+
+        scene.overlay().showText(60)
+            .text("Fill the Apothecary with a fluid, then throw in ingredients and a catalyst to craft.")
+            .pointAt(util.vector().topOf(pos))
+            .attachKeyFrame();
+        scene.idle(30);
+
+        ItemStack waterBucket = new ItemStack(Items.WATER_BUCKET);
+        scene.overlay().showControls(util.vector().topOf(pos), Pointing.DOWN, 30).rightClick()
+            .withItem(waterBucket);
+        scene.idle(7);
+        scene.world().modifyBlockEntity(pos, ApothecaryBlockEntity.class,
+            be -> be.getFluidTank().fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE));
+        scene.idle(10);
+
+        scene.overlay().showText(50)
+            .text("Right-click with a water bucket to fill the basin.")
+            .pointAt(util.vector().topOf(pos))
+            .attachKeyFrame();
+        scene.idle(25);
+
+        ItemStack whitePetal = new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get());
+        scene.overlay().showControls(util.vector().topOf(pos), Pointing.DOWN, 30).withItem(whitePetal);
+        scene.idle(7);
+
+        for (int i = 0; i < 4; i++) {
+            ElementLink<EntityElement> petal = scene.world().createItemEntity(
+                util.vector().topOf(pos).add(0, 1.2, 0), util.vector().of(0, 0.1, 0), whitePetal);
+            scene.idle(10);
+            scene.world().modifyEntity(petal, Entity::discard);
+            scene.world().modifyBlockEntity(pos, ApothecaryBlockEntity.class,
+                be -> be.getIngredients().add(whitePetal.copy()));
+            scene.idle(6);
+        }
+
+        scene.overlay().showText(60)
+            .text("Throw four matching petals in — they'll float above the fluid until the recipe is ready.")
+            .pointAt(util.vector().topOf(pos))
+            .attachKeyFrame();
+        scene.idle(30);
+
+        ItemStack seed = new ItemStack(Items.WHEAT_SEEDS);
+        scene.overlay().showControls(util.vector().topOf(pos), Pointing.DOWN, 30).withItem(seed);
+        scene.idle(7);
+
+        ElementLink<EntityElement> seedEntity = scene.world().createItemEntity(
+            util.vector().topOf(pos).add(0, 1.2, 0), util.vector().of(0, 0.1, 0), seed);
+        scene.idle(10);
+        scene.world().modifyEntity(seedEntity, Entity::discard);
+
+        // Ponder scenes have no live RecipeManager to match against, so the craft outcome
+        // (fluid drain, ingredient clear, output eject) is staged directly — same end state
+        // ApothecaryBlockEntity.collideEntityItem() reaches on a real match.
+        scene.world().modifyBlockEntity(pos, ApothecaryBlockEntity.class, be -> {
+            be.getFluidTank().drain(be.getFluidTank().getFluidAmount(), IFluidHandler.FluidAction.EXECUTE);
+            be.getIngredients().clear();
+        });
+        scene.world().createItemEntity(util.vector().topOf(pos).add(0, 1.5, 0), util.vector().of(0, 0.1, 0),
+            VerdantFlowers.PURE_DAISY.asStack());
+        scene.effects().indicateSuccess(pos);
+        scene.idle(10);
+
+        scene.overlay().showText(80)
+            .text("Throw the catalyst last — a seed — to trigger the craft. The fluid drains, the ingredients clear, and the Pure Daisy pops out.")
+            .pointAt(util.vector().topOf(pos))
+            .attachKeyFrame();
+        scene.idle(90);
     }
 }

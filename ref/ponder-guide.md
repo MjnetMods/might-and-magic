@@ -145,6 +145,25 @@ The storyboard path (`"pure_daisy/converts_stone"`) determines the **structure f
 
 ## 3. Storyboard API
 
+### Driving a custom BlockEntityRenderer from a scene
+
+A block entity with its own renderer (fluid tanks, item displays, anything drawn per-frame from
+live state rather than baked into the model) does **not** need a parallel, invented visual inside
+a Ponder scene. Scenes render real registered `BlockEntityRenderer`s for block entities present in
+the scene — mutate the actual block entity's state through its existing public API and the real
+renderer draws it, same as in a live world:
+
+```java
+scene.world().modifyBlockEntity(pos, MyBlockEntity.class,
+    be -> be.getFluidTank().fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE));
+```
+
+This is how Create's own fluid-tank/mixer-basin scenes (`FluidTankScenes.storage()`,
+`DrainScenes.emptying()`) get correct fluid/particle visuals without a second render path. Don't
+assume a custom renderer is off-limits to Ponder and reach for an approximation (block swaps,
+particle-only effects) unless the block entity's state genuinely isn't exposed via a public
+getter/mutator you can call from `modifyBlockEntity`.
+
 ### Method signatures
 
 ```java

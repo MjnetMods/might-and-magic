@@ -207,5 +207,11 @@
 
   "mam.ponder.hydroangeas.rain_and_water.header": "Rain and Water",
   "mam.ponder.hydroangeas.rain_and_water.text_1": "The Hydroangeas generates mana in the rain — or when placed adjacent to a water source.",
-  "mam.ponder.hydroangeas.rain_and_water.text_2": "A single adjacent water source provides constant generation without needing rain."
+  "mam.ponder.hydroangeas.rain_and_water.text_2": "A single adjacent water source provides constant generation without needing rain.",
+
+  "mam.ponder.apothecary.brews_pure_daisy.header": "Brewing at the Apothecary",
+  "mam.ponder.apothecary.brews_pure_daisy.text_1": "Fill the Apothecary with a fluid, then throw in ingredients and a catalyst to craft.",
+  "mam.ponder.apothecary.brews_pure_daisy.text_2": "Right-click with a water bucket to fill the basin.",
+  "mam.ponder.apothecary.brews_pure_daisy.text_3": "Throw four matching petals in — they'll float above the fluid until the recipe is ready.",
+  "mam.ponder.apothecary.brews_pure_daisy.text_4": "Throw the catalyst last — a seed — to trigger the craft. The fluid drains, the ingredients clear, and the Pure Daisy pops out."
 }
