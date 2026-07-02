@@ -42,7 +42,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
         }
     };
 
-    private final List<ItemStack> petals = new ArrayList<>();
+    private final List<ItemStack> ingredients = new ArrayList<>();
 
     public ApothecaryBlockEntity(BlockPos pos, BlockState state) {
         super(MamBlockEntities.APOTHECARY.get(), pos, state);
@@ -61,14 +61,14 @@ public class ApothecaryBlockEntity extends BlockEntity {
         if (stack.isEmpty() || tank.isEmpty()) return false;
 
         Level level = getLevel();
-        ApothecaryInput view = new ApothecaryInput(List.copyOf(petals));
+        ApothecaryInput view = new ApothecaryInput(List.copyOf(ingredients));
         Optional<RecipeHolder<ApothecaryRecipe>> match = level.getRecipeManager()
                 .getRecipeFor(MamRecipes.APOTHECARY_TYPE.get(), view, level);
         if (match.isPresent() && match.get().value().getReagent().test(stack)) {
             ApothecaryRecipe recipe = match.get().value();
             ItemStack result = recipe.assemble(view, level.registryAccess());
 
-            petals.clear();
+            ingredients.clear();
             stack.shrink(1);
             if (stack.isEmpty()) item.discard(); else item.setItem(stack);
 
@@ -81,8 +81,8 @@ public class ApothecaryBlockEntity extends BlockEntity {
             return true;
         }
 
-        if (petals.size() < MAX_INGREDIENTS) {
-            petals.add(stack.split(1));
+        if (ingredients.size() < MAX_INGREDIENTS) {
+            ingredients.add(stack.split(1));
             if (stack.isEmpty()) item.discard(); else item.setItem(stack);
             setChanged();
             return true;
@@ -97,7 +97,7 @@ public class ApothecaryBlockEntity extends BlockEntity {
     }
 
     public FluidTank getFluidTank() { return tank; }
-    public List<ItemStack> getPetals() { return petals; }
+    public List<ItemStack> getIngredients() { return ingredients; }
 
     @Override
     public void setChanged() {
@@ -124,21 +124,21 @@ public class ApothecaryBlockEntity extends BlockEntity {
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put("fluid", tank.writeToNBT(registries, new CompoundTag()));
-        CompoundTag petalTag = new CompoundTag();
-        for (int i = 0; i < petals.size(); i++) {
-            petalTag.put(String.valueOf(i), petals.get(i).save(registries));
+        CompoundTag ingredientTag = new CompoundTag();
+        for (int i = 0; i < ingredients.size(); i++) {
+            ingredientTag.put(String.valueOf(i), ingredients.get(i).save(registries));
         }
-        tag.put("petals", petalTag);
+        tag.put("ingredients", ingredientTag);
     }
 
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         tank.readFromNBT(registries, tag.getCompound("fluid"));
-        petals.clear();
-        CompoundTag petalTag = tag.getCompound("petals");
-        for (String key : petalTag.getAllKeys()) {
-            ItemStack.parse(registries, petalTag.getCompound(key)).ifPresent(petals::add);
+        ingredients.clear();
+        CompoundTag ingredientTag = tag.getCompound("ingredients");
+        for (String key : ingredientTag.getAllKeys()) {
+            ItemStack.parse(registries, ingredientTag.getCompound(key)).ifPresent(ingredients::add);
         }
     }
 }

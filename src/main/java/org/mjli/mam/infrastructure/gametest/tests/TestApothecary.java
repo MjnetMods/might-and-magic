@@ -73,10 +73,10 @@ public class TestApothecary {
         FluidTank seedTank = new FluidTank(1000);
         seedTank.setFluid(new FluidStack(Fluids.WATER, 1000));
         stateTag.put("fluid", seedTank.writeToNBT(registries, new CompoundTag()));
-        CompoundTag petalsTag = new CompoundTag();
+        CompoundTag ingredientsTag = new CompoundTag();
         ItemStack petal = new ItemStack(VerdantFlowers.PETALS.get(DyeColor.WHITE).get());
-        petalsTag.put("0", petal.save(registries));
-        stateTag.put("petals", petalsTag);
+        ingredientsTag.put("0", petal.save(registries));
+        stateTag.put("ingredients", ingredientsTag);
 
         ApothecaryBlockEntity beA = (ApothecaryBlockEntity)
                 helper.getLevel().getBlockEntity(helper.absolutePos(posA));
@@ -91,10 +91,10 @@ public class TestApothecary {
         if (beB.getFluidTank().isEmpty() || beB.getFluidTank().getFluid().getFluid() != Fluids.WATER) {
             helper.fail("Expected WATER fluid, got " + beB.getFluidTank().getFluid());
         }
-        if (beB.getPetals().size() != 1) {
-            helper.fail("Expected 1 petal, got " + beB.getPetals().size());
+        if (beB.getIngredients().size() != 1) {
+            helper.fail("Expected 1 petal, got " + beB.getIngredients().size());
         }
-        if (!ItemStack.isSameItemSameComponents(beB.getPetals().get(0), petal)) {
+        if (!ItemStack.isSameItemSameComponents(beB.getIngredients().get(0), petal)) {
             helper.fail("Petal item did not survive round-trip");
         }
         helper.succeed();
@@ -129,8 +129,8 @@ public class TestApothecary {
         }
 
         helper.runAfterDelay(2, () -> {
-            if (be.getPetals().size() != 4) {
-                helper.fail("Expected 4 petals ingested, got " + be.getPetals().size());
+            if (be.getIngredients().size() != 4) {
+                helper.fail("Expected 4 petals ingested, got " + be.getIngredients().size());
                 return;
             }
 
@@ -141,8 +141,8 @@ public class TestApothecary {
                 if (!be.getFluidTank().isEmpty()) {
                     helper.fail("Expected fluid drained after craft, got " + be.getFluidTank().getFluid());
                 }
-                if (!be.getPetals().isEmpty()) {
-                    helper.fail("Expected petals cleared after craft, got " + be.getPetals().size());
+                if (!be.getIngredients().isEmpty()) {
+                    helper.fail("Expected petals cleared after craft, got " + be.getIngredients().size());
                 }
                 boolean foundOutput = helper.getLevel()
                         .getEntitiesOfClass(ItemEntity.class, new AABB(absCenter.above()))

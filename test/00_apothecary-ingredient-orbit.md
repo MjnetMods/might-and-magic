@@ -1,6 +1,6 @@
 ---
 type: test
-status: pending
+status: verified
 last-updated: 2026-07-02
 links: ["[[magic/10_apothecary]]"]
 ---
@@ -20,6 +20,12 @@ GameTest can't verify renderer output (client-only draw code) — this is a by-e
 
 Each ingested petal orbits visibly above the fluid surface (small bobbing circle), instead of
 vanishing on contact — matches Botania's floating-petal visual for the Petal Apothecary.
+
+**Verified 2026-07-02.** Two tuning passes were needed before this read clearly: items are
+rendered full-bright (`LightTexture.FULL_BRIGHT`, not resampled per-position — an earlier
+attempt at resampling world light per-item caused visible blinking as the bob animation crossed
+the block-above boundary each cycle) and scaled up twice (`0.15F` → `0.22F` → `0.32F`) from the
+initial Botania-derived value, which read as too small in practice.
 
 ## Delete this file when
 
