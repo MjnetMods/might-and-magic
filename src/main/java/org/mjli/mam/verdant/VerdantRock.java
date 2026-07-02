@@ -164,12 +164,14 @@ public class VerdantRock {
          .item().model((ctx, p) -> p.blockWithInventoryModel(ctx::getEntry)).build()
          .register();
 
-    // ── Infused / Sacred tiers (placeholder: reuse tier-1 textures, no art yet) ──
+    // ── Infused / Sacred tiers (tinted blue/green via shared desaturated texture, no unique art yet) ──
 
     public static final BlockEntry<Block> INFUSED_LIVING_ROCK =
         R.block("infused_living_rock", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -177,7 +179,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> INFUSED_LIVING_ROCK_POLISHED =
         R.block("infused_living_rock_polished", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_polished_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -185,7 +189,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> INFUSED_LIVING_ROCK_BRICK =
         R.block("infused_living_rock_brick", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_brick_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -193,7 +199,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> SACRED_LIVING_ROCK =
         R.block("sacred_living_rock", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -201,7 +209,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> SACRED_LIVING_ROCK_POLISHED =
         R.block("sacred_living_rock_polished", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_polished_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -209,17 +219,21 @@ public class VerdantRock {
     public static final BlockEntry<Block> SACRED_LIVING_ROCK_BRICK =
         R.block("sacred_living_rock_brick", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_brick_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
 
-    // ── Desecrated tier (Nox/Dark branch, placeholder: reuse tier-1 textures, no art yet) ──
+    // ── Desecrated tier (Nox/Dark branch, tinted purple via shared desaturated texture) ──
 
     public static final BlockEntry<Block> DESECRATED_LIVING_ROCK =
         R.block("desecrated_living_rock", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -227,7 +241,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> DESECRATED_LIVING_ROCK_POLISHED =
         R.block("desecrated_living_rock_polished", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_polished"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_polished_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -235,7 +251,9 @@ public class VerdantRock {
     public static final BlockEntry<Block> DESECRATED_LIVING_ROCK_BRICK =
         R.block("desecrated_living_rock_brick", Block::new)
          .properties(p -> MamBlockProperties.livingRock())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/living_rock_brick"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/living_rock_brick_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();

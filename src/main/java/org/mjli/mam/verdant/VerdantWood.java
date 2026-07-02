@@ -1,5 +1,6 @@
 package org.mjli.mam.verdant;
 
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.CreativeModeTabModifier;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,6 +19,18 @@ import org.mjli.mam.foundation.registration.MamRegistrate;
 public class VerdantWood {
 
     private static final MamRegistrate R = MightAndMagic.registrate();
+
+    private static ModelFile tintedColumn(RegistrateBlockstateProvider p, String name, String side, String end) {
+        return p.models().withExistingParent(name, p.modLoc("block/tinted_cube_column"))
+            .texture("side", p.modLoc(side))
+            .texture("end", p.modLoc(end));
+    }
+
+    private static ModelFile tintedColumnHorizontal(RegistrateBlockstateProvider p, String name, String side, String end) {
+        return p.models().withExistingParent(name + "_horizontal", p.modLoc("block/tinted_cube_column_horizontal"))
+            .texture("side", p.modLoc(side))
+            .texture("end", p.modLoc(end));
+    }
 
     public static final BlockEntry<RotatedPillarBlock> LIVINGWOOD_LOG =
         R.block("livingwood_log", RotatedPillarBlock::new)
@@ -133,14 +146,14 @@ public class VerdantWood {
          .simpleItem()
          .register();
 
-    // ── Infused / Sacred tiers (placeholder: reuse tier-1 textures, no art yet) ──
+    // ── Infused / Sacred tiers (tinted blue/green via shared desaturated texture, no unique art yet) ──
 
     public static final BlockEntry<RotatedPillarBlock> INFUSED_LIVINGWOOD_LOG =
         R.block("infused_livingwood_log", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log_top")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -149,8 +162,8 @@ public class VerdantWood {
         R.block("infused_livingwood", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -158,7 +171,9 @@ public class VerdantWood {
     public static final BlockEntry<Block> INFUSED_LIVINGWOOD_PLANKS =
         R.block("infused_livingwood_planks", Block::new)
          .properties(p -> MamBlockProperties.livingWood())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/livingwood_planks_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -167,8 +182,8 @@ public class VerdantWood {
         R.block("sacred_livingwood_log", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log_top")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -177,8 +192,8 @@ public class VerdantWood {
         R.block("sacred_livingwood", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -186,19 +201,21 @@ public class VerdantWood {
     public static final BlockEntry<Block> SACRED_LIVINGWOOD_PLANKS =
         R.block("sacred_livingwood_planks", Block::new)
          .properties(p -> MamBlockProperties.livingWood())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/livingwood_planks_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
 
-    // ── Desecrated tier (Nox/Dark branch, placeholder: reuse tier-1 textures, no art yet) ──
+    // ── Desecrated tier (Nox/Dark branch, tinted purple via shared desaturated texture) ──
 
     public static final BlockEntry<RotatedPillarBlock> DESECRATED_LIVINGWOOD_LOG =
         R.block("desecrated_livingwood_log", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log_top")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_top_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -207,8 +224,8 @@ public class VerdantWood {
         R.block("desecrated_livingwood", RotatedPillarBlock::new)
          .properties(p -> MamBlockProperties.livingWoodLog())
          .blockstate((ctx, p) -> p.axisBlock((RotatedPillarBlock) ctx.get(),
-             p.modLoc("block/livingwood_log"),
-             p.modLoc("block/livingwood_log")))
+             tintedColumn(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated"),
+             tintedColumnHorizontal(p, ctx.getName(), "block/livingwood_log_desaturated", "block/livingwood_log_desaturated")))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
@@ -216,7 +233,9 @@ public class VerdantWood {
     public static final BlockEntry<Block> DESECRATED_LIVINGWOOD_PLANKS =
         R.block("desecrated_livingwood_planks", Block::new)
          .properties(p -> MamBlockProperties.livingWood())
-         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(), p.models().cubeAll(ctx.getName(), p.modLoc("block/livingwood_planks"))))
+         .blockstate((ctx, p) -> p.simpleBlock(ctx.get(),
+             p.models().withExistingParent(ctx.getName(), p.modLoc("block/tinted_cube_all"))
+                 .texture("all", p.modLoc("block/livingwood_planks_desaturated"))))
          .loot((t, b) -> t.dropSelf(b))
          .simpleItem()
          .register();
