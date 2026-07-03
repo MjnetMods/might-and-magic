@@ -33,7 +33,15 @@ Once you've got Infused Living Rock, the Apothecary itself becomes an ingredient
 
 {{< crafting in="block/living_rock,block/apothecary_side,block/living_rock|,block/living_rock,|block/living_rock,block/living_rock,block/living_rock" out="block/apothecary_side" count=1 >}}
 
-Using it feels exactly the same — same fluids, same fill-throw-catalyst rhythm, same retract if you throw the wrong petal. It's just got more hands: six ingredients aloft at once instead of four, enough room for recipes the base Apothecary can't fit. Sacred and Desecrated Apothecaries repeat the trick further up the tree, trading rock and reagent again for even more room.
+Using it feels exactly the same — same fluids, same fill-throw-catalyst rhythm, same retract if you throw the wrong petal. It's just got more hands: six ingredients aloft at once instead of four, enough room for recipes the base Apothecary can't fit.
+
+### Sacred Apothecary
+
+Verdant's endgame tier takes the same trick and multiplies it. Six blocks of Sacred Living Rock fill the goblet, and an Infused Apothecary sits in the center where the lesser reagent went before — consumed whole, same as every tier up to this one.
+
+{{< crafting in="block/living_rock,block/apothecary_side,block/living_rock|,block/living_rock,|block/living_rock,block/living_rock,block/living_rock" out="block/apothecary_side" count=1 >}}
+
+What jumps is capacity: sixty-four ingredients aloft at once, not six. Nothing on the books needs anywhere near that many — this is headroom, built in now for whatever heavier Verdant recipes come later. Everything about actually using it is untouched: same fluid, same throw, same catalyst-last, same empty-hand retract and recraft. You've just got a lot more room to work with.
 
 ---
 
