@@ -73,6 +73,11 @@ Releases are tagged `vX.Y.Z`. `git-cliff` reads these prefixes to generate the c
 
 Built JAR lands in `build/libs/`. Run configurations write their working directories under `run/<configName>/`.
 
+Headless tasks (`compileJava`, `runData`, `runGameTestServer`, `build`) are fine to run directly —
+no need to ask first. Launching the interactive client (`runClient`) stays the user's own action —
+prompt them to run it, naming the exact command and what to check/verify, rather than attempting
+it directly.
+
 ## Architecture
 
 ### Entry points
@@ -138,7 +143,14 @@ Community docs: https://docs.neoforged.net/
 | `ref/ponder-guide.md` | Ponder (Create's in-game tutorial system) reference — deps, scenes, SNBT format, localization |
 | `ref/site-guide.md` | Hugo site authoring — crafting shortcode usage, texture paths, running locally |
 | `ref/book-guide.md` | Patchouli book authoring — entry/category JSON structure, lang-key content split, voice conventions |
+| `ref/texture-guide.md` | NeoForge/Minecraft texture-atlas conventions — e.g. why shared block-model textures must live under `textures/block/`, not `textures/misc/` |
+| `ref/registrate-guide.md` | NeoForge Registrate usage patterns — block-type/item-model strategy, fence/wall inventory models, slab loot tables, datagen vs. hand-authored recipes |
+| `ref/worldgen-guide.md` | NeoForge worldgen reference — how MAM places mystical flowers/mushrooms, one custom `Feature` type in Java with the rest in JSON datapacks |
 | `site/content/` | Player-facing documentation (source of truth — `docs/` removed) |
+| `factory/agent-factory-guide.md` | Multi-agent pipeline reference — roles, charters, task-file format, rollout phases, and where each doc type's responsibility ends (design vs. `todo`/`test`/task handoff logs). Read before creating or picking up a `factory/tasks/*.md` file. |
+| `factory/charters/*.md` | One charter per agent role (Coder, Tester, Reviewer, Site Writer, Book Writer, Ponder) — scope, directive, handoff rules, guardrails. |
+| `factory/tasks/*.md` | One file per unit of pipeline work, numbered like `/todo`. Front matter `gate` tracks pipeline stage; body is a running handoff log. |
+| `factory/tasks.md` | Master index of open tasks and their current gate. |
 
 Current active tracking files:
 - `design/21_verdant-implementation-status.md`

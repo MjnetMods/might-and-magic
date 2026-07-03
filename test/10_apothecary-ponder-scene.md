@@ -1,7 +1,7 @@
 ---
 type: test
-status: pending
-last-updated: 2026-07-02
+status: verified
+last-updated: 2026-07-03
 links: ["[[magic/10_apothecary]]"]
 ---
 

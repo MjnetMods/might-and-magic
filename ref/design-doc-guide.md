@@ -51,7 +51,11 @@ it's introduced.
 
 Everything in a doc is one of:
 
-- **Design** — the actual proposal. This is the doc's default prose; no marker needed.
+- **Design** — the actual proposal. This is the doc's default prose; no marker needed. It
+  describes the system/mechanic being designed — not the process of writing the doc itself (what
+  wasn't documented before, what order things were discovered in, why a gap existed). If content
+  is missing because something shipped without a design pass, the fix is backfilling the real spec
+  from existing implementation/behavior, not a sentence explaining the gap.
 - **Open Question** — something unresolved. Mark it so it's findable regardless of where it
   sits in the doc:
   ```

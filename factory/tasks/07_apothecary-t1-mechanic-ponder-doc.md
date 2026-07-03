@@ -1,7 +1,7 @@
 ---
 type: task
-gate: done
-last-updated: 2026-07-02
+gate: merge
+last-updated: 2026-07-03
 links: ["[[magic/10_apothecary]]"]
 ---
 
@@ -194,3 +194,6 @@ task-brief assumption for future Ponder tasks involving block entities with cust
   plays correctly; this is a pre-existing known gap (no runClient capability in this
   environment), not something this review found. Ready to move to `merge` once that visual
   confirmation lands.
+- 2026-07-03 — human ran `./gradlew runClient` and visually confirmed the
+  `apothecary/brews_pure_daisy` scene plays correctly. `test/10_apothecary-ponder-scene.md`
+  updated to `status: verified`. No open items left — ready for `merge`.

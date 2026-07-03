@@ -27,6 +27,10 @@ section) and match that voice before adding anything.
   doesn't exist yet (e.g. the base Apothecary recipe renders `out="block/apothecary_side"` even
   though T1 accepts any rock, not literally stone). Reuse that pattern rather than reaching for
   prose-as-diagram.
+- Don't hedge implementation status per-line/row (`(not yet implemented)`, `(placeholder)`,
+  `(no obtain path yet)`) anywhere in a page. If a page needs to flag that some described content
+  isn't built yet, say so once, near the top — then write everything else as intent, plainly. No
+  per-row markers; that's exactly what the single disclaimer exists to make unnecessary.
 
 ## Content structure
 

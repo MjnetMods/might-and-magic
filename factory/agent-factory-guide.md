@@ -11,6 +11,22 @@ Format and rollout plan for running the Feature Pipeline (see root `CLAUDE.md`) 
 scoped agents instead of one person doing every stage. This is process structure, not a specific
 task — see `factory/tasks/` for actual work items.
 
+**Doc-type roles**, so `factory/tasks/*.md` doesn't blur into `design/`:
+
+| Doc type                          | Goal                                                                             | Role                                                                                                                 |
+|-----------------------------------|----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| `todo/`                           | Pre-design scratch — ideas and tasks-to-validate, not yet a commitment.          | Disposable — promoted into `design/` or deleted once its job is done. Not accumulated as history.                    |
+| `design/`                         | Single source of truth — the engineering spec everything else is judged against. | Current, intended state, stated plainly — no process history, no correction narrative.                               |
+| `site/`                           | Sells the mod — thematic, player-facing marketing copy.                          | No implementation-status hedging or dev-process asides — write as if the feature simply exists, since that's what sells it. Written before implementation (Feature Pipeline). |
+| Book docs (Patchouli)             | In-game help/reference — thematic, read by the player in-world.                  | No implementation-status hedging or dev-process asides — write as if the feature simply exists, since that's what helps a player in-world. Written before implementation, alongside site docs. |
+| `test/`                           | Pending manual/visual checks GameTest can't cover.                               | Disposable — promoted (automated coverage lands) or deleted once its job is done. Not accumulated as history.        |
+| `factory/tasks/*.md` handoff logs | The retro record — why something changed, what broke, what was learned.          | The one place process narrative belongs (§3).                                                                        |
+
+`site/` and book docs are both read as input by **Reviewer** (§1 Roles table), who checks impl
+against all three (design doc + site-doc + book-doc) together — not read directly by **Coder**,
+whose scope is the design doc alone. See §3's Q&A on the handoff-log/design-doc narrative split for
+the one caveat: it only holds going forward, since it depends on a task file existing to log into.
+
 ---
 
 ## 1. Roles
@@ -136,6 +152,23 @@ waits for a resume, or does it keep working other tasks while one waits?
 **A:** At Manual single-agent fork, sequential by construction — there's only ever one agent
 running, so there's nothing else for it to work on while waiting. Becomes a live question again
 at Chained agents, once the human isn't the one initiating each fork. (2026-07-02)
+
+**Q:** Should a task's handoff log narrate mistakes/corrections in detail, or should that live in
+the design doc it's implementing?
+**A:** Handoff log, not the design doc. A design doc states the current facts and intended state
+plainly — what a tier's capacity is, what a texture looks like — not the history of how it got
+there or what was wrong before ("corrected from 3 to 4", "was an accidental palette copy", "the
+old name was wrong"). That narrative belongs in the task's handoff log (and the commit message it
+composes), where it's genuinely useful for a retro without cluttering the doc a player-facing
+feature's design is judged against. Reviewed 2026-07-03 while trimming
+`design/magic/10_apothecary.md`: this split only holds **going forward** — three corrections that
+predated the task-file system (T1 slot count 3→4, T1 texture palette-copy fix,
+`getPetals()`→`getIngredients()` rename) had no handoff log to live in, and their commit messages
+were bare one-liners with no body, so trimming their design-doc narrative lost that history
+outright with no equivalent record anywhere. Accepted as a minor, non-recoverable loss for those
+three specifically — the reason it's acceptable going forward is that every task from here on has
+a handoff log that's the correct home for this, so the design doc no longer needs to double as the
+retro record.
 
 ## 4. Rollout phases
 

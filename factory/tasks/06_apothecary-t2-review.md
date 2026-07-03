@@ -1,7 +1,7 @@
 ---
 type: task
-gate: review
-last-updated: 2026-07-02
+gate: merge
+last-updated: 2026-07-03
 links: ["[[magic/10_apothecary]]"]
 ---
 
@@ -66,3 +66,20 @@ diff in isolation.
   including PA-6. The per-tier capacity fix itself was correct from the start; only the regression
   test guarding it needed correcting. Still open before `merge`: a re-review of this test fix (not
   yet done by a Reviewer pass, only self-verified by execution).
+- 2026-07-03 — re-reviewed (reviewer), both fix commits (`3f061fc`, `690878d`) together. Verified,
+  not just read: `capacityFor()`'s block-identity branches match `design/magic/10_apothecary.md`'s
+  tier table exactly (T1=4, T2=6, Sacred=64, Desecrated=64); PA-6's fill→throw×7→wait(2
+  ticks)→assert sequence correctly distinguishes capacity=6 from both "still hardcoded to 4" and
+  "unbounded," using the same batch-spawn-then-`runAfterDelay` timing pattern PA-3/4/5 already
+  prove reliable — and the actual 70/70 passing run is empirical confirmation of that, not just a
+  read-through. One finding, doc-only: `design/magic/10_apothecary.md`'s tier *table* (not the
+  Validation section, which was already correct) still had Infused Apothecary's row marked "Not
+  yet implemented" / "Blocked on this tier existing as a block" — stale on both counts, since the
+  block, recipe, and capacity are all implemented, and the block is already wired into the shared
+  per-tier tint mechanism in `MightAndMagicClient.java` (confirmed by grep — `INFUSED_APOTHECARY`
+  appears in the T2 tint-target array alongside its Mana Pool/Altar siblings). Fixed: row updated
+  to `**Implemented**`, texture note updated to describe the tint as applied rather than blocked.
+  No bounce to Coder/Tester — this was the only gap, and it's closed now.
+
+  **Verdict: ready for `merge`.** Both fix commits are correct and tested; the one doc
+  inconsistency this pass found has been corrected in the same pass.
