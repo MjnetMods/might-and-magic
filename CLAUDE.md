@@ -151,8 +151,10 @@ Community docs: https://docs.neoforged.net/
 | `factory/charters/*.md` | One charter per agent role (Coder, Tester, Reviewer, Site Writer, Book Writer, Ponder) — scope, directive, handoff rules, guardrails. |
 | `factory/tasks/*.md` | One file per unit of pipeline work, numbered like `/todo`. Front matter `gate` tracks pipeline stage; body is a running handoff log. |
 | `factory/tasks.md` | Master index of open tasks and their current gate. |
+| `factory/collaboration-stages.md` | Maturity ladder for how much of the Feature Pipeline runs as agents vs. by hand — see `factory/agent-factory-guide.md` for the current stage. |
 
-Current active tracking files:
+Legacy tracking files (pre-migration, not actively updated — see `ref/design-doc-guide.md` for the
+current convention: per-doc inline `## Validation` sections):
 - `design/21_verdant-implementation-status.md`
 - `design/22_verdant-test-plan.md`
 
