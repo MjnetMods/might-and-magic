@@ -307,6 +307,12 @@ public class TestApothecary {
         ApothecaryBlockEntity be = (ApothecaryBlockEntity) helper.getLevel().getBlockEntity(absCenter);
         if (be == null) { helper.fail("No BlockEntity at CENTER"); return; }
 
+        // collideEntityItem() rejects every ingredient outright while the tank is empty
+        // (see ApothecaryBlockEntity), so the basin must be filled before capacity can be tested.
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.WATER_BUCKET));
+        be.interact(player);
+
         double x = absCenter.getX() + 0.5, y = absCenter.getY() + 1.0, z = absCenter.getZ() + 0.5;
         for (int i = 0; i < 7; i++) {
             helper.getLevel().addFreshEntity(new ItemEntity(helper.getLevel(), x, y, z, new ItemStack(Items.STICK)));

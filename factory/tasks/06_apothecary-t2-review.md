@@ -53,3 +53,16 @@ diff in isolation.
   `./gradlew runGameTestServer` — same no-display/long-running constraint every prior handoff in
   this task chain has flagged. PA-6 is compiled and read for correctness only, not executed yet.
   Flagging for the human to run alongside a re-review before this task can move to `merge`.
+
+- 2026-07-03 — human ran `./gradlew runGameTestServer`: 1 required test failed,
+  `apothecarytier2acceptssixingredients` (PA-6). Root cause was in the **test, not the capacity
+  fix**: `collideEntityItem`'s very first guard (`if (stack.isEmpty() || tank.isEmpty()) return
+  false;`) rejects every ingredient outright while the fluid tank is empty — true for every tier,
+  unchanged by this task. PA-3/PA-4/PA-5 all fill the tank with a water bucket before throwing
+  ingredients; PA-6 skipped that setup step, so all 7 thrown sticks were rejected and
+  `getIngredients()` came back `0`, not `6`. Fixed by adding the same
+  `player.setItemInHand(WATER_BUCKET); be.interact(player);` fill step PA-3/4/5 already use, before
+  throwing the 7 sticks. Re-ran `./gradlew runGameTestServer`: **all 70 required tests pass**,
+  including PA-6. The per-tier capacity fix itself was correct from the start; only the regression
+  test guarding it needed correcting. Still open before `merge`: a re-review of this test fix (not
+  yet done by a Reviewer pass, only self-verified by execution).
